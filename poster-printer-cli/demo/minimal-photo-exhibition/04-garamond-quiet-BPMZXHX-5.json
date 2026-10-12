@@ -1,0 +1,691 @@
+{
+ "app": "poster-printer",
+ "kind": "poster",
+ "version": 1,
+ "entry": {
+  "id": "BPMZXHX-5-mv4opk4i",
+  "ts": 1791775230498,
+  "seeds": {
+   "layout": "BPMZXHX-5L",
+   "text": "BPMZXHX-5T",
+   "color": "BPMZXHX-5C~1",
+   "image": "BPMZXHX-5I#3"
+  },
+  "decorSalt": "",
+  "ratio": "3:4",
+  "styleId": "garamond-quiet",
+  "params": {
+   "gridType": "auto",
+   "density": "auto",
+   "composition": "auto",
+   "gridStrength": 1,
+   "cols": 0,
+   "rows": 0,
+   "margin": 4.5,
+   "gutter": 0,
+   "baseline": 8,
+   "whitespace": 78,
+   "symmetry": 30,
+   "gridOpacity": 100,
+   "zoneStrength": 40,
+   "cornerRadius": 22,
+   "cardGap": 22,
+   "tuneOn": true,
+   "contrast": 100,
+   "saturation": 100,
+   "brightness": 100,
+   "texture": "paper",
+   "textureAmount": 18,
+   "bigGroups": 1,
+   "smallGroups": 2,
+   "smallRel": 32,
+   "titleScale": 101,
+   "smallScale": 100,
+   "tickText": true,
+   "align": "random",
+   "case": "auto",
+   "proseCount": 1,
+   "proseSize": 22,
+   "metaCount": 3,
+   "maxLineWidth": 92,
+   "mainBreath": 18,
+   "subBreath": 6,
+   "ruleWeight": 100,
+   "groupGap": 28,
+   "fontCount": 2,
+   "englishBias": 90,
+   "shakeOnDraw": false,
+   "bandHeight": 24,
+   "bandPos": "auto",
+   "bandKind": "auto",
+   "bandBleed": true,
+   "sidebarTpl": "auto",
+   "sidebarSide": "auto",
+   "sidebarWidth": 16,
+   "sidebarFont": 100,
+   "sidebarRule": true,
+   "colorMode": "normal",
+   "paletteSource": "nice",
+   "bgPref": "light",
+   "soft": false,
+   "minContrast": 4.5,
+   "zoneColors": 3,
+   "accentUse": 50,
+   "imageCount": 1,
+   "imageShare": 70,
+   "maskKind": "auto",
+   "sliceCount": 5,
+   "imageZoom": 100,
+   "legibility": 70,
+   "imgSat": 100,
+   "imgContrast": 100,
+   "duotone": 15,
+   "tornRough": 50,
+   "bigGlyph": true,
+   "glyphKind": "auto",
+   "glyphSize": 90,
+   "glyphOpacity": 100,
+   "ornaments": 1,
+   "ornamentSize": 100,
+   "lineWeight": 1,
+   "nodeSize": 3,
+   "zoneNumbers": true,
+   "guides": false,
+   "dashed": false,
+   "curveCount": 2,
+   "shapeCount": 1,
+   "noiseAmount": 30,
+   "qualityGate": true,
+   "qualityMin": 78,
+   "qualityTries": 5,
+   "collisionFix": true,
+   "idea": "immersion",
+   "planV2": true,
+   "typeOnlyShare": 0,
+   "monoShare": 30,
+   "clashShare": 6,
+   "grainShare": 12,
+   "scriptShare": 12,
+   "artDirection": true,
+   "typeRatio": "auto",
+   "opticalTracking": true,
+   "blockBudget": 6,
+   "decorBudget": 1,
+   "busyScrim": true,
+   "snapGrid": true,
+   "exportScale": 2,
+   "embedFonts": true,
+   "replaySpeed": 900
+  },
+  "modules": {
+   "bg": true,
+   "zones": true,
+   "lines": true,
+   "curves": true,
+   "noise": true,
+   "texture": true,
+   "text": true,
+   "ornament": true,
+   "shapes": true,
+   "images": true,
+   "sidebar": true,
+   "band": true
+  },
+  "modes": [],
+  "fonts": {
+   "en": {
+    "big.main": {
+     "family": "EB Garamond",
+     "weight": 400,
+     "size": 100,
+     "tracking": -0.015,
+     "leading": 0.95,
+     "case": "none"
+    },
+    "big.sub": {
+     "family": "EB Garamond",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0,
+     "leading": 1.2,
+     "case": "none",
+     "italic": true
+    },
+    "big.note": {
+     "family": "Inter",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.01,
+     "leading": 1.35,
+     "case": "upper"
+    },
+    "small.main": {
+     "family": "EB Garamond",
+     "weight": 400,
+     "size": 100,
+     "tracking": -0.015,
+     "leading": 1,
+     "case": "none"
+    },
+    "small.sub": {
+     "family": "EB Garamond",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0,
+     "leading": 1.25,
+     "case": "none",
+     "italic": true
+    },
+    "small.note": {
+     "family": "Inter",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.01,
+     "leading": 1.35,
+     "case": "upper"
+    }
+   },
+   "zh": {
+    "big.main": {
+     "family": "Noto Serif SC",
+     "weight": 500,
+     "size": 100,
+     "tracking": 0.02,
+     "leading": 1.08,
+     "case": "none"
+    },
+    "big.sub": {
+     "family": "Noto Serif SC",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.04,
+     "leading": 1.4,
+     "case": "none"
+    },
+    "big.note": {
+     "family": "Noto Serif SC",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.06,
+     "leading": 1.6,
+     "case": "none"
+    },
+    "small.main": {
+     "family": "Noto Serif SC",
+     "weight": 500,
+     "size": 100,
+     "tracking": 0.02,
+     "leading": 1.15,
+     "case": "none"
+    },
+    "small.sub": {
+     "family": "Noto Serif SC",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.04,
+     "leading": 1.45,
+     "case": "none"
+    },
+    "small.note": {
+     "family": "Noto Serif SC",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.06,
+     "leading": 1.6,
+     "case": "none"
+    }
+   },
+   "glyph": {
+    "family": "EB Garamond",
+    "weight": 400
+   },
+   "glyphZh": {
+    "family": "Noto Serif SC",
+    "weight": 500
+   }
+  },
+  "picked": {
+   "texts": {
+    "set": "custom",
+    "headline": {
+     "t": "Low Tide",
+     "lang": "en"
+    },
+    "sub": {
+     "t": "Photographs by Mara Ellison",
+     "lang": "en"
+    },
+    "note": {
+     "t": "2026.10.30 — 12.14\nGallery Kōen · Tokyo",
+     "lang": "en"
+    },
+    "groups": [
+     {
+      "main": {
+       "t": "10.30 — 12.14",
+       "lang": "en"
+      },
+      "sub": {
+       "t": "2026",
+       "lang": "en"
+      },
+      "note": {
+       "t": "When",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "Gallery Kōen",
+       "lang": "en"
+      },
+      "sub": {
+       "t": "3-8-2 Kiyosumi, Koto-ku · Tokyo",
+       "lang": "en"
+      },
+      "note": {
+       "t": "Where",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "Free admission",
+       "lang": "en"
+      },
+      "sub": {
+       "t": "",
+       "lang": "en"
+      },
+      "note": {
+       "t": "Tickets",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "",
+       "lang": "en"
+      },
+      "sub": {
+       "t": "",
+       "lang": "en"
+      },
+      "note": {
+       "t": "",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "",
+       "lang": "en"
+      },
+      "sub": {
+       "t": "",
+       "lang": "en"
+      },
+      "note": {
+       "t": "",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "",
+       "lang": "en"
+      },
+      "sub": {
+       "t": "",
+       "lang": "en"
+      },
+      "note": {
+       "t": "",
+       "lang": "en"
+      }
+     }
+    ],
+    "prose": [
+     {
+      "t": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     }
+    ],
+    "meta": [
+     {
+      "t": "2026.10.30 — 12.14",
+      "lang": "en"
+     },
+     {
+      "t": "Gallery Kōen",
+      "lang": "en"
+     },
+     {
+      "t": "Tokyo",
+      "lang": "en"
+     },
+     {
+      "t": "Free admission",
+      "lang": "en"
+     },
+     {
+      "t": "galleryko.example/lowtide",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     }
+    ],
+    "words": [
+     {
+      "t": "LOW",
+      "lang": "en"
+     },
+     {
+      "t": "TIDE",
+      "lang": "en"
+     },
+     {
+      "t": "EXHIBITION",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     }
+    ],
+    "glyph": "L",
+    "facts": {
+     "date": {
+      "y": 2026,
+      "m": 10,
+      "d": 30
+     },
+     "year": "2026",
+     "issue": "2026.10",
+     "numeral": "30",
+     "signature": "Gallery Kōen",
+     "masthead": "LOW TIDE",
+     "sticker": [
+      "FREE",
+      "10.30"
+     ]
+    }
+   },
+   "palette": {
+    "bg": "#eafbf6",
+    "ink": "#090f0d",
+    "inkSoft": "#090f0d",
+    "accent": "#49685f",
+    "alt": "#cedbd7",
+    "fills": [
+     "#49685f",
+     "#cedbd7"
+    ],
+    "light": "#eafbf6",
+    "dark": "#090f0d",
+    "source": "itten:lightdark",
+    "sourceColors": [
+     "#d8f5d1",
+     "#9ddbca",
+     "#92b395",
+     "#726c81",
+     "#565164"
+    ]
+   },
+   "imageIds": [
+    "nature-land146321457"
+   ],
+   "comp": "veil",
+   "grid": {
+    "type": "ortho",
+    "density": "simple",
+    "nc": 3,
+    "nr": 4
+   },
+   "attempt": 0,
+   "quality": {
+    "score": 91,
+    "overlaps": 0,
+    "glyphHits": 0,
+    "lowContrast": 0,
+    "offCanvas": 0,
+    "clutter": 0,
+    "empty": 0,
+    "moved": 12,
+    "dropped": 0,
+    "recolored": 0,
+    "scrims": 0,
+    "outlined": 0,
+    "design": 9,
+    "audit": {
+     "blocks": 3,
+     "subject": 0,
+     "focalRatio": 3.3862433862433856,
+     "sizes": 3,
+     "align": 0.6666666666666666,
+     "quiet": 0.7934027777777778,
+     "decor": 0,
+     "accent": 0,
+     "busy": 1,
+     "harmony": 0.97496849619962,
+     "penalty": 9,
+     "parts": {
+      "blocks": 0,
+      "focal": 0,
+      "sizes": 0,
+      "align": 4,
+      "quiet": 0,
+      "decor": 0,
+      "accent": 0,
+      "busy": 5,
+      "harmony": 0,
+      "subject": 0,
+      "treatments": 0,
+      "midLevels": 0,
+      "busyXL": 0
+     }
+    }
+   },
+   "plan": {
+    "v2": true,
+    "typeOnly": false,
+    "tone": "light",
+    "palette": "mono",
+    "grain": 0,
+    "kit": [
+     "footer",
+     "mark"
+    ],
+    "script": false,
+    "geometry": "none",
+    "material": "none"
+   },
+   "idea": {
+    "id": "immersion",
+    "contrast": "lightdark",
+    "frame": "grid",
+    "brk": "none"
+   },
+   "salt": "#x3",
+   "taste": 7.086
+  },
+  "edits": {},
+  "custom": {
+   "headline": "Low Tide",
+   "sub": "Photographs by Mara Ellison",
+   "small": [
+    "10.30 — 12.14",
+    "Gallery Kōen",
+    "Free admission"
+   ],
+   "note": [
+    "When",
+    "Where",
+    "Tickets"
+   ],
+   "prose": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+   "meta": [
+    "2026.10.30 — 12.14",
+    "Gallery Kōen",
+    "Tokyo",
+    "Free admission",
+    "galleryko.example/lowtide"
+   ]
+  },
+  "comp": "veil"
+ },
+ "x_cli": {
+  "direction": "d5",
+  "reasons": [
+   "style garamond-quiet: en library for English copy, mood calm+minimal+elegant, voice serif, density airy, exhibition: literary / elegant faces",
+   "idea immersion (imagery: hero)",
+   "background light: matched (#eafbf6)",
+   "engine picked composition veil / idea immersion (taste 7.09 − penalty 0.08 = 7.01)"
+  ],
+  "brief_seed": "BPMZXHX",
+  "summary": {
+   "style": "garamond-quiet",
+   "ratio": "3:4",
+   "size": [
+    1200,
+    1600
+   ],
+   "comp": "veil",
+   "idea": "immersion",
+   "grid": "ortho/simple 3×4",
+   "attempt": 0,
+   "salt": "#x3",
+   "seeds": {
+    "layout": "BPMZXHX-5L",
+    "text": "BPMZXHX-5T",
+    "color": "BPMZXHX-5C~1",
+    "image": "BPMZXHX-5I#3"
+   },
+   "taste": 7.086,
+   "penalty": 0.08,
+   "score": 7.006,
+   "quality": 91,
+   "gates": {
+    "fails": [],
+    "soft": [
+     "centroid"
+    ],
+    "penalty": 0.08
+   },
+   "palette": {
+    "bg": "#eafbf6",
+    "ink": "#090f0d",
+    "accent": "#49685f"
+   },
+   "images": [
+    "nature-land146321457"
+   ],
+   "fonts": [
+    "EB Garamond",
+    "Noto Serif SC"
+   ]
+  },
+  "brief": {
+   "$schema": "poster-printer/brief.v1",
+   "purpose": "exhibition",
+   "context": {
+    "use": "art",
+    "audience": "gallery visitors and photography readers",
+    "display": {
+     "kind": "print",
+     "print_size": "A1",
+     "viewing_distance_m": 1.5
+    },
+    "priority": [
+     "title",
+     "date",
+     "venue",
+     "subtitle"
+    ]
+   },
+   "content": {
+    "title": "Low Tide",
+    "subtitle": "Photographs by Mara Ellison",
+    "date": "2026-10-30",
+    "date_end": "2026-12-14",
+    "venue": "Gallery Kōen",
+    "address": "3-8-2 Kiyosumi, Koto-ku",
+    "city": "Tokyo",
+    "organizers": [
+     "Gallery Kōen"
+    ],
+    "body": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+    "price": "Free admission",
+    "url": "galleryko.example/lowtide",
+    "language": "en"
+   },
+   "style": {
+    "mood": [
+     "calm",
+     "minimal",
+     "elegant"
+    ],
+    "density": "airy",
+    "imagery": {
+     "use": "hero",
+     "subject": [
+      "landscape",
+      "nature"
+     ]
+    },
+    "color": {
+     "background": "light",
+     "chroma": "muted"
+    },
+    "typography": {
+     "voice": "serif"
+    }
+   },
+   "format": {
+    "ratio": "3:4",
+    "count": 6,
+    "min_score": 6
+   }
+  },
+  "gates_passed": true,
+  "blocking_failures": []
+ }
+}

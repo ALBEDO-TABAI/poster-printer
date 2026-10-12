@@ -1,0 +1,5 @@
+# Optional AI cut-out extras for the distributable (looser pins than the dev box so it installs on Python 3.9–3.13)
+rembg>=2.0.55
+onnxruntime>=1.17
+pillow>=10.0
+numpy>=1.24

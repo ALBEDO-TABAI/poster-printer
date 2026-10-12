@@ -1,0 +1,866 @@
+[
+{
+"name": "q000",
+"style": "neue-grid",
+"comp": "auto",
+"ratio": "3:4",
+"seed": "QS0",
+"scale": 0.4
+},
+{
+"name": "q001",
+"style": "geo-bauhaus",
+"comp": "split",
+"ratio": "21:9",
+"seed": "QS1",
+"scale": 0.4
+},
+{
+"name": "q002",
+"style": "wide-future",
+"comp": "checker",
+"ratio": "16:9",
+"seed": "QS2",
+"scale": 0.4
+},
+{
+"name": "q003",
+"style": "big-shoulders",
+"comp": "fullbleed",
+"ratio": "4:3",
+"seed": "QS3",
+"scale": 0.4
+},
+{
+"name": "q004",
+"style": "fat-face",
+"comp": "giant",
+"ratio": "1:1",
+"seed": "QS4",
+"scale": 0.4
+},
+{
+"name": "q005",
+"style": "zh-wenkai-note",
+"comp": "partition",
+"ratio": "9:16",
+"seed": "QS5",
+"scale": 0.4
+},
+{
+"name": "q006",
+"style": "zh-heavy-song",
+"comp": "cards",
+"ratio": "3:4",
+"seed": "QS6",
+"scale": 0.4
+},
+{
+"name": "q007",
+"style": "zh-mono-modern",
+"comp": "fan",
+"ratio": "21:9",
+"seed": "QS7",
+"scale": 0.4
+},
+{
+"name": "q008",
+"style": "zh-retro-print",
+"comp": "typefill",
+"ratio": "16:9",
+"seed": "QS8",
+"scale": 0.4
+},
+{
+"name": "q009",
+"style": "didone-salon",
+"comp": "swiss",
+"ratio": "4:3",
+"seed": "QS9",
+"scale": 0.4
+},
+{
+"name": "q010",
+"style": "soft-serif",
+"comp": "centered",
+"ratio": "1:1",
+"seed": "QS10",
+"scale": 0.4
+},
+{
+"name": "q011",
+"style": "typewriter-memo",
+"comp": "layered",
+"ratio": "9:16",
+"seed": "QS11",
+"scale": 0.4
+},
+{
+"name": "q012",
+"style": "sporting",
+"comp": "bands",
+"ratio": "3:4",
+"seed": "QS12",
+"scale": 0.4
+},
+{
+"name": "q013",
+"style": "plex-corporate",
+"comp": "auto",
+"ratio": "21:9",
+"seed": "QS13",
+"scale": 0.4
+},
+{
+"name": "q014",
+"style": "zh-smiley",
+"comp": "split",
+"ratio": "16:9",
+"seed": "QS14",
+"scale": 0.4
+},
+{
+"name": "q015",
+"style": "zh-heavy-hei",
+"comp": "checker",
+"ratio": "4:3",
+"seed": "QS15",
+"scale": 0.4
+},
+{
+"name": "q016",
+"style": "zh-old-paper",
+"comp": "fullbleed",
+"ratio": "1:1",
+"seed": "QS16",
+"scale": 0.4
+},
+{
+"name": "q017",
+"style": "zh-colossal",
+"comp": "giant",
+"ratio": "9:16",
+"seed": "QS17",
+"scale": 0.4
+},
+{
+"name": "q018",
+"style": "poster-gothic",
+"comp": "partition",
+"ratio": "3:4",
+"seed": "QS18",
+"scale": 0.4
+},
+{
+"name": "q019",
+"style": "editorial-play",
+"comp": "cards",
+"ratio": "21:9",
+"seed": "QS19",
+"scale": 0.4
+},
+{
+"name": "q020",
+"style": "pixel-retro",
+"comp": "fan",
+"ratio": "16:9",
+"seed": "QS20",
+"scale": 0.4
+},
+{
+"name": "q021",
+"style": "fashion-gloock",
+"comp": "typefill",
+"ratio": "4:3",
+"seed": "QS21",
+"scale": 0.4
+},
+{
+"name": "q022",
+"style": "outline-wide",
+"comp": "swiss",
+"ratio": "1:1",
+"seed": "QS22",
+"scale": 0.4
+},
+{
+"name": "q023",
+"style": "zh-brush-title",
+"comp": "centered",
+"ratio": "9:16",
+"seed": "QS23",
+"scale": 0.4
+},
+{
+"name": "q024",
+"style": "zh-longcang",
+"comp": "layered",
+"ratio": "3:4",
+"seed": "QS24",
+"scale": 0.4
+},
+{
+"name": "q025",
+"style": "zh-mincho",
+"comp": "bands",
+"ratio": "21:9",
+"seed": "QS25",
+"scale": 0.4
+},
+{
+"name": "q026",
+"style": "zh-bilingual",
+"comp": "auto",
+"ratio": "16:9",
+"seed": "QS26",
+"scale": 0.4
+},
+{
+"name": "q027",
+"style": "grotesk-black",
+"comp": "split",
+"ratio": "4:3",
+"seed": "QS27",
+"scale": 0.4
+},
+{
+"name": "q028",
+"style": "tower-caps",
+"comp": "checker",
+"ratio": "1:1",
+"seed": "QS28",
+"scale": 0.4
+},
+{
+"name": "q029",
+"style": "newsprint",
+"comp": "fullbleed",
+"ratio": "9:16",
+"seed": "QS29",
+"scale": 0.4
+},
+{
+"name": "q030",
+"style": "warm-serif",
+"comp": "giant",
+"ratio": "3:4",
+"seed": "QS30",
+"scale": 0.4
+},
+{
+"name": "q031",
+"style": "quiet-geo",
+"comp": "partition",
+"ratio": "21:9",
+"seed": "QS31",
+"scale": 0.4
+},
+{
+"name": "q032",
+"style": "zh-cursive-air",
+"comp": "cards",
+"ratio": "16:9",
+"seed": "QS32",
+"scale": 0.4
+},
+{
+"name": "q033",
+"style": "zh-wild-grass",
+"comp": "fan",
+"ratio": "4:3",
+"seed": "QS33",
+"scale": 0.4
+},
+{
+"name": "q034",
+"style": "zh-tea-journal",
+"comp": "typefill",
+"ratio": "1:1",
+"seed": "QS34",
+"scale": 0.4
+},
+{
+"name": "q035",
+"style": "zh-clash",
+"comp": "swiss",
+"ratio": "9:16",
+"seed": "QS35",
+"scale": 0.4
+},
+{
+"name": "q036",
+"style": "mono-lab",
+"comp": "centered",
+"ratio": "3:4",
+"seed": "QS36",
+"scale": 0.4
+},
+{
+"name": "q037",
+"style": "gallery-syne",
+"comp": "layered",
+"ratio": "21:9",
+"seed": "QS37",
+"scale": 0.4
+},
+{
+"name": "q038",
+"style": "caslon-book",
+"comp": "bands",
+"ratio": "16:9",
+"seed": "QS38",
+"scale": 0.4
+},
+{
+"name": "q039",
+"style": "readable",
+"comp": "auto",
+"ratio": "4:3",
+"seed": "QS39",
+"scale": 0.4
+},
+{
+"name": "q040",
+"style": "zh-cold-hei",
+"comp": "split",
+"ratio": "1:1",
+"seed": "QS40",
+"scale": 0.4
+},
+{
+"name": "q041",
+"style": "zh-xiaowei",
+"comp": "checker",
+"ratio": "9:16",
+"seed": "QS41",
+"scale": 0.4
+},
+{
+"name": "q042",
+"style": "zh-song-minimal",
+"comp": "fullbleed",
+"ratio": "3:4",
+"seed": "QS42",
+"scale": 0.4
+},
+{
+"name": "q043",
+"style": "zh-future",
+"comp": "giant",
+"ratio": "21:9",
+"seed": "QS43",
+"scale": 0.4
+},
+{
+"name": "q044",
+"style": "zh-layer",
+"comp": "partition",
+"ratio": "16:9",
+"seed": "QS44",
+"scale": 0.4
+},
+{
+"name": "q045",
+"style": "garamond-quiet",
+"comp": "cards",
+"ratio": "4:3",
+"seed": "QS45",
+"scale": 0.4
+},
+{
+"name": "q046",
+"style": "instrument",
+"comp": "fan",
+"ratio": "1:1",
+"seed": "QS46",
+"scale": 0.4
+},
+{
+"name": "q047",
+"style": "floral-script",
+"comp": "typefill",
+"ratio": "9:16",
+"seed": "QS47",
+"scale": 0.4
+},
+{
+"name": "q048",
+"style": "avant",
+"comp": "swiss",
+"ratio": "3:4",
+"seed": "QS48",
+"scale": 0.4
+},
+{
+"name": "q049",
+"style": "zh-song-edit",
+"comp": "centered",
+"ratio": "21:9",
+"seed": "QS49",
+"scale": 0.4
+},
+{
+"name": "q050",
+"style": "zh-huangyou",
+"comp": "layered",
+"ratio": "16:9",
+"seed": "QS50",
+"scale": 0.4
+},
+{
+"name": "q051",
+"style": "zh-new-chinese",
+"comp": "bands",
+"ratio": "4:3",
+"seed": "QS51",
+"scale": 0.4
+},
+{
+"name": "q052",
+"style": "zh-stone",
+"comp": "auto",
+"ratio": "1:1",
+"seed": "QS52",
+"scale": 0.4
+},
+{
+"name": "q053",
+"style": "zh-torn",
+"comp": "split",
+"ratio": "9:16",
+"seed": "QS53",
+"scale": 0.4
+},
+{
+"name": "q054",
+"style": "condensed-signal",
+"comp": "checker",
+"ratio": "3:4",
+"seed": "QS54",
+"scale": 0.4
+},
+{
+"name": "q055",
+"style": "stone-roman",
+"comp": "fullbleed",
+"ratio": "21:9",
+"seed": "QS55",
+"scale": 0.4
+},
+{
+"name": "q056",
+"style": "industrial",
+"comp": "giant",
+"ratio": "16:9",
+"seed": "QS56",
+"scale": 0.4
+},
+{
+"name": "q057",
+"style": "spartan",
+"comp": "partition",
+"ratio": "4:3",
+"seed": "QS57",
+"scale": 0.4
+},
+{
+"name": "q058",
+"style": "zh-thin-air",
+"comp": "cards",
+"ratio": "1:1",
+"seed": "QS58",
+"scale": 0.4
+},
+{
+"name": "q059",
+"style": "zh-kuaile",
+"comp": "fan",
+"ratio": "9:16",
+"seed": "QS59",
+"scale": 0.4
+},
+{
+"name": "q060",
+"style": "zh-hk-mag",
+"comp": "typefill",
+"ratio": "3:4",
+"seed": "QS60",
+"scale": 0.4
+},
+{
+"name": "q061",
+"style": "zh-round-geo",
+"comp": "swiss",
+"ratio": "21:9",
+"seed": "QS61",
+"scale": 0.4
+},
+{
+"name": "q062",
+"style": "neue-grid",
+"comp": "centered",
+"ratio": "16:9",
+"seed": "QS62",
+"scale": 0.4
+},
+{
+"name": "q063",
+"style": "geo-bauhaus",
+"comp": "layered",
+"ratio": "4:3",
+"seed": "QS63",
+"scale": 0.4
+},
+{
+"name": "q064",
+"style": "wide-future",
+"comp": "bands",
+"ratio": "1:1",
+"seed": "QS64",
+"scale": 0.4
+},
+{
+"name": "q065",
+"style": "big-shoulders",
+"comp": "auto",
+"ratio": "9:16",
+"seed": "QS65",
+"scale": 0.4
+},
+{
+"name": "q066",
+"style": "fat-face",
+"comp": "split",
+"ratio": "3:4",
+"seed": "QS66",
+"scale": 0.4
+},
+{
+"name": "q067",
+"style": "zh-wenkai-note",
+"comp": "checker",
+"ratio": "21:9",
+"seed": "QS67",
+"scale": 0.4
+},
+{
+"name": "q068",
+"style": "zh-heavy-song",
+"comp": "fullbleed",
+"ratio": "16:9",
+"seed": "QS68",
+"scale": 0.4
+},
+{
+"name": "q069",
+"style": "zh-mono-modern",
+"comp": "giant",
+"ratio": "4:3",
+"seed": "QS69",
+"scale": 0.4
+},
+{
+"name": "q070",
+"style": "zh-retro-print",
+"comp": "partition",
+"ratio": "1:1",
+"seed": "QS70",
+"scale": 0.4
+},
+{
+"name": "q071",
+"style": "didone-salon",
+"comp": "cards",
+"ratio": "9:16",
+"seed": "QS71",
+"scale": 0.4
+},
+{
+"name": "q072",
+"style": "soft-serif",
+"comp": "fan",
+"ratio": "3:4",
+"seed": "QS72",
+"scale": 0.4
+},
+{
+"name": "q073",
+"style": "typewriter-memo",
+"comp": "typefill",
+"ratio": "21:9",
+"seed": "QS73",
+"scale": 0.4
+},
+{
+"name": "q074",
+"style": "sporting",
+"comp": "swiss",
+"ratio": "16:9",
+"seed": "QS74",
+"scale": 0.4
+},
+{
+"name": "q075",
+"style": "plex-corporate",
+"comp": "centered",
+"ratio": "4:3",
+"seed": "QS75",
+"scale": 0.4
+},
+{
+"name": "q076",
+"style": "zh-smiley",
+"comp": "layered",
+"ratio": "1:1",
+"seed": "QS76",
+"scale": 0.4
+},
+{
+"name": "q077",
+"style": "zh-heavy-hei",
+"comp": "bands",
+"ratio": "9:16",
+"seed": "QS77",
+"scale": 0.4
+},
+{
+"name": "q078",
+"style": "zh-old-paper",
+"comp": "auto",
+"ratio": "3:4",
+"seed": "QS78",
+"scale": 0.4
+},
+{
+"name": "q079",
+"style": "zh-colossal",
+"comp": "split",
+"ratio": "21:9",
+"seed": "QS79",
+"scale": 0.4
+},
+{
+"name": "q080",
+"style": "poster-gothic",
+"comp": "checker",
+"ratio": "16:9",
+"seed": "QS80",
+"scale": 0.4
+},
+{
+"name": "q081",
+"style": "editorial-play",
+"comp": "fullbleed",
+"ratio": "4:3",
+"seed": "QS81",
+"scale": 0.4
+},
+{
+"name": "q082",
+"style": "pixel-retro",
+"comp": "giant",
+"ratio": "1:1",
+"seed": "QS82",
+"scale": 0.4
+},
+{
+"name": "q083",
+"style": "fashion-gloock",
+"comp": "partition",
+"ratio": "9:16",
+"seed": "QS83",
+"scale": 0.4
+},
+{
+"name": "q084",
+"style": "outline-wide",
+"comp": "cards",
+"ratio": "3:4",
+"seed": "QS84",
+"scale": 0.4
+},
+{
+"name": "q085",
+"style": "zh-brush-title",
+"comp": "fan",
+"ratio": "21:9",
+"seed": "QS85",
+"scale": 0.4
+},
+{
+"name": "q086",
+"style": "zh-longcang",
+"comp": "typefill",
+"ratio": "16:9",
+"seed": "QS86",
+"scale": 0.4
+},
+{
+"name": "q087",
+"style": "zh-mincho",
+"comp": "swiss",
+"ratio": "4:3",
+"seed": "QS87",
+"scale": 0.4
+},
+{
+"name": "q088",
+"style": "zh-bilingual",
+"comp": "centered",
+"ratio": "1:1",
+"seed": "QS88",
+"scale": 0.4
+},
+{
+"name": "q089",
+"style": "grotesk-black",
+"comp": "layered",
+"ratio": "9:16",
+"seed": "QS89",
+"scale": 0.4
+},
+{
+"name": "q090",
+"style": "tower-caps",
+"comp": "bands",
+"ratio": "3:4",
+"seed": "QS90",
+"scale": 0.4
+},
+{
+"name": "q091",
+"style": "newsprint",
+"comp": "auto",
+"ratio": "21:9",
+"seed": "QS91",
+"scale": 0.4
+},
+{
+"name": "q092",
+"style": "warm-serif",
+"comp": "split",
+"ratio": "16:9",
+"seed": "QS92",
+"scale": 0.4
+},
+{
+"name": "q093",
+"style": "quiet-geo",
+"comp": "checker",
+"ratio": "4:3",
+"seed": "QS93",
+"scale": 0.4
+},
+{
+"name": "q094",
+"style": "zh-cursive-air",
+"comp": "fullbleed",
+"ratio": "1:1",
+"seed": "QS94",
+"scale": 0.4
+},
+{
+"name": "q095",
+"style": "zh-wild-grass",
+"comp": "giant",
+"ratio": "9:16",
+"seed": "QS95",
+"scale": 0.4
+},
+{
+"name": "q096",
+"style": "zh-tea-journal",
+"comp": "partition",
+"ratio": "3:4",
+"seed": "QS96",
+"scale": 0.4
+},
+{
+"name": "q097",
+"style": "zh-clash",
+"comp": "cards",
+"ratio": "21:9",
+"seed": "QS97",
+"scale": 0.4
+},
+{
+"name": "q098",
+"style": "mono-lab",
+"comp": "fan",
+"ratio": "16:9",
+"seed": "QS98",
+"scale": 0.4
+},
+{
+"name": "q099",
+"style": "gallery-syne",
+"comp": "typefill",
+"ratio": "4:3",
+"seed": "QS99",
+"scale": 0.4
+},
+{
+"name": "q100",
+"style": "caslon-book",
+"comp": "swiss",
+"ratio": "1:1",
+"seed": "QS100",
+"scale": 0.4
+},
+{
+"name": "q101",
+"style": "readable",
+"comp": "centered",
+"ratio": "9:16",
+"seed": "QS101",
+"scale": 0.4
+},
+{
+"name": "q102",
+"style": "zh-cold-hei",
+"comp": "layered",
+"ratio": "3:4",
+"seed": "QS102",
+"scale": 0.4
+},
+{
+"name": "q103",
+"style": "zh-xiaowei",
+"comp": "bands",
+"ratio": "21:9",
+"seed": "QS103",
+"scale": 0.4
+},
+{
+"name": "q104",
+"style": "zh-song-minimal",
+"comp": "auto",
+"ratio": "16:9",
+"seed": "QS104",
+"scale": 0.4
+},
+{
+"name": "q105",
+"style": "zh-future",
+"comp": "split",
+"ratio": "4:3",
+"seed": "QS105",
+"scale": 0.4
+},
+{
+"name": "q106",
+"style": "zh-layer",
+"comp": "checker",
+"ratio": "1:1",
+"seed": "QS106",
+"scale": 0.4
+},
+{
+"name": "q107",
+"style": "garamond-quiet",
+"comp": "fullbleed",
+"ratio": "9:16",
+"seed": "QS107",
+"scale": 0.4
+}
+]

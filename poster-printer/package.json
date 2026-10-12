@@ -1,0 +1,41 @@
+{
+  "name": "poster-printer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "vitest run",
+    "qa:e2e": "node scripts/qa/e2e.mjs",
+    "qa:controls": "node scripts/qa/controls.mjs",
+    "qa:interaction": "node scripts/qa/interaction.mjs",
+    "qa:showcase": "node scripts/qa/showcase.mjs",
+    "cutout": "server/.venv/bin/python server/cutout_server.py",
+    "fonts": "python3 scripts/build-fonts.py",
+    "predev": "node scripts/check-fonts.mjs",
+    "prebuild": "node scripts/check-fonts.mjs",
+    "qa:deck": "node scripts/qa/deck-export.mjs",
+    "dist": "bash scripts/make-dist.sh"
+  },
+  "dependencies": {
+    "idb-keyval": "^6.3.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "oxlint": "^1.81.0",
+    "playwright": "^1.64.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.3"
+  },
+  "license": "AGPL-3.0-only"
+}

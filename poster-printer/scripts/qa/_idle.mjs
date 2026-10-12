@@ -1,0 +1,13 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox', ...(process.env.GPU?['--enable-gpu','--use-angle=swiftshader','--enable-unsafe-swiftshader']:[])] });
+const p = await (await b.newContext({ viewport: { width: 1512, height: 945 } })).newPage();
+await p.goto('http://127.0.0.1:5180/?fresh');
+await p.waitForFunction(() => window.__rea?.getState().scene, null, { timeout: 90000 }); await p.waitForTimeout(2500);
+const f = async (label) => console.log(label, await p.evaluate(() => new Promise((r) => { const a = []; let l = performance.now(); const t = (x) => { a.push(x - l); l = x; if (a.length < 60) requestAnimationFrame(t); else { a.sort((x, y) => x - y); r({ p50: a[30].toFixed(1), p95: a[57].toFixed(1) }); } }; requestAnimationFrame(t); })));
+await f('idle');
+await p.evaluate(() => document.documentElement.classList.add('reduce-motion')); await f('rm');
+await p.addStyleTag({ content: '*{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}' }); await f('no-backdrop');
+await p.addStyleTag({ content: '*{filter:none!important}' }); await f('no-filter');
+const s = await p.evaluate(() => [...document.querySelectorAll('*')].filter((e) => { const c = getComputedStyle(e); return c.backdropFilter !== 'none' }).length);
+console.log('bf elements', s);
+await b.close();

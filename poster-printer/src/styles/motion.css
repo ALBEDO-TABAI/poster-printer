@@ -1,0 +1,124 @@
+/* ============================================================
+   Phase 14 — motion system
+   One restrained vocabulary for the whole shell:
+     --t-1 140ms  press / hover / colour
+     --t-2 200ms  small popovers, chips, toasts out
+     --t-3 260ms  panels, sheets, toasts in
+     --t-4 320ms  layout moves (panels pushing the canvas, rails re-centring)
+   Curves:
+     --e-std    cubic-bezier(.2,.8,.2,1)   decelerate — the default for everything that arrives
+     --e-exit   cubic-bezier(.4,0,1,1)     accelerate — things that leave
+     --e-spring a critically-damped spring (≈ 2% overshoot) via linear(); falls back to --e-std
+   Rules: things scale + fade from where they came from (transform-origin = the trigger); nothing bounces more than a
+   hair; leaving is faster than arriving; reduced motion keeps only opacity.
+   ============================================================ */
+:root {
+  --t-1: 140ms; --t-2: 200ms; --t-3: 260ms; --t-4: 320ms;
+  --e-std: cubic-bezier(.2, .8, .2, 1);
+  --e-exit: cubic-bezier(.4, 0, 1, 1);
+  --e-spring: var(--e-std);
+  /* the old tokens resolve to the new vocabulary, so every existing transition joins the system */
+  --ease-out: var(--e-std);
+  --ease-liquid: var(--e-std);
+  --ease-spring: var(--e-spring);
+  --d-2: var(--t-2); --d-3: var(--t-3); --d-4: var(--t-4);
+}
+@supports (transition-timing-function: linear(0, 1)) {
+  :root { --e-spring: linear(0, .009, .035 2.1%, .141 4.4%, .723 12.9%, .938 16.7%, 1.017 20.5%, 1.043 24.5%, 1.035 28.4%, 1.007 36%, .998 42.3%, 1.001 55%, 1); }
+}
+
+/* ---------- press feedback: every pressable shrinks to .97 on the same 140ms curve ---------- */
+.press, .rail button, .seg > button, .opt, .chipt, .pin-chip, .btn, .icon-btn, .remix, .style-card, .comp-card, .fmt, .plink {
+  transition-property: transform, background-color, color, box-shadow, opacity;
+  transition-duration: var(--t-1); transition-timing-function: var(--e-std);
+}
+.press:active, .rail button:active, .seg > button:active, .opt:active, .chipt:active, .pin-chip:active, .btn:active, .icon-btn:active, .remix:active, .fmt:active { transform: scale(.97); transition-duration: 60ms; }
+.draw.press:active { transform: translateY(0) scale(.97); }
+button:disabled:active { transform: none; }
+/* hover never sticks on touch */
+@media (hover: none) { .rail button:hover, .icon-btn:hover, .remix:hover { background: transparent; } }
+
+/* ---------- panels: scale + fade from their rail, faster out than in; closed panels leave the compositor ---------- */
+.panel { filter: none !important; visibility: hidden; contain: layout paint style;
+  transition: transform var(--t-3) var(--e-exit), opacity var(--t-2) var(--e-exit), visibility 0s linear var(--t-3); }
+.panel.open { visibility: visible; transition: transform var(--t-3) var(--e-spring), opacity var(--t-2) var(--e-std), visibility 0s; }
+.inspector, .advanced { transform: translateX(24px) scale(.98); transform-origin: calc(100% + 48px) var(--rail-oy, 50%); }
+.library { transform: translateX(-24px) scale(.98) !important; transform-origin: -48px var(--rail-oy, 50%); }
+.library.open { transform: none !important; }
+.adv-main, .p-body { contain: content; }
+.film { visibility: hidden; transition: transform var(--t-3) var(--e-exit), opacity var(--t-2) var(--e-exit), visibility 0s linear var(--t-3); transform-origin: 50% 100%; }
+.film.open { visibility: visible; transition: transform var(--t-3) var(--e-spring), opacity var(--t-2) var(--e-std), visibility 0s; }
+
+/* ---------- sheets: from the button that opened them (origin set by Sheets.tsx) ---------- */
+.sheet { visibility: hidden; transform-origin: var(--sx, 50%) var(--sy, 50%); transform: translate(-50%, -50%) scale(.94);
+  transition: transform var(--t-2) var(--e-exit), opacity var(--t-2) var(--e-exit), visibility 0s linear var(--t-2); }
+.sheet.open { visibility: visible; transform: translate(-50%, -50%) scale(1); transition: transform var(--t-3) var(--e-spring), opacity var(--t-2) var(--e-std), visibility 0s; }
+.scrim { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; transition: opacity var(--t-3) var(--e-std); }
+
+/* ---------- light popovers: tooltips, explainers, notes, ctx bar ---------- */
+@keyframes popFade { from { opacity: 0; transform: translateY(-3px) scale(.98); } }
+.pexp { transform-origin: 100% 0; animation: popFade var(--t-2) var(--e-std) both; }
+.pnote { animation: popFade var(--t-2) var(--e-std) both; }
+.ctxbar.show { animation: ctxIn var(--t-3) var(--e-spring) both; }
+@keyframes ctxIn { from { opacity: 0; transform: translate(-50%, 4px) scale(.96); } to { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+.pctl .pt { backdrop-filter: none; -webkit-backdrop-filter: none; }
+
+/* ---------- toasts: rise in, settle, fade down; replaced in place ---------- */
+.toast { animation: toastIn2 var(--t-3) var(--e-spring) both; will-change: transform, opacity; }
+.toast.out { animation: toastOut2 var(--t-2) var(--e-exit) both; }
+@keyframes toastIn2 { from { opacity: 0; transform: translateY(8px) scale(.96); } }
+@keyframes toastOut2 { to { opacity: 0; transform: translateY(4px) scale(.98); } }
+
+/* ---------- pins: chips grow in from 抽一张 and shrink out ---------- */
+.pin-chip { animation: chipIn var(--t-3) var(--e-spring) both; transform-origin: 50% 0; }
+.pin-chip.out { animation: chipOut var(--t-2) var(--e-exit) both; pointer-events: none; }
+@keyframes chipIn { from { opacity: 0; transform: translateY(-6px) scale(.9); } }
+@keyframes chipOut { to { opacity: 0; transform: scale(.9); max-width: 0; padding: 0; margin: 0; } }
+.pins-bar { animation: popFade var(--t-3) var(--e-std) both; }
+
+/* ---------- segmented control: the thumb slides on the shared curve ---------- */
+.seg-thumb { transition-duration: var(--t-3) !important; transition-timing-function: var(--e-spring) !important; }
+
+/* ---------- poster: a short crossfade + settle on every new print (no blur pass: it was the costliest frame) ---------- */
+@keyframes printIn { 0% { opacity: 0; transform: scale(1.012); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes printOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+.frame .paper .layer.in { animation: printIn var(--t-4) var(--e-std) both; }
+.frame .paper .layer.out { animation: printOut var(--t-3) var(--e-exit) both; }
+.frame { transition: width var(--t-4) var(--e-std), height var(--t-4) var(--e-std); }
+
+/* ---------- rails: centred on the poster axis (top set by Shell.tsx), glide when it moves ---------- */
+.rails-placed .rail { transition: top var(--t-4) var(--e-std), opacity var(--t-2) var(--e-std); }
+
+/* ---------- reduced motion: no movement, only quick fades ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root { --t-1: 0ms; --t-3: 120ms; --t-4: 0ms; --e-spring: linear; }
+  *, *::before, *::after { animation-duration: 120ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+  .press:active, .rail button:active, .btn:active, .icon-btn:active { transform: none; }
+  .inspector, .advanced, .library { transform: none !important; }
+  .film { transform: translate(-50%, 0) !important; }
+  .sheet, .sheet.open { transform: translate(-50%, -50%) !important; }
+}
+html.reduce-motion { --t-1: 0ms; --t-3: 120ms; --t-4: 0ms; --e-spring: linear; }
+html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after { animation-duration: 120ms !important; animation-iteration-count: 1 !important; }
+html.reduce-motion .inspector, html.reduce-motion .advanced, html.reduce-motion .library { transform: none !important; }
+html.reduce-motion .film { transform: translate(-50%, 0) !important; }
+html.reduce-motion .sheet, html.reduce-motion .sheet.open { transform: translate(-50%, -50%) !important; }
+
+/* ---------- live drag: the big side panels hold a frozen material ----------
+   Profiling (docs/INTERACTION_AUDIT.md): while a slider re-renders the poster every frame, the 584 px advanced panel
+   re-blurs its backdrop (the poster tucks under its rim) every frame — that alone took frames from 17 ms to 100 ms on a
+   software rasteriser. During a drag the panels swap the live blur for an almost-opaque tint of the same colour (the
+   blurred backdrop there is nearly uniform anyway), and get it back on release. */
+.panel.lg { transition: background-color var(--t-1) var(--e-std), box-shadow var(--t-3) var(--e-std), transform var(--t-3) var(--e-exit), opacity var(--t-2) var(--e-exit), visibility 0s linear var(--t-3); }
+body.scrubbing .panel.lg, body.scrubbing .panel.lg > .lg-lens::after { -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  background: linear-gradient(rgb(var(--amb) / var(--amb-alpha)), rgb(var(--amb) / var(--amb-alpha))), rgb(var(--glass-tint) / .94) !important; }
+body.scrubbing .frame .paper .layer.in { animation: none; }
+.panel.lg.open { transition: background-color var(--t-1) var(--e-std), box-shadow var(--t-3) var(--e-std), transform var(--t-3) var(--e-spring), opacity var(--t-2) var(--e-std), visibility 0s; }
+
+/* a segmented thumb is invisible until it has been measured once (first placement is deferred a frame) */
+.seg-thumb:not([data-placed]) { opacity: 0; }
+
+/* a remix that is still landing: the label dims, the icon breathes once */
+.remix.busy { color: var(--accent); }
+.remix.busy svg { animation: busyPulse 600ms var(--e-std) infinite alternate; }
+@keyframes busyPulse { to { opacity: .45; } }

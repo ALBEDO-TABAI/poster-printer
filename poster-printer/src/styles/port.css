@@ -1,0 +1,53 @@
+/* Port-specific additions: pieces the prototype rendered as images that the real app renders as live SVG. */
+.stage-host { position: absolute; inset: 0; }
+.frame .paper.poster { touch-action: none; user-select: none; background: transparent; }
+.frame .paper.poster > svg { display: block; width: 100%; height: 100%; }
+.frame .paper.layer-in { animation: printIn 620ms var(--ease-out) both; }
+.frame .paper.img-editing { cursor: grab; }
+.frame .paper [data-layer='text'], .frame .paper [data-layer='images'], .frame .paper [data-layer='ornament'], .frame .paper [data-layer='shapes'], .frame .paper [data-layer='sidebar'], .frame .paper [data-layer='band'] { cursor: pointer; }
+.frame .paper .tx:hover { filter: drop-shadow(0 0 .5px var(--accent)); }
+.replaying .frame .paper.layer-in { animation-duration: 260ms; }
+.text-editor { position: absolute; z-index: 8; background: rgb(255 255 255 / .96); color: #111; border: 0; border-radius: 8px; padding: 5px 7px; line-height: 1.15; resize: both; outline: none; box-shadow: 0 0 0 1.5px var(--accent), var(--shadow-3); }
+.caption .cap-link { color: var(--accent); font: inherit; padding: 0; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: .5px; }
+.caption .sep { color: var(--ink-4); }
+/* live SVG thumbnails */
+.svgth { display: block; width: 100%; height: 100%; }
+.svgth svg { display: block; width: 100%; height: 100%; }
+.fthumb { aspect-ratio: 3/4; background: var(--fill); border-radius: 4px; }
+.fthumb .svgth { border-radius: 4px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 4px 10px -4px rgba(0,0,0,.25); }
+.fthumb.cur .svgth { box-shadow: 0 0 0 2px var(--stage), 0 0 0 3.5px var(--accent), 0 8px 18px -6px rgba(0,0,0,.35); }
+.fthumb .x { position: absolute; right: 3px; top: 3px; width: 18px; height: 18px; border-radius: 9px; background: rgb(0 0 0 / .55); color: #fff; display: none; place-items: center; }
+.fthumb:hover .x { display: grid; }
+.style-card { position: relative; }
+.style-card .th .svgth { position: absolute; inset: 0; }
+.style-card .del { position: absolute; right: 4px; top: 4px; width: 22px; height: 22px; border-radius: 11px; background: rgb(0 0 0 / .55); color: #fff; display: none; place-items: center; }
+.style-card:hover .del { display: grid; }
+.export .pv .pvposter { width: auto; height: auto; max-width: 100%; max-height: 380px; aspect-ratio: auto; }
+.export .pv .pvposter svg { width: 100%; height: auto; max-height: 380px; border-radius: 3px; box-shadow: var(--poster-shadow); }
+.mini-list .chipt[disabled] { opacity: .4; pointer-events: none; }
+.btn[disabled] { opacity: .45; pointer-events: none; }
+.dotc { display: inline-block; width: 9px; height: 9px; border-radius: 50%; box-shadow: inset 0 0 0 .5px rgb(0 0 0 / .25); margin-right: 5px; vertical-align: -1px; }
+.img-prev { height: 132px; border-radius: 12px; background-size: cover; box-shadow: inset 0 0 0 .5px var(--hair); margin-bottom: 10px; }
+/* card wrapper used by the legacy panels inside the libraries */
+.sec.card .card-body { padding: 0; }
+.sec.card .chev { color: var(--ink-3); }
+/* deck view */
+.deck-pages { overflow-y: auto; scrollbar-width: none; }
+.deck-pages .dp-h { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; padding: 4px 4px 0; flex: none; }
+.deck-thumb { position: relative; cursor: pointer; flex: none; border-radius: 4px; transition: transform 420ms var(--ease-spring); }
+.deck-thumb:hover { transform: translateY(-2px); }
+.deck-mini { width: 100%; border-radius: 4px; overflow: hidden; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 4px 10px -4px rgba(0,0,0,.25); }
+.deck-mini svg { display: block; width: 100%; height: 100%; }
+.deck-thumb.on .deck-mini { box-shadow: 0 0 0 2px var(--stage), 0 0 0 3.5px var(--accent); }
+.deck-pages .deck-thumb.on { box-shadow: none; }
+.deck-thumb .deck-no { position: absolute; left: 4px; top: 4px; font-family: var(--font-mono); font-size: 9.5px; background: rgb(0 0 0 / .55); color: #fff; border-radius: 4px; padding: 1px 4px; pointer-events: none; }
+.deck-tools { position: absolute; right: 3px; bottom: 3px; display: none; gap: 2px; }
+.deck-thumb:hover .deck-tools { display: flex; }
+.deck-tools .icon-btn { width: 22px; height: 22px; border-radius: 6px; background: rgb(255 255 255 / .9); color: #111; }
+.deck-tools .icon-btn[disabled] { opacity: .35; }
+.deck-add { flex: none; height: 36px; }
+.deck-panel { --win-dir: 90deg; }
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) { .frame .paper.layer-in, .frame .scan.run { animation: none !important; } }
+html.reduce-motion .frame .paper.layer-in, html.reduce-motion .frame .scan.run { animation: none !important; }
+html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; }

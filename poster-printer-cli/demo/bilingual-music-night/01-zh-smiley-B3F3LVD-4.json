@@ -1,0 +1,723 @@
+{
+ "app": "poster-printer",
+ "kind": "poster",
+ "version": 1,
+ "entry": {
+  "id": "B3F3LVD-4-mv4ok7kg",
+  "ts": 1791774980944,
+  "seeds": {
+   "layout": "B3F3LVD-4L",
+   "text": "B3F3LVD-4T",
+   "color": "B3F3LVD-4C~1",
+   "image": "B3F3LVD-4I#5"
+  },
+  "decorSalt": "",
+  "ratio": "3:4",
+  "styleId": "zh-smiley",
+  "params": {
+   "gridType": "auto",
+   "density": "auto",
+   "composition": "auto",
+   "gridStrength": 1,
+   "cols": 0,
+   "rows": 0,
+   "margin": 4.5,
+   "gutter": 0,
+   "baseline": 8,
+   "whitespace": 40,
+   "symmetry": 30,
+   "gridOpacity": 100,
+   "zoneStrength": 40,
+   "cornerRadius": 22,
+   "cardGap": 22,
+   "tuneOn": true,
+   "contrast": 100,
+   "saturation": 100,
+   "brightness": 100,
+   "texture": "auto",
+   "textureAmount": 18,
+   "bigGroups": 1,
+   "smallGroups": 5,
+   "smallRel": 32,
+   "titleScale": 148,
+   "smallScale": 128,
+   "tickText": true,
+   "align": "random",
+   "case": "auto",
+   "proseCount": 0,
+   "proseSize": 22,
+   "metaCount": 6,
+   "maxLineWidth": 92,
+   "mainBreath": 18,
+   "subBreath": 6,
+   "ruleWeight": 100,
+   "groupGap": 28,
+   "fontCount": 2,
+   "englishBias": 50,
+   "shakeOnDraw": false,
+   "bandHeight": 24,
+   "bandPos": "auto",
+   "bandKind": "auto",
+   "bandBleed": true,
+   "sidebarTpl": "auto",
+   "sidebarSide": "auto",
+   "sidebarWidth": 16,
+   "sidebarFont": 100,
+   "sidebarRule": true,
+   "colorMode": "experimental",
+   "paletteSource": "nice",
+   "bgPref": "dark",
+   "soft": false,
+   "minContrast": 4.5,
+   "zoneColors": 3,
+   "accentUse": 50,
+   "imageCount": 1,
+   "imageShare": 55,
+   "maskKind": "auto",
+   "sliceCount": 5,
+   "imageZoom": 100,
+   "legibility": 70,
+   "imgSat": 100,
+   "imgContrast": 100,
+   "duotone": 15,
+   "tornRough": 50,
+   "bigGlyph": true,
+   "glyphKind": "auto",
+   "glyphSize": 90,
+   "glyphOpacity": 100,
+   "ornaments": 2,
+   "ornamentSize": 100,
+   "lineWeight": 1,
+   "nodeSize": 3,
+   "zoneNumbers": true,
+   "guides": false,
+   "dashed": false,
+   "curveCount": 2,
+   "shapeCount": 1,
+   "noiseAmount": 30,
+   "qualityGate": true,
+   "qualityMin": 78,
+   "qualityTries": 5,
+   "collisionFix": true,
+   "idea": "tension",
+   "planV2": true,
+   "typeOnlyShare": 15,
+   "monoShare": 30,
+   "clashShare": 6,
+   "grainShare": 12,
+   "scriptShare": 12,
+   "artDirection": true,
+   "typeRatio": "auto",
+   "opticalTracking": true,
+   "blockBudget": 8,
+   "decorBudget": 2,
+   "busyScrim": true,
+   "snapGrid": true,
+   "exportScale": 2,
+   "embedFonts": true,
+   "replaySpeed": 900
+  },
+  "modules": {
+   "bg": true,
+   "zones": true,
+   "lines": true,
+   "curves": true,
+   "noise": true,
+   "texture": true,
+   "text": true,
+   "ornament": true,
+   "shapes": true,
+   "images": true,
+   "sidebar": true,
+   "band": true
+  },
+  "modes": [],
+  "fonts": {
+   "en": {
+    "big.main": {
+     "family": "Space Grotesk",
+     "weight": 700,
+     "size": 100,
+     "tracking": -0.01,
+     "leading": 0.95,
+     "case": "none"
+    },
+    "big.sub": {
+     "family": "Space Grotesk",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0,
+     "leading": 1.2,
+     "case": "none"
+    },
+    "big.note": {
+     "family": "Space Mono",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.01,
+     "leading": 1.35,
+     "case": "upper"
+    },
+    "small.main": {
+     "family": "Space Grotesk",
+     "weight": 700,
+     "size": 100,
+     "tracking": 0,
+     "leading": 1,
+     "case": "none"
+    },
+    "small.sub": {
+     "family": "Space Grotesk",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0,
+     "leading": 1.25,
+     "case": "none"
+    },
+    "small.note": {
+     "family": "Space Mono",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.01,
+     "leading": 1.35,
+     "case": "upper"
+    }
+   },
+   "zh": {
+    "big.main": {
+     "family": "Smiley Sans",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.02,
+     "leading": 1.08,
+     "case": "none"
+    },
+    "big.sub": {
+     "family": "Noto Sans SC",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.04,
+     "leading": 1.4,
+     "case": "none"
+    },
+    "big.note": {
+     "family": "Noto Sans SC",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.06,
+     "leading": 1.6,
+     "case": "none"
+    },
+    "small.main": {
+     "family": "Smiley Sans",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.02,
+     "leading": 1.15,
+     "case": "none"
+    },
+    "small.sub": {
+     "family": "Noto Sans SC",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.04,
+     "leading": 1.45,
+     "case": "none"
+    },
+    "small.note": {
+     "family": "Noto Sans SC",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.06,
+     "leading": 1.6,
+     "case": "none"
+    }
+   },
+   "glyph": {
+    "family": "Space Grotesk",
+    "weight": 700
+   },
+   "glyphZh": {
+    "family": "Smiley Sans",
+    "weight": 400
+   }
+  },
+  "picked": {
+   "texts": {
+    "set": "custom",
+    "headline": {
+     "t": "夜航",
+     "lang": "zh"
+    },
+    "sub": {
+     "t": "NIGHT FERRY",
+     "lang": "en"
+    },
+    "note": {
+     "t": "Electronic & Ambient Live · 电子与氛围现场\nSAT 2026.12.05 20:00\n九号仓库 Warehouse 9 · 杭州 Hangzhou",
+     "lang": "zh"
+    },
+    "groups": [
+     {
+      "main": {
+       "t": "苔原 Tundra",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "20:00",
+       "lang": "en"
+      },
+      "note": {
+       "t": "opening set",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "Soft Static",
+       "lang": "en"
+      },
+      "sub": {
+       "t": "21:00",
+       "lang": "en"
+      },
+      "note": {
+       "t": "",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "流明 Lumen",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "22:00",
+       "lang": "en"
+      },
+      "note": {
+       "t": "live A/V",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "Harbor Choir",
+       "lang": "en"
+      },
+      "sub": {
+       "t": "23:15",
+       "lang": "en"
+      },
+      "note": {
+       "t": "",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "小满 Xiaoman",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "00:30",
+       "lang": "en"
+      },
+      "note": {
+       "t": "closing DJ set",
+       "lang": "en"
+      }
+     },
+     {
+      "main": {
+       "t": "",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "",
+       "lang": "zh"
+      },
+      "note": {
+       "t": "",
+       "lang": "zh"
+      }
+     }
+    ],
+    "prose": [
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     }
+    ],
+    "meta": [
+     {
+      "t": "2026.12.05",
+      "lang": "en"
+     },
+     {
+      "t": "20:00",
+      "lang": "en"
+     },
+     {
+      "t": "九号仓库 Warehouse 9",
+      "lang": "zh"
+     },
+     {
+      "t": "¥120 · 预售 ¥90",
+      "lang": "zh"
+     },
+     {
+      "t": "杭州 Hangzhou",
+      "lang": "zh"
+     },
+     {
+      "t": "nightferry.example",
+      "lang": "en"
+     },
+     {
+      "t": "#夜航2026",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     }
+    ],
+    "words": [
+     {
+      "t": "NIGHT",
+      "lang": "en"
+     },
+     {
+      "t": "FERRY",
+      "lang": "en"
+     },
+     {
+      "t": "LIVE",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     }
+    ],
+    "glyph": "夜",
+    "facts": {
+     "date": {
+      "y": 2026,
+      "m": 12,
+      "d": 5
+     },
+     "year": "2026",
+     "issue": "2026.12",
+     "numeral": "05",
+     "signature": "",
+     "masthead": "夜航",
+     "sticker": [
+      "LIVE",
+      "12.05"
+     ],
+     "times": [
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:15",
+      "00:30",
+      "",
+      ""
+     ],
+     "values": [
+      "20:00",
+      "21:00",
+      "22:00",
+      "23:15",
+      "00:30",
+      "",
+      ""
+     ]
+    }
+   },
+   "palette": {
+    "bg": "#3b0b2d",
+    "ink": "#5adb94",
+    "inkSoft": "#14a866",
+    "accent": "#2d8e5b",
+    "alt": "#17283a",
+    "fills": [
+     "#2d8e5b",
+     "#17283a",
+     "#78d59e",
+     "#8b004d",
+     "#3c9e8c",
+     "#300033"
+    ],
+    "light": "#ecf6ef",
+    "dark": "#16221b",
+    "source": "nice:n0333",
+    "sourceColors": [
+     "#5adb94",
+     "#0ba18c",
+     "#368986",
+     "#8a034d",
+     "#2e0331"
+    ]
+   },
+   "imageIds": [
+    "city-object143875268"
+   ],
+   "comp": "knockout",
+   "grid": {
+    "type": "ortho",
+    "density": "stable",
+    "nc": 3,
+    "nr": 5
+   },
+   "attempt": 0,
+   "quality": {
+    "score": 86,
+    "overlaps": 1,
+    "glyphHits": 0,
+    "lowContrast": 0,
+    "offCanvas": 0,
+    "clutter": 0,
+    "empty": 0,
+    "moved": 1,
+    "dropped": 0,
+    "recolored": 0,
+    "scrims": 0,
+    "outlined": 0,
+    "design": 0,
+    "audit": {
+     "blocks": 5,
+     "subject": 0,
+     "focalRatio": 9.92064400325577,
+     "sizes": 4,
+     "align": 1,
+     "quiet": 0.5868055555555556,
+     "decor": 0,
+     "accent": 0,
+     "busy": 0,
+     "harmony": 0.8549668053196983,
+     "penalty": 0,
+     "parts": {
+      "blocks": 0,
+      "focal": 0,
+      "sizes": 0,
+      "align": 0,
+      "quiet": 0,
+      "decor": 0,
+      "accent": 0,
+      "busy": 0,
+      "harmony": 0,
+      "subject": 0,
+      "treatments": 0,
+      "midLevels": 0,
+      "busyXL": 0
+     }
+    }
+   },
+   "plan": {
+    "v2": true,
+    "typeOnly": false,
+    "tone": "dark",
+    "palette": "source",
+    "grain": 0,
+    "kit": [
+     "footer",
+     "dots"
+    ],
+    "script": false,
+    "geometry": "none",
+    "material": "none"
+   },
+   "idea": {
+    "id": "tension",
+    "contrast": "none",
+    "frame": "eyes",
+    "brk": "bleed"
+   },
+   "salt": "#5",
+   "taste": 7.386
+  },
+  "edits": {},
+  "custom": {
+   "headline": "夜航",
+   "sub": "NIGHT FERRY",
+   "small": [
+    "苔原 Tundra",
+    "Soft Static",
+    "流明 Lumen",
+    "Harbor Choir",
+    "小满 Xiaoman"
+   ],
+   "note": [
+    "opening set",
+    "",
+    "live A/V",
+    "",
+    "closing DJ set"
+   ],
+   "prose": "",
+   "meta": [
+    "2026.12.05",
+    "20:00",
+    "九号仓库 Warehouse 9",
+    "¥120 · 预售 ¥90",
+    "杭州 Hangzhou",
+    "nightferry.example",
+    "#夜航2026"
+   ]
+  },
+  "comp": "knockout"
+ },
+ "x_cli": {
+  "direction": "d4",
+  "reasons": [
+   "style zh-smiley: title is Chinese, mood bold+playful, density balanced",
+   "idea tension (baseline; bold → tension; music night → energy)",
+   "background dark: matched (#3b0b2d)",
+   "engine picked composition knockout / idea tension (taste 7.39 − penalty 0.08 = 7.31)"
+  ],
+  "brief_seed": "B3F3LVD",
+  "summary": {
+   "style": "zh-smiley",
+   "ratio": "3:4",
+   "size": [
+    1200,
+    1600
+   ],
+   "comp": "knockout",
+   "idea": "tension",
+   "grid": "ortho/stable 3×5",
+   "attempt": 0,
+   "salt": "#5",
+   "seeds": {
+    "layout": "B3F3LVD-4L",
+    "text": "B3F3LVD-4T",
+    "color": "B3F3LVD-4C~1",
+    "image": "B3F3LVD-4I#5"
+   },
+   "taste": 7.386,
+   "penalty": 0.08,
+   "score": 7.306,
+   "quality": 86,
+   "gates": {
+    "fails": [],
+    "soft": [
+     "tone"
+    ],
+    "penalty": 0.08
+   },
+   "palette": {
+    "bg": "#3b0b2d",
+    "ink": "#5adb94",
+    "accent": "#2d8e5b"
+   },
+   "images": [
+    "city-object143875268"
+   ],
+   "fonts": [
+    "Space Grotesk",
+    "Smiley Sans"
+   ]
+  },
+  "brief": {
+   "$schema": "poster-printer/brief.v1",
+   "purpose": "music",
+   "context": {
+    "use": "promo",
+    "audience": "electronic / ambient music fans in Hangzhou, 20–35",
+    "display": {
+     "kind": "print",
+     "print_size": "A1",
+     "viewing_distance_m": 2
+    },
+    "priority": [
+     "title",
+     "title_alt",
+     "date",
+     "venue",
+     "program",
+     "price"
+    ]
+   },
+   "content": {
+    "title": "夜航",
+    "title_alt": "NIGHT FERRY",
+    "subtitle": "Electronic & Ambient Live · 电子与氛围现场",
+    "date": "2026-12-05T20:00",
+    "venue": "九号仓库 Warehouse 9",
+    "city": "杭州 Hangzhou",
+    "program": [
+     "20:00 苔原 Tundra — opening set",
+     "21:00 Soft Static",
+     "22:00 流明 Lumen — live A/V",
+     "23:15 Harbor Choir",
+     "00:30 小满 Xiaoman — closing DJ set"
+    ],
+    "price": "¥120 · 预售 ¥90",
+    "url": "nightferry.example",
+    "hashtags": [
+     "夜航2026"
+    ],
+    "language": "bilingual"
+   },
+   "style": {
+    "mood": [
+     "bold",
+     "playful"
+    ],
+    "era": "90s",
+    "density": "balanced",
+    "imagery": {
+     "use": "accent",
+     "subject": [
+      "city",
+      "abstract",
+      "space"
+     ]
+    },
+    "color": {
+     "lightness": "dark",
+     "chroma": "rich",
+     "contrast": "strong"
+    }
+   },
+   "format": {
+    "ratio": "3:4",
+    "count": 6,
+    "min_score": 6
+   }
+  },
+  "gates_passed": true,
+  "blocking_failures": []
+ }
+}

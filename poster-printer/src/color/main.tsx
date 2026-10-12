@@ -1,0 +1,10 @@
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import '../styles/tokens.css';
+import '../styles/glass.css';
+import '../styles/shell.css';
+import '../styles/grid.css';
+import '../styles/port.css';
+import './color.css';
+import { ColorApp } from './ColorApp';
+createRoot(document.getElementById('root')!).render(<StrictMode><ColorApp /></StrictMode>);

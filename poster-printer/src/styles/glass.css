@@ -1,0 +1,144 @@
+/* ============================================================
+   Liquid glass material
+   Layers (back → front):
+   1. backdrop: blur + saturate (+ SVG bevel refraction on Chromium, set by glass.js)
+   2. body tint: glass-tint rgb at alpha, nudged toward the poster's ambient colour
+   3. inner shadows: top specular line, bottom contact shade, hairline edge
+   4. ::before  specular rim — a 1px gradient border whose angle follows the pointer
+   5. ::after   caustic — soft light pooled under the top edge
+   ============================================================ */
+.lg {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(rgb(var(--amb) / var(--amb-alpha)), rgb(var(--amb) / var(--amb-alpha))),
+    rgb(var(--glass-tint) / var(--glass-alpha));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-inner-hi),
+    inset 0 -1px 0 0 var(--glass-inner-lo),
+    inset 0 0 0 .5px var(--glass-edge),
+    var(--shadow-2);
+  border-radius: var(--r-xl);
+  transition: background-color var(--d-3) var(--ease-out), box-shadow var(--d-3) var(--ease-out);
+}
+.lg::before {
+  /* specular rim */
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(var(--la), var(--glass-rim-hi) 0%, var(--glass-rim-lo) 32%, transparent 50%, var(--glass-rim-lo) 70%, var(--glass-rim-hi) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+  z-index: 2;
+  opacity: .55;
+}
+.lg::after {
+  /* specular stroke + rim shade (per-size overlay map from glass.js, liquid-glass optics),
+     plus a faint caustic pooled under the top edge */
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background:
+    var(--lg-ov, none) 0 0 / 100% 100% no-repeat,
+    radial-gradient(120% 60% at 50% -18%, rgb(255 255 255 / var(--caustic-a, .16)), transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+.lg.strong { --glass-alpha: var(--glass-alpha-strong); }
+/* "clear" material: floats over imagery, minimal tint so the refraction reads */
+.lg[data-mat='clear'] { --glass-alpha: var(--glass-alpha-clear); }
+
+/* Mirror lens (Firefox / Safari): glass.js paints the scene under the surface into
+   .lg-lens > i and refracts it with an element filter. The tint moves above the lens. */
+.lg.has-lens { background: transparent !important; }
+.lg-lens { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; z-index: -1; pointer-events: none;
+  /* WebKit does not clip a filtered child to overflow+radius on its own; a mask forces the clip */
+  -webkit-mask-image: linear-gradient(#000, #000); mask-image: linear-gradient(#000, #000); }
+.lg-lens > i { position: absolute; inset: -24px; background-repeat: no-repeat, repeat, no-repeat; }
+.lg-lens::after { content: ''; position: absolute; inset: 0; background:
+  linear-gradient(rgb(var(--amb) / var(--amb-alpha)), rgb(var(--amb) / var(--amb-alpha))),
+  rgb(var(--glass-tint) / var(--glass-alpha)); }
+html.reduce-transparency .lg-lens { display: none; }
+html.reduce-transparency .lg.has-lens { background: rgb(var(--glass-tint)) !important; }
+@media (prefers-reduced-transparency: reduce) { .lg-lens { display: none; } .lg.has-lens { background: rgb(var(--glass-tint)) !important; } }
+.lg.thin { --glass-blur: 14px; }
+.lg.flat::after { display: none; }
+
+/* Inverse ("ink") glass — the hero Draw button. Dark lens in light mode, light lens in dark mode. */
+.lg.ink {
+  --glass-tint: 14 14 18;
+  --glass-alpha: .8;
+  --glass-rim-hi: rgba(255,255,255,.55);
+  --glass-rim-lo: rgba(255,255,255,.06);
+  --glass-inner-hi: rgba(255,255,255,.22);
+  --glass-inner-lo: rgba(0,0,0,.4);
+  --glass-caustic: rgba(255,255,255,.28);
+  --amb-alpha: .06;
+  color: #fff;
+}
+[data-theme='dark'] .lg.ink {
+  --glass-tint: 246 246 248;
+  --glass-alpha: .9;
+  --glass-rim-hi: rgba(255,255,255,1);
+  --glass-rim-lo: rgba(255,255,255,.3);
+  --glass-inner-hi: rgba(255,255,255,.9);
+  --glass-inner-lo: rgba(0,0,0,.12);
+  --glass-caustic: rgba(255,255,255,.7);
+  color: #0b0b0e;
+}
+
+/* Glass that floats over the poster adapts to what is underneath (glass.js sets .on-dark / .on-light) */
+.lg.adaptive.on-dark { --glass-tint: 18 18 22; --glass-alpha: .34; color: #f5f5f7; --ink: #f5f5f7; --ink-2: rgb(245 245 247 / .78); --ink-3: rgb(245 245 247 / .55); --fill: rgb(255 255 255 / .1); --fill-2: rgb(255 255 255 / .16); --hair-2: rgb(255 255 255 / .16); --glass-rim-hi: rgba(255,255,255,.5); --glass-inner-hi: rgba(255,255,255,.18); text-shadow: 0 1px 2px rgb(0 0 0 / .25); }
+.lg.adaptive.on-light { --glass-tint: 255 255 255; --glass-alpha: .4; color: #0b0b0e; --ink: #0b0b0e; --ink-2: rgb(11 11 14 / .74); --ink-3: rgb(11 11 14 / .5); }
+
+/* ---------- liquid press: shrink on press, spring-bulge on release ---------- */
+.press {
+  transition: transform 520ms var(--ease-spring), background-color var(--d-2) var(--ease-out), color var(--d-2), box-shadow var(--d-2);
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+}
+@supports (transition-timing-function: linear(0, 1)) {
+  :root { --ease-spring: linear(0, .009, .035 2.1%, .141 4.4%, .723 12.9%, .938 16.7%, 1.017 19.4%, 1.067, 1.099 24.3%, 1.103 25.9%, 1.096, 1.077 30.4%, 1.002 39%, .979 43.5%, .975 47.6%, .998 59.6%, 1.002 66.6%, 1); }
+}
+.press:active { transform: scale(.94); transition-duration: 110ms; transition-timing-function: var(--ease-out); }
+.press.jelly { animation: jelly 560ms var(--ease-out); }
+@keyframes jelly {
+  0% { transform: scale(.94, .94); }
+  30% { transform: scale(1.06, .96); }
+  50% { transform: scale(.98, 1.03); }
+  70% { transform: scale(1.015, .99); }
+  100% { transform: scale(1, 1); }
+}
+
+/* pointer-follow highlight inside interactive glass */
+.hl { --hx: 50%; --hy: 50%; }
+.hl > .hl-glow {
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
+  background: radial-gradient(140px circle at var(--hx) var(--hy), rgb(255 255 255 / .22), transparent 60%);
+  opacity: 0; transition: opacity var(--d-3) var(--ease-out);
+  mix-blend-mode: overlay;
+}
+.hl:hover > .hl-glow { opacity: 1; }
+
+/* ---------- accessibility fallbacks ---------- */
+@media (prefers-reduced-transparency: reduce) {
+  .lg { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; --glass-alpha: 1; --amb-alpha: 0; }
+  .lg::after { display: none; }
+}
+html.reduce-transparency .lg { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; --glass-alpha: 1 !important; --amb-alpha: 0; }
+html.reduce-transparency .lg::after { display: none; }
+html.reduce-transparency .aura { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+}
+html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+
+/* Firefox < 103 / no backdrop-filter at all: raise opacity so text stays legible */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lg { --glass-alpha: .92; }
+}

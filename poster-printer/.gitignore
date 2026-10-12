@@ -1,0 +1,40 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+scripts/vendor/
+scripts/img_raw/
+server/.venv/
+__pycache__/
+showcase/tmp/
+test-results/
+
+# generated / heavy artefacts kept out of git (phase 2 repo shrink)
+# showcase renders: regenerate with `npm run qa:showcase`; only the contact sheet + UI jpgs are tracked
+showcase/posters/
+showcase/**/*.png
+# dist bundle
+release/
+
+# phase-3 rating renders (regenerable via scripts/qa/showcase.mjs + quality-spec.json)
+quality/*/

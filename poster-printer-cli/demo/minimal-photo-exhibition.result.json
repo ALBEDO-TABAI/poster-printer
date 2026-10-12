@@ -1,0 +1,4217 @@
+{
+  "backend": "chromium",
+  "parity": true,
+  "count": 6,
+  "minScore": 6,
+  "tries": 7,
+  "rejected": [],
+  "gate_failed": [
+    {
+      "name": "stone-roman-BPMZXHX-3",
+      "direction": "d3",
+      "taste": 6.954,
+      "comp": "window",
+      "blocking_failures": [
+        "text contrast: \"Photographs by Mara Elli\""
+      ]
+    }
+  ],
+  "posters": [
+    {
+      "rank": 1,
+      "name": "01-quiet-geo-BPMZXHX-4",
+      "direction": "d4",
+      "style": "quiet-geo",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "edge",
+      "idea": "scale",
+      "grid": "ortho/aggressive 6×8",
+      "attempt": 0,
+      "salt": "#2",
+      "seeds": {
+        "layout": "BPMZXHX-4L",
+        "text": "BPMZXHX-4T",
+        "color": "BPMZXHX-4C",
+        "image": "BPMZXHX-4I"
+      },
+      "taste": 8.031,
+      "penalty": 0,
+      "score": 8.031,
+      "quality": 100,
+      "gates": {
+        "fails": [],
+        "soft": [],
+        "penalty": 0
+      },
+      "palette": {
+        "bg": "#fff0ef",
+        "ink": "#140a09",
+        "accent": "#624544"
+      },
+      "images": [
+        "nature-sky30939058"
+      ],
+      "fonts": [
+        "Fraunces",
+        "Newsreader",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style quiet-geo: en library for English copy, mood calm+minimal+elegant, density airy, exhibition: literary / elegant faces",
+        "idea scale (baseline: big type)",
+        "fonts: typography voice serif → pairing lit-newsreader (literary): Fraunces + Newsreader / Noto Serif SC",
+        "background light: matched (#fff0ef)",
+        "engine picked composition edge / idea scale (taste 8.03 − penalty 0 = 8.03)"
+      ],
+      "ms": 38849,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9402714789619552,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "Low Tide",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  47,
+                  691,
+                  957,
+                  928
+                ],
+                "size_px": 542.7,
+                "css_px": 510.3,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": true,
+                "expected": "Photographs by Mara Ellison",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  463,
+                  146,
+                  82
+                ],
+                "size_px": 28.4,
+                "css_px": 26.7,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.10.30",
+                "status": "pass",
+                "rendered": "as \"2026.10.30\"",
+                "region": [
+                  54,
+                  591,
+                  173,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "date_end",
+                "label": "date_end",
+                "required": true,
+                "expected": "2026.12.14",
+                "status": "pass",
+                "rendered": "as \"12.14\"",
+                "region": [
+                  54,
+                  591,
+                  173,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  54,
+                  591,
+                  173,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "address",
+                "label": "address",
+                "required": false,
+                "expected": "3-8-2 Kiyosumi, Koto-ku",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "Tokyo",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  54,
+                  591,
+                  173,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "Free admission",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  1037,
+                  54,
+                  109,
+                  10
+                ],
+                "size_px": 11.4,
+                "css_px": 10.7,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "galleryko.example/lowtide",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  54,
+                  591,
+                  173,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 510.3,
+                "min_css_px": 9,
+                "region": [
+                  47,
+                  691,
+                  957,
+                  928
+                ]
+              },
+              {
+                "label": "subtitle",
+                "status": "pass",
+                "css_px": 26.7,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  463,
+                  146,
+                  82
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 11.8,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  591,
+                  173,
+                  28
+                ]
+              },
+              {
+                "label": "date_end",
+                "status": "pass",
+                "css_px": 11.8,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  591,
+                  173,
+                  28
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 11.8,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  591,
+                  173,
+                  28
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "LOW\nTIDE",
+                "status": "pass",
+                "ratio": 17.6,
+                "typical": 17.6,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  47,
+                  691,
+                  957,
+                  928
+                ]
+              },
+              {
+                "text": "Photographs by Mara Ellison",
+                "status": "pass",
+                "ratio": 17.6,
+                "typical": 17.6,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  463,
+                  146,
+                  82
+                ]
+              },
+              {
+                "text": "2026.10.30 — 12.14\nGALLERY KŌEN · TOKYO",
+                "status": "pass",
+                "ratio": 17.6,
+                "typical": 17.6,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  591,
+                  173,
+                  28
+                ]
+              },
+              {
+                "text": "TOKYO",
+                "status": "pass",
+                "ratio": 17.6,
+                "typical": 17.6,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  54,
+                  38,
+                  10
+                ]
+              },
+              {
+                "text": "FREE ADMISSION",
+                "status": "pass",
+                "ratio": 8.93,
+                "typical": 9.07,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1037,
+                  54,
+                  109,
+                  10
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "status": "n/a",
+            "why": "no Chinese text"
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "Fraunces",
+                "status": "pass"
+              },
+              {
+                "family": "Newsreader",
+                "status": "pass"
+              },
+              {
+                "family": "DM Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass"
+              },
+              {
+                "family": "LXGW WenKai",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): address",
+          "content (optional): url",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 8.031,
+            "taste": 8.031,
+            "gate_penalty": 0,
+            "score": 8.031,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 10,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 10,
+            "hierarchy": 10,
+            "basis": "near-miss edges 0; 4 text blocks, 2 sizes, 0 busy blocks, 0 collisions; 100% blocks aligned; focal ratio 19.1, priority order kept 10/10"
+          },
+          "expressive": {
+            "value": 6.2,
+            "tension": 6.2,
+            "idea": null,
+            "idea_assigned": {
+              "id": "scale",
+              "contrast": "lightdark",
+              "frame": "grid",
+              "brk": "bleed"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 19.1) + asymmetry (centroid offset 0.061); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 9.9,
+            "harmony": 9.7,
+            "palette_discipline": 10,
+            "tone_structure": 10,
+            "hero_separation": 10,
+            "basis": "harmony 0.973, 0 hue families, largest tone band 62%, headline ΔL 81"
+          },
+          "craft": {
+            "value": 10,
+            "engine_gates": 10,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": null,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 15.2 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): address",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: address (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.1.sub; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=5",
+              "why": "the copy is in slot meta.4, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/01-quiet-geo-BPMZXHX-4.json",
+        "png": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/01-quiet-geo-BPMZXHX-4.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 404984,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 105.17
+        }
+      }
+    },
+    {
+      "rank": 2,
+      "name": "02-caslon-book-BPMZXHX-2",
+      "direction": "d2",
+      "style": "caslon-book",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "cover",
+      "idea": "immersion",
+      "grid": "skew/stable 3×6",
+      "attempt": 0,
+      "salt": "#3",
+      "seeds": {
+        "layout": "BPMZXHX-2L",
+        "text": "BPMZXHX-2T",
+        "color": "BPMZXHX-2C",
+        "image": "BPMZXHX-2I"
+      },
+      "taste": 7.521,
+      "penalty": 0.16,
+      "score": 7.361,
+      "quality": 96,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "tone",
+          "heroDL35"
+        ],
+        "penalty": 0.16
+      },
+      "palette": {
+        "bg": "#e5ecca",
+        "ink": "#101302",
+        "accent": "#596400"
+      },
+      "images": [
+        "nature-figure35518584"
+      ],
+      "fonts": [
+        "Libre Caslon Display",
+        "Libre Caslon Text",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style caslon-book: en library for English copy, mood calm+elegant, voice serif, density airy, exhibition: literary / elegant faces",
+        "idea immersion (imagery: hero)",
+        "background light: matched (#e5ecca)",
+        "engine picked composition cover / idea immersion (taste 7.52 − penalty 0.16 = 7.36)"
+      ],
+      "ms": 10909,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9402714789619552,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "Low Tide",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  42,
+                  108,
+                  1116,
+                  292
+                ],
+                "size_px": 339.5,
+                "css_px": 319.2,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": true,
+                "expected": "Photographs by Mara Ellison",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  1514,
+                  220,
+                  15
+                ],
+                "size_px": 16.2,
+                "css_px": 15.2,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.10.30",
+                "status": "pass",
+                "rendered": "as \"2026.10.30\"",
+                "region": [
+                  897,
+                  428,
+                  249,
+                  8
+                ],
+                "size_px": 11.4,
+                "css_px": 10.7,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "date_end",
+                "label": "date_end",
+                "required": true,
+                "expected": "2026.12.14",
+                "status": "pass",
+                "rendered": "as \"12.14\"",
+                "region": [
+                  54,
+                  489,
+                  92,
+                  53
+                ],
+                "size_px": 28.4,
+                "css_px": 26.7,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  681,
+                  77,
+                  53
+                ],
+                "size_px": 28.4,
+                "css_px": 26.7,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "address",
+                "label": "address",
+                "required": false,
+                "expected": "3-8-2 Kiyosumi, Koto-ku",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "Tokyo",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "Free admission",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  873,
+                  102,
+                  53
+                ],
+                "size_px": 28.4,
+                "css_px": 26.7,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "galleryko.example/lowtide",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  681,
+                  77,
+                  53
+                ],
+                "size_px": 28.4,
+                "css_px": 26.7,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 319.2,
+                "min_css_px": 9,
+                "region": [
+                  42,
+                  108,
+                  1116,
+                  292
+                ]
+              },
+              {
+                "label": "subtitle",
+                "status": "pass",
+                "css_px": 15.2,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1514,
+                  220,
+                  15
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 10.7,
+                "min_css_px": 9,
+                "region": [
+                  897,
+                  428,
+                  249,
+                  8
+                ]
+              },
+              {
+                "label": "date_end",
+                "status": "pass",
+                "css_px": 26.7,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  489,
+                  92,
+                  53
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 26.7,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  681,
+                  77,
+                  53
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "fail",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "10.30 — 12.14",
+                "status": "pass",
+                "ratio": 6.62,
+                "typical": 7.09,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  489,
+                  92,
+                  53
+                ]
+              },
+              {
+                "text": "WHEN",
+                "status": "pass",
+                "ratio": 4.54,
+                "typical": 4.78,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  577,
+                  43,
+                  12
+                ]
+              },
+              {
+                "text": "Gallery Kōen",
+                "status": "pass",
+                "ratio": 5.11,
+                "typical": 5.99,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  681,
+                  77,
+                  53
+                ]
+              },
+              {
+                "text": "WHERE",
+                "status": "pass",
+                "ratio": 5.7,
+                "typical": 5.75,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  769,
+                  52,
+                  12
+                ]
+              },
+              {
+                "text": "Free admission",
+                "status": "fail",
+                "ratio": 2.97,
+                "typical": 3.04,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  873,
+                  102,
+                  53
+                ]
+              },
+              {
+                "text": "TICKETS",
+                "status": "fail",
+                "ratio": 3.05,
+                "typical": 3.1,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  961,
+                  60,
+                  12
+                ]
+              },
+              {
+                "text": "Low Tide",
+                "status": "pass",
+                "ratio": 15.94,
+                "typical": 16.05,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  1404,
+                  74,
+                  80
+                ]
+              },
+              {
+                "text": "Photographs by Mara Ellison",
+                "status": "pass",
+                "ratio": 14.49,
+                "typical": 14.62,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  1514,
+                  220,
+                  15
+                ]
+              },
+              {
+                "text": "2026.10  ·  2026.10.30 — 12.14  ·  2026",
+                "status": "pass",
+                "ratio": 9.63,
+                "typical": 9.92,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  897,
+                  428,
+                  249,
+                  8
+                ]
+              },
+              {
+                "text": "611608275783",
+                "status": "pass",
+                "ratio": 16.73,
+                "typical": 17.18,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1017,
+                  1528,
+                  102,
+                  9
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "status": "n/a",
+            "why": "no Chinese text"
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "Libre Caslon Display",
+                "status": "pass"
+              },
+              {
+                "family": "Libre Caslon Text",
+                "status": "pass"
+              },
+              {
+                "family": "Libre Franklin",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): address",
+          "content (optional): city",
+          "content (optional): url",
+          "content (optional): body",
+          "text contrast: \"Free admission\"",
+          "text contrast: \"TICKETS\""
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.521,
+            "taste": 7.521,
+            "gate_penalty": 0.16,
+            "score": 7.361,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 6.7,
+            "order": 10,
+            "clarity": 4,
+            "alignment": 8.9,
+            "hierarchy": 3.9,
+            "basis": "near-miss edges 0; 9 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 89% blocks aligned; focal ratio 1.5, priority order kept 6/10"
+          },
+          "expressive": {
+            "value": 4.7,
+            "tension": 4.7,
+            "idea": null,
+            "idea_assigned": {
+              "id": "immersion",
+              "contrast": "saturation",
+              "frame": "grid",
+              "brk": "none"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 1.5) + asymmetry (centroid offset 0.17800000000000002); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 7.2,
+            "harmony": 7.6,
+            "palette_discipline": 10,
+            "tone_structure": 5.1,
+            "hero_separation": 5.9,
+            "basis": "harmony 0.762, 0 hue families, largest tone band 40%, headline ΔL 30"
+          },
+          "craft": {
+            "value": 9.7,
+            "engine_gates": 8.7,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": null,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.16, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 9.5 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): address",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: address (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.1.sub; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): city",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: city (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.2; another structure may"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=5",
+              "why": "the copy is in slot meta.4, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "contrast",
+            "dimension": "text contrast: \"Free admission\"",
+            "blocking": false,
+            "region": [
+              54,
+              873,
+              102,
+              53
+            ],
+            "evidence": "2.97:1 worst-case (typical 3.04:1) vs 3:1 for large text at print",
+            "impact": [
+              "legibility"
+            ],
+            "fix": {
+              "command": "refine --set legibility=100 --set busyScrim=true",
+              "why": "scrim / stronger separation over the uneven background; if the next audit still fails: variations --vary layout"
+            }
+          },
+          {
+            "id": "i6",
+            "gate": "contrast",
+            "dimension": "text contrast: \"TICKETS\"",
+            "blocking": false,
+            "region": [
+              54,
+              961,
+              60,
+              12
+            ],
+            "evidence": "3.05:1 worst-case (typical 3.1:1) vs 4.5:1 for normal text at print",
+            "impact": [
+              "legibility"
+            ],
+            "fix": {
+              "command": "refine --set legibility=100 --set busyScrim=true",
+              "why": "scrim / stronger separation over the uneven background; if the next audit still fails: variations --vary layout"
+            }
+          },
+          {
+            "id": "i7",
+            "dimension": "classical: hierarchy",
+            "blocking": false,
+            "region": null,
+            "evidence": "largest / next text size = 1.5×",
+            "impact": [
+              "finding-info",
+              "expression"
+            ],
+            "fix": {
+              "command": "refine --set titleScale=140",
+              "why": "a clearer hero"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/02-caslon-book-BPMZXHX-2.json",
+        "png": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/02-caslon-book-BPMZXHX-2.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 2169208,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 75.46
+        }
+      }
+    },
+    {
+      "rank": 3,
+      "name": "03-garamond-quiet-BPMZXHX-7",
+      "direction": "d1",
+      "style": "garamond-quiet",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "inset",
+      "idea": "emptiness",
+      "grid": "ortho/simple 3×3",
+      "attempt": 0,
+      "salt": "#2",
+      "seeds": {
+        "layout": "BPMZXHX-7L",
+        "text": "BPMZXHX-7T",
+        "color": "BPMZXHX-7C~1",
+        "image": "BPMZXHX-7I"
+      },
+      "taste": 7.138,
+      "penalty": 0,
+      "score": 7.138,
+      "quality": 98,
+      "gates": {
+        "fails": [],
+        "soft": [],
+        "penalty": 0
+      },
+      "palette": {
+        "bg": "#f9ebe9",
+        "ink": "#170e0d",
+        "accent": "#6e5855"
+      },
+      "images": [
+        "nature-plant23655710"
+      ],
+      "fonts": [
+        "EB Garamond",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style garamond-quiet: en library for English copy, mood calm+minimal+elegant, voice serif, density airy, exhibition: literary / elegant faces",
+        "idea emptiness (calm / minimal → emptiness (ma); elegant → space; exhibition → quiet space)",
+        "background light: matched (#f9ebe9)",
+        "engine picked composition inset / idea emptiness (taste 7.14 − penalty 0 = 7.14)"
+      ],
+      "ms": 1026,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9402714789619552,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "Low Tide",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  290,
+                  78,
+                  619,
+                  72
+                ],
+                "size_px": 108,
+                "css_px": 101.5,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": true,
+                "expected": "Photographs by Mara Ellison",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  1043,
+                  206,
+                  16
+                ],
+                "size_px": 18.9,
+                "css_px": 17.8,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.10.30",
+                "status": "pass",
+                "rendered": "as \"2026.10.30\"",
+                "region": [
+                  943,
+                  228,
+                  189,
+                  21
+                ],
+                "size_px": 30.6,
+                "css_px": 28.8,
+                "slot": "groups.0.sub"
+              },
+              {
+                "field": "date_end",
+                "label": "date_end",
+                "required": true,
+                "expected": "2026.12.14",
+                "status": "pass",
+                "rendered": "as \"12.14\"",
+                "region": [
+                  54,
+                  1448,
+                  135,
+                  79
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  418,
+                  1448,
+                  112,
+                  79
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "address",
+                "label": "address",
+                "required": false,
+                "expected": "3-8-2 Kiyosumi, Koto-ku",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "Tokyo",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  54,
+                  1151,
+                  163,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "Free admission",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  782,
+                  1415,
+                  156,
+                  79
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "galleryko.example/lowtide",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  418,
+                  1448,
+                  112,
+                  79
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 101.5,
+                "min_css_px": 9,
+                "region": [
+                  290,
+                  78,
+                  619,
+                  72
+                ]
+              },
+              {
+                "label": "subtitle",
+                "status": "pass",
+                "css_px": 17.8,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1043,
+                  206,
+                  16
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 28.8,
+                "min_css_px": 9,
+                "region": [
+                  943,
+                  228,
+                  189,
+                  21
+                ]
+              },
+              {
+                "label": "date_end",
+                "status": "pass",
+                "css_px": 40,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1448,
+                  135,
+                  79
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 40,
+                "min_css_px": 9,
+                "region": [
+                  418,
+                  1448,
+                  112,
+                  79
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "LOW TIDE",
+                "status": "pass",
+                "ratio": 16.37,
+                "typical": 16.37,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  290,
+                  78,
+                  619,
+                  72
+                ]
+              },
+              {
+                "text": "Photographs by Mara Ellison",
+                "status": "pass",
+                "ratio": 16.37,
+                "typical": 16.37,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  1043,
+                  206,
+                  16
+                ]
+              },
+              {
+                "text": "2026.10.30 — 12.14\nGALLERY KŌEN · TOKYO",
+                "status": "pass",
+                "ratio": 16.37,
+                "typical": 16.37,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1151,
+                  163,
+                  28
+                ]
+              },
+              {
+                "text": "10.30 — 12.14",
+                "status": "pass",
+                "ratio": 16.37,
+                "typical": 16.37,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  1448,
+                  135,
+                  79
+                ]
+              },
+              {
+                "text": "Gallery Kōen",
+                "status": "pass",
+                "ratio": 16.37,
+                "typical": 16.37,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  418,
+                  1448,
+                  112,
+                  79
+                ]
+              },
+              {
+                "text": "Free admission",
+                "status": "pass",
+                "ratio": 16.37,
+                "typical": 16.37,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  782,
+                  1415,
+                  156,
+                  79
+                ]
+              },
+              {
+                "text": "TICKETS",
+                "status": "pass",
+                "ratio": 16.37,
+                "typical": 16.37,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  782,
+                  1535,
+                  57,
+                  11
+                ]
+              },
+              {
+                "text": "2026.10.30 — 12.14",
+                "status": "pass",
+                "ratio": 14.83,
+                "typical": 16.37,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1564,
+                  106,
+                  8
+                ]
+              },
+              {
+                "text": "2026.10",
+                "status": "pass",
+                "ratio": 10.41,
+                "typical": 16.22,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  337,
+                  1564,
+                  43,
+                  8
+                ]
+              },
+              {
+                "text": "GALLERY KŌEN",
+                "status": "pass",
+                "ratio": 11.91,
+                "typical": 16.37,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  610,
+                  1564,
+                  87,
+                  8
+                ]
+              },
+              {
+                "text": "TOKYO",
+                "status": "pass",
+                "ratio": 10.78,
+                "typical": 16.37,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  883,
+                  1564,
+                  39,
+                  8
+                ]
+              },
+              {
+                "text": "FREE",
+                "status": "pass",
+                "ratio": 5.99,
+                "typical": 5.99,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  982,
+                  191,
+                  113,
+                  26
+                ]
+              },
+              {
+                "text": "2026.10.30",
+                "status": "pass",
+                "ratio": 5.99,
+                "typical": 5.99,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  943,
+                  228,
+                  189,
+                  21
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "status": "n/a",
+            "why": "no Chinese text"
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "EB Garamond",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): address",
+          "content (optional): url",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.138,
+            "taste": 7.138,
+            "gate_penalty": 0,
+            "score": 7.138,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 7.7,
+            "order": 10,
+            "clarity": 7,
+            "alignment": 8.3,
+            "hierarchy": 5.5,
+            "basis": "near-miss edges 0; 7 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 83% blocks aligned; focal ratio 2.5, priority order kept 5/10"
+          },
+          "expressive": {
+            "value": 4.4,
+            "tension": 4.4,
+            "idea": null,
+            "idea_assigned": {
+              "id": "emptiness",
+              "contrast": "lightdark",
+              "frame": "eyes",
+              "brk": "offgrid"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 2.5) + asymmetry (centroid offset 0.091); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 9.3,
+            "harmony": 8,
+            "palette_discipline": 10,
+            "tone_structure": 9.3,
+            "hero_separation": 10,
+            "basis": "harmony 0.8, 0 hue families, largest tone band 65%, headline ΔL 77"
+          },
+          "craft": {
+            "value": 10,
+            "engine_gates": 10,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": null,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 3 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): address",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: address (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.1.sub; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=5",
+              "why": "the copy is in slot meta.4, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          },
+          {
+            "id": "i4",
+            "dimension": "classical: priority order",
+            "blocking": false,
+            "region": null,
+            "evidence": "required fields drawn out of priority order (5/10 pairs in order): title 108px, subtitle 18.9px, date 30.6px, date_end 42.5px, venue 42.5px",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "another structure may place the priority fields larger"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/03-garamond-quiet-BPMZXHX-7.json",
+        "png": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/03-garamond-quiet-BPMZXHX-7.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 1115580,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 70.47
+        }
+      }
+    },
+    {
+      "rank": 4,
+      "name": "04-garamond-quiet-BPMZXHX-5",
+      "direction": "d5",
+      "style": "garamond-quiet",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "veil",
+      "idea": "immersion",
+      "grid": "ortho/simple 3×4",
+      "attempt": 0,
+      "salt": "#x3",
+      "seeds": {
+        "layout": "BPMZXHX-5L",
+        "text": "BPMZXHX-5T",
+        "color": "BPMZXHX-5C~1",
+        "image": "BPMZXHX-5I#3"
+      },
+      "taste": 7.086,
+      "penalty": 0.08,
+      "score": 7.006,
+      "quality": 91,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "centroid"
+        ],
+        "penalty": 0.08
+      },
+      "palette": {
+        "bg": "#eafbf6",
+        "ink": "#090f0d",
+        "accent": "#49685f"
+      },
+      "images": [
+        "nature-land146321457"
+      ],
+      "fonts": [
+        "EB Garamond",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style garamond-quiet: en library for English copy, mood calm+minimal+elegant, voice serif, density airy, exhibition: literary / elegant faces",
+        "idea immersion (imagery: hero)",
+        "background light: matched (#eafbf6)",
+        "engine picked composition veil / idea immersion (taste 7.09 − penalty 0.08 = 7.01)"
+      ],
+      "ms": 1223,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9402714789619552,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "Low Tide",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  554,
+                  1182,
+                  501,
+                  122
+                ],
+                "size_px": 144,
+                "css_px": 135.4,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": true,
+                "expected": "Photographs by Mara Ellison",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  554,
+                  1323,
+                  206,
+                  16
+                ],
+                "size_px": 18.9,
+                "css_px": 17.8,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.10.30",
+                "status": "pass",
+                "rendered": "as \"2026.10.30\"",
+                "region": [
+                  554,
+                  700,
+                  99,
+                  26
+                ],
+                "size_px": 11.4,
+                "css_px": 10.7,
+                "slot": "meta.0"
+              },
+              {
+                "field": "date_end",
+                "label": "date_end",
+                "required": true,
+                "expected": "2026.12.14",
+                "status": "pass",
+                "rendered": "as \"12.14\"",
+                "region": [
+                  782,
+                  1334,
+                  135,
+                  79
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  782,
+                  1420,
+                  112,
+                  79
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "address",
+                "label": "address",
+                "required": false,
+                "expected": "3-8-2 Kiyosumi, Koto-ku",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "Tokyo",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "Free admission",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "galleryko.example/lowtide",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  782,
+                  1420,
+                  112,
+                  79
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 135.4,
+                "min_css_px": 9,
+                "region": [
+                  554,
+                  1182,
+                  501,
+                  122
+                ]
+              },
+              {
+                "label": "subtitle",
+                "status": "pass",
+                "css_px": 17.8,
+                "min_css_px": 9,
+                "region": [
+                  554,
+                  1323,
+                  206,
+                  16
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 10.7,
+                "min_css_px": 9,
+                "region": [
+                  554,
+                  700,
+                  99,
+                  26
+                ]
+              },
+              {
+                "label": "date_end",
+                "status": "pass",
+                "css_px": 40,
+                "min_css_px": 9,
+                "region": [
+                  782,
+                  1334,
+                  135,
+                  79
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 40,
+                "min_css_px": 9,
+                "region": [
+                  782,
+                  1420,
+                  112,
+                  79
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "2026.10.30 — 12.14\n",
+                "status": "pass",
+                "ratio": 17.07,
+                "typical": 17.1,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  554,
+                  700,
+                  99,
+                  26
+                ]
+              },
+              {
+                "text": "GALLERY KŌEN\n",
+                "status": "pass",
+                "ratio": 15.56,
+                "typical": 16.13,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1064,
+                  700,
+                  94,
+                  26
+                ]
+              },
+              {
+                "text": "Low Tide",
+                "status": "pass",
+                "ratio": 17.25,
+                "typical": 17.25,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  554,
+                  1182,
+                  501,
+                  122
+                ]
+              },
+              {
+                "text": "Photographs by Mara Ellison",
+                "status": "pass",
+                "ratio": 17.25,
+                "typical": 17.25,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  554,
+                  1323,
+                  206,
+                  16
+                ]
+              },
+              {
+                "text": "10.30 — 12.14",
+                "status": "pass",
+                "ratio": 17.25,
+                "typical": 17.25,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  782,
+                  1334,
+                  135,
+                  79
+                ]
+              },
+              {
+                "text": "2026",
+                "status": "pass",
+                "ratio": 17.1,
+                "typical": 17.25,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  782,
+                  1506,
+                  32,
+                  14
+                ]
+              },
+              {
+                "text": "WHEN",
+                "status": "pass",
+                "ratio": 17.25,
+                "typical": 17.25,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  782,
+                  1527,
+                  41,
+                  11
+                ]
+              },
+              {
+                "text": "Gallery Kōen",
+                "status": "pass",
+                "ratio": 17.25,
+                "typical": 17.25,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  782,
+                  1420,
+                  112,
+                  79
+                ]
+              },
+              {
+                "text": "WHERE",
+                "status": "pass",
+                "ratio": 17.25,
+                "typical": 17.26,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  782,
+                  1545,
+                  48,
+                  11
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "status": "n/a",
+            "why": "no Chinese text"
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "EB Garamond",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): address",
+          "content (optional): city",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.086,
+            "taste": 7.086,
+            "gate_penalty": 0.08,
+            "score": 7.006,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 7.9,
+            "order": 10,
+            "clarity": 8,
+            "alignment": 6.7,
+            "hierarchy": 6.9,
+            "basis": "near-miss edges 0; 3 text blocks, 3 sizes, 1 busy blocks, 0 collisions; 67% blocks aligned; focal ratio 3.4, priority order kept 6/10"
+          },
+          "expressive": {
+            "value": 7.1,
+            "tension": 7.1,
+            "idea": null,
+            "idea_assigned": {
+              "id": "immersion",
+              "contrast": "lightdark",
+              "frame": "grid",
+              "brk": "none"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 3.4) + asymmetry (centroid offset 0.187); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 9.7,
+            "harmony": 9.7,
+            "palette_discipline": 10,
+            "tone_structure": 9.1,
+            "hero_separation": 10,
+            "basis": "harmony 0.975, 0 hue families, largest tone band 66%, headline ΔL 80"
+          },
+          "craft": {
+            "value": 9.9,
+            "engine_gates": 9.4,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": null,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.08, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 4 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): address",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: address (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.1.sub; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): city",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: city (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.2; another structure may"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set smallGroups=3",
+              "why": "the copy is in slot groups.2.main, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=5",
+              "why": "the copy is in slot meta.4, which this layout does not show"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/04-garamond-quiet-BPMZXHX-5.json",
+        "png": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/04-garamond-quiet-BPMZXHX-5.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 1551827,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 66.49
+        }
+      }
+    },
+    {
+      "rank": 5,
+      "name": "05-garamond-quiet-BPMZXHX-1",
+      "direction": "d1",
+      "style": "garamond-quiet",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "ma",
+      "idea": "emptiness",
+      "grid": "image/stable 3×5",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "BPMZXHX-1L",
+        "text": "BPMZXHX-1T",
+        "color": "BPMZXHX-1C~1",
+        "image": "BPMZXHX-1I"
+      },
+      "taste": 6.994,
+      "penalty": 0,
+      "score": 6.994,
+      "quality": 88,
+      "gates": {
+        "fails": [],
+        "soft": [],
+        "penalty": 0
+      },
+      "palette": {
+        "bg": "#fff2ef",
+        "ink": "#0e0907",
+        "accent": "#5c4844"
+      },
+      "images": [
+        "nature-land146321446"
+      ],
+      "fonts": [
+        "EB Garamond",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style garamond-quiet: en library for English copy, mood calm+minimal+elegant, voice serif, density airy, exhibition: literary / elegant faces",
+        "idea emptiness (calm / minimal → emptiness (ma); elegant → space; exhibition → quiet space)",
+        "background light: matched (#fff2ef)",
+        "engine picked composition ma / idea emptiness (taste 6.99 − penalty 0 = 6.99)"
+      ],
+      "ms": 3652,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9402714789619552,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "Low Tide",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  133,
+                  1114,
+                  227,
+                  54
+                ],
+                "size_px": 63,
+                "css_px": 59.2,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": true,
+                "expected": "Photographs by Mara Ellison",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  133,
+                  1186,
+                  181,
+                  14
+                ],
+                "size_px": 16.2,
+                "css_px": 15.2,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.10.30",
+                "status": "pass",
+                "rendered": "as \"2026.10.30\"",
+                "region": [
+                  133,
+                  1216,
+                  163,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "date_end",
+                "label": "date_end",
+                "required": true,
+                "expected": "2026.12.14",
+                "status": "pass",
+                "rendered": "as \"12.14\"",
+                "region": [
+                  133,
+                  1216,
+                  163,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  133,
+                  1216,
+                  163,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "address",
+                "label": "address",
+                "required": false,
+                "expected": "3-8-2 Kiyosumi, Koto-ku",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "Tokyo",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  133,
+                  1216,
+                  163,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "Free admission",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "galleryko.example/lowtide",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  133,
+                  1216,
+                  163,
+                  28
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 59.2,
+                "min_css_px": 9,
+                "region": [
+                  133,
+                  1114,
+                  227,
+                  54
+                ]
+              },
+              {
+                "label": "subtitle",
+                "status": "pass",
+                "css_px": 15.2,
+                "min_css_px": 9,
+                "region": [
+                  133,
+                  1186,
+                  181,
+                  14
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 11.8,
+                "min_css_px": 9,
+                "region": [
+                  133,
+                  1216,
+                  163,
+                  28
+                ]
+              },
+              {
+                "label": "date_end",
+                "status": "pass",
+                "css_px": 11.8,
+                "min_css_px": 9,
+                "region": [
+                  133,
+                  1216,
+                  163,
+                  28
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 11.8,
+                "min_css_px": 9,
+                "region": [
+                  133,
+                  1216,
+                  163,
+                  28
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "Low Tide",
+                "status": "pass",
+                "ratio": 18.1,
+                "typical": 18.1,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  133,
+                  1114,
+                  227,
+                  54
+                ]
+              },
+              {
+                "text": "Photographs by Mara Ellison",
+                "status": "pass",
+                "ratio": 18.1,
+                "typical": 18.1,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  133,
+                  1186,
+                  181,
+                  14
+                ]
+              },
+              {
+                "text": "2026.10.30 — 12.14\nGALLERY KŌEN · TOKYO",
+                "status": "pass",
+                "ratio": 18.1,
+                "typical": 18.1,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  133,
+                  1216,
+                  163,
+                  28
+                ]
+              },
+              {
+                "text": "2026.10.30 — 12.14",
+                "status": "pass",
+                "ratio": 18.1,
+                "typical": 18.1,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  133,
+                  169,
+                  143,
+                  8
+                ]
+              },
+              {
+                "text": "2026",
+                "status": "pass",
+                "ratio": 15.67,
+                "typical": 18.1,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  965,
+                  169,
+                  35,
+                  8
+                ]
+              },
+              {
+                "text": "2026.10.30 — 12.14",
+                "status": "pass",
+                "ratio": 16.1,
+                "typical": 18.1,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  29,
+                  106,
+                  8
+                ]
+              },
+              {
+                "text": "2026.10",
+                "status": "pass",
+                "ratio": 13.94,
+                "typical": 16.1,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  337,
+                  29,
+                  43,
+                  8
+                ]
+              },
+              {
+                "text": "GALLERY KŌEN",
+                "status": "pass",
+                "ratio": 16.1,
+                "typical": 17.78,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  610,
+                  29,
+                  87,
+                  8
+                ]
+              },
+              {
+                "text": "TOKYO",
+                "status": "pass",
+                "ratio": 14.66,
+                "typical": 17.31,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  883,
+                  29,
+                  39,
+                  8
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "status": "n/a",
+            "why": "no Chinese text"
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "EB Garamond",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): address",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 6.994,
+            "taste": 6.994,
+            "gate_penalty": 0,
+            "score": 6.994,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 8.9,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 6.7,
+            "hierarchy": 9.1,
+            "basis": "near-miss edges 0; 3 text blocks, 2 sizes, 0 busy blocks, 0 collisions; 67% blocks aligned; focal ratio 3.9, priority order kept 10/10"
+          },
+          "expressive": {
+            "value": 7.1,
+            "tension": 7.1,
+            "idea": null,
+            "idea_assigned": {
+              "id": "emptiness",
+              "contrast": "lightdark",
+              "frame": "eyes",
+              "brk": "offgrid"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 3.9) + asymmetry (centroid offset 0.165); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 8,
+            "harmony": 8.5,
+            "palette_discipline": 10,
+            "tone_structure": 3.4,
+            "hero_separation": 10,
+            "basis": "harmony 0.85, 0 hue families, largest tone band 92%, headline ΔL 82"
+          },
+          "craft": {
+            "value": 10,
+            "engine_gates": 10,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": null,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 1.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): address",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: address (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.1.sub; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set smallGroups=3",
+              "why": "the copy is in slot groups.2.main, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=5",
+              "why": "the copy is in slot meta.4, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/05-garamond-quiet-BPMZXHX-1.json",
+        "png": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/05-garamond-quiet-BPMZXHX-1.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 333389,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 40.93
+        }
+      }
+    },
+    {
+      "rank": 6,
+      "name": "06-caslon-book-BPMZXHX-6",
+      "direction": "d6",
+      "style": "caslon-book",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "window",
+      "idea": "reveal",
+      "grid": "ortho/stable 3×6",
+      "attempt": 0,
+      "salt": "#5",
+      "seeds": {
+        "layout": "BPMZXHX-6L",
+        "text": "BPMZXHX-6T",
+        "color": "BPMZXHX-6C",
+        "image": "BPMZXHX-6I#5"
+      },
+      "taste": 6.911,
+      "penalty": 0,
+      "score": 6.911,
+      "quality": 97,
+      "gates": {
+        "fails": [],
+        "soft": [],
+        "penalty": 0
+      },
+      "palette": {
+        "bg": "#fbdecf",
+        "ink": "#1d0e06",
+        "accent": "#af5100"
+      },
+      "images": [
+        "nature-sky140172937"
+      ],
+      "fonts": [
+        "Libre Caslon Display",
+        "Libre Caslon Text",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style caslon-book: en library for English copy, mood calm+elegant, voice serif, density airy, exhibition: literary / elegant faces",
+        "idea reveal (picture as hero; exhibition → a window on the work)",
+        "background light: matched (#fbdecf)",
+        "engine picked composition window / idea reveal (taste 6.91 − penalty 0 = 6.91)"
+      ],
+      "ms": 1080,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9402714789619552,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "Low Tide",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  102,
+                  454,
+                  116
+                ],
+                "size_px": 132,
+                "css_px": 124.1,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": true,
+                "expected": "Photographs by Mara Ellison",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  236,
+                  251,
+                  18
+                ],
+                "size_px": 18.9,
+                "css_px": 17.8,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.10.30",
+                "status": "pass",
+                "rendered": "as \"2026.10.30\"",
+                "region": [
+                  54,
+                  282,
+                  169,
+                  29
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "date_end",
+                "label": "date_end",
+                "required": true,
+                "expected": "2026.12.14",
+                "status": "pass",
+                "rendered": "as \"12.14\"",
+                "region": [
+                  54,
+                  1409,
+                  136,
+                  80
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  425,
+                  1409,
+                  115,
+                  80
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "address",
+                "label": "address",
+                "required": false,
+                "expected": "3-8-2 Kiyosumi, Koto-ku",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "Tokyo",
+                "status": "pass",
+                "rendered": "verbatim (case changed by the style)",
+                "region": [
+                  54,
+                  282,
+                  169,
+                  29
+                ],
+                "size_px": 12.6,
+                "css_px": 11.8,
+                "slot": "note"
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "Free admission",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "galleryko.example/lowtide",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "Gallery Kōen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  425,
+                  1409,
+                  115,
+                  80
+                ],
+                "size_px": 42.5,
+                "css_px": 40,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 1.5 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 124.1,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  102,
+                  454,
+                  116
+                ]
+              },
+              {
+                "label": "subtitle",
+                "status": "pass",
+                "css_px": 17.8,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  236,
+                  251,
+                  18
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 11.8,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  282,
+                  169,
+                  29
+                ]
+              },
+              {
+                "label": "date_end",
+                "status": "pass",
+                "css_px": 40,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1409,
+                  136,
+                  80
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 40,
+                "min_css_px": 9,
+                "region": [
+                  425,
+                  1409,
+                  115,
+                  80
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "Low Tide",
+                "status": "pass",
+                "ratio": 11.84,
+                "typical": 13.34,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  102,
+                  454,
+                  116
+                ]
+              },
+              {
+                "text": "Photographs by Mara Ellison",
+                "status": "pass",
+                "ratio": 10.13,
+                "typical": 10.8,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  236,
+                  251,
+                  18
+                ]
+              },
+              {
+                "text": "2026.10.30 — 12.14\nGALLERY KŌEN · TOKYO",
+                "status": "pass",
+                "ratio": 8.88,
+                "typical": 9.08,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  282,
+                  169,
+                  29
+                ]
+              },
+              {
+                "text": "2026.10",
+                "status": "pass",
+                "ratio": 7.92,
+                "typical": 8.98,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  64,
+                  52,
+                  8
+                ]
+              },
+              {
+                "text": "2026",
+                "status": "pass",
+                "ratio": 11.63,
+                "typical": 14.26,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1113,
+                  64,
+                  33,
+                  8
+                ]
+              },
+              {
+                "text": "10.30 — 12.14",
+                "status": "pass",
+                "ratio": 13.34,
+                "typical": 13.34,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  1409,
+                  136,
+                  80
+                ]
+              },
+              {
+                "text": "WHEN",
+                "status": "pass",
+                "ratio": 13.34,
+                "typical": 13.34,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1534,
+                  43,
+                  12
+                ]
+              },
+              {
+                "text": "Gallery Kōen",
+                "status": "pass",
+                "ratio": 11.02,
+                "typical": 11.49,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  425,
+                  1409,
+                  115,
+                  80
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "status": "n/a",
+            "why": "no Chinese text"
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "Libre Caslon Display",
+                "status": "pass"
+              },
+              {
+                "family": "Libre Caslon Text",
+                "status": "pass"
+              },
+              {
+                "family": "Libre Franklin",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): address",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 6.911,
+            "taste": 6.911,
+            "gate_penalty": 0,
+            "score": 6.911,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 8.5,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 7.5,
+            "hierarchy": 6.6,
+            "basis": "near-miss edges 0; 5 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 75% blocks aligned; focal ratio 3.1, priority order kept 6/10"
+          },
+          "expressive": {
+            "value": 5.2,
+            "tension": 5.2,
+            "idea": null,
+            "idea_assigned": {
+              "id": "reveal",
+              "contrast": "saturation",
+              "frame": "eyes",
+              "brk": "window"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 3.1) + asymmetry (centroid offset 0.10099999999999999); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 9.7,
+            "harmony": 9.6,
+            "palette_discipline": 10,
+            "tone_structure": 9.2,
+            "hero_separation": 10,
+            "basis": "harmony 0.965, 0 hue families, largest tone band 58%, headline ΔL 69"
+          },
+          "craft": {
+            "value": 10,
+            "engine_gates": 10,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": null,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 3.7 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): address",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: address (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.1.sub; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set smallGroups=3",
+              "why": "the copy is in slot groups.2.main, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=5",
+              "why": "the copy is in slot meta.4, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/06-caslon-book-BPMZXHX-6.json",
+        "png": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/06-caslon-book-BPMZXHX-6.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 1490004,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 55.87
+        }
+      }
+    }
+  ],
+  "analysis": {
+    "language": {
+      "overall": "en",
+      "title": "en",
+      "cjkShare": 0,
+      "why": "language given as en"
+    },
+    "hierarchy": [
+      {
+        "key": "title",
+        "tier": "hero",
+        "importance": 1
+      },
+      {
+        "key": "date",
+        "tier": "secondary",
+        "importance": 0.91
+      },
+      {
+        "key": "venue",
+        "tier": "secondary",
+        "importance": 0.87
+      },
+      {
+        "key": "subtitle",
+        "tier": "secondary",
+        "importance": 0.83
+      },
+      {
+        "key": "city",
+        "tier": "tertiary",
+        "importance": 0.35
+      },
+      {
+        "key": "price",
+        "tier": "tertiary",
+        "importance": 0.35
+      },
+      {
+        "key": "organizers",
+        "tier": "tertiary",
+        "importance": 0.35
+      },
+      {
+        "key": "address",
+        "tier": "tertiary",
+        "importance": 0.25
+      },
+      {
+        "key": "url",
+        "tier": "tertiary",
+        "importance": 0.25
+      },
+      {
+        "key": "body",
+        "tier": "tertiary",
+        "importance": 0.22
+      }
+    ],
+    "list": {
+      "kind": "none",
+      "items": 0
+    }
+  },
+  "reasons": [
+    {
+      "field": "density",
+      "value": "airy",
+      "why": "given"
+    },
+    {
+      "field": "language",
+      "value": "en",
+      "why": "language given as en"
+    },
+    {
+      "field": "hierarchy",
+      "value": "hero:title > secondary:date > secondary:venue > secondary:subtitle > tertiary:city > tertiary:price > tertiary:organizers > tertiary:address > tertiary:url > tertiary:body",
+      "why": "importance = field base + purpose boost − length penalty"
+    },
+    {
+      "field": "texts.headline",
+      "value": "Low Tide",
+      "why": "the title is the hero field"
+    },
+    {
+      "field": "texts.sub",
+      "value": "Photographs by Mara Ellison",
+      "why": "subtitle is the strongest secondary line"
+    },
+    {
+      "field": "texts.note",
+      "value": "2026.10.30 — 12.14\nGallery Kōen · Tokyo",
+      "why": "caption block: when + where (the facts people look for after the title)"
+    },
+    {
+      "field": "texts.groups",
+      "value": "10.30 — 12.14 / Gallery Kōen / Free admission",
+      "why": "no list in the content: the key facts (when / where / tickets / organizer) become the small groups"
+    },
+    {
+      "field": "texts.prose",
+      "value": "Thirty-two photographs of the Ariake coa",
+      "why": "body copy / slogan go to the prose blocks"
+    },
+    {
+      "field": "texts.meta",
+      "value": "2026.10.30 — 12.14 | Gallery Kōen | Tokyo | Free admission | galleryko.example/lowtide",
+      "why": "short facts become the meta labels (date, time, venue, price, url, organizers)"
+    },
+    {
+      "field": "texts.facts",
+      "value": {
+        "date": {
+          "y": 2026,
+          "m": 10,
+          "d": 30
+        },
+        "year": "2026",
+        "issue": "2026.10",
+        "numeral": "30",
+        "signature": "Gallery Kōen",
+        "masthead": "LOW TIDE",
+        "sticker": [
+          "FREE",
+          "10.30"
+        ]
+      },
+      "why": "real year / edition / date / numerals replace the invented \"NO. 12\", years, calendar days and index times"
+    },
+    {
+      "field": "titleScale",
+      "value": 112,
+      "why": "title ≈ 4.2 em wide → 130, 3 secondary fields compete → −8, airy / minimal → −10 (multiplied by the style's own title scale)"
+    },
+    {
+      "field": "smallGroups",
+      "value": 2,
+      "why": "3 key facts, airy → at most 2"
+    },
+    {
+      "field": "metaCount",
+      "value": 3,
+      "why": "5 real meta labels, density airy, at least the 2 required (priority) facts"
+    },
+    {
+      "field": "proseCount",
+      "value": 1,
+      "why": "1 prose blocks in the content"
+    },
+    {
+      "field": "smallScale",
+      "value": 100,
+      "why": "copy load heavy"
+    },
+    {
+      "field": "whitespace/blockBudget/decorBudget",
+      "value": [
+        78,
+        6,
+        1
+      ],
+      "why": "density airy, heavy copy"
+    },
+    {
+      "field": "imageCount/typeOnlyShare/imageShare",
+      "value": [
+        1,
+        0,
+        70
+      ],
+      "why": "imagery hero"
+    },
+    {
+      "field": "bgPref",
+      "value": "light",
+      "why": "color.background / lightness"
+    },
+    {
+      "field": "plan",
+      "value": {
+        "tone": "light",
+        "script": false,
+        "material": "none",
+        "typeOnly": false
+      },
+      "why": "the plan normally rolls tone / script lettering / torn-stamp material / type-only per draw; the brief fixes them"
+    }
+  ],
+  "warnings": [],
+  "fonts": {
+    "fallback_subsets": [],
+    "unresolved": {},
+    "note": ""
+  },
+  "sheet": "/workspace/poster-printer-cli/demo/minimal-photo-exhibition/sheet.jpg"
+}

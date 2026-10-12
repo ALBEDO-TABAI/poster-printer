@@ -1,0 +1,722 @@
+{
+ "app": "poster-printer",
+ "kind": "poster",
+ "version": 1,
+ "entry": {
+  "id": "B1OP5LG5-4-mv4omuuf",
+  "ts": 1791775104423,
+  "seeds": {
+   "layout": "B1OP5LG5-4L",
+   "text": "B1OP5LG5-4T",
+   "color": "B1OP5LG5-4C~2",
+   "image": "B1OP5LG5-4I"
+  },
+  "decorSalt": "",
+  "ratio": "3:4",
+  "styleId": "zh-song-minimal",
+  "params": {
+   "gridType": "auto",
+   "density": "auto",
+   "composition": "auto",
+   "gridStrength": 1,
+   "cols": 0,
+   "rows": 0,
+   "margin": 4.5,
+   "gutter": 0,
+   "baseline": 8,
+   "whitespace": 78,
+   "symmetry": 30,
+   "gridOpacity": 100,
+   "zoneStrength": 40,
+   "cornerRadius": 22,
+   "cardGap": 22,
+   "tuneOn": true,
+   "contrast": 100,
+   "saturation": 100,
+   "brightness": 100,
+   "texture": "auto",
+   "textureAmount": 18,
+   "bigGroups": 1,
+   "smallGroups": 3,
+   "smallRel": 32,
+   "titleScale": 90,
+   "smallScale": 100,
+   "tickText": true,
+   "align": "random",
+   "case": "auto",
+   "proseCount": 1,
+   "proseSize": 22,
+   "metaCount": 6,
+   "maxLineWidth": 92,
+   "mainBreath": 18,
+   "subBreath": 6,
+   "ruleWeight": 100,
+   "groupGap": 28,
+   "fontCount": 2,
+   "englishBias": 20,
+   "shakeOnDraw": false,
+   "bandHeight": 24,
+   "bandPos": "auto",
+   "bandKind": "auto",
+   "bandBleed": true,
+   "sidebarTpl": "auto",
+   "sidebarSide": "auto",
+   "sidebarWidth": 16,
+   "sidebarFont": 100,
+   "sidebarRule": true,
+   "colorMode": "normal",
+   "paletteSource": "nice",
+   "bgPref": "light",
+   "soft": false,
+   "minContrast": 4.5,
+   "zoneColors": 3,
+   "accentUse": 50,
+   "imageCount": 1,
+   "imageShare": 55,
+   "maskKind": "auto",
+   "sliceCount": 5,
+   "imageZoom": 100,
+   "legibility": 70,
+   "imgSat": 100,
+   "imgContrast": 100,
+   "duotone": 15,
+   "tornRough": 50,
+   "bigGlyph": true,
+   "glyphKind": "auto",
+   "glyphSize": 90,
+   "glyphOpacity": 100,
+   "ornaments": 1,
+   "ornamentSize": 100,
+   "lineWeight": 1,
+   "nodeSize": 3,
+   "zoneNumbers": true,
+   "guides": false,
+   "dashed": false,
+   "curveCount": 2,
+   "shapeCount": 1,
+   "noiseAmount": 30,
+   "qualityGate": true,
+   "qualityMin": 78,
+   "qualityTries": 5,
+   "collisionFix": true,
+   "idea": "scale",
+   "planV2": true,
+   "typeOnlyShare": 15,
+   "monoShare": 30,
+   "clashShare": 6,
+   "grainShare": 12,
+   "scriptShare": 12,
+   "artDirection": true,
+   "typeRatio": "auto",
+   "opticalTracking": true,
+   "blockBudget": 6,
+   "decorBudget": 1,
+   "busyScrim": true,
+   "snapGrid": true,
+   "exportScale": 2,
+   "embedFonts": true,
+   "replaySpeed": 900
+  },
+  "modules": {
+   "bg": true,
+   "zones": true,
+   "lines": true,
+   "curves": true,
+   "noise": true,
+   "texture": true,
+   "text": true,
+   "ornament": true,
+   "shapes": true,
+   "images": true,
+   "sidebar": true,
+   "band": true
+  },
+  "modes": [],
+  "fonts": {
+   "en": {
+    "big.main": {
+     "family": "Jost",
+     "weight": 300,
+     "size": 100,
+     "tracking": -0.01,
+     "leading": 0.95,
+     "case": "none"
+    },
+    "big.sub": {
+     "family": "Jost",
+     "weight": 300,
+     "size": 100,
+     "tracking": 0,
+     "leading": 1.2,
+     "case": "none"
+    },
+    "big.note": {
+     "family": "Jost",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.01,
+     "leading": 1.35,
+     "case": "upper"
+    },
+    "small.main": {
+     "family": "Jost",
+     "weight": 300,
+     "size": 100,
+     "tracking": 0,
+     "leading": 1,
+     "case": "none"
+    },
+    "small.sub": {
+     "family": "Jost",
+     "weight": 300,
+     "size": 100,
+     "tracking": 0,
+     "leading": 1.25,
+     "case": "none"
+    },
+    "small.note": {
+     "family": "Jost",
+     "weight": 400,
+     "size": 100,
+     "tracking": 0.01,
+     "leading": 1.35,
+     "case": "upper"
+    }
+   },
+   "zh": {
+    "big.main": {
+     "family": "Noto Serif SC",
+     "weight": 300,
+     "size": 100,
+     "tracking": 0.1,
+     "leading": 1.08,
+     "case": "none"
+    },
+    "big.sub": {
+     "family": "Noto Sans SC",
+     "weight": 300,
+     "size": 100,
+     "tracking": 0.04,
+     "leading": 1.4,
+     "case": "none"
+    },
+    "big.note": {
+     "family": "Noto Sans SC",
+     "weight": 300,
+     "size": 100,
+     "tracking": 0.06,
+     "leading": 1.6,
+     "case": "none"
+    },
+    "small.main": {
+     "family": "Noto Serif SC",
+     "weight": 300,
+     "size": 100,
+     "tracking": 0.1,
+     "leading": 1.15,
+     "case": "none"
+    },
+    "small.sub": {
+     "family": "Noto Sans SC",
+     "weight": 300,
+     "size": 100,
+     "tracking": 0.04,
+     "leading": 1.45,
+     "case": "none"
+    },
+    "small.note": {
+     "family": "Noto Sans SC",
+     "weight": 300,
+     "size": 100,
+     "tracking": 0.06,
+     "leading": 1.6,
+     "case": "none"
+    }
+   },
+   "glyph": {
+    "family": "Jost",
+    "weight": 300
+   },
+   "glyphZh": {
+    "family": "Noto Serif SC",
+    "weight": 300
+   }
+  },
+  "picked": {
+   "texts": {
+    "set": "custom",
+    "headline": {
+     "t": "留白之后",
+     "lang": "zh"
+    },
+    "sub": {
+     "t": "当代中文字体设计的六个问题",
+     "lang": "zh"
+    },
+    "note": {
+     "t": "11月21日 周六 19:30\n衡山路 12 号 · 二楼讲堂 · 上海",
+     "lang": "zh"
+    },
+    "groups": [
+     {
+      "main": {
+       "t": "林知远",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "",
+       "lang": "en"
+      },
+      "note": {
+       "t": "字体设计师",
+       "lang": "zh"
+      }
+     },
+     {
+      "main": {
+       "t": "周沐",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "",
+       "lang": "en"
+      },
+      "note": {
+       "t": "书籍设计师",
+       "lang": "zh"
+      }
+     },
+     {
+      "main": {
+       "t": "陈一禾",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "",
+       "lang": "en"
+      },
+      "note": {
+       "t": "主持",
+       "lang": "zh"
+      }
+     },
+     {
+      "main": {
+       "t": "",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "",
+       "lang": "zh"
+      },
+      "note": {
+       "t": "",
+       "lang": "zh"
+      }
+     },
+     {
+      "main": {
+       "t": "",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "",
+       "lang": "zh"
+      },
+      "note": {
+       "t": "",
+       "lang": "zh"
+      }
+     },
+     {
+      "main": {
+       "t": "",
+       "lang": "zh"
+      },
+      "sub": {
+       "t": "",
+       "lang": "zh"
+      },
+      "note": {
+       "t": "",
+       "lang": "zh"
+      }
+     }
+    ],
+    "prose": [
+     {
+      "t": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     },
+     {
+      "t": "",
+      "lang": "zh"
+     }
+    ],
+    "meta": [
+     {
+      "t": "2026.11.21",
+      "lang": "en"
+     },
+     {
+      "t": "19:30",
+      "lang": "en"
+     },
+     {
+      "t": "衡山路 12 号 · 二楼讲堂",
+      "lang": "zh"
+     },
+     {
+      "t": "林知远",
+      "lang": "zh"
+     },
+     {
+      "t": "周沐",
+      "lang": "zh"
+     },
+     {
+      "t": "陈一禾",
+      "lang": "zh"
+     },
+     {
+      "t": "上海",
+      "lang": "zh"
+     },
+     {
+      "t": "免费 · 需预约",
+      "lang": "zh"
+     },
+     {
+      "t": "paperworks.example/talk",
+      "lang": "en"
+     },
+     {
+      "t": "第07期",
+      "lang": "zh"
+     }
+    ],
+    "words": [
+     {
+      "t": "TALK",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     },
+     {
+      "t": "",
+      "lang": "en"
+     }
+    ],
+    "glyph": "留",
+    "facts": {
+     "date": {
+      "y": 2026,
+      "m": 11,
+      "d": 21
+     },
+     "year": "2026",
+     "issue": "第07期",
+     "numeral": "21",
+     "signature": "",
+     "masthead": "留白之后",
+     "sticker": [
+      "免费",
+      "11.21"
+     ],
+     "times": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     "values": [
+      "01",
+      "02",
+      "03",
+      "",
+      "",
+      "",
+      ""
+     ]
+    }
+   },
+   "palette": {
+    "bg": "#f3eded",
+    "ink": "#160b0c",
+    "inkSoft": "#160b0c",
+    "accent": "#70585a",
+    "alt": "#e1d4d5",
+    "fills": [
+     "#70585a",
+     "#e1d4d5"
+    ],
+    "light": "#f3eded",
+    "dark": "#160b0c",
+    "source": "itten:lightdark",
+    "sourceColors": [
+     "#f9ebc4",
+     "#ffb391",
+     "#fc2f68",
+     "#472f5f",
+     "#08295e"
+    ]
+   },
+   "imageIds": [],
+   "comp": "giant",
+   "grid": {
+    "type": "ortho",
+    "density": "full",
+    "nc": 5,
+    "nr": 6
+   },
+   "attempt": 0,
+   "quality": {
+    "score": 100,
+    "overlaps": 0,
+    "glyphHits": 0,
+    "lowContrast": 0,
+    "offCanvas": 0,
+    "clutter": 0,
+    "empty": 0,
+    "moved": 1,
+    "dropped": 0,
+    "recolored": 0,
+    "scrims": 0,
+    "outlined": 0,
+    "design": 0,
+    "audit": {
+     "blocks": 7,
+     "subject": 0,
+     "focalRatio": 8.797004077430497,
+     "sizes": 2,
+     "align": 1,
+     "quiet": 0.8159722222222222,
+     "decor": 1,
+     "accent": 0,
+     "busy": 0,
+     "harmony": 0.9685958218886667,
+     "penalty": 0,
+     "parts": {
+      "blocks": 0,
+      "focal": 0,
+      "sizes": 0,
+      "align": 0,
+      "quiet": 0,
+      "decor": 0,
+      "accent": 0,
+      "busy": 0,
+      "harmony": 0,
+      "subject": 0,
+      "treatments": 0,
+      "midLevels": 0,
+      "busyXL": 0
+     }
+    }
+   },
+   "plan": {
+    "v2": true,
+    "typeOnly": true,
+    "tone": "light",
+    "palette": "mono",
+    "grain": 0.09496542849577963,
+    "kit": [
+     "mark",
+     "header"
+    ],
+    "script": false,
+    "geometry": "none",
+    "material": "none"
+   },
+   "idea": {
+    "id": "scale",
+    "contrast": "lightdark",
+    "frame": "grid",
+    "brk": "bleed"
+   },
+   "salt": "",
+   "taste": 6.733
+  },
+  "edits": {},
+  "custom": {
+   "headline": "留白之后",
+   "sub": "当代中文字体设计的六个问题",
+   "small": [
+    "林知远",
+    "周沐",
+    "陈一禾"
+   ],
+   "note": [
+    "字体设计师",
+    "书籍设计师",
+    "主持"
+   ],
+   "prose": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+   "meta": [
+    "2026.11.21",
+    "19:30",
+    "衡山路 12 号 · 二楼讲堂",
+    "林知远",
+    "周沐",
+    "陈一禾",
+    "上海",
+    "免费 · 需预约"
+   ]
+  },
+  "comp": "giant"
+ },
+ "x_cli": {
+  "direction": "d4",
+  "reasons": [
+   "style zh-song-minimal: zh library for Chinese copy, mood calm+literary, voice serif, density airy, short Chinese title suits a strong CJK face",
+   "idea scale (baseline: big type)",
+   "background light: matched (#f3eded)",
+   "engine picked composition giant / idea scale (taste 6.73 − penalty 0.08 = 6.65)"
+  ],
+  "brief_seed": "B1OP5LG5",
+  "summary": {
+   "style": "zh-song-minimal",
+   "ratio": "3:4",
+   "size": [
+    1200,
+    1600
+   ],
+   "comp": "giant",
+   "idea": "scale",
+   "grid": "ortho/full 5×6",
+   "attempt": 0,
+   "salt": "",
+   "seeds": {
+    "layout": "B1OP5LG5-4L",
+    "text": "B1OP5LG5-4T",
+    "color": "B1OP5LG5-4C~2",
+    "image": "B1OP5LG5-4I"
+   },
+   "taste": 6.733,
+   "penalty": 0.08,
+   "score": 6.653,
+   "quality": 100,
+   "gates": {
+    "fails": [],
+    "soft": [
+     "centroid"
+    ],
+    "penalty": 0.08
+   },
+   "palette": {
+    "bg": "#f3eded",
+    "ink": "#160b0c",
+    "accent": "#70585a"
+   },
+   "images": [],
+   "fonts": [
+    "Jost",
+    "Noto Serif SC"
+   ]
+  },
+  "brief": {
+   "$schema": "poster-printer/brief.v1",
+   "purpose": "talk",
+   "context": {
+    "use": "editorial",
+    "audience": "designers, type enthusiasts and design students in Shanghai",
+    "display": {
+     "kind": "print",
+     "print_size": "A2",
+     "viewing_distance_m": 1
+    },
+    "priority": [
+     "title",
+     "date",
+     "venue",
+     "speakers",
+     "subtitle"
+    ]
+   },
+   "content": {
+    "title": "留白之后",
+    "subtitle": "当代中文字体设计的六个问题",
+    "date": "2026-11-21T19:30",
+    "venue": "衡山路 12 号 · 二楼讲堂",
+    "city": "上海",
+    "speakers": [
+     {
+      "name": "林知远",
+      "role": "字体设计师"
+     },
+     {
+      "name": "周沐",
+      "role": "书籍设计师"
+     },
+     {
+      "name": "陈一禾",
+      "role": "主持"
+     }
+    ],
+    "organizers": [
+     "纸上工作室"
+    ],
+    "price": "免费 · 需预约",
+    "url": "paperworks.example/talk",
+    "edition": "第07期",
+    "body": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+    "language": "zh"
+   },
+   "style": {
+    "mood": [
+     "calm",
+     "literary",
+     "editorial"
+    ],
+    "density": "airy",
+    "typography": {
+     "voice": "serif"
+    },
+    "imagery": {
+     "use": "accent",
+     "subject": [
+      "still",
+      "object",
+      "architecture"
+     ]
+    },
+    "color": {
+     "background": "light",
+     "temperature": "warm",
+     "chroma": "muted"
+    }
+   },
+   "format": {
+    "ratio": "3:4",
+    "count": 6,
+    "min_score": 6
+   }
+  },
+  "gates_passed": true,
+  "blocking_failures": []
+ }
+}

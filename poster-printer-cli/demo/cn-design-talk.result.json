@@ -1,0 +1,5234 @@
+{
+  "backend": "chromium",
+  "parity": true,
+  "count": 6,
+  "minScore": 6,
+  "tries": 11,
+  "rejected": [],
+  "gate_failed": [
+    {
+      "name": "zh-song-minimal-B1OP5LG5-10",
+      "direction": "d4",
+      "taste": 7.085,
+      "comp": "edge",
+      "blocking_failures": [
+        "content: speakers[2] 陈一禾"
+      ]
+    },
+    {
+      "name": "zh-song-edit-B1OP5LG5-6",
+      "direction": "d6",
+      "taste": 6.871,
+      "comp": "ma",
+      "blocking_failures": [
+        "content: speakers[1] 周沐",
+        "content: speakers[2] 陈一禾"
+      ]
+    },
+    {
+      "name": "zh-song-edit-B1OP5LG5-8",
+      "direction": "d2",
+      "taste": 6.348,
+      "comp": "index",
+      "blocking_failures": [
+        "content: date (time)",
+        "content: venue"
+      ]
+    },
+    {
+      "name": "zh-bilingual-B1OP5LG5-1",
+      "direction": "d1",
+      "taste": 7.766,
+      "comp": "hanzi",
+      "blocking_failures": [
+        "content: speakers[0] 林知远",
+        "content: speakers[1] 周沐",
+        "content: speakers[2] 陈一禾"
+      ]
+    },
+    {
+      "name": "zh-bilingual-B1OP5LG5-7",
+      "direction": "d1",
+      "taste": 7.572,
+      "comp": "hanzi",
+      "blocking_failures": [
+        "content: speakers[0] 林知远",
+        "content: speakers[1] 周沐",
+        "content: speakers[2] 陈一禾"
+      ]
+    }
+  ],
+  "posters": [
+    {
+      "rank": 1,
+      "name": "01-zh-mincho-B1OP5LG5-3",
+      "direction": "d3",
+      "style": "zh-mincho",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "inset",
+      "idea": "emptiness",
+      "grid": "image/full 4×5",
+      "attempt": 0,
+      "salt": "#1",
+      "seeds": {
+        "layout": "B1OP5LG5-3L",
+        "text": "B1OP5LG5-3T",
+        "color": "B1OP5LG5-3C~1",
+        "image": "B1OP5LG5-3I#1"
+      },
+      "taste": 7.134,
+      "penalty": 0,
+      "score": 7.134,
+      "quality": 95,
+      "gates": {
+        "fails": [],
+        "soft": [],
+        "penalty": 0
+      },
+      "palette": {
+        "bg": "#ede9e0",
+        "ink": "#16130e",
+        "accent": "#3c79f0"
+      },
+      "images": [
+        "architecture-arch61370171"
+      ],
+      "fonts": [
+        "Cormorant",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-mincho: zh library for Chinese copy, mood calm+literary, voice serif, density airy, short Chinese title suits a strong CJK face",
+        "idea emptiness (calm / minimal → emptiness (ma))",
+        "background light: matched (#ede9e0)",
+        "engine picked composition inset / idea emptiness (taste 7.13 − penalty 0 = 7.13)"
+      ],
+      "ms": 1071,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9961734693877551,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "留白之后",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  489,
+                  78,
+                  221,
+                  335
+                ],
+                "size_px": 108,
+                "css_px": 107.6,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "当代中文字体设计的六个问题",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.11.21",
+                "status": "pass",
+                "rendered": "as \"11月21日\"",
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ],
+                "size_px": 12.6,
+                "css_px": 12.6,
+                "slot": "note"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "19:30",
+                "status": "pass",
+                "rendered": "as \"19:30\"",
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ],
+                "size_px": 12.6,
+                "css_px": 12.6,
+                "slot": "note"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ],
+                "size_px": 12.6,
+                "css_px": 12.6,
+                "slot": "note"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "上海",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ],
+                "size_px": 12.6,
+                "css_px": 12.6,
+                "slot": "note"
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "免费 · 需预约",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "paperworks.example/talk",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "edition",
+                "label": "edition",
+                "required": false,
+                "expected": "第07期",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[0] 林知远",
+                "required": true,
+                "expected": "林知远",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  1477,
+                  39,
+                  40
+                ],
+                "size_px": 18.9,
+                "css_px": 18.8,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[1] 周沐",
+                "required": true,
+                "expected": "周沐",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  327,
+                  1477,
+                  19,
+                  40
+                ],
+                "size_px": 18.9,
+                "css_px": 18.8,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[2] 陈一禾",
+                "required": true,
+                "expected": "陈一禾",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  600,
+                  1479,
+                  35,
+                  36
+                ],
+                "size_px": 17.2,
+                "css_px": 17.1,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "纸上工作室",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 107.6,
+                "min_css_px": 9,
+                "region": [
+                  489,
+                  78,
+                  221,
+                  335
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 12.6,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 12.6,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 12.6,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ]
+              },
+              {
+                "label": "speakers[0] 林知远",
+                "status": "pass",
+                "css_px": 18.8,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1477,
+                  39,
+                  40
+                ]
+              },
+              {
+                "label": "speakers[1] 周沐",
+                "status": "pass",
+                "css_px": 18.8,
+                "min_css_px": 9,
+                "region": [
+                  327,
+                  1477,
+                  19,
+                  40
+                ]
+              },
+              {
+                "label": "speakers[2] 陈一禾",
+                "status": "pass",
+                "css_px": 17.1,
+                "min_css_px": 9,
+                "region": [
+                  600,
+                  1479,
+                  35,
+                  36
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "留白之后",
+                "status": "pass",
+                "ratio": 15.29,
+                "typical": 15.29,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  489,
+                  78,
+                  221,
+                  335
+                ]
+              },
+              {
+                "text": "11 月 21 日 周六 19:30\n衡山路 12 号 · 二楼讲堂 · 上海",
+                "status": "pass",
+                "ratio": 15.29,
+                "typical": 15.29,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ]
+              },
+              {
+                "text": "林知远",
+                "status": "pass",
+                "ratio": 15.29,
+                "typical": 15.29,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  1477,
+                  39,
+                  40
+                ]
+              },
+              {
+                "text": "周沐",
+                "status": "pass",
+                "ratio": 13.53,
+                "typical": 15.29,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  327,
+                  1477,
+                  19,
+                  40
+                ]
+              },
+              {
+                "text": "陈一禾",
+                "status": "pass",
+                "ratio": 15.29,
+                "typical": 15.29,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  600,
+                  1479,
+                  35,
+                  36
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Cormorant",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              }
+            ],
+            "note": "patched glyphs come from the full fonts and exist only in CLI renders; the web app shows its fallback face for them"
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): subtitle",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): edition",
+          "content (optional): organizers",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.134,
+            "taste": 7.134,
+            "gate_penalty": 0,
+            "score": 7.134,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 8.6,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 6,
+            "hierarchy": 8.3,
+            "basis": "near-miss edges 0; 5 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 60% blocks aligned; focal ratio 5.7, priority order kept 5.7/10"
+          },
+          "expressive": {
+            "value": 9.1,
+            "tension": 9.1,
+            "idea": null,
+            "idea_assigned": {
+              "id": "emptiness",
+              "contrast": "extension",
+              "frame": "eyes",
+              "brk": "offgrid"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 5.7) + asymmetry (centroid offset 0.212); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 9.5,
+            "harmony": 9.7,
+            "palette_discipline": 10,
+            "tone_structure": 8.1,
+            "hero_separation": 10,
+            "basis": "harmony 0.97, 0 hue families, largest tone band 70%, headline ΔL 75"
+          },
+          "craft": {
+            "value": 10,
+            "engine_gates": 10,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 3.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): subtitle",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: subtitle (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot sub; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.7, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.8, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): edition",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: edition (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.9, which this layout does not show"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): organizers",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: organizers[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --text meta.0=\"纸上工作室\" --set metaCount=6",
+              "why": "the text is in no slot; put it into a meta label"
+            }
+          },
+          {
+            "id": "i6",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          },
+          {
+            "id": "i7",
+            "dimension": "classical: priority order",
+            "blocking": false,
+            "region": null,
+            "evidence": "required fields drawn out of priority order (5.7/10 pairs in order): title 108px, date 12.6px, date 12.6px, venue 12.6px, speakers 18.9px, speakers 18.9px, speakers 17.2px",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "another structure may place the priority fields larger"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/cn-design-talk/01-zh-mincho-B1OP5LG5-3.json",
+        "png": "/workspace/poster-printer-cli/demo/cn-design-talk/01-zh-mincho-B1OP5LG5-3.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 1299835,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 47.87
+        }
+      }
+    },
+    {
+      "rank": 2,
+      "name": "02-zh-mincho-B1OP5LG5-9",
+      "direction": "d3",
+      "style": "zh-mincho",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "inset",
+      "idea": "emptiness",
+      "grid": "ortho/stable 3×6",
+      "attempt": 0,
+      "salt": "#6",
+      "seeds": {
+        "layout": "B1OP5LG5-9L",
+        "text": "B1OP5LG5-9T",
+        "color": "B1OP5LG5-9C~3#6",
+        "image": "B1OP5LG5-9I"
+      },
+      "taste": 7.115,
+      "penalty": 0,
+      "score": 7.115,
+      "quality": 94,
+      "gates": {
+        "fails": [],
+        "soft": [],
+        "penalty": 0
+      },
+      "palette": {
+        "bg": "#fff3f3",
+        "ink": "#161010",
+        "accent": "#725b5b"
+      },
+      "images": [
+        "still-food52782748"
+      ],
+      "fonts": [
+        "Cormorant",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-mincho: zh library for Chinese copy, mood calm+literary, voice serif, density airy, short Chinese title suits a strong CJK face",
+        "idea emptiness (calm / minimal → emptiness (ma))",
+        "background light: matched (#fff3f3)",
+        "engine picked composition inset / idea emptiness (taste 7.12 − penalty 0 = 7.12)"
+      ],
+      "ms": 28697,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9961734693877551,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "留白之后",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  489,
+                  78,
+                  221,
+                  335
+                ],
+                "size_px": 108,
+                "css_px": 107.6,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "当代中文字体设计的六个问题",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.11.21",
+                "status": "pass",
+                "rendered": "as \"11月21日\"",
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ],
+                "size_px": 12.6,
+                "css_px": 12.6,
+                "slot": "note"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "19:30",
+                "status": "pass",
+                "rendered": "as \"19:30\"",
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ],
+                "size_px": 12.6,
+                "css_px": 12.6,
+                "slot": "note"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ],
+                "size_px": 12.6,
+                "css_px": 12.6,
+                "slot": "note"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "上海",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ],
+                "size_px": 12.6,
+                "css_px": 12.6,
+                "slot": "note"
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "免费 · 需预约",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "paperworks.example/talk",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "edition",
+                "label": "edition",
+                "required": false,
+                "expected": "第07期",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[0] 林知远",
+                "required": true,
+                "expected": "林知远",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  1471,
+                  35,
+                  36
+                ],
+                "size_px": 17.2,
+                "css_px": 17.1,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[1] 周沐",
+                "required": true,
+                "expected": "周沐",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  418,
+                  1470,
+                  19,
+                  40
+                ],
+                "size_px": 18.9,
+                "css_px": 18.8,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[2] 陈一禾",
+                "required": true,
+                "expected": "陈一禾",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  782,
+                  1470,
+                  39,
+                  40
+                ],
+                "size_px": 18.9,
+                "css_px": 18.8,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "纸上工作室",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 107.6,
+                "min_css_px": 9,
+                "region": [
+                  489,
+                  78,
+                  221,
+                  335
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 12.6,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 12.6,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 12.6,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ]
+              },
+              {
+                "label": "speakers[0] 林知远",
+                "status": "pass",
+                "css_px": 17.1,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  1471,
+                  35,
+                  36
+                ]
+              },
+              {
+                "label": "speakers[1] 周沐",
+                "status": "pass",
+                "css_px": 18.8,
+                "min_css_px": 9,
+                "region": [
+                  418,
+                  1470,
+                  19,
+                  40
+                ]
+              },
+              {
+                "label": "speakers[2] 陈一禾",
+                "status": "pass",
+                "css_px": 18.8,
+                "min_css_px": 9,
+                "region": [
+                  782,
+                  1470,
+                  39,
+                  40
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "留白之后",
+                "status": "pass",
+                "ratio": 17.36,
+                "typical": 17.36,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  489,
+                  78,
+                  221,
+                  335
+                ]
+              },
+              {
+                "text": "11 月 21 日 周六 19:30\n衡山路 12 号 · 二楼讲堂 · 上海",
+                "status": "pass",
+                "ratio": 17.36,
+                "typical": 17.36,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  1276,
+                  188,
+                  32
+                ]
+              },
+              {
+                "text": "林知远",
+                "status": "pass",
+                "ratio": 17.36,
+                "typical": 17.36,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  1471,
+                  35,
+                  36
+                ]
+              },
+              {
+                "text": "周沐",
+                "status": "pass",
+                "ratio": 15.88,
+                "typical": 17.36,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  418,
+                  1470,
+                  19,
+                  40
+                ]
+              },
+              {
+                "text": "陈一禾",
+                "status": "pass",
+                "ratio": 17.36,
+                "typical": 17.36,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  782,
+                  1470,
+                  39,
+                  40
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Cormorant",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              }
+            ],
+            "note": "patched glyphs come from the full fonts and exist only in CLI renders; the web app shows its fallback face for them"
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): subtitle",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): edition",
+          "content (optional): organizers",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.115,
+            "taste": 7.115,
+            "gate_penalty": 0,
+            "score": 7.115,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 8.5,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 6,
+            "hierarchy": 7.9,
+            "basis": "near-miss edges 0; 5 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 60% blocks aligned; focal ratio 5.7, priority order kept 4.8/10"
+          },
+          "expressive": {
+            "value": 7.7,
+            "tension": 7.7,
+            "idea": null,
+            "idea_assigned": {
+              "id": "emptiness",
+              "contrast": "lightdark",
+              "frame": "eyes",
+              "brk": "offgrid"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 5.7) + asymmetry (centroid offset 0.14300000000000002); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 8.4,
+            "harmony": 9.7,
+            "palette_discipline": 10,
+            "tone_structure": 3.8,
+            "hero_separation": 10,
+            "basis": "harmony 0.975, 0 hue families, largest tone band 90%, headline ΔL 79"
+          },
+          "craft": {
+            "value": 10,
+            "engine_gates": 10,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 3.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): subtitle",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: subtitle (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot sub; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.7, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.8, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): edition",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: edition (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.9, which this layout does not show"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): organizers",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: organizers[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --text meta.0=\"纸上工作室\" --set metaCount=6",
+              "why": "the text is in no slot; put it into a meta label"
+            }
+          },
+          {
+            "id": "i6",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          },
+          {
+            "id": "i7",
+            "dimension": "classical: priority order",
+            "blocking": false,
+            "region": null,
+            "evidence": "required fields drawn out of priority order (4.8/10 pairs in order): title 108px, date 12.6px, date 12.6px, venue 12.6px, speakers 17.2px, speakers 18.9px, speakers 18.9px",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "another structure may place the priority fields larger"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/cn-design-talk/02-zh-mincho-B1OP5LG5-9.json",
+        "png": "/workspace/poster-printer-cli/demo/cn-design-talk/02-zh-mincho-B1OP5LG5-9.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 729077,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 52.19
+        }
+      }
+    },
+    {
+      "rank": 3,
+      "name": "03-zh-bilingual-B1OP5LG5-11",
+      "direction": "d5",
+      "style": "zh-bilingual",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "index",
+      "idea": "data",
+      "grid": "image/full 4×5",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "B1OP5LG5-11L",
+        "text": "B1OP5LG5-11T",
+        "color": "B1OP5LG5-11C",
+        "image": "B1OP5LG5-11I"
+      },
+      "taste": 7.016,
+      "penalty": 0.08,
+      "score": 6.936,
+      "quality": 98,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "centroid"
+        ],
+        "penalty": 0.08
+      },
+      "palette": {
+        "bg": "#eee9e3",
+        "ink": "#17130e",
+        "accent": "#3c79f0"
+      },
+      "images": [
+        "object-54081"
+      ],
+      "fonts": [
+        "Source Serif 4",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-bilingual: zh library for Chinese copy, mood calm+literary+editorial, voice serif, short Chinese title suits a strong CJK face, talk: editorial / technical faces",
+        "idea data (3-item speakers → an index / programme table shows it) → composition index",
+        "background light: matched (#eee9e3)",
+        "engine picked composition index / idea data (taste 7.02 − penalty 0.08 = 6.94)"
+      ],
+      "ms": 1381,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9961734693877551,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "留白之后",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  126,
+                  272,
+                  420
+                ],
+                "size_px": 135.4,
+                "css_px": 134.8,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "当代中文字体设计的六个问题",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  564,
+                  255,
+                  18
+                ],
+                "size_px": 18.9,
+                "css_px": 18.8,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.11.21",
+                "status": "pass",
+                "rendered": "as \"2026.11.21\"",
+                "region": [
+                  54,
+                  54,
+                  51,
+                  10
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.0"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "19:30",
+                "status": "pass",
+                "rendered": "as \"19:30\"",
+                "region": [
+                  586,
+                  54,
+                  29,
+                  10
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.1"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  1005,
+                  53,
+                  141,
+                  11
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.2"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "上海",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "免费 · 需预约",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "paperworks.example/talk",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "edition",
+                "label": "edition",
+                "required": false,
+                "expected": "第07期",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[0] 林知远",
+                "required": true,
+                "expected": "林知远",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  727,
+                  124,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 40.6,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[1] 周沐",
+                "required": true,
+                "expected": "周沐",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  1006,
+                  82,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 40.6,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[2] 陈一禾",
+                "required": true,
+                "expected": "陈一禾",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  1284,
+                  124,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 40.6,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "纸上工作室",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 134.8,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  126,
+                  272,
+                  420
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  54,
+                  51,
+                  10
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  586,
+                  54,
+                  29,
+                  10
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  1005,
+                  53,
+                  141,
+                  11
+                ]
+              },
+              {
+                "label": "speakers[0] 林知远",
+                "status": "pass",
+                "css_px": 40.6,
+                "min_css_px": 9,
+                "region": [
+                  316,
+                  727,
+                  124,
+                  38
+                ]
+              },
+              {
+                "label": "speakers[1] 周沐",
+                "status": "pass",
+                "css_px": 40.6,
+                "min_css_px": 9,
+                "region": [
+                  316,
+                  1006,
+                  82,
+                  38
+                ]
+              },
+              {
+                "label": "speakers[2] 陈一禾",
+                "status": "pass",
+                "css_px": 40.6,
+                "min_css_px": 9,
+                "region": [
+                  316,
+                  1284,
+                  124,
+                  38
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "2026.11.21",
+                "status": "pass",
+                "ratio": 15.32,
+                "typical": 15.32,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  54,
+                  51,
+                  10
+                ]
+              },
+              {
+                "text": "19:30",
+                "status": "pass",
+                "ratio": 13.19,
+                "typical": 15.32,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  586,
+                  54,
+                  29,
+                  10
+                ]
+              },
+              {
+                "text": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "ratio": 15.32,
+                "typical": 15.32,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  1005,
+                  53,
+                  141,
+                  11
+                ]
+              },
+              {
+                "text": "留白之后",
+                "status": "pass",
+                "ratio": 15.32,
+                "typical": 15.32,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  126,
+                  272,
+                  420
+                ]
+              },
+              {
+                "text": "当代中文字体设计的六个问题",
+                "status": "pass",
+                "ratio": 15.32,
+                "typical": 15.32,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  564,
+                  255,
+                  18
+                ]
+              },
+              {
+                "text": "林知远",
+                "status": "pass",
+                "ratio": 15.32,
+                "typical": 15.32,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  316,
+                  727,
+                  124,
+                  38
+                ]
+              },
+              {
+                "text": "字体设计师",
+                "status": "pass",
+                "ratio": 11.02,
+                "typical": 15.32,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1082,
+                  730,
+                  64,
+                  11
+                ]
+              },
+              {
+                "text": "周沐",
+                "status": "pass",
+                "ratio": 15.32,
+                "typical": 15.32,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  316,
+                  1006,
+                  82,
+                  38
+                ]
+              },
+              {
+                "text": "书籍设计师",
+                "status": "pass",
+                "ratio": 9.18,
+                "typical": 15.32,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1082,
+                  1008,
+                  64,
+                  11
+                ]
+              },
+              {
+                "text": "陈一禾",
+                "status": "pass",
+                "ratio": 15.32,
+                "typical": 15.32,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  316,
+                  1284,
+                  124,
+                  38
+                ]
+              },
+              {
+                "text": "主持",
+                "status": "pass",
+                "ratio": 9.6,
+                "typical": 15.32,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1121,
+                  1287,
+                  25,
+                  11
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Source Serif 4",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              }
+            ],
+            "note": "patched glyphs come from the full fonts and exist only in CLI renders; the web app shows its fallback face for them"
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): city",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): edition",
+          "content (optional): organizers",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.016,
+            "taste": 7.016,
+            "gate_penalty": 0.08,
+            "score": 6.936,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 7.9,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 5,
+            "hierarchy": 6.8,
+            "basis": "near-miss edges 0; 3 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 50% blocks aligned; focal ratio 3.3, priority order kept 5.7/10"
+          },
+          "expressive": {
+            "value": 8.3,
+            "tension": 8.3,
+            "idea": null,
+            "idea_assigned": {
+              "id": "data",
+              "contrast": "extension",
+              "frame": "grid",
+              "brk": "overlap"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 3.3) + asymmetry (centroid offset 0.331); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 8.9,
+            "harmony": 9.7,
+            "palette_discipline": 10,
+            "tone_structure": 5.7,
+            "hero_separation": 10,
+            "basis": "harmony 0.97, 1 hue families, largest tone band 82%, headline ΔL 75"
+          },
+          "craft": {
+            "value": 9.9,
+            "engine_gates": 9.4,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.08, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 4.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): city",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: city (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.7, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.8, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): edition",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: edition (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.9, which this layout does not show"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): organizers",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: organizers[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --text meta.0=\"纸上工作室\" --set metaCount=6",
+              "why": "the text is in no slot; put it into a meta label"
+            }
+          },
+          {
+            "id": "i6",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          },
+          {
+            "id": "i7",
+            "dimension": "classical: priority order",
+            "blocking": false,
+            "region": null,
+            "evidence": "required fields drawn out of priority order (5.7/10 pairs in order): title 135.4px, date 11.4px, date 11.4px, venue 11.4px, speakers 40.8px, speakers 40.8px, speakers 40.8px",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "another structure may place the priority fields larger"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/cn-design-talk/03-zh-bilingual-B1OP5LG5-11.json",
+        "png": "/workspace/poster-printer-cli/demo/cn-design-talk/03-zh-bilingual-B1OP5LG5-11.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 286755,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 36.28
+        }
+      }
+    },
+    {
+      "rank": 4,
+      "name": "04-zh-song-minimal-B1OP5LG5-4",
+      "direction": "d4",
+      "style": "zh-song-minimal",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "giant",
+      "idea": "scale",
+      "grid": "ortho/full 5×6",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "B1OP5LG5-4L",
+        "text": "B1OP5LG5-4T",
+        "color": "B1OP5LG5-4C~2",
+        "image": "B1OP5LG5-4I"
+      },
+      "taste": 6.733,
+      "penalty": 0.08,
+      "score": 6.653,
+      "quality": 100,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "centroid"
+        ],
+        "penalty": 0.08
+      },
+      "palette": {
+        "bg": "#f3eded",
+        "ink": "#160b0c",
+        "accent": "#70585a"
+      },
+      "images": [],
+      "fonts": [
+        "Jost",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-song-minimal: zh library for Chinese copy, mood calm+literary, voice serif, density airy, short Chinese title suits a strong CJK face",
+        "idea scale (baseline: big type)",
+        "background light: matched (#f3eded)",
+        "engine picked composition giant / idea scale (taste 6.73 − penalty 0.08 = 6.65)"
+      ],
+      "ms": 1643,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9961734693877551,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "留白之后",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  24,
+                  1272,
+                  1152,
+                  250
+                ],
+                "size_px": 290.2,
+                "css_px": 289.1,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "当代中文字体设计的六个问题",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  90,
+                  177,
+                  106
+                ],
+                "size_px": 32.8,
+                "css_px": 32.7,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.11.21",
+                "status": "pass",
+                "rendered": "as \"2026.11.21\"",
+                "region": [
+                  54,
+                  29,
+                  63,
+                  7
+                ],
+                "size_px": 10.5,
+                "css_px": 10.4,
+                "slot": "meta.0"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "19:30",
+                "status": "pass",
+                "rendered": "as \"19:30\"",
+                "region": [
+                  610,
+                  29,
+                  31,
+                  7
+                ],
+                "size_px": 10.5,
+                "css_px": 10.4,
+                "slot": "meta.1"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  54,
+                  141,
+                  29
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.2"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "上海",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "免费 · 需预约",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "paperworks.example/talk",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "edition",
+                "label": "edition",
+                "required": false,
+                "expected": "第07期",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  337,
+                  28,
+                  36,
+                  9
+                ],
+                "size_px": 10.5,
+                "css_px": 10.4,
+                "slot": "meta.9"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[0] 林知远",
+                "required": true,
+                "expected": "林知远",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  582,
+                  54,
+                  36,
+                  29
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[1] 周沐",
+                "required": true,
+                "expected": "周沐",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  460,
+                  33,
+                  69
+                ],
+                "size_px": 33,
+                "css_px": 32.9,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[2] 陈一禾",
+                "required": true,
+                "expected": "陈一禾",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  842,
+                  33,
+                  107
+                ],
+                "size_px": 33,
+                "css_px": 32.9,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "纸上工作室",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 289.1,
+                "min_css_px": 9,
+                "region": [
+                  24,
+                  1272,
+                  1152,
+                  250
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 10.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  29,
+                  63,
+                  7
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 10.4,
+                "min_css_px": 9,
+                "region": [
+                  610,
+                  29,
+                  31,
+                  7
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  54,
+                  141,
+                  29
+                ]
+              },
+              {
+                "label": "speakers[0] 林知远",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  582,
+                  54,
+                  36,
+                  29
+                ]
+              },
+              {
+                "label": "speakers[1] 周沐",
+                "status": "pass",
+                "css_px": 32.9,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  460,
+                  33,
+                  69
+                ]
+              },
+              {
+                "label": "speakers[2] 陈一禾",
+                "status": "pass",
+                "css_px": 32.9,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  842,
+                  33,
+                  107
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "留白之后",
+                "status": "pass",
+                "ratio": 5.61,
+                "typical": 5.61,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  24,
+                  1272,
+                  1152,
+                  250
+                ]
+              },
+              {
+                "text": "当代中文字体设计的六个问题",
+                "status": "pass",
+                "ratio": 16.54,
+                "typical": 16.69,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  90,
+                  177,
+                  106
+                ]
+              },
+              {
+                "text": "字体设计师",
+                "status": "pass",
+                "ratio": 13.49,
+                "typical": 16.54,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  202,
+                  67,
+                  12
+                ]
+              },
+              {
+                "text": "周沐",
+                "status": "pass",
+                "ratio": 16.54,
+                "typical": 16.57,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  460,
+                  33,
+                  69
+                ]
+              },
+              {
+                "text": "书籍设计师",
+                "status": "pass",
+                "ratio": 11.83,
+                "typical": 16.42,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  564,
+                  67,
+                  12
+                ]
+              },
+              {
+                "text": "陈一禾",
+                "status": "pass",
+                "ratio": 16.54,
+                "typical": 16.69,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  842,
+                  33,
+                  107
+                ]
+              },
+              {
+                "text": "主持",
+                "status": "pass",
+                "ratio": 15.23,
+                "typical": 16.54,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  993,
+                  26,
+                  12
+                ]
+              },
+              {
+                "text": "衡山路 12 号 · 二楼讲堂\n",
+                "status": "pass",
+                "ratio": 16.54,
+                "typical": 16.69,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  54,
+                  141,
+                  29
+                ]
+              },
+              {
+                "text": "林知远\n林知远",
+                "status": "pass",
+                "ratio": 14.53,
+                "typical": 16.54,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  582,
+                  54,
+                  36,
+                  29
+                ]
+              },
+              {
+                "text": "周沐",
+                "status": "pass",
+                "ratio": 9.5,
+                "typical": 14.59,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1122,
+                  54,
+                  24,
+                  11
+                ]
+              },
+              {
+                "text": "2026.11.21",
+                "status": "pass",
+                "ratio": 14.4,
+                "typical": 16.54,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  29,
+                  63,
+                  7
+                ]
+              },
+              {
+                "text": "第07期",
+                "status": "pass",
+                "ratio": 9.5,
+                "typical": 16.39,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  337,
+                  28,
+                  36,
+                  9
+                ]
+              },
+              {
+                "text": "19:30",
+                "status": "pass",
+                "ratio": 12.81,
+                "typical": 16.42,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  610,
+                  29,
+                  31,
+                  7
+                ]
+              },
+              {
+                "text": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "ratio": 14.73,
+                "typical": 16.54,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  883,
+                  28,
+                  132,
+                  9
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Jost",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              }
+            ],
+            "note": "patched glyphs come from the full fonts and exist only in CLI renders; the web app shows its fallback face for them"
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): city",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): organizers",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 6.733,
+            "taste": 6.733,
+            "gate_penalty": 0.08,
+            "score": 6.653,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 8.7,
+            "order": 10,
+            "clarity": 7,
+            "alignment": 10,
+            "hierarchy": 7.7,
+            "basis": "near-miss edges 0; 7 text blocks, 2 sizes, 0 busy blocks, 0 collisions; 100% blocks aligned; focal ratio 8.8, priority order kept 4.3/10"
+          },
+          "expressive": {
+            "value": 10,
+            "tension": 10,
+            "idea": null,
+            "idea_assigned": {
+              "id": "scale",
+              "contrast": "lightdark",
+              "frame": "grid",
+              "brk": "bleed"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 8.8) + asymmetry (centroid offset 0.27); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 7.9,
+            "harmony": 9.7,
+            "palette_discipline": 10,
+            "tone_structure": 2.7,
+            "hero_separation": 9.3,
+            "basis": "harmony 0.9690000000000001, 0 hue families, largest tone band 95%, headline ΔL 47"
+          },
+          "craft": {
+            "value": 9.9,
+            "engine_gates": 9.4,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.08, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 10.2 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): city",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: city (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.7, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.8, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): organizers",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: organizers[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --text meta.0=\"纸上工作室\" --set metaCount=6",
+              "why": "the text is in no slot; put it into a meta label"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          },
+          {
+            "id": "i6",
+            "dimension": "classical: priority order",
+            "blocking": false,
+            "region": null,
+            "evidence": "required fields drawn out of priority order (4.3/10 pairs in order): title 290.2px, date 10.5px, date 10.5px, venue 11.4px, speakers 11.4px, speakers 33px, speakers 33px",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "another structure may place the priority fields larger"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/cn-design-talk/04-zh-song-minimal-B1OP5LG5-4.json",
+        "png": "/workspace/poster-printer-cli/demo/cn-design-talk/04-zh-song-minimal-B1OP5LG5-4.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 2515772,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 26.18
+        }
+      }
+    },
+    {
+      "rank": 5,
+      "name": "05-zh-bilingual-B1OP5LG5-5",
+      "direction": "d5",
+      "style": "zh-bilingual",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "index",
+      "idea": "data",
+      "grid": "image/full 4×5",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "B1OP5LG5-5L",
+        "text": "B1OP5LG5-5T",
+        "color": "B1OP5LG5-5C",
+        "image": "B1OP5LG5-5I"
+      },
+      "taste": 6.454,
+      "penalty": 0.08,
+      "score": 6.374,
+      "quality": 100,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "centroid"
+        ],
+        "penalty": 0.08
+      },
+      "palette": {
+        "bg": "#e8edf3",
+        "ink": "#101419",
+        "accent": "#da4339"
+      },
+      "images": [
+        "architecture-arch145564879"
+      ],
+      "fonts": [
+        "Source Serif 4",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-bilingual: zh library for Chinese copy, mood calm+literary+editorial, voice serif, short Chinese title suits a strong CJK face, talk: editorial / technical faces",
+        "idea data (3-item speakers → an index / programme table shows it) → composition index",
+        "background light: matched (#e8edf3)",
+        "engine picked composition index / idea data (taste 6.45 − penalty 0.08 = 6.37)"
+      ],
+      "ms": 746,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9961734693877551,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "留白之后",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  126,
+                  386,
+                  388
+                ],
+                "size_px": 192,
+                "css_px": 191.3,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "当代中文字体设计的六个问题",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  553,
+                  255,
+                  18
+                ],
+                "size_px": 18.9,
+                "css_px": 18.8,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.11.21",
+                "status": "pass",
+                "rendered": "as \"2026.11.21\"",
+                "region": [
+                  54,
+                  54,
+                  64,
+                  29
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.0"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "19:30",
+                "status": "pass",
+                "rendered": "as \"19:30\"",
+                "region": [
+                  584,
+                  54,
+                  32,
+                  29
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.1"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  1005,
+                  54,
+                  141,
+                  11
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.2"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "上海",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "免费 · 需预约",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "paperworks.example/talk",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "edition",
+                "label": "edition",
+                "required": false,
+                "expected": "第07期",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  337,
+                  1563,
+                  36,
+                  9
+                ],
+                "size_px": 10.5,
+                "css_px": 10.4,
+                "slot": "meta.9"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[0] 林知远",
+                "required": true,
+                "expected": "林知远",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  513,
+                  730,
+                  63,
+                  65
+                ],
+                "size_px": 31.2,
+                "css_px": 31.1,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[1] 周沐",
+                "required": true,
+                "expected": "周沐",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  513,
+                  1008,
+                  31,
+                  65
+                ],
+                "size_px": 31.2,
+                "css_px": 31.1,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[2] 陈一禾",
+                "required": true,
+                "expected": "陈一禾",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  513,
+                  1287,
+                  63,
+                  65
+                ],
+                "size_px": 31.2,
+                "css_px": 31.1,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "纸上工作室",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 191.3,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  126,
+                  386,
+                  388
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  54,
+                  64,
+                  29
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  584,
+                  54,
+                  32,
+                  29
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  1005,
+                  54,
+                  141,
+                  11
+                ]
+              },
+              {
+                "label": "speakers[0] 林知远",
+                "status": "pass",
+                "css_px": 31.1,
+                "min_css_px": 9,
+                "region": [
+                  513,
+                  730,
+                  63,
+                  65
+                ]
+              },
+              {
+                "label": "speakers[1] 周沐",
+                "status": "pass",
+                "css_px": 31.1,
+                "min_css_px": 9,
+                "region": [
+                  513,
+                  1008,
+                  31,
+                  65
+                ]
+              },
+              {
+                "label": "speakers[2] 陈一禾",
+                "status": "pass",
+                "css_px": 31.1,
+                "min_css_px": 9,
+                "region": [
+                  513,
+                  1287,
+                  63,
+                  65
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "2026.11.21\n",
+                "status": "pass",
+                "ratio": 15.7,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  54,
+                  64,
+                  29
+                ]
+              },
+              {
+                "text": "19:30\n",
+                "status": "pass",
+                "ratio": 15.7,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  584,
+                  54,
+                  32,
+                  29
+                ]
+              },
+              {
+                "text": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "ratio": 14.19,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  1005,
+                  54,
+                  141,
+                  11
+                ]
+              },
+              {
+                "text": "留白之后",
+                "status": "pass",
+                "ratio": 15.7,
+                "typical": 15.7,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  126,
+                  386,
+                  388
+                ]
+              },
+              {
+                "text": "当代中文字体设计的六个问题",
+                "status": "pass",
+                "ratio": 15.7,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  553,
+                  255,
+                  18
+                ]
+              },
+              {
+                "text": "01",
+                "status": "pass",
+                "ratio": 3.68,
+                "typical": 3.68,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  749,
+                  92,
+                  64
+                ]
+              },
+              {
+                "text": "林知远",
+                "status": "pass",
+                "ratio": 15.7,
+                "typical": 15.7,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  513,
+                  730,
+                  63,
+                  65
+                ]
+              },
+              {
+                "text": "字体设计师",
+                "status": "pass",
+                "ratio": 15.56,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  813,
+                  67,
+                  12
+                ]
+              },
+              {
+                "text": "02",
+                "status": "pass",
+                "ratio": 15.7,
+                "typical": 15.7,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  1025,
+                  126,
+                  66
+                ]
+              },
+              {
+                "text": "周沐",
+                "status": "pass",
+                "ratio": 15.7,
+                "typical": 15.7,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  513,
+                  1008,
+                  31,
+                  65
+                ]
+              },
+              {
+                "text": "书籍设计师",
+                "status": "pass",
+                "ratio": 12.61,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  1091,
+                  67,
+                  12
+                ]
+              },
+              {
+                "text": "03",
+                "status": "pass",
+                "ratio": 15.7,
+                "typical": 15.7,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  1304,
+                  126,
+                  66
+                ]
+              },
+              {
+                "text": "陈一禾",
+                "status": "pass",
+                "ratio": 15.7,
+                "typical": 15.7,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  513,
+                  1287,
+                  63,
+                  65
+                ]
+              },
+              {
+                "text": "主持",
+                "status": "pass",
+                "ratio": 11.22,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  1370,
+                  26,
+                  12
+                ]
+              },
+              {
+                "text": "2026.11.21",
+                "status": "pass",
+                "ratio": 11.82,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1564,
+                  55,
+                  8
+                ]
+              },
+              {
+                "text": "第07期",
+                "status": "pass",
+                "ratio": 9.45,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  337,
+                  1563,
+                  36,
+                  9
+                ]
+              },
+              {
+                "text": "19:30",
+                "status": "pass",
+                "ratio": 11.22,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  610,
+                  1564,
+                  30,
+                  8
+                ]
+              },
+              {
+                "text": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "ratio": 14.19,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  883,
+                  1563,
+                  132,
+                  9
+                ]
+              },
+              {
+                "text": "2026.11.21",
+                "status": "pass",
+                "ratio": 14.19,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  29,
+                  55,
+                  8
+                ]
+              },
+              {
+                "text": "第07期",
+                "status": "pass",
+                "ratio": 9.45,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  337,
+                  28,
+                  36,
+                  9
+                ]
+              },
+              {
+                "text": "19:30",
+                "status": "pass",
+                "ratio": 12.77,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  610,
+                  29,
+                  30,
+                  8
+                ]
+              },
+              {
+                "text": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "ratio": 14.19,
+                "typical": 15.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  883,
+                  28,
+                  132,
+                  9
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Source Serif 4",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              }
+            ],
+            "note": "patched glyphs come from the full fonts and exist only in CLI renders; the web app shows its fallback face for them"
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): city",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): organizers",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 6.454,
+            "taste": 6.454,
+            "gate_penalty": 0.08,
+            "score": 6.374,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 9.6,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 10,
+            "hierarchy": 8.3,
+            "basis": "near-miss edges 0; 4 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 100% blocks aligned; focal ratio 6.2, priority order kept 5.7/10"
+          },
+          "expressive": {
+            "value": 10,
+            "tension": 10,
+            "idea": null,
+            "idea_assigned": {
+              "id": "data",
+              "contrast": "extension",
+              "frame": "grid",
+              "brk": "overlap"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 6.2) + asymmetry (centroid offset 0.406); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 8.7,
+            "harmony": 9.7,
+            "palette_discipline": 10,
+            "tone_structure": 5.2,
+            "hero_separation": 10,
+            "basis": "harmony 0.972, 1 hue families, largest tone band 84%, headline ΔL 75"
+          },
+          "craft": {
+            "value": 9.9,
+            "engine_gates": 9.4,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.08, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 6.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): city",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: city (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.7, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.8, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): organizers",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: organizers[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --text meta.0=\"纸上工作室\" --set metaCount=6",
+              "why": "the text is in no slot; put it into a meta label"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          },
+          {
+            "id": "i6",
+            "dimension": "classical: priority order",
+            "blocking": false,
+            "region": null,
+            "evidence": "required fields drawn out of priority order (5.7/10 pairs in order): title 192px, date 11.4px, date 11.4px, venue 11.4px, speakers 31.2px, speakers 31.2px, speakers 31.2px",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "another structure may place the priority fields larger"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/cn-design-talk/05-zh-bilingual-B1OP5LG5-5.json",
+        "png": "/workspace/poster-printer-cli/demo/cn-design-talk/05-zh-bilingual-B1OP5LG5-5.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 114329,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 34.95
+        }
+      }
+    },
+    {
+      "rank": 6,
+      "name": "06-zh-song-edit-B1OP5LG5-2",
+      "direction": "d2",
+      "style": "zh-song-edit",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "index",
+      "idea": "data",
+      "grid": "ortho/full 4×6",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "B1OP5LG5-2L",
+        "text": "B1OP5LG5-2T",
+        "color": "B1OP5LG5-2C",
+        "image": "B1OP5LG5-2I"
+      },
+      "taste": 6.383,
+      "penalty": 0.08,
+      "score": 6.303,
+      "quality": 100,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "centroid"
+        ],
+        "penalty": 0.08
+      },
+      "palette": {
+        "bg": "#eeddc6",
+        "ink": "#251b0d",
+        "accent": "#964100"
+      },
+      "images": [
+        "architecture-interior147990465"
+      ],
+      "fonts": [
+        "EB Garamond",
+        "Noto Serif SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-song-edit: zh library for Chinese copy, mood calm+literary+editorial, voice serif, short Chinese title suits a strong CJK face, talk: editorial / technical faces",
+        "idea data (3-item speakers → an index / programme table shows it) → composition index",
+        "background light: matched (#eeddc6)",
+        "engine picked composition index / idea data (taste 6.38 − penalty 0.08 = 6.30)"
+      ],
+      "ms": 784,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.9961734693877551,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "留白之后",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  126,
+                  774,
+                  180
+                ],
+                "size_px": 192,
+                "css_px": 191.3,
+                "slot": "headline"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "当代中文字体设计的六个问题",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  324,
+                  255,
+                  18
+                ],
+                "size_px": 18.9,
+                "css_px": 18.8,
+                "slot": "sub"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.11.21",
+                "status": "pass",
+                "rendered": "as \"2026.11.21\"",
+                "region": [
+                  54,
+                  54,
+                  51,
+                  10
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.0"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "19:30",
+                "status": "pass",
+                "rendered": "as \"19:30\"",
+                "region": [
+                  584,
+                  53,
+                  32,
+                  29
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.1"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "衡山路 12 号 · 二楼讲堂",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  1013,
+                  53,
+                  133,
+                  29
+                ],
+                "size_px": 11.4,
+                "css_px": 11.4,
+                "slot": "meta.2"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "上海",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "免费 · 需预约",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "paperworks.example/talk",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "edition",
+                "label": "edition",
+                "required": false,
+                "expected": "第07期",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[0] 林知远",
+                "required": true,
+                "expected": "林知远",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  727,
+                  124,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 40.6,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[1] 周沐",
+                "required": true,
+                "expected": "周沐",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  1006,
+                  82,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 40.6,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "speakers",
+                "label": "speakers[2] 陈一禾",
+                "required": true,
+                "expected": "陈一禾",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  1284,
+                  124,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 40.6,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "organizers",
+                "label": "organizers[0]",
+                "required": false,
+                "expected": "纸上工作室",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "body",
+                "label": "body",
+                "required": false,
+                "expected": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A2 (420×594 mm) seen from 1 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 191.3,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  126,
+                  774,
+                  180
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  54,
+                  51,
+                  10
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  584,
+                  53,
+                  32,
+                  29
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  1013,
+                  53,
+                  133,
+                  29
+                ]
+              },
+              {
+                "label": "speakers[0] 林知远",
+                "status": "pass",
+                "css_px": 40.6,
+                "min_css_px": 9,
+                "region": [
+                  316,
+                  727,
+                  124,
+                  38
+                ]
+              },
+              {
+                "label": "speakers[1] 周沐",
+                "status": "pass",
+                "css_px": 40.6,
+                "min_css_px": 9,
+                "region": [
+                  316,
+                  1006,
+                  82,
+                  38
+                ]
+              },
+              {
+                "label": "speakers[2] 陈一禾",
+                "status": "pass",
+                "css_px": 40.6,
+                "min_css_px": 9,
+                "region": [
+                  316,
+                  1284,
+                  124,
+                  38
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "2026.11.21",
+                "status": "pass",
+                "ratio": 12.72,
+                "typical": 12.72,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  54,
+                  51,
+                  10
+                ]
+              },
+              {
+                "text": "19:30\n",
+                "status": "pass",
+                "ratio": 12.72,
+                "typical": 12.72,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  584,
+                  53,
+                  32,
+                  29
+                ]
+              },
+              {
+                "text": "衡山路 12 号 · 二楼讲堂\n",
+                "status": "pass",
+                "ratio": 12.72,
+                "typical": 12.72,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  1013,
+                  53,
+                  133,
+                  29
+                ]
+              },
+              {
+                "text": "留白之后",
+                "status": "pass",
+                "ratio": 12.72,
+                "typical": 12.72,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  126,
+                  774,
+                  180
+                ]
+              },
+              {
+                "text": "当代中文字体设计的六个问题",
+                "status": "pass",
+                "ratio": 12.72,
+                "typical": 12.72,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  324,
+                  255,
+                  18
+                ]
+              },
+              {
+                "text": "林知远",
+                "status": "pass",
+                "ratio": 12.72,
+                "typical": 12.72,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  316,
+                  727,
+                  124,
+                  38
+                ]
+              },
+              {
+                "text": "字体设计师",
+                "status": "pass",
+                "ratio": 10.75,
+                "typical": 12.72,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1082,
+                  730,
+                  64,
+                  11
+                ]
+              },
+              {
+                "text": "周沐",
+                "status": "pass",
+                "ratio": 12.72,
+                "typical": 12.72,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  316,
+                  1006,
+                  82,
+                  38
+                ]
+              },
+              {
+                "text": "书籍设计师",
+                "status": "pass",
+                "ratio": 9.29,
+                "typical": 12.72,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1082,
+                  1008,
+                  64,
+                  11
+                ]
+              },
+              {
+                "text": "陈一禾",
+                "status": "pass",
+                "ratio": 12.72,
+                "typical": 12.72,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  316,
+                  1284,
+                  124,
+                  38
+                ]
+              },
+              {
+                "text": "主持",
+                "status": "pass",
+                "ratio": 9.54,
+                "typical": 12.72,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1121,
+                  1287,
+                  25,
+                  11
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "EB Garamond",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass",
+                "missing_in_app_font": "沐",
+                "patched_cli_only": "沐",
+                "unresolved": ""
+              }
+            ],
+            "note": "patched glyphs come from the full fonts and exist only in CLI renders; the web app shows its fallback face for them"
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): city",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): edition",
+          "content (optional): organizers",
+          "content (optional): body"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 6.383,
+            "taste": 6.383,
+            "gate_penalty": 0.08,
+            "score": 6.303,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 7,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 0,
+            "hierarchy": 8.1,
+            "basis": "near-miss edges 0; 3 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 0% blocks aligned; focal ratio 4.7, priority order kept 5.7/10"
+          },
+          "expressive": {
+            "value": 9.3,
+            "tension": 9.3,
+            "idea": null,
+            "idea_assigned": {
+              "id": "data",
+              "contrast": "saturation",
+              "frame": "grid",
+              "brk": "overlap"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 4.7) + asymmetry (centroid offset 0.4); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 8.5,
+            "harmony": 9.6,
+            "palette_discipline": 10,
+            "tone_structure": 4.5,
+            "hero_separation": 10,
+            "basis": "harmony 0.965, 1 hue families, largest tone band 87%, headline ΔL 67"
+          },
+          "craft": {
+            "value": 9.9,
+            "engine_gates": 9.4,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.08, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 6.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): city",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: city (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.7, which this layout does not show"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.8, which this layout does not show"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): edition",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: edition (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=8",
+              "why": "the copy is in slot meta.9, which this layout does not show"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): organizers",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: organizers[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --text meta.0=\"纸上工作室\" --set metaCount=6",
+              "why": "the text is in no slot; put it into a meta label"
+            }
+          },
+          {
+            "id": "i6",
+            "gate": "content",
+            "dimension": "content (optional): body",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: body (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set proseCount=1",
+              "why": "the copy is in slot prose.0"
+            }
+          },
+          {
+            "id": "i7",
+            "dimension": "classical: alignment",
+            "blocking": false,
+            "region": null,
+            "evidence": "0% of text blocks share an edge or axis",
+            "impact": [
+              "craft"
+            ],
+            "fix": {
+              "command": "refine --set gridStrength=2 --set align=lr",
+              "why": "stronger grid and one alignment"
+            }
+          },
+          {
+            "id": "i8",
+            "dimension": "classical: priority order",
+            "blocking": false,
+            "region": null,
+            "evidence": "required fields drawn out of priority order (5.7/10 pairs in order): title 192px, date 11.4px, date 11.4px, venue 11.4px, speakers 40.8px, speakers 40.8px, speakers 40.8px",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "another structure may place the priority fields larger"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/cn-design-talk/06-zh-song-edit-B1OP5LG5-2.json",
+        "png": "/workspace/poster-printer-cli/demo/cn-design-talk/06-zh-song-edit-B1OP5LG5-2.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 96090,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 30.98
+        }
+      }
+    }
+  ],
+  "analysis": {
+    "language": {
+      "overall": "zh",
+      "title": "zh",
+      "cjkShare": 0.98,
+      "why": "language given as zh"
+    },
+    "hierarchy": [
+      {
+        "key": "title",
+        "tier": "hero",
+        "importance": 1
+      },
+      {
+        "key": "date",
+        "tier": "secondary",
+        "importance": 0.91
+      },
+      {
+        "key": "venue",
+        "tier": "secondary",
+        "importance": 0.87
+      },
+      {
+        "key": "speakers",
+        "tier": "secondary",
+        "importance": 0.83
+      },
+      {
+        "key": "subtitle",
+        "tier": "secondary",
+        "importance": 0.79
+      },
+      {
+        "key": "city",
+        "tier": "tertiary",
+        "importance": 0.35
+      },
+      {
+        "key": "price",
+        "tier": "tertiary",
+        "importance": 0.35
+      },
+      {
+        "key": "body",
+        "tier": "tertiary",
+        "importance": 0.32
+      },
+      {
+        "key": "edition",
+        "tier": "tertiary",
+        "importance": 0.32
+      },
+      {
+        "key": "organizers",
+        "tier": "tertiary",
+        "importance": 0.3
+      },
+      {
+        "key": "url",
+        "tier": "tertiary",
+        "importance": 0.25
+      }
+    ],
+    "list": {
+      "kind": "speakers",
+      "items": 3
+    }
+  },
+  "reasons": [
+    {
+      "field": "density",
+      "value": "airy",
+      "why": "given"
+    },
+    {
+      "field": "language",
+      "value": "zh",
+      "why": "language given as zh"
+    },
+    {
+      "field": "hierarchy",
+      "value": "hero:title > secondary:date > secondary:venue > secondary:speakers > secondary:subtitle > tertiary:city > tertiary:price > tertiary:body > tertiary:edition > tertiary:organizers > tertiary:url",
+      "why": "importance = field base + purpose boost − length penalty"
+    },
+    {
+      "field": "texts.headline",
+      "value": "留白之后",
+      "why": "the title is the hero field"
+    },
+    {
+      "field": "texts.sub",
+      "value": "当代中文字体设计的六个问题",
+      "why": "subtitle is the strongest secondary line"
+    },
+    {
+      "field": "texts.note",
+      "value": "11月21日 周六 19:30\n衡山路 12 号 · 二楼讲堂 · 上海",
+      "why": "caption block: when + where (the facts people look for after the title)"
+    },
+    {
+      "field": "texts.groups",
+      "value": "林知远 / 周沐 / 陈一禾",
+      "why": "3 speaker(s) → speaker list; 3 of 3 items fill the small groups"
+    },
+    {
+      "field": "texts.prose",
+      "value": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+      "why": "body copy / slogan go to the prose blocks"
+    },
+    {
+      "field": "texts.meta",
+      "value": "2026.11.21 | 19:30 | 衡山路 12 号 · 二楼讲堂 | 林知远 | 周沐 | 陈一禾 | 上海 | 免费 · 需预约",
+      "why": "short facts become the meta labels (date, time, venue, price, url, organizers)"
+    },
+    {
+      "field": "texts.facts",
+      "value": {
+        "date": {
+          "y": 2026,
+          "m": 11,
+          "d": 21
+        },
+        "year": "2026",
+        "issue": "第07期",
+        "numeral": "21",
+        "signature": "",
+        "masthead": "留白之后",
+        "sticker": [
+          "免费",
+          "11.21"
+        ],
+        "times": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "values": [
+          "01",
+          "02",
+          "03",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "why": "real year / edition / date / numerals replace the invented \"NO. 12\", years, calendar days and index times"
+    },
+    {
+      "field": "titleScale",
+      "value": 112,
+      "why": "title ≈ 4 em wide → 130, 4 secondary fields compete → −8, airy / minimal → −10 (multiplied by the style's own title scale)"
+    },
+    {
+      "field": "smallGroups",
+      "value": 3,
+      "why": "show the speakers (3 items)"
+    },
+    {
+      "field": "metaCount",
+      "value": 6,
+      "why": "8 real meta labels, density airy, at least the 6 required (priority) facts"
+    },
+    {
+      "field": "proseCount",
+      "value": 1,
+      "why": "1 prose blocks in the content"
+    },
+    {
+      "field": "smallScale",
+      "value": 100,
+      "why": "copy load medium"
+    },
+    {
+      "field": "whitespace/blockBudget/decorBudget",
+      "value": [
+        78,
+        6,
+        1
+      ],
+      "why": "density airy"
+    },
+    {
+      "field": "imageCount/typeOnlyShare/imageShare",
+      "value": [
+        1,
+        15,
+        55
+      ],
+      "why": "imagery accent"
+    },
+    {
+      "field": "bgPref",
+      "value": "light",
+      "why": "color.background / lightness"
+    },
+    {
+      "field": "plan",
+      "value": {
+        "tone": "light",
+        "script": false,
+        "material": "none"
+      },
+      "why": "the plan normally rolls tone / script lettering / torn-stamp material / type-only per draw; the brief fixes them"
+    }
+  ],
+  "warnings": [],
+  "fonts": {
+    "fallback_subsets": [
+      {
+        "family": "Noto Sans SC",
+        "chars": "U+6C90"
+      },
+      {
+        "family": "Noto Serif SC",
+        "chars": "U+6C90"
+      },
+      {
+        "family": "Source Han Sans CN",
+        "chars": "U+6C90"
+      },
+      {
+        "family": "Source Han Sans CN",
+        "chars": "U+6C90"
+      },
+      {
+        "family": "Source Han Sans CN",
+        "chars": "U+6C90"
+      },
+      {
+        "family": "Source Han Serif CN",
+        "chars": "U+6C90"
+      },
+      {
+        "family": "Source Han Serif CN",
+        "chars": "U+6C90"
+      },
+      {
+        "family": "Source Han Serif CN",
+        "chars": "U+6C90"
+      }
+    ],
+    "unresolved": {},
+    "note": "fallback glyphs are not in the web app's fonts: those characters render with the app's fallback face after import"
+  },
+  "sheet": "/workspace/poster-printer-cli/demo/cn-design-talk/sheet.jpg"
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "poster-printer/brief.v1",
+  "purpose": "talk",
+  "context": {
+    "use": "editorial",
+    "audience": "designers, type enthusiasts and design students in Shanghai",
+    "display": {
+      "kind": "print",
+      "print_size": "A2",
+      "viewing_distance_m": 1.0
+    },
+    "priority": [
+      "title",
+      "date",
+      "venue",
+      "speakers",
+      "subtitle"
+    ]
+  },
+  "content": {
+    "title": "留白之后",
+    "subtitle": "当代中文字体设计的六个问题",
+    "date": "2026-11-21T19:30",
+    "venue": "衡山路 12 号 · 二楼讲堂",
+    "city": "上海",
+    "speakers": [
+      {
+        "name": "林知远",
+        "role": "字体设计师"
+      },
+      {
+        "name": "周沐",
+        "role": "书籍设计师"
+      },
+      {
+        "name": "陈一禾",
+        "role": "主持"
+      }
+    ],
+    "organizers": [
+      "纸上工作室"
+    ],
+    "price": "免费 · 需预约",
+    "url": "paperworks.example/talk",
+    "edition": "第07期",
+    "body": "从宋体的骨架到黑体的呼吸，两位设计师谈一个字如何在页面上站稳。",
+    "language": "zh"
+  },
+  "style": {
+    "mood": [
+      "calm",
+      "literary",
+      "editorial"
+    ],
+    "density": "airy",
+    "typography": {
+      "voice": "serif"
+    },
+    "imagery": {
+      "use": "accent",
+      "subject": [
+        "still",
+        "object",
+        "architecture"
+      ]
+    },
+    "color": {
+      "background": "light",
+      "temperature": "warm",
+      "chroma": "muted"
+    }
+  },
+  "format": {
+    "ratio": "3:4",
+    "count": 6,
+    "min_score": 6
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "poster-printer/brief.v1",
+  "purpose": "exhibition",
+  "context": {
+    "use": "art",
+    "audience": "gallery visitors and photography readers",
+    "display": {
+      "kind": "print",
+      "print_size": "A1",
+      "viewing_distance_m": 1.5
+    },
+    "priority": [
+      "title",
+      "date",
+      "venue",
+      "subtitle"
+    ]
+  },
+  "content": {
+    "title": "Low Tide",
+    "subtitle": "Photographs by Mara Ellison",
+    "date": "2026-10-30",
+    "date_end": "2026-12-14",
+    "venue": "Gallery Kōen",
+    "address": "3-8-2 Kiyosumi, Koto-ku",
+    "city": "Tokyo",
+    "organizers": [
+      "Gallery Kōen"
+    ],
+    "body": "Thirty-two photographs of the Ariake coast, taken in the hour when the sea withdraws.",
+    "price": "Free admission",
+    "url": "galleryko.example/lowtide",
+    "language": "en"
+  },
+  "style": {
+    "mood": [
+      "calm",
+      "minimal",
+      "elegant"
+    ],
+    "density": "airy",
+    "imagery": {
+      "use": "hero",
+      "subject": [
+        "landscape",
+        "nature"
+      ]
+    },
+    "color": {
+      "background": "light",
+      "chroma": "muted"
+    },
+    "typography": {
+      "voice": "serif"
+    }
+  },
+  "format": {
+    "ratio": "3:4",
+    "count": 6,
+    "min_score": 6
+  }
+}

@@ -1,0 +1,556 @@
+[
+ {
+  "name": "01-zh-cold-hei-3x4",
+  "style": "zh-cold-hei",
+  "ratio": "3:4",
+  "seed": "SHOW0",
+  "scale": 0.75
+ },
+ {
+  "name": "02-zh-song-edit-9x16",
+  "style": "zh-song-edit",
+  "ratio": "9:16",
+  "seed": "SHOW1",
+  "scale": 0.75
+ },
+ {
+  "name": "03-zh-thin-air-1x1",
+  "style": "zh-thin-air",
+  "ratio": "1:1",
+  "seed": "SHOW2",
+  "scale": 0.75
+ },
+ {
+  "name": "04-zh-wenkai-note-4x3",
+  "style": "zh-wenkai-note",
+  "ratio": "4:3",
+  "seed": "SHOW3",
+  "scale": 0.75
+ },
+ {
+  "name": "05-zh-smiley-16x9",
+  "style": "zh-smiley",
+  "ratio": "16:9",
+  "seed": "SHOW4",
+  "scale": 0.75
+ },
+ {
+  "name": "06-zh-brush-title-3x4",
+  "style": "zh-brush-title",
+  "ratio": "3:4",
+  "seed": "SHOW5",
+  "scale": 0.75
+ },
+ {
+  "name": "07-zh-xiaowei-3x4",
+  "style": "zh-xiaowei",
+  "ratio": "3:4",
+  "seed": "SHOW7",
+  "scale": 0.75
+ },
+ {
+  "name": "08-zh-huangyou-3x4",
+  "style": "zh-huangyou",
+  "ratio": "3:4",
+  "seed": "SHOW8",
+  "scale": 0.75
+ },
+ {
+  "name": "09-zh-heavy-song-1x1",
+  "style": "zh-heavy-song",
+  "ratio": "1:1",
+  "seed": "SHOW10",
+  "scale": 0.75
+ },
+ {
+  "name": "10-zh-heavy-hei-4x3",
+  "style": "zh-heavy-hei",
+  "ratio": "4:3",
+  "seed": "SHOW11",
+  "scale": 0.75
+ },
+ {
+  "name": "11-zh-longcang-16x9",
+  "style": "zh-longcang",
+  "ratio": "16:9",
+  "seed": "SHOW12",
+  "scale": 0.75
+ },
+ {
+  "name": "12-zh-wild-grass-3x4",
+  "style": "zh-wild-grass",
+  "ratio": "3:4",
+  "seed": "SHOW13",
+  "scale": 0.75
+ },
+ {
+  "name": "13-zh-mono-modern-9x16",
+  "style": "zh-mono-modern",
+  "ratio": "9:16",
+  "seed": "SHOW17",
+  "scale": 0.75
+ },
+ {
+  "name": "14-zh-tea-journal-16x9",
+  "style": "zh-tea-journal",
+  "ratio": "16:9",
+  "seed": "SHOW20",
+  "scale": 0.75
+ },
+ {
+  "name": "15-zh-stone-21x9",
+  "style": "zh-stone",
+  "ratio": "21:9",
+  "seed": "SHOW22",
+  "scale": 0.75
+ },
+ {
+  "name": "16-zh-round-geo-3x4",
+  "style": "zh-round-geo",
+  "ratio": "3:4",
+  "seed": "SHOW23",
+  "scale": 0.75
+ },
+ {
+  "name": "17-zh-retro-print-3x4",
+  "style": "zh-retro-print",
+  "ratio": "3:4",
+  "seed": "SHOW24",
+  "scale": 0.75
+ },
+ {
+  "name": "18-zh-colossal-9x16",
+  "style": "zh-colossal",
+  "ratio": "9:16",
+  "seed": "SHOW25",
+  "scale": 0.75
+ },
+ {
+  "name": "19-zh-bilingual-1x1",
+  "style": "zh-bilingual",
+  "ratio": "1:1",
+  "seed": "SHOW26",
+  "scale": 0.75
+ },
+ {
+  "name": "20-zh-clash-4x3",
+  "style": "zh-clash",
+  "ratio": "4:3",
+  "seed": "SHOW27",
+  "scale": 0.75
+ },
+ {
+  "name": "21-zh-layer-16x9",
+  "style": "zh-layer",
+  "ratio": "16:9",
+  "seed": "SHOW28",
+  "scale": 0.75
+ },
+ {
+  "name": "22-zh-torn-3x4",
+  "style": "zh-torn",
+  "ratio": "3:4",
+  "seed": "SHOW29",
+  "scale": 0.75
+ },
+ {
+  "name": "23-neue-grid-21x9",
+  "style": "neue-grid",
+  "ratio": "21:9",
+  "seed": "SHOW30",
+  "scale": 0.75
+ },
+ {
+  "name": "24-poster-gothic-3x4",
+  "style": "poster-gothic",
+  "ratio": "3:4",
+  "seed": "SHOW32",
+  "scale": 0.75
+ },
+ {
+  "name": "25-mono-lab-1x1",
+  "style": "mono-lab",
+  "ratio": "1:1",
+  "seed": "SHOW34",
+  "scale": 0.75
+ },
+ {
+  "name": "26-garamond-quiet-4x3",
+  "style": "garamond-quiet",
+  "ratio": "4:3",
+  "seed": "SHOW35",
+  "scale": 0.75
+ },
+ {
+  "name": "27-condensed-signal-16x9",
+  "style": "condensed-signal",
+  "ratio": "16:9",
+  "seed": "SHOW36",
+  "scale": 0.75
+ },
+ {
+  "name": "28-soft-serif-21x9",
+  "style": "soft-serif",
+  "ratio": "21:9",
+  "seed": "SHOW38",
+  "scale": 0.75
+ },
+ {
+  "name": "29-editorial-play-3x4",
+  "style": "editorial-play",
+  "ratio": "3:4",
+  "seed": "SHOW39",
+  "scale": 0.75
+ },
+ {
+  "name": "30-instrument-1x1",
+  "style": "instrument",
+  "ratio": "1:1",
+  "seed": "SHOW42",
+  "scale": 0.75
+ },
+ {
+  "name": "31-stone-roman-4x3",
+  "style": "stone-roman",
+  "ratio": "4:3",
+  "seed": "SHOW43",
+  "scale": 0.75
+ },
+ {
+  "name": "32-wide-future-16x9",
+  "style": "wide-future",
+  "ratio": "16:9",
+  "seed": "SHOW44",
+  "scale": 0.75
+ },
+ {
+  "name": "33-typewriter-memo-3x4",
+  "style": "typewriter-memo",
+  "ratio": "3:4",
+  "seed": "SHOW45",
+  "scale": 0.75
+ },
+ {
+  "name": "34-sporting-16x9",
+  "style": "sporting",
+  "ratio": "16:9",
+  "seed": "SHOW52",
+  "scale": 0.75
+ },
+ {
+  "name": "35-warm-serif-21x9",
+  "style": "warm-serif",
+  "ratio": "21:9",
+  "seed": "SHOW54",
+  "scale": 0.75
+ },
+ {
+  "name": "36-avant-3x4",
+  "style": "avant",
+  "ratio": "3:4",
+  "seed": "SHOW56",
+  "scale": 0.75
+ },
+ {
+  "name": "37-spartan-9x16",
+  "style": "spartan",
+  "ratio": "9:16",
+  "seed": "SHOW57",
+  "scale": 0.75
+ },
+ {
+  "name": "38-fat-face-1x1",
+  "style": "fat-face",
+  "ratio": "1:1",
+  "seed": "SHOW58",
+  "scale": 0.75
+ },
+ {
+  "name": "39-plex-corporate-4x3",
+  "style": "plex-corporate",
+  "ratio": "4:3",
+  "seed": "SHOW59",
+  "scale": 0.75
+ },
+ {
+  "name": "40-outline-wide-16x9",
+  "style": "outline-wide",
+  "ratio": "16:9",
+  "seed": "SHOW60",
+  "scale": 0.75
+ },
+ {
+  "name": "41-mode-brushImage-neue-grid-3x4",
+  "style": "neue-grid",
+  "ratio": "3:4",
+  "seed": "MODE0",
+  "modes": [
+   "brushImage"
+  ],
+  "scale": 0.75
+ },
+ {
+  "name": "42-mode-bandMask-zh-heavy-hei-3x4",
+  "style": "zh-heavy-hei",
+  "ratio": "3:4",
+  "seed": "MODE1",
+  "modes": [
+   "bandMask"
+  ],
+  "scale": 0.75
+ },
+ {
+  "name": "43-mode-brushMask-didone-salon-4x3",
+  "style": "didone-salon",
+  "ratio": "4:3",
+  "seed": "MODE2",
+  "modes": [
+   "brushMask"
+  ],
+  "scale": 0.75
+ },
+ {
+  "name": "44-mode-card-zh-cold-hei-9x16",
+  "style": "zh-cold-hei",
+  "ratio": "9:16",
+  "seed": "MODE3",
+  "modes": [
+   "card"
+  ],
+  "scale": 0.75
+ },
+ {
+  "name": "45-mode-clash-poster-gothic-1x1",
+  "style": "poster-gothic",
+  "ratio": "1:1",
+  "seed": "MODE4",
+  "modes": [
+   "clash"
+  ],
+  "scale": 0.75
+ },
+ {
+  "name": "46-mode-experimental-grotesk-black-3x4",
+  "style": "grotesk-black",
+  "ratio": "3:4",
+  "seed": "MODE5",
+  "modes": [
+   "experimental"
+  ],
+  "scale": 0.75
+ },
+ {
+  "name": "47-mode-wada-zh-song-edit-3x4",
+  "style": "zh-song-edit",
+  "ratio": "3:4",
+  "seed": "MODE6",
+  "modes": [
+   "wada"
+  ],
+  "scale": 0.75
+ },
+ {
+  "name": "48-mode-layered-zh-layer-3x4",
+  "style": "zh-layer",
+  "ratio": "3:4",
+  "seed": "MODE7",
+  "modes": [
+   "layered"
+  ],
+  "scale": 0.75
+ },
+ {
+  "name": "49-sidebar-colophon-3x4",
+  "style": "neue-grid",
+  "ratio": "3:4",
+  "seed": "SHOWP0",
+  "scale": 0.75,
+  "comp": "split",
+  "params": {
+   "sidebarTpl": "colophon"
+  }
+ },
+ {
+  "name": "50-sidebar-timeline-3x4",
+  "style": "zh-song-edit",
+  "ratio": "3:4",
+  "seed": "SHOWP1",
+  "scale": 0.75,
+  "comp": "swiss",
+  "params": {
+   "sidebarTpl": "timeline"
+  }
+ },
+ {
+  "name": "51-sidebar-data-header-4x3",
+  "style": "grotesk-black",
+  "ratio": "4:3",
+  "seed": "SHOWP2",
+  "scale": 0.75,
+  "comp": "centered",
+  "params": {
+   "sidebarTpl": "data.header"
+  }
+ },
+ {
+  "name": "52-sidebar-tags-1x1",
+  "style": "zh-thin-air",
+  "ratio": "1:1",
+  "seed": "SHOWP3",
+  "scale": 0.75,
+  "comp": "split",
+  "params": {
+   "sidebarTpl": "tags"
+  }
+ },
+ {
+  "name": "53-sidebar-ruler-3x4",
+  "style": "didone-salon",
+  "ratio": "3:4",
+  "seed": "SHOWP4",
+  "scale": 0.75,
+  "comp": "fan",
+  "params": {
+   "sidebarTpl": "ruler"
+  }
+ },
+ {
+  "name": "54-sidebar-center-stack-16x9",
+  "style": "zh-wenkai-note",
+  "ratio": "16:9",
+  "seed": "SHOWP5",
+  "scale": 0.75,
+  "comp": "bands",
+  "params": {
+   "sidebarTpl": "center.stack"
+  }
+ },
+ {
+  "name": "55-parts-ticket-stamp-3x4",
+  "style": "poster-gothic",
+  "ratio": "3:4",
+  "seed": "SHOWP6",
+  "scale": 0.75,
+  "comp": "partition",
+  "params": {},
+  "slots": [
+   {
+    "type": "ticket",
+    "scale": 1.1,
+    "color": "auto"
+   },
+   {
+    "type": "stamp",
+    "scale": 1.0,
+    "color": "accent",
+    "rot": -12
+   }
+  ]
+ },
+ {
+  "name": "56-parts-date-barcode-9x16",
+  "style": "zh-smiley",
+  "ratio": "9:16",
+  "seed": "SHOWP7",
+  "scale": 0.75,
+  "comp": "swiss",
+  "params": {},
+  "slots": [
+   {
+    "type": "date",
+    "scale": 1.0,
+    "color": "auto"
+   },
+   {
+    "type": "barcode",
+    "scale": 0.9,
+    "color": "ink"
+   }
+  ]
+ },
+ {
+  "name": "57-parts-star-tag-1x1",
+  "style": "grotesk-black",
+  "ratio": "1:1",
+  "seed": "SHOWP8",
+  "scale": 0.75,
+  "comp": "checker",
+  "params": {},
+  "slots": [
+   {
+    "type": "star",
+    "scale": 1.2,
+    "color": "accent",
+    "rot": 10
+   },
+   {
+    "type": "tag",
+    "scale": 1.0,
+    "color": "auto"
+   }
+  ]
+ },
+ {
+  "name": "58-parts-chips-caption-4x3",
+  "style": "neue-grid",
+  "ratio": "4:3",
+  "seed": "SHOWP9",
+  "scale": 0.75,
+  "comp": "split",
+  "params": {},
+  "slots": [
+   {
+    "type": "chips",
+    "scale": 1.0,
+    "color": "auto"
+   },
+   {
+    "type": "caption",
+    "scale": 1.0,
+    "color": "plate"
+   }
+  ]
+ },
+ {
+  "name": "59-parts-signature-grid-16x9",
+  "style": "didone-salon",
+  "ratio": "16:9",
+  "seed": "SHOWP10",
+  "scale": 0.75,
+  "comp": "centered",
+  "params": {},
+  "slots": [
+   {
+    "type": "signature",
+    "scale": 1.0,
+    "color": "auto"
+   },
+   {
+    "type": "grid",
+    "scale": 1.0,
+    "color": "ink"
+   }
+  ]
+ },
+ {
+  "name": "60-parts-index-arrow-21x9",
+  "style": "zh-heavy-song",
+  "ratio": "21:9",
+  "seed": "SHOWP11",
+  "scale": 0.75,
+  "comp": "giant",
+  "params": {},
+  "slots": [
+   {
+    "type": "index",
+    "scale": 0.9,
+    "color": "accent"
+   },
+   {
+    "type": "arrow",
+    "scale": 1.0,
+    "color": "auto"
+   }
+  ]
+ }
+]

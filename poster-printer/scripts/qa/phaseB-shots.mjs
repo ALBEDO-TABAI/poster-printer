@@ -1,0 +1,36 @@
+// Phase 13 (phase B) key-state screenshots → test-results/ui/phaseB_*.png
+import { chromium } from 'playwright';
+const URL = process.env.APP_URL || 'http://127.0.0.1:5180/';
+const OUT = 'test-results/ui';
+const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox'] });
+const page = await browser.newPage({ viewport: { width: 1512, height: 945 }, deviceScaleFactor: 1 });
+const errs = []; page.on('pageerror', (e) => errs.push(e.message));
+await page.goto(URL + '?fresh');
+await page.waitForFunction(() => { const s = window.__rea?.getState(); return s?.ready && s.scene && s.presetImages.length > 0; }, null, { timeout: 90000 });
+const w = (ms) => page.waitForTimeout(ms);
+const shot = async (n) => { await w(700); await page.screenshot({ path: `${OUT}/phaseB_${n}.png` }); console.log('shot', n); };
+await page.keyboard.press('a'); await w(500);
+await page.click('#adv-nav [data-intent="color"]'); await w(300);
+await shot('1_advanced_color');
+// adjust this poster: bgPref dark
+await page.click('#adv-main [data-k="bgPref"] button:has-text("深"), #adv-main [data-k="bgPref"] [data-v="dark"]').catch(async () => { await page.evaluate(() => window.__rea.getState().setParam('bgPref', 'dark')); });
+await w(400);
+await page.hover('#adv-main [data-pk="bgPref"]'); await shot('2_adjust_bgPref_dark');
+await page.click('#adv-main [data-pk="bgPref"] [data-act="pin"]'); await w(200);
+await page.hover('#adv-main [data-pk="contrast"]'); await page.click('#adv-main [data-pk="contrast"] [data-act="pin"]');
+await page.hover('#adv-main [data-pk="bgPref"]'); await page.click('#adv-main [data-pk="bgPref"] [data-act="help"]');
+await shot('3_pins_chips');
+await page.keyboard.press('Escape'); await page.mouse.click(5, 400); await page.keyboard.press('Space'); await w(900);
+await shot('4_draw_with_pins');
+await page.keyboard.press('a'); await w(400);
+await page.click('#adv-nav [data-intent="details"]'); await w(300);
+await page.click('#adv-main [data-g="classic.details"]').catch(() => {}); await w(300);
+await page.evaluate(() => window.__rea.getState().setParam('curveCount', 5)); await w(500);
+await shot('5_classic_no_effect');
+await page.click('#adv-nav [data-intent="engine"]'); await w(300);
+await page.evaluate(() => window.__rea.getState().setParam('monoShare', 60)); await w(400);
+await shot('6_draw_odds');
+await page.keyboard.press('e'); await w(500);
+await shot('7_export_prefs');
+console.log('errors', errs.length, errs.slice(0, 3));
+await browser.close();

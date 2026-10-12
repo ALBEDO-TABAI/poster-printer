@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poster Printer</title>
+    <meta name="description" content="Poster Printer — rule-based generative poster layouts." />
+    <link rel="preload" href="/ui-fonts/Inter.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <filter id="warp" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+        <feTurbulence id="warp-turb" type="fractalNoise" baseFrequency="0.006 0.012" numOctaves="2" seed="3" result="n" />
+        <feDisplacementMap id="warp-dm" in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

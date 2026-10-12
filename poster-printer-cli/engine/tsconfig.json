@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "module": "ESNext", "moduleResolution": "bundler", "strict": true, "noEmit": true, "skipLibCheck": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"], "types": ["node"], "allowImportingTsExtensions": false, "noImplicitAny": false,
+    "paths": { "@rea/*": ["./../../rea-poster/src/*"] }, "typeRoots": ["../../rea-poster/node_modules/@types"]
+  },
+  "include": ["src"]
+}

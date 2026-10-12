@@ -1,0 +1,123 @@
+/* ============================================================
+   Poster Printer — design tokens
+   Light is the default; [data-theme="dark"] overrides.
+   ============================================================ */
+/* UI faces use namespaced family names (PP *) so they never collide with the poster fonts
+   the engine loads and measures (Inter, Geist Mono, Instrument Serif are poster fonts too). */
+@font-face { font-family: 'PP Sans'; src: url(/ui-fonts/Inter.woff2) format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'PP Display'; src: url(/ui-fonts/InterTight.woff2) format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'PP Mono'; src: url(/ui-fonts/GeistMono.woff2) format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'PP Serif'; src: url(/ui-fonts/InstrumentSerif.woff2) format('woff2'); font-style: normal; font-display: swap; }
+@font-face { font-family: 'PP Serif'; src: url(/ui-fonts/InstrumentSerifItalic.woff2) format('woff2'); font-style: italic; font-display: swap; }
+@font-face { font-family: 'Noto Sans SC UI'; src: url(/ui-fonts/NotoSansSC-ui.woff2) format('woff2'); font-weight: 100 900; font-display: swap; }
+
+:root {
+  /* ---- type ---- */
+  --font-ui: 'PP Sans', 'Noto Sans SC UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-display: 'PP Display', 'Noto Sans SC UI', system-ui, sans-serif;
+  --font-mono: 'PP Mono', ui-monospace, 'Noto Sans SC UI', monospace;
+  --font-serif: 'PP Serif', 'Noto Sans SC UI', Georgia, serif;
+  --fs-2xs: 10px; --fs-xs: 11px; --fs-sm: 12px; --fs-md: 13px; --fs-lg: 15px; --fs-xl: 17px; --fs-2xl: 22px; --fs-3xl: 28px; --fs-4xl: 40px;
+  --lh-tight: 1.15; --lh: 1.45;
+  --tracking-tight: -0.02em; --tracking-caps: 0.06em;
+
+  /* ---- space (4pt) ---- */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px; --s10: 40px; --s14: 56px;
+
+  /* ---- radii (concentric: inner = outer − padding) ---- */
+  --r-xs: 6px; --r-sm: 9px; --r-md: 12px; --r-lg: 16px; --r-xl: 22px; --r-2xl: 28px; --r-pill: 999px;
+
+  /* ---- motion ---- */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-liquid: cubic-bezier(.3, .7, .2, 1);
+  --d-1: 120ms; --d-2: 200ms; --d-3: 320ms; --d-4: 480ms; --d-5: 640ms;
+
+  /* ---- palette: light ---- */
+  --stage: #ebebee;
+  --stage-2: #e3e3e8;
+  --ink: #0b0b0e;
+  --ink-2: rgba(11, 11, 14, .64);
+  --ink-3: rgba(11, 11, 14, .42);
+  --ink-4: rgba(11, 11, 14, .22);
+  --hair: rgba(11, 11, 14, .08);
+  --hair-2: rgba(11, 11, 14, .14);
+  --fill: rgba(11, 11, 14, .045);
+  --fill-2: rgba(11, 11, 14, .08);
+  --fill-3: rgba(11, 11, 14, .13);
+  --accent: #ff5a1f;           /* "Print signal" — the one accent */
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(255, 90, 31, .14);
+  --ok: #1fae6b; --warn: #e2a400; --bad: #e5484d;
+  --inverse: #0b0b0e; --on-inverse: #fafafa;
+
+  /* ---- glass material ---- */
+  --glass-tint: 252 252 253;     /* rgb triplet */
+  --glass-alpha: .52;
+  --glass-alpha-strong: .62;
+  --glass-alpha-clear: .3;
+  --glass-blur: 22px;
+  --glass-sat: 185%;
+  --glass-rim-hi: rgba(255, 255, 255, .95);
+  --glass-rim-lo: rgba(255, 255, 255, .18);
+  --glass-edge: rgba(11, 11, 14, .07);
+  --glass-inner-hi: rgba(255, 255, 255, .75);
+  --glass-inner-lo: rgba(11, 11, 14, .04);
+  --glass-caustic: rgba(255, 255, 255, .55);
+  --shadow-1: 0 1px 2px rgba(10, 10, 20, .06), 0 2px 8px -2px rgba(10, 10, 20, .06);
+  --shadow-2: 0 2px 6px rgba(10, 10, 20, .05), 0 12px 32px -12px rgba(10, 10, 30, .18);
+  --shadow-3: 0 4px 12px rgba(10, 10, 20, .06), 0 24px 64px -20px rgba(10, 10, 30, .28);
+  --shadow-4: 0 8px 24px rgba(10, 10, 20, .08), 0 48px 120px -32px rgba(10, 10, 30, .38);
+  --poster-shadow: 0 1px 1px rgba(0,0,0,.04), 0 6px 16px -6px rgba(10,10,30,.18), 0 40px 80px -30px rgba(10,10,30,.35);
+
+  /* adaptive: written by JS from the current poster */
+  --amb: 200 190 180;
+  --amb-alpha: .10;
+  --la: 135deg; /* specular light angle, follows pointer */
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --stage: #0b0b0d;
+  --stage-2: #111114;
+  --ink: #f4f4f6;
+  --ink-2: rgba(244, 244, 246, .66);
+  --ink-3: rgba(244, 244, 246, .42);
+  --ink-4: rgba(244, 244, 246, .2);
+  --hair: rgba(255, 255, 255, .08);
+  --hair-2: rgba(255, 255, 255, .14);
+  --fill: rgba(255, 255, 255, .05);
+  --fill-2: rgba(255, 255, 255, .085);
+  --fill-3: rgba(255, 255, 255, .13);
+  --accent: #ff6a2c;
+  --accent-soft: rgba(255, 106, 44, .18);
+  --inverse: #f4f4f6; --on-inverse: #0b0b0e;
+  --glass-tint: 28 28 32;
+  --glass-alpha: .5;
+  --glass-alpha-strong: .64;
+  --glass-alpha-clear: .3;
+  --glass-sat: 170%;
+  --glass-rim-hi: rgba(255, 255, 255, .42);
+  --glass-rim-lo: rgba(255, 255, 255, .04);
+  --glass-edge: rgba(0, 0, 0, .5);
+  --glass-inner-hi: rgba(255, 255, 255, .14);
+  --glass-inner-lo: rgba(0, 0, 0, .25);
+  --glass-caustic: rgba(255, 255, 255, .12);
+  --shadow-1: 0 1px 2px rgba(0,0,0,.4), 0 2px 8px -2px rgba(0,0,0,.4);
+  --shadow-2: 0 2px 6px rgba(0,0,0,.35), 0 12px 32px -12px rgba(0,0,0,.6);
+  --shadow-3: 0 4px 12px rgba(0,0,0,.4), 0 24px 64px -20px rgba(0,0,0,.7);
+  --shadow-4: 0 8px 24px rgba(0,0,0,.45), 0 48px 120px -32px rgba(0,0,0,.8);
+  --poster-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 10px 24px -8px rgba(0,0,0,.6), 0 50px 100px -30px rgba(0,0,0,.85);
+  --amb-alpha: .14;
+  color-scheme: dark;
+}
+
+/* Full CJK coverage for UI strings outside the prototype subset (same family/design, glyph fallback) */
+@font-face { font-family: 'UI CJK'; src: url(/fonts/noto-sans-sc-0.woff2) format('woff2'); font-weight: 100 900; font-display: swap; }
+:root {
+  --font-ui: 'PP Sans', 'Noto Sans SC UI', 'UI CJK', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-display: 'PP Display', 'Noto Sans SC UI', 'UI CJK', system-ui, sans-serif;
+  --font-mono: 'PP Mono', ui-monospace, 'Noto Sans SC UI', 'UI CJK', monospace;
+  --font-serif: 'PP Serif', 'Noto Sans SC UI', 'UI CJK', Georgia, serif;
+}

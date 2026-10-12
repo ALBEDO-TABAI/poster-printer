@@ -1,0 +1,5488 @@
+{
+  "backend": "chromium",
+  "parity": true,
+  "count": 6,
+  "minScore": 6,
+  "tries": 8,
+  "rejected": [],
+  "gate_failed": [
+    {
+      "name": "zh-huangyou-B3F3LVD-6",
+      "direction": "d6",
+      "taste": 7.569,
+      "comp": "giant",
+      "blocking_failures": [
+        "content: date",
+        "content: date (time)"
+      ]
+    },
+    {
+      "name": "sporting-B3F3LVD-3",
+      "direction": "d3",
+      "taste": 7.589,
+      "comp": "typo",
+      "blocking_failures": [
+        "content: date",
+        "content: date (time)",
+        "content: venue"
+      ]
+    }
+  ],
+  "posters": [
+    {
+      "rank": 1,
+      "name": "01-zh-smiley-B3F3LVD-4",
+      "direction": "d4",
+      "style": "zh-smiley",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "knockout",
+      "idea": "tension",
+      "grid": "ortho/stable 3×5",
+      "attempt": 0,
+      "salt": "#5",
+      "seeds": {
+        "layout": "B3F3LVD-4L",
+        "text": "B3F3LVD-4T",
+        "color": "B3F3LVD-4C~1",
+        "image": "B3F3LVD-4I#5"
+      },
+      "taste": 7.386,
+      "penalty": 0.08,
+      "score": 7.306,
+      "quality": 86,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "tone"
+        ],
+        "penalty": 0.08
+      },
+      "palette": {
+        "bg": "#3b0b2d",
+        "ink": "#5adb94",
+        "accent": "#2d8e5b"
+      },
+      "images": [
+        "city-object143875268"
+      ],
+      "fonts": [
+        "Space Grotesk",
+        "Smiley Sans"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-smiley: title is Chinese, mood bold+playful, density balanced",
+        "idea tension (baseline; bold → tension; music night → energy)",
+        "background dark: matched (#3b0b2d)",
+        "engine picked composition knockout / idea tension (taste 7.39 − penalty 0.08 = 7.31)"
+      ],
+      "ms": 1310,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.7052036092214663,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "夜航",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  60,
+                  1064,
+                  1080,
+                  464
+                ],
+                "size_px": 540,
+                "css_px": 380.8,
+                "slot": "headline"
+              },
+              {
+                "field": "title_alt",
+                "label": "title_alt",
+                "required": true,
+                "expected": "NIGHT FERRY",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  54,
+                  111,
+                  68
+                ],
+                "size_px": 36.3,
+                "css_px": 25.6,
+                "slot": "sub"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "Electronic & Ambient Live · 电子与氛围现场",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.12.05",
+                "status": "pass",
+                "rendered": "as \"2026.12.05\"",
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "九号仓库 Warehouse 9",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "杭州 Hangzhou",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "¥120 · 预售 ¥90",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "nightferry.example",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[0] 苔原 Tundra",
+                "required": false,
+                "expected": "苔原 Tundra",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  512,
+                  176,
+                  114
+                ],
+                "size_px": 54.4,
+                "css_px": 38.4,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "program",
+                "label": "program[0] time",
+                "required": false,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "program",
+                "label": "program[1] Soft Static",
+                "required": false,
+                "expected": "Soft Static",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  402,
+                  157,
+                  102
+                ],
+                "size_px": 54.4,
+                "css_px": 38.4,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "program",
+                "label": "program[1] time",
+                "required": false,
+                "expected": "21:00",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[2] 流明 Lumen",
+                "required": false,
+                "expected": "流明 Lumen",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[2] time",
+                "required": false,
+                "expected": "22:00",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[3] Harbor Choir",
+                "required": false,
+                "expected": "Harbor Choir",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[3] time",
+                "required": false,
+                "expected": "23:15",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[4] 小满 Xiaoman",
+                "required": false,
+                "expected": "小满 Xiaoman",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[4] time",
+                "required": false,
+                "expected": "00:30",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "hashtags",
+                "label": "hashtags[0]",
+                "required": false,
+                "expected": "夜航2026",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 380.8,
+                "min_css_px": 9,
+                "region": [
+                  60,
+                  1064,
+                  1080,
+                  464
+                ]
+              },
+              {
+                "label": "title_alt",
+                "status": "pass",
+                "css_px": 25.6,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  54,
+                  111,
+                  68
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "夜航",
+                "status": "pass",
+                "ratio": 8.56,
+                "typical": 8.56,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  60,
+                  1064,
+                  1080,
+                  464
+                ]
+              },
+              {
+                "text": "2026.12.05",
+                "status": "pass",
+                "ratio": 8.19,
+                "typical": 8.56,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  614,
+                  102,
+                  10
+                ]
+              },
+              {
+                "text": "2026.12",
+                "status": "pass",
+                "ratio": 8.56,
+                "typical": 8.56,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1075,
+                  614,
+                  71,
+                  10
+                ]
+              },
+              {
+                "text": "NIGHT FERRY",
+                "status": "pass",
+                "ratio": 9.43,
+                "typical": 9.43,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  54,
+                  111,
+                  68
+                ]
+              },
+              {
+                "text": "Electronic & Ambient Live · 电子与氛围现场\nSAT ",
+                "status": "pass",
+                "ratio": 9.43,
+                "typical": 9.43,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  156,
+                  296,
+                  118
+                ]
+              },
+              {
+                "text": "苔原 Tundra",
+                "status": "pass",
+                "ratio": 8.56,
+                "typical": 9.43,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  512,
+                  176,
+                  114
+                ]
+              },
+              {
+                "text": "Soft Static",
+                "status": "pass",
+                "ratio": 9.43,
+                "typical": 9.43,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  402,
+                  157,
+                  102
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "Space Grotesk",
+                "status": "pass"
+              },
+              {
+                "family": "Space Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Smiley Sans",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): program",
+          "content (optional): hashtags"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.386,
+            "taste": 7.386,
+            "gate_penalty": 0.08,
+            "score": 7.306,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 10,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 10,
+            "hierarchy": 10,
+            "basis": "near-miss edges 0; 5 text blocks, 4 sizes, 0 busy blocks, 0 collisions; 100% blocks aligned; focal ratio 9.9, priority order kept 10/10"
+          },
+          "expressive": {
+            "value": 7.5,
+            "tension": 7.5,
+            "idea": null,
+            "idea_assigned": {
+              "id": "tension",
+              "contrast": "none",
+              "frame": "eyes",
+              "brk": "bleed"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 9.9) + asymmetry (centroid offset 0.124); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 9.1,
+            "harmony": 8.5,
+            "palette_discipline": 10,
+            "tone_structure": 7.7,
+            "hero_separation": 10,
+            "basis": "harmony 0.855, 2 hue families, largest tone band 52%, headline ΔL 53"
+          },
+          "craft": {
+            "value": 9.9,
+            "engine_gates": 9.4,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.08, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 19 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.3; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.5; another structure may"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): program",
+            "blocking": false,
+            "region": null,
+            "evidence": "7 item(s) not shown: program[1] time; program[2] 流明 Lumen; program[2] time; program[3] Harbor Choir; program[3] time; program[4] 小满 Xiaoman; program[4] time (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.1.sub; another structure may"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): hashtags",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: hashtags[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/bilingual-music-night/01-zh-smiley-B3F3LVD-4.json",
+        "png": "/workspace/poster-printer-cli/demo/bilingual-music-night/01-zh-smiley-B3F3LVD-4.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 621716,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 77.55
+        }
+      }
+    },
+    {
+      "rank": 2,
+      "name": "02-zh-hk-mag-B3F3LVD-1",
+      "direction": "d1",
+      "style": "zh-hk-mag",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "hanzi",
+      "idea": "hanzi",
+      "grid": "ortho/stable 4×6",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "B3F3LVD-1L",
+        "text": "B3F3LVD-1T",
+        "color": "B3F3LVD-1C",
+        "image": "B3F3LVD-1I"
+      },
+      "taste": 7.774,
+      "penalty": 0.5,
+      "score": 7.274,
+      "quality": 96,
+      "gates": {
+        "fails": [],
+        "soft": [],
+        "penalty": 0
+      },
+      "palette": {
+        "bg": "#c56343",
+        "ink": "#160f0d",
+        "accent": "#002924"
+      },
+      "images": [
+        "city-urban95206524"
+      ],
+      "fonts": [
+        "Bodoni Moda",
+        "Noto Serif",
+        "Noto Sans SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-hk-mag: title is Chinese, mood bold, era 90s, density balanced, short Chinese title suits a strong CJK face",
+        "idea hanzi (short Chinese title (2 hanzi) → the hanzi itself becomes the picture) → composition hanzi",
+        "background dark: NOT matched after 4 colour re-rolls (−0.5) (#c56343)",
+        "engine picked composition hanzi / idea hanzi (taste 7.77 − penalty 0.5 = 7.27)"
+      ],
+      "ms": 2773,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.7052036092214663,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "夜航",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  72,
+                  73,
+                  72,
+                  143
+                ],
+                "size_px": 72,
+                "css_px": 50.8,
+                "slot": "headline"
+              },
+              {
+                "field": "title_alt",
+                "label": "title_alt",
+                "required": true,
+                "expected": "NIGHT FERRY",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  216,
+                  1310,
+                  130,
+                  70
+                ],
+                "size_px": 36.3,
+                "css_px": 25.6,
+                "slot": "sub"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "Electronic & Ambient Live · 电子与氛围现场",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.12.05",
+                "status": "pass",
+                "rendered": "as \"2026.12.05\"",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "九号仓库 Warehouse 9",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "杭州 Hangzhou",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "¥120 · 预售 ¥90",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "nightferry.example",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[0] 苔原 Tundra",
+                "required": false,
+                "expected": "苔原 Tundra",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[0] time",
+                "required": false,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "program",
+                "label": "program[1] Soft Static",
+                "required": false,
+                "expected": "Soft Static",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[1] time",
+                "required": false,
+                "expected": "21:00",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[2] 流明 Lumen",
+                "required": false,
+                "expected": "流明 Lumen",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[2] time",
+                "required": false,
+                "expected": "22:00",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[3] Harbor Choir",
+                "required": false,
+                "expected": "Harbor Choir",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[3] time",
+                "required": false,
+                "expected": "23:15",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[4] 小满 Xiaoman",
+                "required": false,
+                "expected": "小满 Xiaoman",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[4] time",
+                "required": false,
+                "expected": "00:30",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "hashtags",
+                "label": "hashtags[0]",
+                "required": false,
+                "expected": "夜航2026",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 50.8,
+                "min_css_px": 9,
+                "region": [
+                  72,
+                  73,
+                  72,
+                  143
+                ]
+              },
+              {
+                "label": "title_alt",
+                "status": "pass",
+                "css_px": 25.6,
+                "min_css_px": 9,
+                "region": [
+                  216,
+                  1310,
+                  130,
+                  70
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "航",
+                "status": "pass",
+                "ratio": 4.73,
+                "typical": 4.73,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  138,
+                  107,
+                  1235,
+                  1062
+                ]
+              },
+              {
+                "text": "夜\n航",
+                "status": "pass",
+                "ratio": 4.73,
+                "typical": 4.73,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  72,
+                  73,
+                  72,
+                  143
+                ]
+              },
+              {
+                "text": "夜\n航",
+                "status": "pass",
+                "ratio": 3.9,
+                "typical": 3.9,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  93,
+                  278,
+                  31,
+                  59
+                ]
+              },
+              {
+                "text": "NIGHT FERRY",
+                "status": "pass",
+                "ratio": 4.73,
+                "typical": 4.73,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  216,
+                  1310,
+                  130,
+                  70
+                ]
+              },
+              {
+                "text": "Electronic & Ambient Live · 电子与氛围现场\nSAT ",
+                "status": "pass",
+                "ratio": 4.73,
+                "typical": 4.73,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ]
+              },
+              {
+                "text": "2026.12",
+                "status": "pass",
+                "ratio": 4.73,
+                "typical": 4.73,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  216,
+                  73,
+                  59,
+                  11
+                ]
+              },
+              {
+                "text": "2026.12.05",
+                "status": "pass",
+                "ratio": 4.73,
+                "typical": 4.73,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1567,
+                  77,
+                  10
+                ]
+              },
+              {
+                "text": "2026.12",
+                "status": "pass",
+                "ratio": 4.73,
+                "typical": 4.73,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  337,
+                  1567,
+                  54,
+                  10
+                ]
+              },
+              {
+                "text": "20:00",
+                "status": "pass",
+                "ratio": 4.73,
+                "typical": 4.73,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  610,
+                  1567,
+                  41,
+                  10
+                ]
+              },
+              {
+                "text": "九号仓库 WAREHOUSE 9",
+                "status": "pass",
+                "ratio": 4.73,
+                "typical": 4.73,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  883,
+                  1565,
+                  176,
+                  12
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): program",
+          "content (optional): hashtags"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.774,
+            "taste": 7.774,
+            "gate_penalty": 0.5,
+            "score": 7.274,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 9.2,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 6.7,
+            "hierarchy": 10,
+            "basis": "near-miss edges 0; 4 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 67% blocks aligned; focal ratio 34, priority order kept 10/10"
+          },
+          "expressive": {
+            "value": 7.5,
+            "tension": 7.5,
+            "idea": null,
+            "idea_assigned": {
+              "id": "hanzi",
+              "contrast": "none",
+              "frame": "eyes",
+              "brk": "crop"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 34) + asymmetry (centroid offset 0.125); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 8.8,
+            "harmony": 7.8,
+            "palette_discipline": 10,
+            "tone_structure": 8.6,
+            "hero_separation": 8.7,
+            "basis": "harmony 0.784, 1 hue families, largest tone band 68%, headline ΔL 43"
+          },
+          "craft": {
+            "value": 10,
+            "engine_gates": 10,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 43.5 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.3; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.5; another structure may"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): program",
+            "blocking": false,
+            "region": null,
+            "evidence": "9 item(s) not shown: program[0] 苔原 Tundra; program[1] Soft Static; program[1] time; program[2] 流明 Lumen; program[2] time; program[3] Harbor Choir; program[3] time; program[4] 小满 Xiaoman; program[4] time (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.0.main; another structure may"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): hashtags",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: hashtags[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/bilingual-music-night/02-zh-hk-mag-B3F3LVD-1.json",
+        "png": "/workspace/poster-printer-cli/demo/bilingual-music-night/02-zh-hk-mag-B3F3LVD-1.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 129271,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 86.1
+        }
+      }
+    },
+    {
+      "rank": 3,
+      "name": "03-zh-hk-mag-B3F3LVD-5",
+      "direction": "d5",
+      "style": "zh-hk-mag",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "index",
+      "idea": "data",
+      "grid": "ortho/simple 2×4",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "B3F3LVD-5L",
+        "text": "B3F3LVD-5T",
+        "color": "B3F3LVD-5C",
+        "image": "B3F3LVD-5I"
+      },
+      "taste": 7.165,
+      "penalty": 0.08,
+      "score": 7.085,
+      "quality": 100,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "hue3"
+        ],
+        "penalty": 0.08
+      },
+      "palette": {
+        "bg": "#840a22",
+        "ink": "#fcef9c",
+        "accent": "#8fd9f5"
+      },
+      "images": [
+        "city-object143875268"
+      ],
+      "fonts": [
+        "Bodoni Moda",
+        "Noto Serif",
+        "Noto Sans SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-hk-mag: title is Chinese, mood bold, era 90s, density balanced, short Chinese title suits a strong CJK face",
+        "idea data (5-item timetable → an index / programme table shows it) → composition index",
+        "background dark: matched (#840a22)",
+        "engine picked composition index / idea data (taste 7.17 − penalty 0.08 = 7.08)"
+      ],
+      "ms": 2249,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.7052036092214663,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "夜航",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  126,
+                  386,
+                  180
+                ],
+                "size_px": 192,
+                "css_px": 135.4,
+                "slot": "headline"
+              },
+              {
+                "field": "title_alt",
+                "label": "title_alt",
+                "required": true,
+                "expected": "NIGHT FERRY",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  345,
+                  177,
+                  22
+                ],
+                "size_px": 24.2,
+                "css_px": 17.1,
+                "slot": "sub"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "Electronic & Ambient Live · 电子与氛围现场",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.12.05",
+                "status": "pass",
+                "rendered": "as \"2026.12.05\"",
+                "region": [
+                  54,
+                  54,
+                  73,
+                  13
+                ],
+                "size_px": 14.6,
+                "css_px": 10.3,
+                "slot": "meta.0"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  54,
+                  728,
+                  94,
+                  22
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.0.sub"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "九号仓库 Warehouse 9",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  980,
+                  52,
+                  166,
+                  14
+                ],
+                "size_px": 14.6,
+                "css_px": 10.3,
+                "slot": "meta.2"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "杭州 Hangzhou",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "¥120 · 预售 ¥90",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "nightferry.example",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[0] 苔原 Tundra",
+                "required": false,
+                "expected": "苔原 Tundra",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  727,
+                  235,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "program",
+                "label": "program[0] time",
+                "required": false,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  54,
+                  728,
+                  94,
+                  22
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.0.sub"
+              },
+              {
+                "field": "program",
+                "label": "program[1] Soft Static",
+                "required": false,
+                "expected": "Soft Static",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  894,
+                  194,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "program",
+                "label": "program[1] time",
+                "required": false,
+                "expected": "21:00",
+                "status": "pass",
+                "rendered": "as \"21:00\"",
+                "region": [
+                  54,
+                  895,
+                  94,
+                  22
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.1.sub"
+              },
+              {
+                "field": "program",
+                "label": "program[2] 流明 Lumen",
+                "required": false,
+                "expected": "流明 Lumen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  1061,
+                  232,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "program",
+                "label": "program[2] time",
+                "required": false,
+                "expected": "22:00",
+                "status": "pass",
+                "rendered": "as \"22:00\"",
+                "region": [
+                  54,
+                  1062,
+                  94,
+                  22
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.2.sub"
+              },
+              {
+                "field": "program",
+                "label": "program[3] Harbor Choir",
+                "required": false,
+                "expected": "Harbor Choir",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  1229,
+                  251,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.3.main"
+              },
+              {
+                "field": "program",
+                "label": "program[3] time",
+                "required": false,
+                "expected": "23:15",
+                "status": "pass",
+                "rendered": "as \"23:15\"",
+                "region": [
+                  54,
+                  1229,
+                  94,
+                  22
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.3.sub"
+              },
+              {
+                "field": "program",
+                "label": "program[4] 小满 Xiaoman",
+                "required": false,
+                "expected": "小满 Xiaoman",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  316,
+                  1396,
+                  270,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.4.main"
+              },
+              {
+                "field": "program",
+                "label": "program[4] time",
+                "required": false,
+                "expected": "00:30",
+                "status": "pass",
+                "rendered": "as \"00:30\"",
+                "region": [
+                  54,
+                  1396,
+                  94,
+                  22
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.4.sub"
+              },
+              {
+                "field": "hashtags",
+                "label": "hashtags[0]",
+                "required": false,
+                "expected": "夜航2026",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 135.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  126,
+                  386,
+                  180
+                ]
+              },
+              {
+                "label": "title_alt",
+                "status": "pass",
+                "css_px": 17.1,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  345,
+                  177,
+                  22
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 10.3,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  54,
+                  73,
+                  13
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 22,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  728,
+                  94,
+                  22
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 10.3,
+                "min_css_px": 9,
+                "region": [
+                  980,
+                  52,
+                  166,
+                  14
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "2026.12.05",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.65,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  54,
+                  73,
+                  13
+                ]
+              },
+              {
+                "text": "20:00\n小满 Xiaoman",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.65,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  549,
+                  52,
+                  102,
+                  37
+                ]
+              },
+              {
+                "text": "九号仓库 Warehouse 9",
+                "status": "pass",
+                "ratio": 8.77,
+                "typical": 8.77,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  980,
+                  52,
+                  166,
+                  14
+                ]
+              },
+              {
+                "text": "夜航",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.65,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  126,
+                  386,
+                  180
+                ]
+              },
+              {
+                "text": "NIGHT FERRY",
+                "status": "pass",
+                "ratio": 8.77,
+                "typical": 8.77,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  345,
+                  177,
+                  22
+                ]
+              },
+              {
+                "text": "20:00",
+                "status": "pass",
+                "ratio": 5.71,
+                "typical": 5.71,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  728,
+                  94,
+                  22
+                ]
+              },
+              {
+                "text": "苔原 Tundra",
+                "status": "pass",
+                "ratio": 8.77,
+                "typical": 8.77,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  316,
+                  727,
+                  235,
+                  38
+                ]
+              },
+              {
+                "text": "OPENING SET",
+                "status": "pass",
+                "ratio": 8.77,
+                "typical": 8.77,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1033,
+                  730,
+                  113,
+                  14
+                ]
+              },
+              {
+                "text": "21:00",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 8.77,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  895,
+                  94,
+                  22
+                ]
+              },
+              {
+                "text": "Soft Static",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.65,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  316,
+                  894,
+                  194,
+                  38
+                ]
+              },
+              {
+                "text": "22:00",
+                "status": "pass",
+                "ratio": 8.77,
+                "typical": 8.77,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1062,
+                  94,
+                  22
+                ]
+              },
+              {
+                "text": "流明 Lumen",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.65,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  316,
+                  1061,
+                  232,
+                  38
+                ]
+              },
+              {
+                "text": "LIVE A/V",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.65,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1075,
+                  1064,
+                  71,
+                  14
+                ]
+              },
+              {
+                "text": "23:15",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.65,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1229,
+                  94,
+                  22
+                ]
+              },
+              {
+                "text": "Harbor Choir",
+                "status": "pass",
+                "ratio": 8.77,
+                "typical": 8.77,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  316,
+                  1229,
+                  251,
+                  38
+                ]
+              },
+              {
+                "text": "00:30",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.65,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1396,
+                  94,
+                  22
+                ]
+              },
+              {
+                "text": "小满 Xiaoman",
+                "status": "pass",
+                "ratio": 8.77,
+                "typical": 8.77,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  316,
+                  1396,
+                  270,
+                  38
+                ]
+              },
+              {
+                "text": "CLOSING DJ SET",
+                "status": "pass",
+                "ratio": 8.77,
+                "typical": 8.77,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1007,
+                  1398,
+                  139,
+                  14
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): subtitle",
+          "content (optional): city",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): hashtags"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.165,
+            "taste": 7.165,
+            "gate_penalty": 0.08,
+            "score": 7.085,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 9.7,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 10,
+            "hierarchy": 9,
+            "basis": "near-miss edges 0; 4 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 100% blocks aligned; focal ratio 4.7, priority order kept 8/10"
+          },
+          "expressive": {
+            "value": 7,
+            "tension": 7,
+            "idea": null,
+            "idea_assigned": {
+              "id": "data",
+              "contrast": "none",
+              "frame": "grid",
+              "brk": "overlap"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 4.7) + asymmetry (centroid offset 0.135); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 8.8,
+            "harmony": 8.3,
+            "palette_discipline": 10,
+            "tone_structure": 6.7,
+            "hero_separation": 10,
+            "basis": "harmony 0.8320000000000001, 3 hue families, largest tone band 77%, headline ΔL 53"
+          },
+          "craft": {
+            "value": 9.9,
+            "engine_gates": 9.4,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.08, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 6.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): subtitle",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: subtitle (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot note; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): city",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: city (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.4; another structure may"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.3; another structure may"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.5; another structure may"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): hashtags",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: hashtags[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/bilingual-music-night/03-zh-hk-mag-B3F3LVD-5.json",
+        "png": "/workspace/poster-printer-cli/demo/bilingual-music-night/03-zh-hk-mag-B3F3LVD-5.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 376722,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 54.3
+        }
+      }
+    },
+    {
+      "rank": 4,
+      "name": "04-zh-huangyou-B3F3LVD-8",
+      "direction": "d2",
+      "style": "zh-huangyou",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "index",
+      "idea": "data",
+      "grid": "ortho/full 4×8",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "B3F3LVD-8L",
+        "text": "B3F3LVD-8T",
+        "color": "B3F3LVD-8C",
+        "image": "B3F3LVD-8I"
+      },
+      "taste": 7.137,
+      "penalty": 0.08,
+      "score": 7.057,
+      "quality": 100,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "centroid"
+        ],
+        "penalty": 0.08
+      },
+      "palette": {
+        "bg": "#852b41",
+        "ink": "#fef1ee",
+        "accent": "#83deaa"
+      },
+      "images": [
+        "city-urban95206524"
+      ],
+      "fonts": [
+        "Archivo Black",
+        "Archivo",
+        "ZCOOL QingKe HuangYou"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-huangyou: title is Chinese, mood bold+playful, era 90s",
+        "idea data (5-item timetable → an index / programme table shows it) → composition index",
+        "background dark: matched (#852b41)",
+        "engine picked composition index / idea data (taste 7.14 − penalty 0.08 = 7.06)"
+      ],
+      "ms": 2832,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.7052036092214663,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "夜航",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  126,
+                  296,
+                  180
+                ],
+                "size_px": 192,
+                "css_px": 135.4,
+                "slot": "headline"
+              },
+              {
+                "field": "title_alt",
+                "label": "title_alt",
+                "required": true,
+                "expected": "NIGHT FERRY",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  345,
+                  180,
+                  21
+                ],
+                "size_px": 24.2,
+                "css_px": 17.1,
+                "slot": "sub"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "Electronic & Ambient Live · 电子与氛围现场",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.12.05",
+                "status": "pass",
+                "rendered": "as \"2026.12.05\"",
+                "region": [
+                  54,
+                  54,
+                  63,
+                  13
+                ],
+                "size_px": 14.6,
+                "css_px": 10.3,
+                "slot": "meta.0"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  584,
+                  54,
+                  31,
+                  13
+                ],
+                "size_px": 14.6,
+                "css_px": 10.3,
+                "slot": "groups.0.sub"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "九号仓库 Warehouse 9",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  980,
+                  52,
+                  166,
+                  37
+                ],
+                "size_px": 14.6,
+                "css_px": 10.3,
+                "slot": "meta.2"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "杭州 Hangzhou",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "¥120 · 预售 ¥90",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "nightferry.example",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[0] 苔原 Tundra",
+                "required": false,
+                "expected": "苔原 Tundra",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  272,
+                  727,
+                  208,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "program",
+                "label": "program[0] time",
+                "required": false,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  584,
+                  54,
+                  31,
+                  13
+                ],
+                "size_px": 14.6,
+                "css_px": 10.3,
+                "slot": "groups.0.sub"
+              },
+              {
+                "field": "program",
+                "label": "program[1] Soft Static",
+                "required": false,
+                "expected": "Soft Static",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  272,
+                  894,
+                  237,
+                  35
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "program",
+                "label": "program[1] time",
+                "required": false,
+                "expected": "21:00",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[2] 流明 Lumen",
+                "required": false,
+                "expected": "流明 Lumen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  272,
+                  1061,
+                  204,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "program",
+                "label": "program[2] time",
+                "required": false,
+                "expected": "22:00",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[3] Harbor Choir",
+                "required": false,
+                "expected": "Harbor Choir",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  272,
+                  1229,
+                  283,
+                  35
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.3.main"
+              },
+              {
+                "field": "program",
+                "label": "program[3] time",
+                "required": false,
+                "expected": "23:15",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[4] 小满 Xiaoman",
+                "required": false,
+                "expected": "小满 Xiaoman",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  272,
+                  1396,
+                  242,
+                  38
+                ],
+                "size_px": 40.8,
+                "css_px": 28.8,
+                "slot": "groups.4.main"
+              },
+              {
+                "field": "program",
+                "label": "program[4] time",
+                "required": false,
+                "expected": "00:30",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "hashtags",
+                "label": "hashtags[0]",
+                "required": false,
+                "expected": "夜航2026",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 135.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  126,
+                  296,
+                  180
+                ]
+              },
+              {
+                "label": "title_alt",
+                "status": "pass",
+                "css_px": 17.1,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  345,
+                  180,
+                  21
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 10.3,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  54,
+                  63,
+                  13
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 10.3,
+                "min_css_px": 9,
+                "region": [
+                  584,
+                  54,
+                  31,
+                  13
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 10.3,
+                "min_css_px": 9,
+                "region": [
+                  980,
+                  52,
+                  166,
+                  37
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "2026.12.05",
+                "status": "pass",
+                "ratio": 7.19,
+                "typical": 7.65,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  54,
+                  63,
+                  13
+                ]
+              },
+              {
+                "text": "20:00",
+                "status": "pass",
+                "ratio": 6.26,
+                "typical": 7.6,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  584,
+                  54,
+                  31,
+                  13
+                ]
+              },
+              {
+                "text": "九号仓库 Warehouse 9\n",
+                "status": "pass",
+                "ratio": 7.7,
+                "typical": 7.87,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  980,
+                  52,
+                  166,
+                  37
+                ]
+              },
+              {
+                "text": "夜航",
+                "status": "pass",
+                "ratio": 7.7,
+                "typical": 7.87,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  126,
+                  296,
+                  180
+                ]
+              },
+              {
+                "text": "NIGHT FERRY",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.81,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  345,
+                  180,
+                  21
+                ]
+              },
+              {
+                "text": "01",
+                "status": "pass",
+                "ratio": 5.23,
+                "typical": 5.3,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  731,
+                  95,
+                  50
+                ]
+              },
+              {
+                "text": "苔原 Tundra",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.81,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  272,
+                  727,
+                  208,
+                  38
+                ]
+              },
+              {
+                "text": "OPENING SET",
+                "status": "pass",
+                "ratio": 7.55,
+                "typical": 7.76,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1046,
+                  730,
+                  100,
+                  13
+                ]
+              },
+              {
+                "text": "02",
+                "status": "pass",
+                "ratio": 5.23,
+                "typical": 5.31,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  898,
+                  95,
+                  50
+                ]
+              },
+              {
+                "text": "Soft Static",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.76,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  272,
+                  894,
+                  237,
+                  35
+                ]
+              },
+              {
+                "text": "03",
+                "status": "pass",
+                "ratio": 5.23,
+                "typical": 5.3,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  1065,
+                  95,
+                  50
+                ]
+              },
+              {
+                "text": "流明 Lumen",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.76,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  272,
+                  1061,
+                  204,
+                  38
+                ]
+              },
+              {
+                "text": "LIVE A/V",
+                "status": "pass",
+                "ratio": 7.6,
+                "typical": 7.76,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1085,
+                  1064,
+                  61,
+                  13
+                ]
+              },
+              {
+                "text": "04",
+                "status": "pass",
+                "ratio": 5.26,
+                "typical": 5.37,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  1232,
+                  95,
+                  50
+                ]
+              },
+              {
+                "text": "Harbor Choir",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.81,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  272,
+                  1229,
+                  283,
+                  35
+                ]
+              },
+              {
+                "text": "05",
+                "status": "pass",
+                "ratio": 5.23,
+                "typical": 5.3,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  1399,
+                  95,
+                  50
+                ]
+              },
+              {
+                "text": "小满 Xiaoman",
+                "status": "pass",
+                "ratio": 7.65,
+                "typical": 7.76,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  272,
+                  1396,
+                  242,
+                  38
+                ]
+              },
+              {
+                "text": "CLOSING DJ SET",
+                "status": "pass",
+                "ratio": 7.54,
+                "typical": 7.76,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  1024,
+                  1398,
+                  122,
+                  13
+                ]
+              },
+              {
+                "text": "2026.12.05",
+                "status": "pass",
+                "ratio": 6.21,
+                "typical": 7.55,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1567,
+                  67,
+                  9
+                ]
+              },
+              {
+                "text": "2026.12",
+                "status": "pass",
+                "ratio": 7.13,
+                "typical": 7.65,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  337,
+                  1567,
+                  48,
+                  9
+                ]
+              },
+              {
+                "text": "20:00",
+                "status": "pass",
+                "ratio": 5.44,
+                "typical": 7.6,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  610,
+                  1567,
+                  33,
+                  9
+                ]
+              },
+              {
+                "text": "九号仓库 WAREHOUSE 9",
+                "status": "pass",
+                "ratio": 7.44,
+                "typical": 7.7,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  883,
+                  1565,
+                  176,
+                  12
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Narrow",
+                "status": "pass"
+              },
+              {
+                "family": "ZCOOL QingKe HuangYou",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): subtitle",
+          "content (optional): city",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): program",
+          "content (optional): hashtags"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.137,
+            "taste": 7.137,
+            "gate_penalty": 0.08,
+            "score": 7.057,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 9.9,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 10,
+            "hierarchy": 9.8,
+            "basis": "near-miss edges 0; 4 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 100% blocks aligned; focal ratio 4.7, priority order kept 10/10"
+          },
+          "expressive": {
+            "value": 9.3,
+            "tension": 9.3,
+            "idea": null,
+            "idea_assigned": {
+              "id": "data",
+              "contrast": "none",
+              "frame": "grid",
+              "brk": "overlap"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 4.7) + asymmetry (centroid offset 0.259); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 8.5,
+            "harmony": 8.7,
+            "palette_discipline": 10,
+            "tone_structure": 5.2,
+            "hero_separation": 10,
+            "basis": "harmony 0.868, 2 hue families, largest tone band 84%, headline ΔL 54"
+          },
+          "craft": {
+            "value": 9.9,
+            "engine_gates": 9.4,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.08, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 6.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): subtitle",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: subtitle (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot note; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): city",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: city (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.4; another structure may"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.3; another structure may"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.5; another structure may"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): program",
+            "blocking": false,
+            "region": null,
+            "evidence": "4 item(s) not shown: program[1] time; program[2] time; program[3] time; program[4] time (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.1.sub; another structure may"
+            }
+          },
+          {
+            "id": "i6",
+            "gate": "content",
+            "dimension": "content (optional): hashtags",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: hashtags[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/bilingual-music-night/04-zh-huangyou-B3F3LVD-8.json",
+        "png": "/workspace/poster-printer-cli/demo/bilingual-music-night/04-zh-huangyou-B3F3LVD-8.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 3530652,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 33.64
+        }
+      }
+    },
+    {
+      "rank": 5,
+      "name": "05-zh-huangyou-B3F3LVD-2",
+      "direction": "d2",
+      "style": "zh-huangyou",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "index",
+      "idea": "data",
+      "grid": "ortho/full 5×8",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "B3F3LVD-2L",
+        "text": "B3F3LVD-2T",
+        "color": "B3F3LVD-2C",
+        "image": "B3F3LVD-2I"
+      },
+      "taste": 7.2,
+      "penalty": 0.16,
+      "score": 7.04,
+      "quality": 100,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "hue3",
+          "centroid"
+        ],
+        "penalty": 0.16
+      },
+      "palette": {
+        "bg": "#813136",
+        "ink": "#fcef9c",
+        "accent": "#7cdad0"
+      },
+      "images": [
+        "city-urban103765414"
+      ],
+      "fonts": [
+        "Archivo Black",
+        "Archivo",
+        "ZCOOL QingKe HuangYou"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-huangyou: title is Chinese, mood bold+playful, era 90s",
+        "idea data (5-item timetable → an index / programme table shows it) → composition index",
+        "background dark: matched (#813136)",
+        "engine picked composition index / idea data (taste 7.20 − penalty 0.16 = 7.04)"
+      ],
+      "ms": 842,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.7052036092214663,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "夜航",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  126,
+                  147,
+                  388
+                ],
+                "size_px": 192,
+                "css_px": 135.4,
+                "slot": "headline"
+              },
+              {
+                "field": "title_alt",
+                "label": "title_alt",
+                "required": true,
+                "expected": "NIGHT FERRY",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  54,
+                  532,
+                  180,
+                  21
+                ],
+                "size_px": 24.2,
+                "css_px": 17.1,
+                "slot": "sub"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "Electronic & Ambient Live · 电子与氛围现场",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.12.05",
+                "status": "pass",
+                "rendered": "as \"2026.12.05\"",
+                "region": [
+                  54,
+                  54,
+                  63,
+                  13
+                ],
+                "size_px": 14.6,
+                "css_px": 10.3,
+                "slot": "meta.0"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  54,
+                  747,
+                  280,
+                  66
+                ],
+                "size_px": 96,
+                "css_px": 67.7,
+                "slot": "groups.0.sub"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "九号仓库 Warehouse 9",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  980,
+                  52,
+                  166,
+                  37
+                ],
+                "size_px": 14.6,
+                "css_px": 10.3,
+                "slot": "meta.2"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "杭州 Hangzhou",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "¥120 · 预售 ¥90",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "nightferry.example",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[0] 苔原 Tundra",
+                "required": false,
+                "expected": "苔原 Tundra",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  513,
+                  730,
+                  101,
+                  65
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.0.main"
+              },
+              {
+                "field": "program",
+                "label": "program[0] time",
+                "required": false,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  54,
+                  747,
+                  280,
+                  66
+                ],
+                "size_px": 96,
+                "css_px": 67.7,
+                "slot": "groups.0.sub"
+              },
+              {
+                "field": "program",
+                "label": "program[1] Soft Static",
+                "required": false,
+                "expected": "Soft Static",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  513,
+                  897,
+                  102,
+                  58
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.1.main"
+              },
+              {
+                "field": "program",
+                "label": "program[1] time",
+                "required": false,
+                "expected": "21:00",
+                "status": "pass",
+                "rendered": "as \"21:00\"",
+                "region": [
+                  54,
+                  914,
+                  280,
+                  66
+                ],
+                "size_px": 96,
+                "css_px": 67.7,
+                "slot": "groups.1.sub"
+              },
+              {
+                "field": "program",
+                "label": "program[2] 流明 Lumen",
+                "required": false,
+                "expected": "流明 Lumen",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  513,
+                  1064,
+                  98,
+                  65
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.2.main"
+              },
+              {
+                "field": "program",
+                "label": "program[2] time",
+                "required": false,
+                "expected": "22:00",
+                "status": "pass",
+                "rendered": "as \"22:00\"",
+                "region": [
+                  54,
+                  1081,
+                  280,
+                  66
+                ],
+                "size_px": 96,
+                "css_px": 67.7,
+                "slot": "groups.2.sub"
+              },
+              {
+                "field": "program",
+                "label": "program[3] Harbor Choir",
+                "required": false,
+                "expected": "Harbor Choir",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  513,
+                  1231,
+                  116,
+                  58
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.3.main"
+              },
+              {
+                "field": "program",
+                "label": "program[3] time",
+                "required": false,
+                "expected": "23:15",
+                "status": "pass",
+                "rendered": "as \"23:15\"",
+                "region": [
+                  54,
+                  1248,
+                  280,
+                  66
+                ],
+                "size_px": 96,
+                "css_px": 67.7,
+                "slot": "groups.3.sub"
+              },
+              {
+                "field": "program",
+                "label": "program[4] 小满 Xiaoman",
+                "required": false,
+                "expected": "小满 Xiaoman",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  513,
+                  1398,
+                  127,
+                  65
+                ],
+                "size_px": 31.2,
+                "css_px": 22,
+                "slot": "groups.4.main"
+              },
+              {
+                "field": "program",
+                "label": "program[4] time",
+                "required": false,
+                "expected": "00:30",
+                "status": "pass",
+                "rendered": "as \"00:30\"",
+                "region": [
+                  54,
+                  1415,
+                  280,
+                  66
+                ],
+                "size_px": 96,
+                "css_px": 67.7,
+                "slot": "groups.4.sub"
+              },
+              {
+                "field": "hashtags",
+                "label": "hashtags[0]",
+                "required": false,
+                "expected": "夜航2026",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 135.4,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  126,
+                  147,
+                  388
+                ]
+              },
+              {
+                "label": "title_alt",
+                "status": "pass",
+                "css_px": 17.1,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  532,
+                  180,
+                  21
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 10.3,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  54,
+                  63,
+                  13
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 67.7,
+                "min_css_px": 9,
+                "region": [
+                  54,
+                  747,
+                  280,
+                  66
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 10.3,
+                "min_css_px": 9,
+                "region": [
+                  980,
+                  52,
+                  166,
+                  37
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "2026.12.05",
+                "status": "pass",
+                "ratio": 7.1,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  54,
+                  63,
+                  13
+                ]
+              },
+              {
+                "text": "20:00\n小满 Xiaoman",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  549,
+                  52,
+                  102,
+                  37
+                ]
+              },
+              {
+                "text": "九号仓库 Warehouse 9\n",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  980,
+                  52,
+                  166,
+                  37
+                ]
+              },
+              {
+                "text": "夜航",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  126,
+                  147,
+                  388
+                ]
+              },
+              {
+                "text": "NIGHT FERRY",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  54,
+                  532,
+                  180,
+                  21
+                ]
+              },
+              {
+                "text": "20:00",
+                "status": "pass",
+                "ratio": 5.27,
+                "typical": 5.27,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  54,
+                  747,
+                  280,
+                  66
+                ]
+              },
+              {
+                "text": "苔原 Tundra",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  730,
+                  101,
+                  65
+                ]
+              },
+              {
+                "text": "OPENING SET",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  813,
+                  105,
+                  14
+                ]
+              },
+              {
+                "text": "21:00",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  914,
+                  280,
+                  66
+                ]
+              },
+              {
+                "text": "Soft Static",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  897,
+                  102,
+                  58
+                ]
+              },
+              {
+                "text": "22:00",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  1081,
+                  280,
+                  66
+                ]
+              },
+              {
+                "text": "流明 Lumen",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  1064,
+                  98,
+                  65
+                ]
+              },
+              {
+                "text": "LIVE A/V",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  1147,
+                  65,
+                  14
+                ]
+              },
+              {
+                "text": "23:15",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  1248,
+                  280,
+                  66
+                ]
+              },
+              {
+                "text": "Harbor Choir",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  1231,
+                  116,
+                  58
+                ]
+              },
+              {
+                "text": "00:30",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  54,
+                  1415,
+                  280,
+                  66
+                ]
+              },
+              {
+                "text": "小满 Xiaoman",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  1398,
+                  127,
+                  65
+                ]
+              },
+              {
+                "text": "CLOSING DJ SET",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  513,
+                  1481,
+                  129,
+                  14
+                ]
+              },
+              {
+                "text": "2026.12.05",
+                "status": "pass",
+                "ratio": 6.19,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  54,
+                  1567,
+                  67,
+                  9
+                ]
+              },
+              {
+                "text": "2026.12",
+                "status": "pass",
+                "ratio": 7.35,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  337,
+                  1567,
+                  48,
+                  9
+                ]
+              },
+              {
+                "text": "20:00",
+                "status": "pass",
+                "ratio": 5.31,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  610,
+                  1567,
+                  33,
+                  9
+                ]
+              },
+              {
+                "text": "九号仓库 WAREHOUSE 9",
+                "status": "pass",
+                "ratio": 7.41,
+                "typical": 7.41,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  883,
+                  1565,
+                  176,
+                  12
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Narrow",
+                "status": "pass"
+              },
+              {
+                "family": "ZCOOL QingKe HuangYou",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): subtitle",
+          "content (optional): city",
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): hashtags"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.2,
+            "taste": 7.2,
+            "gate_penalty": 0.16,
+            "score": 7.04,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 9.8,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 10,
+            "hierarchy": 9.2,
+            "basis": "near-miss edges 0; 3 text blocks, 4 sizes, 0 busy blocks, 0 collisions; 100% blocks aligned; focal ratio 6.2, priority order kept 8/10"
+          },
+          "expressive": {
+            "value": 10,
+            "tension": 10,
+            "idea": null,
+            "idea_assigned": {
+              "id": "data",
+              "contrast": "none",
+              "frame": "grid",
+              "brk": "overlap"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 6.2) + asymmetry (centroid offset 0.31); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 8.6,
+            "harmony": 7.9,
+            "palette_discipline": 10,
+            "tone_structure": 6.3,
+            "hero_separation": 10,
+            "basis": "harmony 0.79, 3 hue families, largest tone band 79%, headline ΔL 52"
+          },
+          "craft": {
+            "value": 9.7,
+            "engine_gates": 8.7,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.16, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 6.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): subtitle",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: subtitle (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot note; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): city",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: city (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.4; another structure may"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.3; another structure may"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.5; another structure may"
+            }
+          },
+          {
+            "id": "i5",
+            "gate": "content",
+            "dimension": "content (optional): hashtags",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: hashtags[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/bilingual-music-night/05-zh-huangyou-B3F3LVD-2.json",
+        "png": "/workspace/poster-printer-cli/demo/bilingual-music-night/05-zh-huangyou-B3F3LVD-2.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 140649,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 40.17
+        }
+      }
+    },
+    {
+      "rank": 6,
+      "name": "06-zh-hk-mag-B3F3LVD-7",
+      "direction": "d1",
+      "style": "zh-hk-mag",
+      "ratio": "3:4",
+      "size": [
+        1200,
+        1600
+      ],
+      "comp": "hanzi",
+      "idea": "hanzi",
+      "grid": "ortho/stable 3×5",
+      "attempt": 0,
+      "salt": "",
+      "seeds": {
+        "layout": "B3F3LVD-7L",
+        "text": "B3F3LVD-7T",
+        "color": "B3F3LVD-7C",
+        "image": "B3F3LVD-7I"
+      },
+      "taste": 7.058,
+      "penalty": 0.08,
+      "score": 6.978,
+      "quality": 96,
+      "gates": {
+        "fails": [],
+        "soft": [
+          "tone"
+        ],
+        "penalty": 0.08
+      },
+      "palette": {
+        "bg": "#760028",
+        "ink": "#ffc994",
+        "accent": "#7bd6ec"
+      },
+      "images": [
+        "city-urban24655697"
+      ],
+      "fonts": [
+        "Bodoni Moda",
+        "Noto Serif",
+        "Noto Sans SC"
+      ],
+      "flagged": false,
+      "gates_passed": true,
+      "blocking_failures": [],
+      "replayExact": true,
+      "reasons": [
+        "style zh-hk-mag: title is Chinese, mood bold, era 90s, density balanced, short Chinese title suits a strong CJK face",
+        "idea hanzi (short Chinese title (2 hanzi) → the hanzi itself becomes the picture) → composition hanzi",
+        "background dark: matched (#760028)",
+        "engine picked composition hanzi / idea hanzi (taste 7.06 − penalty 0.08 = 6.98)"
+      ],
+      "ms": 4075,
+      "report": {
+        "display": {
+          "kind": "print",
+          "cssPerPx": 0.7052036092214663,
+          "minInfoCss": 9,
+          "heroOnly": false,
+          "note": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9"
+        },
+        "gates": {
+          "content": {
+            "status": "pass",
+            "optional_status": "fail",
+            "items": [
+              {
+                "field": "title",
+                "label": "title",
+                "required": true,
+                "expected": "夜航",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  72,
+                  73,
+                  72,
+                  143
+                ],
+                "size_px": 72,
+                "css_px": 50.8,
+                "slot": "headline"
+              },
+              {
+                "field": "title_alt",
+                "label": "title_alt",
+                "required": true,
+                "expected": "NIGHT FERRY",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  216,
+                  1310,
+                  130,
+                  70
+                ],
+                "size_px": 36.3,
+                "css_px": 25.6,
+                "slot": "sub"
+              },
+              {
+                "field": "subtitle",
+                "label": "subtitle",
+                "required": false,
+                "expected": "Electronic & Ambient Live · 电子与氛围现场",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "date",
+                "label": "date",
+                "required": true,
+                "expected": "2026.12.05",
+                "status": "pass",
+                "rendered": "as \"2026.12.05\"",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "date",
+                "label": "date (time)",
+                "required": true,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "venue",
+                "label": "venue",
+                "required": true,
+                "expected": "九号仓库 Warehouse 9",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "city",
+                "label": "city",
+                "required": false,
+                "expected": "杭州 Hangzhou",
+                "status": "pass",
+                "rendered": "verbatim",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "price",
+                "label": "price",
+                "required": false,
+                "expected": "¥120 · 预售 ¥90",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "url",
+                "label": "url",
+                "required": false,
+                "expected": "nightferry.example",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[0] 苔原 Tundra",
+                "required": false,
+                "expected": "苔原 Tundra",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[0] time",
+                "required": false,
+                "expected": "20:00",
+                "status": "pass",
+                "rendered": "as \"20:00\"",
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ],
+                "size_px": 16.1,
+                "css_px": 11.4,
+                "slot": "note"
+              },
+              {
+                "field": "program",
+                "label": "program[1] Soft Static",
+                "required": false,
+                "expected": "Soft Static",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[1] time",
+                "required": false,
+                "expected": "21:00",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[2] 流明 Lumen",
+                "required": false,
+                "expected": "流明 Lumen",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[2] time",
+                "required": false,
+                "expected": "22:00",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[3] Harbor Choir",
+                "required": false,
+                "expected": "Harbor Choir",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[3] time",
+                "required": false,
+                "expected": "23:15",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[4] 小满 Xiaoman",
+                "required": false,
+                "expected": "小满 Xiaoman",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "program",
+                "label": "program[4] time",
+                "required": false,
+                "expected": "00:30",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              },
+              {
+                "field": "hashtags",
+                "label": "hashtags[0]",
+                "required": false,
+                "expected": "夜航2026",
+                "status": "fail",
+                "evidence": "not drawn anywhere",
+                "region": null
+              }
+            ]
+          },
+          "min_size": {
+            "status": "pass",
+            "display": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9",
+            "items": [
+              {
+                "label": "title",
+                "status": "pass",
+                "css_px": 50.8,
+                "min_css_px": 9,
+                "region": [
+                  72,
+                  73,
+                  72,
+                  143
+                ]
+              },
+              {
+                "label": "title_alt",
+                "status": "pass",
+                "css_px": 25.6,
+                "min_css_px": 9,
+                "region": [
+                  216,
+                  1310,
+                  130,
+                  70
+                ]
+              },
+              {
+                "label": "date",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ]
+              },
+              {
+                "label": "date (time)",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ]
+              },
+              {
+                "label": "venue",
+                "status": "pass",
+                "css_px": 11.4,
+                "min_css_px": 9,
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ]
+              }
+            ]
+          },
+          "contrast": {
+            "status": "pass",
+            "all_text_status": "pass",
+            "label": "checked text contrast (WCAG 2.2 thresholds 4.5:1 / 3:1 large; pixel-sampled worst case); not a WCAG compliance claim",
+            "items": [
+              {
+                "text": "航",
+                "status": "pass",
+                "ratio": 7.79,
+                "typical": 7.79,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  259,
+                  157,
+                  1103,
+                  948
+                ]
+              },
+              {
+                "text": "夜\n航",
+                "status": "pass",
+                "ratio": 7.79,
+                "typical": 7.79,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  72,
+                  73,
+                  72,
+                  143
+                ]
+              },
+              {
+                "text": "夜\n航",
+                "status": "pass",
+                "ratio": 5.8,
+                "typical": 7.04,
+                "threshold": 3,
+                "large": true,
+                "required": false,
+                "region": [
+                  95,
+                  277,
+                  27,
+                  52
+                ]
+              },
+              {
+                "text": "NIGHT FERRY",
+                "status": "pass",
+                "ratio": 7.79,
+                "typical": 7.79,
+                "threshold": 3,
+                "large": true,
+                "required": true,
+                "region": [
+                  216,
+                  1310,
+                  130,
+                  70
+                ]
+              },
+              {
+                "text": "Electronic & Ambient Live · 电子与氛围现场\nSAT ",
+                "status": "pass",
+                "ratio": 7.79,
+                "typical": 7.79,
+                "threshold": 4.5,
+                "large": false,
+                "required": true,
+                "region": [
+                  216,
+                  1410,
+                  185,
+                  118
+                ]
+              },
+              {
+                "text": "2026.12",
+                "status": "pass",
+                "ratio": 7.61,
+                "typical": 7.79,
+                "threshold": 4.5,
+                "large": false,
+                "required": false,
+                "region": [
+                  216,
+                  73,
+                  59,
+                  11
+                ]
+              }
+            ]
+          },
+          "cjk": {
+            "line_start": {
+              "status": "pass",
+              "items": []
+            },
+            "line_end": {
+              "status": "pass",
+              "items": []
+            },
+            "single_char_last_line": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            },
+            "cjk_latin_spacing": {
+              "status": "pass",
+              "blocking": false,
+              "items": []
+            }
+          },
+          "glyphs": {
+            "status": "pass",
+            "items": [
+              {
+                "family": "Sacramento",
+                "status": "pass"
+              },
+              {
+                "family": "Great Vibes",
+                "status": "pass"
+              },
+              {
+                "family": "Dancing Script",
+                "status": "pass"
+              },
+              {
+                "family": "Pacifico",
+                "status": "pass"
+              },
+              {
+                "family": "Anton",
+                "status": "pass"
+              },
+              {
+                "family": "Bebas Neue",
+                "status": "pass"
+              },
+              {
+                "family": "Oswald",
+                "status": "pass"
+              },
+              {
+                "family": "Archivo Black",
+                "status": "pass"
+              },
+              {
+                "family": "IBM Plex Mono",
+                "status": "pass"
+              },
+              {
+                "family": "Instrument Serif",
+                "status": "pass"
+              },
+              {
+                "family": "DM Serif Display",
+                "status": "pass"
+              },
+              {
+                "family": "Playfair Display",
+                "status": "pass"
+              },
+              {
+                "family": "Bodoni Moda",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Sans CN",
+                "status": "pass"
+              },
+              {
+                "family": "Source Han Serif CN",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif",
+                "status": "pass"
+              },
+              {
+                "family": "Inter",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Sans SC",
+                "status": "pass"
+              },
+              {
+                "family": "Noto Serif SC",
+                "status": "pass"
+              }
+            ],
+            "note": ""
+          }
+        },
+        "gates_passed": true,
+        "blocking_failures": [],
+        "advisory_failures": [
+          "content (optional): price",
+          "content (optional): url",
+          "content (optional): program",
+          "content (optional): hashtags"
+        ],
+        "aesthetic": {
+          "note": "relative, model/heuristic-based scores (0–10); not comparable across briefs without human calibration; null = not judged",
+          "overall": {
+            "value": 7.058,
+            "taste": 7.058,
+            "gate_penalty": 0.08,
+            "score": 6.978,
+            "basis": "learned taste selector (1–10, trained on one rater so far) minus engine gate penalty"
+          },
+          "classical": {
+            "value": 9.2,
+            "order": 10,
+            "clarity": 10,
+            "alignment": 6.7,
+            "hierarchy": 10,
+            "basis": "near-miss edges 0; 4 text blocks, 3 sizes, 0 busy blocks, 0 collisions; 67% blocks aligned; focal ratio 30.4, priority order kept 10/10"
+          },
+          "expressive": {
+            "value": 8.5,
+            "tension": 8.5,
+            "idea": null,
+            "idea_assigned": {
+              "id": "hanzi",
+              "contrast": "none",
+              "frame": "eyes",
+              "brk": "crop"
+            },
+            "originality": null,
+            "basis": "tension = scale contrast (focal ratio 30.4) + asymmetry (centroid offset 0.17300000000000001); idea and originality need a human eye (null)"
+          },
+          "color": {
+            "value": 9.1,
+            "harmony": 8,
+            "palette_discipline": 10,
+            "tone_structure": 8.4,
+            "hero_separation": 10,
+            "basis": "harmony 0.802, 1 hue families, largest tone band 55%, headline ΔL 51"
+          },
+          "craft": {
+            "value": 9.9,
+            "engine_gates": 9.4,
+            "collisions": 10,
+            "subject_protection": 10,
+            "cjk_typesetting": 10,
+            "thumbnail_read": 10,
+            "basis": "engine soft-gate penalty 0.08, 0 collisions, subject overlap 0, 0 CJK defects, thumbnail cap 38.8 px"
+          }
+        },
+        "issues": [
+          {
+            "id": "i1",
+            "gate": "content",
+            "dimension": "content (optional): price",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: price (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.3; another structure may"
+            }
+          },
+          {
+            "id": "i2",
+            "gate": "content",
+            "dimension": "content (optional): url",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: url (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot meta.5; another structure may"
+            }
+          },
+          {
+            "id": "i3",
+            "gate": "content",
+            "dimension": "content (optional): program",
+            "blocking": false,
+            "region": null,
+            "evidence": "9 item(s) not shown: program[0] 苔原 Tundra; program[1] Soft Static; program[1] time; program[2] 流明 Lumen; program[2] time; program[3] Harbor Choir; program[3] time; program[4] 小满 Xiaoman; program[4] time (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "variations --vary structure -n 6",
+              "why": "this composition does not draw slot groups.0.main; another structure may"
+            }
+          },
+          {
+            "id": "i4",
+            "gate": "content",
+            "dimension": "content (optional): hashtags",
+            "blocking": false,
+            "region": null,
+            "evidence": "1 item(s) not shown: hashtags[0] (not drawn anywhere)",
+            "impact": [
+              "finding-info"
+            ],
+            "fix": {
+              "command": "refine --set metaCount=7",
+              "why": "the copy is in slot meta.6, which this layout does not show"
+            }
+          }
+        ]
+      },
+      "files": {
+        "json": "/workspace/poster-printer-cli/demo/bilingual-music-night/06-zh-hk-mag-B3F3LVD-7.json",
+        "png": "/workspace/poster-printer-cli/demo/bilingual-music-night/06-zh-hk-mag-B3F3LVD-7.png"
+      },
+      "verify": {
+        "png": {
+          "magic": true,
+          "bytes": 134360,
+          "w": 1200,
+          "h": 1600,
+          "nonblank": true,
+          "stdev": 89.5
+        }
+      }
+    }
+  ],
+  "analysis": {
+    "language": {
+      "overall": "bilingual",
+      "title": "zh",
+      "cjkShare": 0.23,
+      "why": "language given as bilingual"
+    },
+    "hierarchy": [
+      {
+        "key": "title",
+        "tier": "hero",
+        "importance": 1
+      },
+      {
+        "key": "title_alt",
+        "tier": "secondary",
+        "importance": 0.91
+      },
+      {
+        "key": "date",
+        "tier": "secondary",
+        "importance": 0.87
+      },
+      {
+        "key": "venue",
+        "tier": "secondary",
+        "importance": 0.83
+      },
+      {
+        "key": "program",
+        "tier": "secondary",
+        "importance": 0.79
+      },
+      {
+        "key": "price",
+        "tier": "secondary",
+        "importance": 0.75
+      },
+      {
+        "key": "subtitle",
+        "tier": "secondary",
+        "importance": 0.7
+      },
+      {
+        "key": "city",
+        "tier": "tertiary",
+        "importance": 0.35
+      },
+      {
+        "key": "url",
+        "tier": "tertiary",
+        "importance": 0.25
+      },
+      {
+        "key": "hashtags",
+        "tier": "tertiary",
+        "importance": 0.15
+      }
+    ],
+    "list": {
+      "kind": "timetable",
+      "items": 5
+    }
+  },
+  "reasons": [
+    {
+      "field": "density",
+      "value": "balanced",
+      "why": "given"
+    },
+    {
+      "field": "language",
+      "value": "bilingual",
+      "why": "language given as bilingual"
+    },
+    {
+      "field": "hierarchy",
+      "value": "hero:title > secondary:title_alt > secondary:date > secondary:venue > secondary:program > secondary:price > secondary:subtitle > tertiary:city > tertiary:url > tertiary:hashtags",
+      "why": "importance = field base + purpose boost − length penalty"
+    },
+    {
+      "field": "texts.headline",
+      "value": "夜航",
+      "why": "the title is the hero field"
+    },
+    {
+      "field": "texts.sub",
+      "value": "NIGHT FERRY",
+      "why": "bilingual: the translated title is paired with the title"
+    },
+    {
+      "field": "texts.note",
+      "value": "Electronic & Ambient Live · 电子与氛围现场\nSAT 2026.12.05 20:00\n九号仓库 Warehouse 9 · 杭州 Hangzhou",
+      "why": "caption block: when + where (the facts people look for after the title)"
+    },
+    {
+      "field": "texts.groups",
+      "value": "苔原 Tundra / Soft Static / 流明 Lumen / Harbor Choir / 小满 Xiaoman",
+      "why": "5 program items with times → timetable; 5 of 5 items fill the small groups"
+    },
+    {
+      "field": "texts.meta",
+      "value": "2026.12.05 | 20:00 | 九号仓库 Warehouse 9 | ¥120 · 预售 ¥90 | 杭州 Hangzhou | nightferry.example | #夜航2026",
+      "why": "short facts become the meta labels (date, time, venue, price, url, organizers)"
+    },
+    {
+      "field": "texts.facts",
+      "value": {
+        "date": {
+          "y": 2026,
+          "m": 12,
+          "d": 5
+        },
+        "year": "2026",
+        "issue": "2026.12",
+        "numeral": "05",
+        "signature": "",
+        "masthead": "夜航",
+        "sticker": [
+          "LIVE",
+          "12.05"
+        ],
+        "times": [
+          "20:00",
+          "21:00",
+          "22:00",
+          "23:15",
+          "00:30",
+          "",
+          ""
+        ],
+        "values": [
+          "20:00",
+          "21:00",
+          "22:00",
+          "23:15",
+          "00:30",
+          "",
+          ""
+        ]
+      },
+      "why": "real year / edition / date / numerals replace the invented \"NO. 12\", years, calendar days and index times"
+    },
+    {
+      "field": "titleScale",
+      "value": 148,
+      "why": "title ≈ 2 em wide → 150, 6 secondary fields compete → −8, long list needs room → −6, bold → +12 (multiplied by the style's own title scale)"
+    },
+    {
+      "field": "smallGroups",
+      "value": 5,
+      "why": "show the timetable (5 items)"
+    },
+    {
+      "field": "metaCount",
+      "value": 6,
+      "why": "7 real meta labels, density balanced, at least the 3 required (priority) facts"
+    },
+    {
+      "field": "proseCount",
+      "value": 0,
+      "why": "no body copy → no prose blocks (no filler text)"
+    },
+    {
+      "field": "smallScale",
+      "value": 90,
+      "why": "long list → smaller secondary type"
+    },
+    {
+      "field": "smallScale",
+      "value": 128,
+      "why": "print A1 (594×841 mm) seen from 2 m; sizes as CSS-px equivalents (0.2646 mm at 0.71 m), info text ≥ 9: small text needs ≥ 13 poster px"
+    },
+    {
+      "field": "whitespace/blockBudget/decorBudget",
+      "value": [
+        40,
+        8,
+        2
+      ],
+      "why": "density balanced, heavy copy"
+    },
+    {
+      "field": "imageCount/typeOnlyShare/imageShare",
+      "value": [
+        1,
+        15,
+        55
+      ],
+      "why": "imagery accent"
+    },
+    {
+      "field": "bgPref",
+      "value": "dark",
+      "why": "color.background / lightness"
+    },
+    {
+      "field": "colorMode",
+      "value": "experimental",
+      "why": "loud mood / 80s–y2k era"
+    },
+    {
+      "field": "plan",
+      "value": {
+        "tone": "dark"
+      },
+      "why": "the plan normally rolls tone / script lettering / torn-stamp material / type-only per draw; the brief fixes them"
+    }
+  ],
+  "warnings": [],
+  "fonts": {
+    "fallback_subsets": [],
+    "unresolved": {},
+    "note": ""
+  },
+  "sheet": "/workspace/poster-printer-cli/demo/bilingual-music-night/sheet.jpg"
+}

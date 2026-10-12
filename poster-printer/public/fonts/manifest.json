@@ -1,0 +1,6229 @@
+[
+{
+"family": "Albert Sans",
+"slug": "albert-sans",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Albert+Sans",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/albert-sans-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 44292
+}
+]
+},
+{
+"family": "Archivo",
+"slug": "archivo",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Archivo+SemiBold",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/archivo-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 115836
+}
+]
+},
+{
+"family": "Bricolage Grotesque",
+"slug": "bricolage-grotesque",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"display",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Bricolage+Grotesque+96pt+ExtraBold",
+"wmin": 200,
+"wmax": 800,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/bricolage-grotesque-0.woff2",
+"weight": "200 800",
+"style": "normal",
+"bytes": 165568
+}
+]
+},
+{
+"family": "DM Sans",
+"slug": "dm-sans",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/DM+Sans+9pt",
+"wmin": 100,
+"wmax": 1000,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/dm-sans-0.woff2",
+"weight": "100 1000",
+"style": "normal",
+"bytes": 75444
+}
+]
+},
+{
+"family": "Familjen Grotesk",
+"slug": "familjen-grotesk",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Familjen+Grotesk",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/familjen-grotesk-0.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 20740
+}
+]
+},
+{
+"family": "Figtree",
+"slug": "figtree",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Figtree+Light",
+"wmin": 300,
+"wmax": 900,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/figtree-0.woff2",
+"weight": "300 900",
+"style": "normal",
+"bytes": 23180
+}
+]
+},
+{
+"family": "Geist",
+"slug": "geist",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/vercel/geist-font",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100,
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/geist-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 29748
+},
+{
+"url": "/fonts/geist-1.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 36324
+}
+]
+},
+{
+"family": "Hanken Grotesk",
+"slug": "hanken-grotesk",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Hanken+Grotesk",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/hanken-grotesk-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 39148
+}
+]
+},
+{
+"family": "IBM Plex Sans",
+"slug": "ibm-plex-sans",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"tech",
+"corporate"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/IBM+Plex+Sans",
+"wmin": 100,
+"wmax": 700,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/ibm-plex-sans-0.woff2",
+"weight": "100 700",
+"style": "normal",
+"bytes": 78268
+}
+]
+},
+{
+"family": "IBM Plex Sans Condensed",
+"slug": "ibm-plex-sans-condensed",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"condensed",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/IBM+Plex+Sans+Condensed",
+"wmin": 100,
+"wmax": 700,
+"weights": [
+100,
+200,
+300,
+400,
+500,
+600,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/ibm-plex-sans-condensed-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 16600
+},
+{
+"url": "/fonts/ibm-plex-sans-condensed-1.woff2",
+"weight": "200",
+"style": "normal",
+"bytes": 17508
+},
+{
+"url": "/fonts/ibm-plex-sans-condensed-2.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 17392
+},
+{
+"url": "/fonts/ibm-plex-sans-condensed-3.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 17464
+},
+{
+"url": "/fonts/ibm-plex-sans-condensed-4.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 16900
+},
+{
+"url": "/fonts/ibm-plex-sans-condensed-5.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 17500
+},
+{
+"url": "/fonts/ibm-plex-sans-condensed-6.woff2",
+"weight": "100",
+"style": "normal",
+"bytes": 16216
+}
+]
+},
+{
+"family": "Instrument Sans",
+"slug": "instrument-sans",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Instrument+Sans",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/instrument-sans-0.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 81736
+}
+]
+},
+{
+"family": "Inter",
+"slug": "inter",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Inter",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/inter-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 103440
+}
+]
+},
+{
+"family": "Inter Tight",
+"slug": "inter-tight",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"condensed",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Inter+Tight",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/inter-tight-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 55312
+}
+]
+},
+{
+"family": "Karla",
+"slug": "karla",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Karla",
+"wmin": 200,
+"wmax": 800,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/karla-0.woff2",
+"weight": "200 800",
+"style": "normal",
+"bytes": 37800
+}
+]
+},
+{
+"family": "Libre Franklin",
+"slug": "libre-franklin",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Libre+Franklin+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/libre-franklin-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 30712
+}
+]
+},
+{
+"family": "Manrope",
+"slug": "manrope",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Manrope+ExtraLight",
+"wmin": 200,
+"wmax": 800,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/manrope-0.woff2",
+"weight": "200 800",
+"style": "normal",
+"bytes": 29144
+}
+]
+},
+{
+"family": "Mulish",
+"slug": "mulish",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Mulish+ExtraLight",
+"wmin": 200,
+"wmax": 1000,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/mulish-0.woff2",
+"weight": "200 1000",
+"style": "normal",
+"bytes": 32496
+}
+]
+},
+{
+"family": "Noto Sans",
+"slug": "noto-sans",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"multilingual"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Noto+Sans",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/noto-sans-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 95396
+}
+]
+},
+{
+"family": "Onest",
+"slug": "onest",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Onest",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/onest-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 41588
+}
+]
+},
+{
+"family": "Open Sans",
+"slug": "open-sans",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Open+Sans",
+"wmin": 300,
+"wmax": 800,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/open-sans-0.woff2",
+"weight": "300 800",
+"style": "normal",
+"bytes": 98612
+}
+]
+},
+{
+"family": "Plus Jakarta Sans",
+"slug": "plus-jakarta-sans",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Plus+Jakarta+Sans",
+"wmin": 200,
+"wmax": 800,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/plus-jakarta-sans-0.woff2",
+"weight": "200 800",
+"style": "normal",
+"bytes": 38176
+}
+]
+},
+{
+"family": "Public Sans",
+"slug": "public-sans",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"gov",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Public+Sans+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/public-sans-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 29056
+}
+]
+},
+{
+"family": "Red Hat Display",
+"slug": "red-hat-display",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Red+Hat+Display",
+"wmin": 300,
+"wmax": 900,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/red-hat-display-0.woff2",
+"weight": "300 900",
+"style": "normal",
+"bytes": 36704
+}
+]
+},
+{
+"family": "Red Hat Text",
+"slug": "red-hat-text",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Red+Hat+Text",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/red-hat-text-0.woff2",
+"weight": "300 700",
+"style": "normal",
+"bytes": 36120
+}
+]
+},
+{
+"family": "Roboto",
+"slug": "roboto",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Roboto",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/roboto-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 90588
+}
+]
+},
+{
+"family": "Rubik",
+"slug": "rubik",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"rounded",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Rubik+Light",
+"wmin": 300,
+"wmax": 900,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/rubik-0.woff2",
+"weight": "300 900",
+"style": "normal",
+"bytes": 44616
+}
+]
+},
+{
+"family": "Schibsted Grotesk",
+"slug": "schibsted-grotesk",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Schibsted+Grotesk",
+"wmin": 400,
+"wmax": 900,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/schibsted-grotesk-0.woff2",
+"weight": "400 900",
+"style": "normal",
+"bytes": 54288
+}
+]
+},
+{
+"family": "Sora",
+"slug": "sora",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Sora",
+"wmin": 100,
+"wmax": 800,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/sora-0.woff2",
+"weight": "100 800",
+"style": "normal",
+"bytes": 41240
+}
+]
+},
+{
+"family": "Source Sans 3",
+"slug": "source-sans-3",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Source+Sans+3+ExtraLight",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/source-sans-3-0.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 54560
+}
+]
+},
+{
+"family": "Space Grotesk",
+"slug": "space-grotesk",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"tech",
+"geometric"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Space+Grotesk+Light",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/space-grotesk-0.woff2",
+"weight": "300 700",
+"style": "normal",
+"bytes": 30828
+}
+]
+},
+{
+"family": "Work Sans",
+"slug": "work-sans",
+"group": "swiss-sans",
+"tags": [
+"swiss",
+"neo-grotesk",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Work+Sans",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/work-sans-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 88736
+}
+]
+},
+{
+"family": "Audiowide",
+"slug": "audiowide",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"tech",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Audiowide",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/audiowide-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 17068
+}
+]
+},
+{
+"family": "Barlow",
+"slug": "barlow",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"swiss"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Barlow",
+"wmin": 250,
+"wmax": 900,
+"weights": [
+250,
+275,
+300,
+400,
+500,
+600,
+700,
+800,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/barlow-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 18476
+},
+{
+"url": "/fonts/barlow-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 19540
+},
+{
+"url": "/fonts/barlow-2.woff2",
+"weight": "800",
+"style": "normal",
+"bytes": 19460
+},
+{
+"url": "/fonts/barlow-3.woff2",
+"weight": "275",
+"style": "normal",
+"bytes": 19084
+},
+{
+"url": "/fonts/barlow-4.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 19264
+},
+{
+"url": "/fonts/barlow-5.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 19408
+},
+{
+"url": "/fonts/barlow-6.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 19400
+},
+{
+"url": "/fonts/barlow-7.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 19664
+},
+{
+"url": "/fonts/barlow-8.woff2",
+"weight": "250",
+"style": "normal",
+"bytes": 19008
+}
+]
+},
+{
+"family": "Barlow Condensed",
+"slug": "barlow-condensed",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"condensed",
+"poster"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Barlow+Condensed",
+"wmin": 250,
+"wmax": 900,
+"weights": [
+250,
+275,
+300,
+400,
+500,
+600,
+700,
+800,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/barlow-condensed-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 17360
+},
+{
+"url": "/fonts/barlow-condensed-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 18572
+},
+{
+"url": "/fonts/barlow-condensed-2.woff2",
+"weight": "800",
+"style": "normal",
+"bytes": 18508
+},
+{
+"url": "/fonts/barlow-condensed-3.woff2",
+"weight": "275",
+"style": "normal",
+"bytes": 18164
+},
+{
+"url": "/fonts/barlow-condensed-4.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 18292
+},
+{
+"url": "/fonts/barlow-condensed-5.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 18316
+},
+{
+"url": "/fonts/barlow-condensed-6.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 18376
+},
+{
+"url": "/fonts/barlow-condensed-7.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 18560
+},
+{
+"url": "/fonts/barlow-condensed-8.woff2",
+"weight": "250",
+"style": "normal",
+"bytes": 17964
+}
+]
+},
+{
+"family": "Chivo",
+"slug": "chivo",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"neo-grotesk"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Chivo+Medium",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/chivo-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 39076
+}
+]
+},
+{
+"family": "Comfortaa",
+"slug": "comfortaa",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"rounded",
+"friendly"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Comfortaa",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/comfortaa-0.woff2",
+"weight": "300 700",
+"style": "normal",
+"bytes": 33108
+}
+]
+},
+{
+"family": "Exo 2",
+"slug": "exo-2",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"tech",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Exo+2",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/exo-2-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 50864
+}
+]
+},
+{
+"family": "Josefin Sans",
+"slug": "josefin-sans",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"elegant",
+"retro"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Josefin+Sans+Thin",
+"wmin": 100,
+"wmax": 700,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/josefin-sans-0.woff2",
+"weight": "100 700",
+"style": "normal",
+"bytes": 31720
+}
+]
+},
+{
+"family": "Jost",
+"slug": "jost",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"bauhaus",
+"retro"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Jost",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/jost-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 34684
+}
+]
+},
+{
+"family": "Lexend",
+"slug": "lexend",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"readable",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Lexend",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/lexend-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 43884
+}
+]
+},
+{
+"family": "Maven Pro",
+"slug": "maven-pro",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Maven+Pro",
+"wmin": 400,
+"wmax": 900,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/maven-pro-0.woff2",
+"weight": "400 900",
+"style": "normal",
+"bytes": 21544
+}
+]
+},
+{
+"family": "Montserrat",
+"slug": "montserrat",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Montserrat+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/montserrat-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 62168
+}
+]
+},
+{
+"family": "Nunito Sans",
+"slug": "nunito-sans",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"friendly"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Nunito+Sans+12pt+ExtraLight",
+"wmin": 200,
+"wmax": 1000,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/nunito-sans-0.woff2",
+"weight": "200 1000",
+"style": "normal",
+"bytes": 91460
+}
+]
+},
+{
+"family": "Orbitron",
+"slug": "orbitron",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"tech",
+"futuristic"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Orbitron",
+"wmin": 400,
+"wmax": 900,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/orbitron-0.woff2",
+"weight": "400 900",
+"style": "normal",
+"bytes": 14480
+}
+]
+},
+{
+"family": "Outfit",
+"slug": "outfit",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Outfit+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/outfit-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 39108
+}
+]
+},
+{
+"family": "Poppins",
+"slug": "poppins",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"friendly"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Poppins",
+"wmin": 250,
+"wmax": 900,
+"weights": [
+250,
+275,
+300,
+400,
+500,
+600,
+700,
+800,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/poppins-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 10132
+},
+{
+"url": "/fonts/poppins-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 10364
+},
+{
+"url": "/fonts/poppins-2.woff2",
+"weight": "800",
+"style": "normal",
+"bytes": 10512
+},
+{
+"url": "/fonts/poppins-3.woff2",
+"weight": "275",
+"style": "normal",
+"bytes": 10480
+},
+{
+"url": "/fonts/poppins-4.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 10456
+},
+{
+"url": "/fonts/poppins-5.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 10364
+},
+{
+"url": "/fonts/poppins-6.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 10580
+},
+{
+"url": "/fonts/poppins-7.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 10732
+},
+{
+"url": "/fonts/poppins-8.woff2",
+"weight": "250",
+"style": "normal",
+"bytes": 9892
+}
+]
+},
+{
+"family": "Quicksand",
+"slug": "quicksand",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"friendly",
+"rounded"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Quicksand+Light",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/quicksand-0.woff2",
+"weight": "300 700",
+"style": "normal",
+"bytes": 31588
+}
+]
+},
+{
+"family": "Raleway",
+"slug": "raleway",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"elegant"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Raleway+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/raleway-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 64704
+}
+]
+},
+{
+"family": "Rounded Mplus 1c",
+"slug": "m-plus-rounded-1c",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"rounded",
+"cjk-latin"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Rounded+Mplus+1c",
+"wmin": 250,
+"wmax": 900,
+"weights": [
+250,
+300,
+400,
+500,
+700,
+800,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/m-plus-rounded-1c-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 17648
+},
+{
+"url": "/fonts/m-plus-rounded-1c-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 18724
+},
+{
+"url": "/fonts/m-plus-rounded-1c-2.woff2",
+"weight": "800",
+"style": "normal",
+"bytes": 18612
+},
+{
+"url": "/fonts/m-plus-rounded-1c-3.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 17980
+},
+{
+"url": "/fonts/m-plus-rounded-1c-4.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 18072
+},
+{
+"url": "/fonts/m-plus-rounded-1c-5.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 18216
+},
+{
+"url": "/fonts/m-plus-rounded-1c-6.woff2",
+"weight": "250",
+"style": "normal",
+"bytes": 16220
+}
+]
+},
+{
+"family": "Syne",
+"slug": "syne",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"display",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Syne",
+"wmin": 400,
+"wmax": 800,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/syne-0.woff2",
+"weight": "400 800",
+"style": "normal",
+"bytes": 43740
+}
+]
+},
+{
+"family": "Titillium Web",
+"slug": "titillium-web",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Titillium+Web",
+"wmin": 275,
+"wmax": 900,
+"weights": [
+275,
+300,
+400,
+600,
+700,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/titillium-web-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 13432
+},
+{
+"url": "/fonts/titillium-web-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 16264
+},
+{
+"url": "/fonts/titillium-web-2.woff2",
+"weight": "275",
+"style": "normal",
+"bytes": 16908
+},
+{
+"url": "/fonts/titillium-web-3.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 17312
+},
+{
+"url": "/fonts/titillium-web-4.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 17376
+},
+{
+"url": "/fonts/titillium-web-5.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 17144
+}
+]
+},
+{
+"family": "Unbounded",
+"slug": "unbounded",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"display",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Unbounded",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/unbounded-0.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 80020
+}
+]
+},
+{
+"family": "Urbanist",
+"slug": "urbanist",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"modern"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Urbanist",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/urbanist-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 29636
+}
+]
+},
+{
+"family": "Varela Round",
+"slug": "varela-round",
+"group": "geometric-sans",
+"tags": [
+"geometric",
+"rounded",
+"friendly"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Varela+Round",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/varela-round-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 17188
+}
+]
+},
+{
+"family": "Bitter",
+"slug": "bitter",
+"group": "classic-serif",
+"tags": [
+"slab",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Bitter+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/bitter-0-i.woff2",
+"weight": "100 900",
+"style": "italic",
+"bytes": 48144
+},
+{
+"url": "/fonts/bitter-1.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 49356
+}
+]
+},
+{
+"family": "Brygada 1918",
+"slug": "brygada-1918",
+"group": "classic-serif",
+"tags": [
+"old-style",
+"retro",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Brygada+1918",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/brygada-1918-0-i.woff2",
+"weight": "400 700",
+"style": "italic",
+"bytes": 38800
+},
+{
+"url": "/fonts/brygada-1918-1.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 36512
+}
+]
+},
+{
+"family": "Cardo",
+"slug": "cardo",
+"group": "classic-serif",
+"tags": [
+"old-style",
+"scholarly"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Cardo",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/cardo-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 20764
+},
+{
+"url": "/fonts/cardo-1-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 23340
+},
+{
+"url": "/fonts/cardo-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 27120
+}
+]
+},
+{
+"family": "Cormorant Garamond",
+"slug": "cormorant-garamond",
+"group": "classic-serif",
+"tags": [
+"old-style",
+"editorial",
+"elegant"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Cormorant+Garamond+Light",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/cormorant-garamond-0-i.woff2",
+"weight": "300 700",
+"style": "italic",
+"bytes": 58264
+},
+{
+"url": "/fonts/cormorant-garamond-1.woff2",
+"weight": "300 700",
+"style": "normal",
+"bytes": 80340
+}
+]
+},
+{
+"family": "Cormorant",
+"slug": "cormorant",
+"group": "classic-serif",
+"tags": [
+"old-style",
+"editorial",
+"elegant",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Cormorant+Light",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/cormorant-0-i.woff2",
+"weight": "300 700",
+"style": "italic",
+"bytes": 53344
+},
+{
+"url": "/fonts/cormorant-1.woff2",
+"weight": "300 700",
+"style": "normal",
+"bytes": 72384
+}
+]
+},
+{
+"family": "Crimson Pro",
+"slug": "crimson-pro",
+"group": "classic-serif",
+"tags": [
+"old-style",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Crimson+Pro",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/crimson-pro-0-i.woff2",
+"weight": "200 900",
+"style": "italic",
+"bytes": 58992
+},
+{
+"url": "/fonts/crimson-pro-1.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 55924
+}
+]
+},
+{
+"family": "EB Garamond",
+"slug": "eb-garamond",
+"group": "classic-serif",
+"tags": [
+"old-style",
+"editorial",
+"elegant"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/EB+Garamond",
+"wmin": 400,
+"wmax": 800,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/eb-garamond-0-i.woff2",
+"weight": "400 800",
+"style": "italic",
+"bytes": 133360
+},
+{
+"url": "/fonts/eb-garamond-1.woff2",
+"weight": "400 800",
+"style": "normal",
+"bytes": 117872
+}
+]
+},
+{
+"family": "Gentium Plus",
+"slug": "gentium-plus",
+"group": "classic-serif",
+"tags": [
+"old-style",
+"multilingual"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Gentium+Plus",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/gentium-plus-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 27416
+},
+{
+"url": "/fonts/gentium-plus-1-i.woff2",
+"weight": "700",
+"style": "italic",
+"bytes": 31264
+},
+{
+"url": "/fonts/gentium-plus-2-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 29568
+},
+{
+"url": "/fonts/gentium-plus-3.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 26392
+}
+]
+},
+{
+"family": "Josefin Slab",
+"slug": "josefin-slab",
+"group": "classic-serif",
+"tags": [
+"slab",
+"elegant",
+"retro"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Josefin+Slab+Thin",
+"wmin": 100,
+"wmax": 700,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/josefin-slab-0-i.woff2",
+"weight": "100 700",
+"style": "italic",
+"bytes": 21232
+},
+{
+"url": "/fonts/josefin-slab-1.woff2",
+"weight": "100 700",
+"style": "normal",
+"bytes": 20044
+}
+]
+},
+{
+"family": "Libre Baskerville",
+"slug": "libre-baskerville",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Libre+Baskerville",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/libre-baskerville-0-i.woff2",
+"weight": "400 700",
+"style": "italic",
+"bytes": 38520
+},
+{
+"url": "/fonts/libre-baskerville-1.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 41084
+}
+]
+},
+{
+"family": "Libre Caslon Display",
+"slug": "libre-caslon-display",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"display",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Libre+Caslon+Display",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/libre-caslon-display-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 19952
+}
+]
+},
+{
+"family": "Libre Caslon Text",
+"slug": "libre-caslon-text",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Libre+Caslon+Text",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/libre-caslon-text-0-i.woff2",
+"weight": "400 700",
+"style": "italic",
+"bytes": 55080
+},
+{
+"url": "/fonts/libre-caslon-text-1.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 49560
+}
+]
+},
+{
+"family": "Literata",
+"slug": "literata",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"editorial",
+"book"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Literata",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/literata-0-i.woff2",
+"weight": "200 900",
+"style": "italic",
+"bytes": 180804
+},
+{
+"url": "/fonts/literata-1.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 180540
+}
+]
+},
+{
+"family": "Lora",
+"slug": "lora",
+"group": "classic-serif",
+"tags": [
+"old-style",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Lora",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/lora-0-i.woff2",
+"weight": "400 700",
+"style": "italic",
+"bytes": 44584
+},
+{
+"url": "/fonts/lora-1.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 41052
+}
+]
+},
+{
+"family": "Merriweather",
+"slug": "merriweather",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Merriweather+Light",
+"wmin": 300,
+"wmax": 900,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/merriweather-0-i.woff2",
+"weight": "300 900",
+"style": "italic",
+"bytes": 960136
+},
+{
+"url": "/fonts/merriweather-1.woff2",
+"weight": "300 900",
+"style": "normal",
+"bytes": 976480
+}
+]
+},
+{
+"family": "Newsreader",
+"slug": "newsreader",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"editorial",
+"newspaper"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Newsreader+16pt",
+"wmin": 200,
+"wmax": 800,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/newsreader-0-i.woff2",
+"weight": "200 800",
+"style": "italic",
+"bytes": 181452
+},
+{
+"url": "/fonts/newsreader-1.woff2",
+"weight": "200 800",
+"style": "normal",
+"bytes": 160216
+}
+]
+},
+{
+"family": "Noto Serif",
+"slug": "noto-serif",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"multilingual"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Noto+Serif",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/noto-serif-0-i.woff2",
+"weight": "100 900",
+"style": "italic",
+"bytes": 132600
+},
+{
+"url": "/fonts/noto-serif-1.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 101608
+}
+]
+},
+{
+"family": "Petrona",
+"slug": "petrona",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Petrona",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/petrona-0-i.woff2",
+"weight": "100 900",
+"style": "italic",
+"bytes": 54992
+},
+{
+"url": "/fonts/petrona-1.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 50204
+}
+]
+},
+{
+"family": "PT Serif",
+"slug": "pt-serif",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/PT+Serif",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/pt-serif-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 18324
+},
+{
+"url": "/fonts/pt-serif-1-i.woff2",
+"weight": "700",
+"style": "italic",
+"bytes": 19256
+},
+{
+"url": "/fonts/pt-serif-2-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 19336
+},
+{
+"url": "/fonts/pt-serif-3.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 18220
+}
+]
+},
+{
+"family": "Roboto Slab",
+"slug": "roboto-slab",
+"group": "classic-serif",
+"tags": [
+"slab",
+"editorial"
+],
+"cjk": false,
+"license": "Apache 2.0",
+"source": "https://fonts.google.com/specimen/Roboto+Slab",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/roboto-slab-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 51588
+}
+]
+},
+{
+"family": "Source Serif 4",
+"slug": "source-serif-4",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Source+Serif+4",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/source-serif-4-0-i.woff2",
+"weight": "200 900",
+"style": "italic",
+"bytes": 183568
+},
+{
+"url": "/fonts/source-serif-4-1.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 216804
+}
+]
+},
+{
+"family": "Spectral",
+"slug": "spectral",
+"group": "classic-serif",
+"tags": [
+"transitional",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Spectral",
+"wmin": 200,
+"wmax": 800,
+"weights": [
+200,
+300,
+400,
+500,
+600,
+700,
+800
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/spectral-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 27644
+},
+{
+"url": "/fonts/spectral-1-i.woff2",
+"weight": "700",
+"style": "italic",
+"bytes": 29276
+},
+{
+"url": "/fonts/spectral-2.woff2",
+"weight": "800",
+"style": "normal",
+"bytes": 25832
+},
+{
+"url": "/fonts/spectral-3-i.woff2",
+"weight": "800",
+"style": "italic",
+"bytes": 27460
+},
+{
+"url": "/fonts/spectral-4.woff2",
+"weight": "200",
+"style": "normal",
+"bytes": 25188
+},
+{
+"url": "/fonts/spectral-5-i.woff2",
+"weight": "200",
+"style": "italic",
+"bytes": 27020
+},
+{
+"url": "/fonts/spectral-6-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 27300
+},
+{
+"url": "/fonts/spectral-7.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 27816
+},
+{
+"url": "/fonts/spectral-8-i.woff2",
+"weight": "300",
+"style": "italic",
+"bytes": 29092
+},
+{
+"url": "/fonts/spectral-9.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 27660
+},
+{
+"url": "/fonts/spectral-10-i.woff2",
+"weight": "500",
+"style": "italic",
+"bytes": 29608
+},
+{
+"url": "/fonts/spectral-11.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 25748
+},
+{
+"url": "/fonts/spectral-12.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 27612
+},
+{
+"url": "/fonts/spectral-13-i.woff2",
+"weight": "600",
+"style": "italic",
+"bytes": 29820
+}
+]
+},
+{
+"family": "Zilla Slab",
+"slug": "zilla-slab",
+"group": "classic-serif",
+"tags": [
+"slab",
+"editorial",
+"retro"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Zilla+Slab",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300,
+400,
+500,
+600,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/zilla-slab-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 32432
+},
+{
+"url": "/fonts/zilla-slab-1-i.woff2",
+"weight": "700",
+"style": "italic",
+"bytes": 34472
+},
+{
+"url": "/fonts/zilla-slab-2-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 34304
+},
+{
+"url": "/fonts/zilla-slab-3.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 32312
+},
+{
+"url": "/fonts/zilla-slab-4-i.woff2",
+"weight": "300",
+"style": "italic",
+"bytes": 33652
+},
+{
+"url": "/fonts/zilla-slab-5.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 32988
+},
+{
+"url": "/fonts/zilla-slab-6-i.woff2",
+"weight": "500",
+"style": "italic",
+"bytes": 34812
+},
+{
+"url": "/fonts/zilla-slab-7.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 32784
+},
+{
+"url": "/fonts/zilla-slab-8.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 32824
+},
+{
+"url": "/fonts/zilla-slab-9-i.woff2",
+"weight": "600",
+"style": "italic",
+"bytes": 34916
+}
+]
+},
+{
+"family": "Abril Fatface",
+"slug": "abril-fatface",
+"group": "display-serif",
+"tags": [
+"display",
+"didone",
+"poster"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Abril+Fatface",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/abril-fatface-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 17052
+}
+]
+},
+{
+"family": "Bodoni Moda",
+"slug": "bodoni-moda",
+"group": "display-serif",
+"tags": [
+"didone",
+"editorial",
+"elegant",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Bodoni+Moda",
+"wmin": 400,
+"wmax": 900,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/bodoni-moda-0-i.woff2",
+"weight": "400 900",
+"style": "italic",
+"bytes": 73464
+},
+{
+"url": "/fonts/bodoni-moda-1.woff2",
+"weight": "400 900",
+"style": "normal",
+"bytes": 62360
+}
+]
+},
+{
+"family": "Caladea",
+"slug": "caladea",
+"group": "display-serif",
+"tags": [
+"transitional",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Caladea",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/caladea-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 15524
+},
+{
+"url": "/fonts/caladea-1-i.woff2",
+"weight": "700",
+"style": "italic",
+"bytes": 17088
+},
+{
+"url": "/fonts/caladea-2-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 17088
+},
+{
+"url": "/fonts/caladea-3.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 15752
+}
+]
+},
+{
+"family": "Cinzel",
+"slug": "cinzel",
+"group": "display-serif",
+"tags": [
+"display",
+"elegant",
+"classical"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Cinzel",
+"wmin": 400,
+"wmax": 900,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/cinzel-0.woff2",
+"weight": "400 900",
+"style": "normal",
+"bytes": 41672
+}
+]
+},
+{
+"family": "Cinzel Decorative",
+"slug": "cinzel-decorative",
+"group": "display-serif",
+"tags": [
+"display",
+"elegant",
+"decorative"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Cinzel+Decorative",
+"wmin": 400,
+"wmax": 900,
+"weights": [
+400,
+700,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/cinzel-decorative-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 16864
+},
+{
+"url": "/fonts/cinzel-decorative-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 18052
+},
+{
+"url": "/fonts/cinzel-decorative-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 16644
+}
+]
+},
+{
+"family": "DM Serif Display",
+"slug": "dm-serif-display",
+"group": "display-serif",
+"tags": [
+"didone",
+"display",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/DM+Serif+Display",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/dm-serif-display-0-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 20056
+},
+{
+"url": "/fonts/dm-serif-display-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 20056
+}
+]
+},
+{
+"family": "DM Serif Text",
+"slug": "dm-serif-text",
+"group": "display-serif",
+"tags": [
+"didone",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/DM+Serif+Text",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/dm-serif-text-0-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 19552
+},
+{
+"url": "/fonts/dm-serif-text-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 19460
+}
+]
+},
+{
+"family": "Fraunces",
+"slug": "fraunces",
+"group": "display-serif",
+"tags": [
+"display",
+"editorial",
+"playful",
+"soft"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Fraunces",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/fraunces-0-i.woff2",
+"weight": "100 900",
+"style": "italic",
+"bytes": 174072
+},
+{
+"url": "/fonts/fraunces-1.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 143628
+}
+]
+},
+{
+"family": "Gloock",
+"slug": "gloock",
+"group": "display-serif",
+"tags": [
+"display",
+"editorial",
+"elegant"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Gloock",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/gloock-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 18720
+}
+]
+},
+{
+"family": "Ibarra Real Nova",
+"slug": "ibarra-real-nova",
+"group": "display-serif",
+"tags": [
+"transitional",
+"editorial",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Ibarra+Real+Nova",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/ibarra-real-nova-0-i.woff2",
+"weight": "400 700",
+"style": "italic",
+"bytes": 41872
+},
+{
+"url": "/fonts/ibarra-real-nova-1.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 38396
+}
+]
+},
+{
+"family": "Instrument Serif",
+"slug": "instrument-serif",
+"group": "display-serif",
+"tags": [
+"editorial",
+"display",
+"elegant"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Instrument+Serif",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/instrument-serif-0-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 17820
+},
+{
+"url": "/fonts/instrument-serif-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 17352
+}
+]
+},
+{
+"family": "Oranienbaum",
+"slug": "oranienbaum",
+"group": "display-serif",
+"tags": [
+"didone",
+"editorial",
+"elegant"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Oranienbaum",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/oranienbaum-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 13072
+}
+]
+},
+{
+"family": "Playfair Display",
+"slug": "playfair-display",
+"group": "display-serif",
+"tags": [
+"didone",
+"editorial",
+"elegant",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Playfair+Display",
+"wmin": 400,
+"wmax": 900,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/playfair-display-0-i.woff2",
+"weight": "400 900",
+"style": "italic",
+"bytes": 57580
+},
+{
+"url": "/fonts/playfair-display-1.woff2",
+"weight": "400 900",
+"style": "normal",
+"bytes": 59592
+}
+]
+},
+{
+"family": "Prata",
+"slug": "prata",
+"group": "display-serif",
+"tags": [
+"didone",
+"display",
+"elegant"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Prata",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/prata-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 11088
+}
+]
+},
+{
+"family": "Rozha One",
+"slug": "rozha-one",
+"group": "display-serif",
+"tags": [
+"didone",
+"display",
+"poster"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Rozha+One",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/rozha-one-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 12268
+}
+]
+},
+{
+"family": "Rufina",
+"slug": "rufina",
+"group": "display-serif",
+"tags": [
+"didone",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Rufina",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/rufina-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 12736
+},
+{
+"url": "/fonts/rufina-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 12764
+}
+]
+},
+{
+"family": "Ultra",
+"slug": "ultra",
+"group": "display-serif",
+"tags": [
+"display",
+"slab",
+"poster",
+"retro"
+],
+"cjk": false,
+"license": "Apache 2.0",
+"source": "https://fonts.google.com/specimen/Ultra",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/ultra-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 16376
+}
+]
+},
+{
+"family": "Unna",
+"slug": "unna",
+"group": "display-serif",
+"tags": [
+"didone",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Unna",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/unna-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 14436
+},
+{
+"url": "/fonts/unna-1-i.woff2",
+"weight": "700",
+"style": "italic",
+"bytes": 16424
+},
+{
+"url": "/fonts/unna-2-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 15888
+},
+{
+"url": "/fonts/unna-3.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 14012
+}
+]
+},
+{
+"family": "Yeseva One",
+"slug": "yeseva-one",
+"group": "display-serif",
+"tags": [
+"display",
+"elegant",
+"decorative"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Yeseva+One",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/yeseva-one-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 11656
+}
+]
+},
+{
+"family": "Young Serif",
+"slug": "young-serif",
+"group": "display-serif",
+"tags": [
+"display",
+"editorial",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Young+Serif",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/young-serif-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 20716
+}
+]
+},
+{
+"family": "Azeret Mono",
+"slug": "azeret-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Azeret+Mono+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/azeret-mono-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 36624
+}
+]
+},
+{
+"family": "DM Mono",
+"slug": "dm-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/DM+Mono+Light",
+"wmin": 300,
+"wmax": 500,
+"weights": [
+300,
+400,
+500
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/dm-mono-0.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 9944
+},
+{
+"url": "/fonts/dm-mono-1.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 10100
+},
+{
+"url": "/fonts/dm-mono-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 9972
+}
+]
+},
+{
+"family": "Fira Code",
+"slug": "fira-code",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"coding",
+"ligatures"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Fira+Code+Light",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/fira-code-0.woff2",
+"weight": "300 700",
+"style": "normal",
+"bytes": 41324
+}
+]
+},
+{
+"family": "Fragment Mono",
+"slug": "fragment-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Fragment+Mono",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/fragment-mono-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 19140
+}
+]
+},
+{
+"family": "Geist Mono",
+"slug": "geist-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"coding",
+"ui"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/vercel/geist-font",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/geist-mono-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 36892
+}
+]
+},
+{
+"family": "IBM Plex Mono",
+"slug": "ibm-plex-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"coding"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/IBM+Plex+Mono",
+"wmin": 100,
+"wmax": 700,
+"weights": [
+100,
+200,
+300,
+400,
+500,
+600,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/ibm-plex-mono-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 12296
+},
+{
+"url": "/fonts/ibm-plex-mono-1.woff2",
+"weight": "200",
+"style": "normal",
+"bytes": 12400
+},
+{
+"url": "/fonts/ibm-plex-mono-2.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 12348
+},
+{
+"url": "/fonts/ibm-plex-mono-3.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 12316
+},
+{
+"url": "/fonts/ibm-plex-mono-4.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 12196
+},
+{
+"url": "/fonts/ibm-plex-mono-5.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 12524
+},
+{
+"url": "/fonts/ibm-plex-mono-6.woff2",
+"weight": "100",
+"style": "normal",
+"bytes": 12048
+}
+]
+},
+{
+"family": "Inconsolata",
+"slug": "inconsolata",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"coding"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Inconsolata",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/inconsolata-0.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 84748
+}
+]
+},
+{
+"family": "JetBrains Mono",
+"slug": "jetbrains-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"coding"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/JetBrains+Mono",
+"wmin": 100,
+"wmax": 800,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/jetbrains-mono-0.woff2",
+"weight": "100 800",
+"style": "normal",
+"bytes": 43876
+}
+]
+},
+{
+"family": "Martian Mono",
+"slug": "martian-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"coding"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Martian+Mono+SemiExpanded",
+"wmin": 100,
+"wmax": 800,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/martian-mono-0.woff2",
+"weight": "100 800",
+"style": "normal",
+"bytes": 44776
+}
+]
+},
+{
+"family": "Noto Sans Mono",
+"slug": "noto-sans-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"multilingual"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Noto+Sans+Mono",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/noto-sans-mono-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 84784
+}
+]
+},
+{
+"family": "Red Hat Mono",
+"slug": "red-hat-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Red+Hat+Mono",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/red-hat-mono-0.woff2",
+"weight": "300 700",
+"style": "normal",
+"bytes": 26704
+}
+]
+},
+{
+"family": "Roboto Mono",
+"slug": "roboto-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Roboto+Mono",
+"wmin": 100,
+"wmax": 700,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/roboto-mono-0.woff2",
+"weight": "100 700",
+"style": "normal",
+"bytes": 45340
+}
+]
+},
+{
+"family": "Source Code Pro",
+"slug": "source-code-pro",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"coding"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Source+Code+Pro+ExtraLight",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/source-code-pro-0.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 31404
+}
+]
+},
+{
+"family": "Space Mono",
+"slug": "space-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech",
+"retro"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Space+Mono",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/space-mono-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 12912
+},
+{
+"url": "/fonts/space-mono-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 12736
+}
+]
+},
+{
+"family": "Ubuntu Mono",
+"slug": "ubuntu-mono",
+"group": "monospace",
+"tags": [
+"mono",
+"tech"
+],
+"cjk": false,
+"license": "Ubuntu Font License",
+"source": "https://fonts.google.com/specimen/Ubuntu+Mono",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/ubuntu-mono-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 14428
+},
+{
+"url": "/fonts/ubuntu-mono-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 14568
+}
+]
+},
+{
+"family": "Alfa Slab One",
+"slug": "alfa-slab-one",
+"group": "condensed-display",
+"tags": [
+"display",
+"slab",
+"poster",
+"retro"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Alfa+Slab+One",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/alfa-slab-one-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 12248
+}
+]
+},
+{
+"family": "Anton",
+"slug": "anton",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"poster",
+"display",
+"brutalist"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Anton",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/anton-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 16052
+}
+]
+},
+{
+"family": "Anybody",
+"slug": "anybody",
+"group": "condensed-display",
+"tags": [
+"display",
+"variable",
+"experimental"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Anybody+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/anybody-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 62456
+}
+]
+},
+{
+"family": "Archivo Black",
+"slug": "archivo-black",
+"group": "condensed-display",
+"tags": [
+"display",
+"poster",
+"brutalist"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Archivo+Black",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/archivo-black-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 12332
+}
+]
+},
+{
+"family": "Archivo Narrow",
+"slug": "archivo-narrow",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"neo-grotesk"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Archivo+Narrow",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/archivo-narrow-0.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 22088
+}
+]
+},
+{
+"family": "Bebas Neue",
+"slug": "bebas-neue",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"poster",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Bebas+Neue",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/bebas-neue-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 9496
+}
+]
+},
+{
+"family": "Big Shoulders Display",
+"slug": "big-shoulders-display",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"poster",
+"display",
+"retro"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Big+Shoulders+Display+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/big-shoulders-display-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 51240
+}
+]
+},
+{
+"family": "Big Shoulders Text",
+"slug": "big-shoulders-text",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Big+Shoulders+Text+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/big-shoulders-text-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 52424
+}
+]
+},
+{
+"family": "Black Ops One",
+"slug": "black-ops-one",
+"group": "condensed-display",
+"tags": [
+"display",
+"poster",
+"military"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Black+Ops+One",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/black-ops-one-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 27708
+}
+]
+},
+{
+"family": "Bowlby One SC",
+"slug": "bowlby-one-sc",
+"group": "condensed-display",
+"tags": [
+"display",
+"poster",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Bowlby+One+SC",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/bowlby-one-sc-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 21272
+}
+]
+},
+{
+"family": "Bungee",
+"slug": "bungee",
+"group": "condensed-display",
+"tags": [
+"display",
+"poster",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Bungee",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/bungee-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 28452
+}
+]
+},
+{
+"family": "Bungee Shade",
+"slug": "bungee-shade",
+"group": "condensed-display",
+"tags": [
+"display",
+"poster",
+"decorative"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Bungee+Shade",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/bungee-shade-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 61104
+}
+]
+},
+{
+"family": "Fjalla One",
+"slug": "fjalla-one",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"display",
+"poster"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Fjalla+One",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/fjalla-one-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 49760
+}
+]
+},
+{
+"family": "Francois One",
+"slug": "francois-one",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Francois+One",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/francois-one-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 13384
+}
+]
+},
+{
+"family": "League Gothic Condensed",
+"slug": "league-gothic",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"poster",
+"display",
+"brutalist"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/theleagueof/league-gothic",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/league-gothic-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 12440
+},
+{
+"url": "/fonts/league-gothic-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 10960
+},
+{
+"url": "/fonts/league-gothic-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 13388
+},
+{
+"url": "/fonts/league-gothic-3.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 11120
+}
+]
+},
+{
+"family": "Lilita One",
+"slug": "lilita-one",
+"group": "condensed-display",
+"tags": [
+"display",
+"poster",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Lilita+One",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/lilita-one-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 10192
+}
+]
+},
+{
+"family": "Oswald",
+"slug": "oswald",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"poster",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Oswald",
+"wmin": 200,
+"wmax": 700,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/oswald-0.woff2",
+"weight": "200 700",
+"style": "normal",
+"bytes": 31284
+}
+]
+},
+{
+"family": "Passion One",
+"slug": "passion-one",
+"group": "condensed-display",
+"tags": [
+"display",
+"poster",
+"bold"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Passion+One",
+"wmin": 400,
+"wmax": 900,
+"weights": [
+400,
+700,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/passion-one-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 7548
+},
+{
+"url": "/fonts/passion-one-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 7800
+},
+{
+"url": "/fonts/passion-one-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 7896
+}
+]
+},
+{
+"family": "Pathway Extreme",
+"slug": "pathway-extreme",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Pathway+Extreme+8pt+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/pathway-extreme-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 115704
+}
+]
+},
+{
+"family": "Russo One",
+"slug": "russo-one",
+"group": "condensed-display",
+"tags": [
+"display",
+"poster",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Russo+One",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/russo-one-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 9068
+}
+]
+},
+{
+"family": "Saira Condensed",
+"slug": "saira-condensed",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Saira+Condensed",
+"wmin": 250,
+"wmax": 900,
+"weights": [
+250,
+275,
+300,
+400,
+500,
+600,
+700,
+800,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/saira-condensed-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 15056
+},
+{
+"url": "/fonts/saira-condensed-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 15372
+},
+{
+"url": "/fonts/saira-condensed-2.woff2",
+"weight": "800",
+"style": "normal",
+"bytes": 15256
+},
+{
+"url": "/fonts/saira-condensed-3.woff2",
+"weight": "275",
+"style": "normal",
+"bytes": 15644
+},
+{
+"url": "/fonts/saira-condensed-4.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 15600
+},
+{
+"url": "/fonts/saira-condensed-5.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 15544
+},
+{
+"url": "/fonts/saira-condensed-6.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 15612
+},
+{
+"url": "/fonts/saira-condensed-7.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 15332
+},
+{
+"url": "/fonts/saira-condensed-8.woff2",
+"weight": "250",
+"style": "normal",
+"bytes": 15228
+}
+]
+},
+{
+"family": "Saira ExtraCondensed",
+"slug": "saira-extra-condensed",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"display",
+"poster"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Saira+ExtraCondensed",
+"wmin": 250,
+"wmax": 900,
+"weights": [
+250,
+275,
+300,
+400,
+500,
+600,
+700,
+800,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/saira-extra-condensed-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 14644
+},
+{
+"url": "/fonts/saira-extra-condensed-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 15104
+},
+{
+"url": "/fonts/saira-extra-condensed-2.woff2",
+"weight": "800",
+"style": "normal",
+"bytes": 14964
+},
+{
+"url": "/fonts/saira-extra-condensed-3.woff2",
+"weight": "275",
+"style": "normal",
+"bytes": 15364
+},
+{
+"url": "/fonts/saira-extra-condensed-4.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 15272
+},
+{
+"url": "/fonts/saira-extra-condensed-5.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 15176
+},
+{
+"url": "/fonts/saira-extra-condensed-6.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 15064
+},
+{
+"url": "/fonts/saira-extra-condensed-7.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 15088
+},
+{
+"url": "/fonts/saira-extra-condensed-8.woff2",
+"weight": "250",
+"style": "normal",
+"bytes": 14824
+}
+]
+},
+{
+"family": "Six Caps",
+"slug": "six-caps",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"poster",
+"display",
+"ultra"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Six+Caps",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/six-caps-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 8992
+}
+]
+},
+{
+"family": "Staatliches",
+"slug": "staatliches",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"poster",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Staatliches",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/staatliches-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 12536
+}
+]
+},
+{
+"family": "Teko",
+"slug": "teko",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"display",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Teko+Light",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/teko-0.woff2",
+"weight": "300 700",
+"style": "normal",
+"bytes": 17004
+}
+]
+},
+{
+"family": "Yanone Kaffeesatz",
+"slug": "yanone-kaffeesatz",
+"group": "condensed-display",
+"tags": [
+"condensed",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Yanone+Kaffeesatz+ExtraLight",
+"wmin": 200,
+"wmax": 700,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/yanone-kaffeesatz-0.woff2",
+"weight": "200 700",
+"style": "normal",
+"bytes": 30204
+}
+]
+},
+{
+"family": "Basteleur Moonlight",
+"slug": "basteleur",
+"group": "experimental",
+"tags": [
+"experimental",
+"display",
+"editorial",
+"brutalist"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/falsumit/Basteleur",
+"wmin": 300,
+"wmax": 400,
+"weights": [
+300,
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/basteleur-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 28188
+},
+{
+"url": "/fonts/basteleur-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 26476
+},
+{
+"url": "/fonts/basteleur-2.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 26192
+},
+{
+"url": "/fonts/basteleur-3.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 22824
+}
+]
+},
+{
+"family": "Bluu Next",
+"slug": "bluu-next",
+"group": "experimental",
+"tags": [
+"experimental",
+"serif",
+"display",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/BluuNext",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+600,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/bluu-next-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 14688
+},
+{
+"url": "/fonts/bluu-next-1.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 12072
+},
+{
+"url": "/fonts/bluu-next-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 10160
+},
+{
+"url": "/fonts/bluu-next-3.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 10792
+}
+]
+},
+{
+"family": "Boeticher",
+"slug": "boeticher",
+"group": "experimental",
+"tags": [
+"experimental",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/Boeticher",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/boeticher-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 3032
+},
+{
+"url": "/fonts/boeticher-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 2760
+}
+]
+},
+{
+"family": "Daubenton",
+"slug": "daubenton",
+"group": "experimental",
+"tags": [
+"experimental",
+"serif",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/Daubenton",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/daubenton-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 6920
+},
+{
+"url": "/fonts/daubenton-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 4696
+},
+{
+"url": "/fonts/daubenton-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 4948
+}
+]
+},
+{
+"family": "Fanwood",
+"slug": "fanwood-text",
+"group": "experimental",
+"tags": [
+"old-style",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/theleagueof/fanwood",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/fanwood-text-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 37108
+},
+{
+"url": "/fonts/fanwood-text-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 37580
+}
+]
+},
+{
+"family": "Format_1452",
+"slug": "format-1452",
+"group": "experimental",
+"tags": [
+"experimental",
+"display",
+"brutalist"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/Format_1452",
+"wmin": 500,
+"wmax": 500,
+"weights": [
+500
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/format-1452-0.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 9904
+},
+{
+"url": "/fonts/format-1452-1.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 4428
+}
+]
+},
+{
+"family": "Goudy Bookletter 1911",
+"slug": "goudy-bookletter-1911",
+"group": "experimental",
+"tags": [
+"old-style",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/theleagueof/goudy-bookletter-1911",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/goudy-bookletter-1911-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 13372
+}
+]
+},
+{
+"family": "Junction",
+"slug": "junction",
+"group": "experimental",
+"tags": [
+"geometric",
+"sans"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/theleagueof/junction",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300,
+500,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/junction-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 12648
+},
+{
+"url": "/fonts/junction-1.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 13832
+},
+{
+"url": "/fonts/junction-2.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 12332
+}
+]
+},
+{
+"family": "Knewave Outline",
+"slug": "knewave",
+"group": "experimental",
+"tags": [
+"script",
+"display",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/theleagueof/knewave",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/knewave-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 37872
+},
+{
+"url": "/fonts/knewave-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 18288
+}
+]
+},
+{
+"family": "League Mono Condensed",
+"slug": "league-mono",
+"group": "experimental",
+"tags": [
+"mono",
+"experimental"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/theleagueof/league-mono",
+"wmin": 100,
+"wmax": 800,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/league-mono-0.woff2",
+"weight": "100 800",
+"style": "normal",
+"bytes": 41844
+}
+]
+},
+{
+"family": "League Spartan",
+"slug": "league-spartan",
+"group": "experimental",
+"tags": [
+"geometric",
+"display",
+"poster"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/theleagueof/league-spartan",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200,
+300,
+400,
+500,
+600,
+700,
+800,
+900
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/league-spartan-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 16928
+},
+{
+"url": "/fonts/league-spartan-1.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 12672
+},
+{
+"url": "/fonts/league-spartan-2.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 18172
+},
+{
+"url": "/fonts/league-spartan-3.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 12916
+},
+{
+"url": "/fonts/league-spartan-4.woff2",
+"weight": "800",
+"style": "normal",
+"bytes": 18240
+},
+{
+"url": "/fonts/league-spartan-5.woff2",
+"weight": "800",
+"style": "normal",
+"bytes": 12944
+},
+{
+"url": "/fonts/league-spartan-6.woff2",
+"weight": "200",
+"style": "normal",
+"bytes": 16784
+},
+{
+"url": "/fonts/league-spartan-7.woff2",
+"weight": "200",
+"style": "normal",
+"bytes": 12964
+},
+{
+"url": "/fonts/league-spartan-8.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 18236
+},
+{
+"url": "/fonts/league-spartan-9.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 13184
+},
+{
+"url": "/fonts/league-spartan-10.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 18000
+},
+{
+"url": "/fonts/league-spartan-11.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 12984
+},
+{
+"url": "/fonts/league-spartan-12.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 18104
+},
+{
+"url": "/fonts/league-spartan-13.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 13064
+},
+{
+"url": "/fonts/league-spartan-14.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 18208
+},
+{
+"url": "/fonts/league-spartan-15.woff2",
+"weight": "600",
+"style": "normal",
+"bytes": 12992
+},
+{
+"url": "/fonts/league-spartan-16.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 23968
+}
+]
+},
+{
+"family": "Mourier",
+"slug": "mourier",
+"group": "experimental",
+"tags": [
+"experimental",
+"display",
+"geometric"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/Mourier",
+"wmin": 500,
+"wmax": 500,
+"weights": [
+500
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/mourier-0.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 3748
+}
+]
+},
+{
+"family": "Ostrich Sans",
+"slug": "ostrich-sans",
+"group": "experimental",
+"tags": [
+"display",
+"condensed",
+"poster"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/theleagueof/ostrich-sans",
+"wmin": 300,
+"wmax": 900,
+"weights": [
+300,
+400,
+500,
+700,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/ostrich-sans-0.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 4112
+},
+{
+"url": "/fonts/ostrich-sans-1.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 7116
+},
+{
+"url": "/fonts/ostrich-sans-2.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 35708
+},
+{
+"url": "/fonts/ostrich-sans-3.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 9292
+},
+{
+"url": "/fonts/ostrich-sans-4.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 4072
+},
+{
+"url": "/fonts/ostrich-sans-5.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 4036
+},
+{
+"url": "/fonts/ostrich-sans-6.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 4912
+}
+]
+},
+{
+"family": "Prociono",
+"slug": "prociono",
+"group": "experimental",
+"tags": [
+"serif",
+"editorial"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/theleagueof/prociono",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/prociono-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 9956
+}
+]
+},
+{
+"family": "Runic Sans Inline",
+"slug": "runic",
+"group": "experimental",
+"tags": [
+"experimental",
+"display",
+"decorative"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/runic",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/runic-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 13244
+},
+{
+"url": "/fonts/runic-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 10812
+}
+]
+},
+{
+"family": "Saintjean",
+"slug": "saint-jean",
+"group": "experimental",
+"tags": [
+"experimental",
+"serif",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/saintjean",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/saint-jean-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 82856
+}
+]
+},
+{
+"family": "Sporting Grotesque",
+"slug": "sporting-grotesque",
+"group": "experimental",
+"tags": [
+"experimental",
+"grotesk",
+"display"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/Sporting-Grotesque",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/sporting-grotesque-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 11368
+},
+{
+"url": "/fonts/sporting-grotesque-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 11728
+},
+{
+"url": "/fonts/sporting-grotesque-2.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 10884
+},
+{
+"url": "/fonts/sporting-grotesque-3.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 11048
+},
+{
+"url": "/fonts/sporting-grotesque-4.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 10916
+},
+{
+"url": "/fonts/sporting-grotesque-5.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 10648
+}
+]
+},
+{
+"family": "Terminal Grotesque",
+"slug": "terminal-grotesque",
+"group": "experimental",
+"tags": [
+"experimental",
+"pixel",
+"retro",
+"tech"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/StudioTriple/Terminal-Grotesque",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/terminal-grotesque-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 10936
+},
+{
+"url": "/fonts/terminal-grotesque-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 10452
+},
+{
+"url": "/fonts/terminal-grotesque-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 14128
+}
+]
+},
+{
+"family": "Trickster",
+"slug": "trickster",
+"group": "experimental",
+"tags": [
+"experimental",
+"display",
+"decorative"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/Trickster",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/trickster-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 20556
+},
+{
+"url": "/fonts/trickster-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 18592
+}
+]
+},
+{
+"family": "Typefesse",
+"slug": "typefesse",
+"group": "experimental",
+"tags": [
+"experimental",
+"display",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/Typefesse",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/typefesse-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 23872
+},
+{
+"url": "/fonts/typefesse-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 16232
+}
+]
+},
+{
+"family": "VTF Victorianna",
+"slug": "victorianna",
+"group": "experimental",
+"tags": [
+"experimental",
+"display",
+"elegant",
+"retro"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://github.com/velvetyne/Victorianna",
+"wmin": 200,
+"wmax": 200,
+"weights": [
+200
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/victorianna-0-i.woff2",
+"weight": "200",
+"style": "italic",
+"bytes": 15184
+},
+{
+"url": "/fonts/victorianna-1.woff2",
+"weight": "200",
+"style": "normal",
+"bytes": 15340
+},
+{
+"url": "/fonts/victorianna-2.woff2",
+"weight": "200",
+"style": "normal",
+"bytes": 15412
+},
+{
+"url": "/fonts/victorianna-3-i.woff2",
+"weight": "200",
+"style": "italic",
+"bytes": 13588
+}
+]
+},
+{
+"family": "Amatic SC",
+"slug": "amatic-sc",
+"group": "script",
+"tags": [
+"handwritten",
+"display",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Amatic+SC",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/amatic-sc-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 19768
+},
+{
+"url": "/fonts/amatic-sc-1.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 21436
+}
+]
+},
+{
+"family": "Caveat",
+"slug": "caveat",
+"group": "script",
+"tags": [
+"script",
+"handwritten",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Caveat",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/caveat-0.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 78992
+}
+]
+},
+{
+"family": "Dancing Script",
+"slug": "dancing-script",
+"group": "script",
+"tags": [
+"script",
+"elegant"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Dancing+Script",
+"wmin": 400,
+"wmax": 700,
+"weights": [
+400
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/dancing-script-0.woff2",
+"weight": "400 700",
+"style": "normal",
+"bytes": 48516
+}
+]
+},
+{
+"family": "Great Vibes",
+"slug": "great-vibes",
+"group": "script",
+"tags": [
+"script",
+"elegant",
+"formal"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Great+Vibes",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/great-vibes-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 42152
+}
+]
+},
+{
+"family": "Indie Flower",
+"slug": "indie-flower",
+"group": "script",
+"tags": [
+"handwritten",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Indie+Flower",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/indie-flower-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 18560
+}
+]
+},
+{
+"family": "Kalam",
+"slug": "kalam",
+"group": "script",
+"tags": [
+"handwritten"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Kalam",
+"wmin": 300,
+"wmax": 700,
+"weights": [
+300,
+400,
+700
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/kalam-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 15524
+},
+{
+"url": "/fonts/kalam-1.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 15648
+},
+{
+"url": "/fonts/kalam-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 17064
+}
+]
+},
+{
+"family": "Pacifico",
+"slug": "pacifico",
+"group": "script",
+"tags": [
+"script",
+"display",
+"retro"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Pacifico",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/pacifico-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 30108
+}
+]
+},
+{
+"family": "Patrick Hand",
+"slug": "patrick-hand",
+"group": "script",
+"tags": [
+"handwritten",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Patrick+Hand",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/patrick-hand-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 24208
+}
+]
+},
+{
+"family": "Sacramento",
+"slug": "sacramento",
+"group": "script",
+"tags": [
+"script",
+"elegant"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Sacramento",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/sacramento-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 26524
+}
+]
+},
+{
+"family": "Shadows Into Light",
+"slug": "shadows-into-light",
+"group": "script",
+"tags": [
+"handwritten",
+"playful"
+],
+"cjk": false,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Shadows+Into+Light",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/shadows-into-light-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 19440
+}
+]
+},
+{
+"family": "Liu Jian Mao Cao",
+"slug": "liu-jian-mao-cao",
+"group": "cjk",
+"tags": [
+"cjk",
+"script",
+"chinese",
+"calligraphy"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Liu+Jian+Mao+Cao",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/liu-jian-mao-cao-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 1238556
+}
+]
+},
+{
+"family": "Long Cang",
+"slug": "long-cang",
+"group": "cjk",
+"tags": [
+"cjk",
+"script",
+"chinese",
+"calligraphy"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Long+Cang",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/long-cang-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 1546244
+}
+]
+},
+{
+"family": "LXGW WenKai",
+"slug": "lxgw-wenkai",
+"group": "cjk",
+"tags": [
+"cjk",
+"serif",
+"chinese",
+"readable"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://github.com/lxgw/LxgwWenKai",
+"wmin": 300,
+"wmax": 500,
+"weights": [
+300,
+400,
+500
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/lxgw-wenkai-0.woff2",
+"weight": "300",
+"style": "normal",
+"bytes": 1007904
+},
+{
+"url": "/fonts/lxgw-wenkai-1.woff2",
+"weight": "500",
+"style": "normal",
+"bytes": 873880
+},
+{
+"url": "/fonts/lxgw-wenkai-2.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 868144
+}
+]
+},
+{
+"family": "Ma Shan Zheng",
+"slug": "ma-shan-zheng",
+"group": "cjk",
+"tags": [
+"cjk",
+"script",
+"chinese",
+"calligraphy"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Ma+Shan+Zheng",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/ma-shan-zheng-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 1714452
+}
+]
+},
+{
+"family": "Noto Sans SC",
+"slug": "noto-sans-sc",
+"group": "cjk",
+"tags": [
+"cjk",
+"sans",
+"chinese",
+"ui"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Noto+Sans+SC+Thin",
+"wmin": 100,
+"wmax": 900,
+"weights": [
+100
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/noto-sans-sc-0.woff2",
+"weight": "100 900",
+"style": "normal",
+"bytes": 1039464
+}
+]
+},
+{
+"family": "Noto Serif SC",
+"slug": "noto-serif-sc",
+"group": "cjk",
+"tags": [
+"cjk",
+"serif",
+"chinese",
+"editorial"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Noto+Serif+SC+ExtraLight",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/noto-serif-sc-0.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 1357768
+}
+]
+},
+{
+"family": "Smiley Sans",
+"slug": "smiley-sans",
+"group": "cjk",
+"tags": [
+"cjk",
+"sans",
+"chinese",
+"display",
+"playful"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://github.com/atelier-anchor/smiley-sans",
+"wmin": 400,
+"wmax": 400,
+"weights": [],
+"variable": false,
+"files": [
+{
+"url": "/fonts/smiley-sans-0-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 616924
+},
+{
+"url": "/fonts/smiley-sans-1-i.woff2",
+"weight": "400",
+"style": "italic",
+"bytes": 497792
+}
+]
+},
+{
+"family": "Source Han Sans CN",
+"slug": "source-han-sans-sc",
+"group": "cjk",
+"tags": [
+"cjk",
+"sans",
+"chinese",
+"ui"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://github.com/adobe-fonts/source-han-sans",
+"wmin": 250,
+"wmax": 900,
+"weights": [
+250,
+700,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/source-han-sans-sc-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 641416
+},
+{
+"url": "/fonts/source-han-sans-sc-1.woff2",
+"weight": "250",
+"style": "normal",
+"bytes": 603104
+},
+{
+"url": "/fonts/source-han-sans-sc-2.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 638776
+}
+]
+},
+{
+"family": "Source Han Serif CN",
+"slug": "source-han-serif-sc",
+"group": "cjk",
+"tags": [
+"cjk",
+"serif",
+"chinese",
+"editorial"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://github.com/adobe-fonts/source-han-serif",
+"wmin": 250,
+"wmax": 900,
+"weights": [
+250,
+700,
+900
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/source-han-serif-sc-0.woff2",
+"weight": "700",
+"style": "normal",
+"bytes": 853608
+},
+{
+"url": "/fonts/source-han-serif-sc-1.woff2",
+"weight": "250",
+"style": "normal",
+"bytes": 747084
+},
+{
+"url": "/fonts/source-han-serif-sc-2.woff2",
+"weight": "900",
+"style": "normal",
+"bytes": 829276
+}
+]
+},
+{
+"family": "ZCOOL KuaiLe",
+"slug": "zcool-kuaile",
+"group": "cjk",
+"tags": [
+"cjk",
+"display",
+"chinese",
+"playful"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/ZCOOL+KuaiLe",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/zcool-kuaile-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 449580
+}
+]
+},
+{
+"family": "ZCOOL QingKe HuangYou",
+"slug": "zcool-qingke-huangyou",
+"group": "cjk",
+"tags": [
+"cjk",
+"display",
+"chinese",
+"playful"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/ZCOOL+QingKe+HuangYou",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/zcool-qingke-huangyou-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 606728
+}
+]
+},
+{
+"family": "ZCOOL XiaoWei",
+"slug": "zcool-xiaowei",
+"group": "cjk",
+"tags": [
+"cjk",
+"serif",
+"chinese",
+"editorial"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/ZCOOL+XiaoWei",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/zcool-xiaowei-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 944928
+}
+]
+},
+{
+"family": "Zhi Mang Xing",
+"slug": "zhi-mang-xing",
+"group": "cjk",
+"tags": [
+"cjk",
+"script",
+"chinese",
+"calligraphy"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://fonts.google.com/specimen/Zhi+Mang+Xing",
+"wmin": 400,
+"wmax": 400,
+"weights": [
+400
+],
+"variable": false,
+"files": [
+{
+"url": "/fonts/zhi-mang-xing-0.woff2",
+"weight": "400",
+"style": "normal",
+"bytes": 1229344
+}
+]
+},
+{
+"family": "Chiron Sung HK",
+"slug": "chiron-sung-hk",
+"group": "cjk",
+"tags": [
+"cjk",
+"serif",
+"chinese",
+"editorial",
+"modern-song"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://github.com/chiron-fonts/chiron-sung-hk",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/chiron-sung-hk-0.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 1482472
+}
+]
+},
+{
+"family": "Chiron Hei HK",
+"slug": "chiron-hei-hk",
+"group": "cjk",
+"tags": [
+"cjk",
+"sans",
+"chinese",
+"modern-hei"
+],
+"cjk": true,
+"license": "OFL-1.1",
+"source": "https://github.com/chiron-fonts/chiron-hei-hk",
+"wmin": 200,
+"wmax": 900,
+"weights": [
+200
+],
+"variable": true,
+"files": [
+{
+"url": "/fonts/chiron-hei-hk-0.woff2",
+"weight": "200 900",
+"style": "normal",
+"bytes": 1215296
+}
+]
+}
+]

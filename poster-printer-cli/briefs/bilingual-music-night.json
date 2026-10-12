@@ -1,0 +1,68 @@
+{
+  "$schema": "poster-printer/brief.v1",
+  "purpose": "music",
+  "context": {
+    "use": "promo",
+    "audience": "electronic / ambient music fans in Hangzhou, 20–35",
+    "display": {
+      "kind": "print",
+      "print_size": "A1",
+      "viewing_distance_m": 2.0
+    },
+    "priority": [
+      "title",
+      "title_alt",
+      "date",
+      "venue",
+      "program",
+      "price"
+    ]
+  },
+  "content": {
+    "title": "夜航",
+    "title_alt": "NIGHT FERRY",
+    "subtitle": "Electronic & Ambient Live · 电子与氛围现场",
+    "date": "2026-12-05T20:00",
+    "venue": "九号仓库 Warehouse 9",
+    "city": "杭州 Hangzhou",
+    "program": [
+      "20:00 苔原 Tundra — opening set",
+      "21:00 Soft Static",
+      "22:00 流明 Lumen — live A/V",
+      "23:15 Harbor Choir",
+      "00:30 小满 Xiaoman — closing DJ set"
+    ],
+    "price": "¥120 · 预售 ¥90",
+    "url": "nightferry.example",
+    "hashtags": [
+      "夜航2026"
+    ],
+    "language": "bilingual"
+  },
+  "style": {
+    "mood": [
+      "bold",
+      "playful"
+    ],
+    "era": "90s",
+    "density": "balanced",
+    "imagery": {
+      "use": "accent",
+      "subject": [
+        "city",
+        "abstract",
+        "space"
+      ]
+    },
+    "color": {
+      "lightness": "dark",
+      "chroma": "rich",
+      "contrast": "strong"
+    }
+  },
+  "format": {
+    "ratio": "3:4",
+    "count": 6,
+    "min_score": 6
+  }
+}

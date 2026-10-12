@@ -1,0 +1,10 @@
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import '../styles/tokens.css';
+import '../styles/glass.css';
+import '../styles/shell.css';
+import '../styles/grid.css';
+import '../styles/port.css';
+import './rate.css';
+import { RateApp } from './RateApp';
+createRoot(document.getElementById('root')!).render(<StrictMode><RateApp /></StrictMode>);

@@ -1,0 +1,177 @@
+// Intent-based information architecture for the Advanced layer (from UX_REDESIGN.md §7).
+// Every engine parameter maps to [intent, group, plain zh, plain en, what-this-does zh, en, tier];
+// unmapped keys fall back to Engine › Art direction (tier 2) so no control can be lost.
+import { PARAMS as ENGINE_PARAMS, type ParamDef } from '../../engine/params';
+
+export interface Intent { id: string; zh: string; en: string; icon: string; dzh: string; den: string }
+type IARow = [string, string, string, string, string, string, number];
+export const INTENTS: Intent[] = [
+  { id: 'layout',  zh: '版式', en: 'Layout',  icon: 'layout-grid', dzh: '骨架：网格、留白、构图', den: 'The skeleton — grid, space, composition' },
+  { id: 'type',    zh: '文字', en: 'Type',    icon: 'type',        dzh: '标题层级、字号与节奏', den: 'Hierarchy, scale and rhythm of text' },
+  { id: 'color',   zh: '色彩', en: 'Color',   icon: 'palette',     dzh: '配色来源、对比与调色', den: 'Palette source, contrast and grading' },
+  { id: 'image',   zh: '图像', en: 'Image',   icon: 'image',       dzh: '图片数量、裁切与处理', den: 'How many images, how they are cut and treated' },
+  { id: 'texture', zh: '质感', en: 'Texture', icon: 'waves',       dzh: '纸张、颗粒与印刷感', den: 'Paper, grain and print feel' },
+  { id: 'details', zh: '细节', en: 'Details', icon: 'shapes',      dzh: '装饰大字、线条与图形', den: 'Glyphs, lines, marks and ornaments' },
+  { id: 'engine',  zh: '抽卡倾向', en: 'Draw odds',  icon: 'gauge',       dzh: '只影响之后的抽卡：纯排版、单色、撞色、颗粒的出现率与创意手法', den: 'Future draws only: how often type-only, mono, clash and grain appear, and the idea' },
+];
+export const GROUPS: Record<string, [string, string]> = {
+  'layout.compose': ['构图', 'Composition'], 'layout.grid': ['网格', 'Grid'], 'layout.space': ['空间', 'Space'], 'layout.band': ['通栏', 'Band'], 'layout.sidebar': ['边栏', 'Sidebar'], 'layout.cards': ['卡片与分区', 'Cards & zones'],
+  'type.hier': ['层级', 'Hierarchy'], 'type.blocks': ['文字块', 'Text blocks'], 'type.rhythm': ['节奏', 'Rhythm'], 'type.fonts': ['字体', 'Fonts'],
+  'color.palette': ['配色', 'Palette'], 'color.grade': ['画面调色', 'Grading'],
+  'image.amount': ['数量与占比', 'Amount'], 'image.cut': ['裁切', 'Cut & mask'], 'image.treat': ['处理', 'Treatment'],
+  'texture.surface': ['表面', 'Surface'], 'texture.marks': ['杂点', 'Specks'],
+  'details.glyph': ['装饰大字', 'Big glyph'], 'details.lines': ['线与网格', 'Lines & grid'], 'details.marks': ['图形装饰', 'Ornaments'],
+  'engine.plan': ['抽卡方向', 'Draw direction'], 'engine.quality': ['质量守门', 'Quality gate'], 'engine.direction': ['版面导演', 'Art direction'],
+  'output.export': ['导出', 'Export'], 'output.settings': ['偏好', 'Preferences'], 'output.replay': ['录制', 'Recording'],
+};
+const IA: Record<string, IARow> = {
+  composition: ['layout','layout.compose','构图手法','Composition','决定这张海报的“招式”：分割、满版、巨字、卡片……','The overall move: split, full-bleed, giant word, cards…',1],
+  gridType: ['layout','layout.grid','网格形态','Grid shape','直角网格最稳；非正交与曲线网格更有张力。','Orthogonal is calm; skewed and curved grids add tension.',1],
+  density: ['layout','layout.grid','信息密度','Density','元素多少与网格切分的细碎程度。','How many cells and elements the grid carries.',1],
+  gridStrength: ['layout','layout.grid','对齐严格度','Grid adherence','越高越严格贴合网格，越低越自由。','Higher snaps everything to the grid; lower loosens it.',2],
+  cols: ['layout','layout.grid','列数','Columns','0 = 自动。手动指定竖向分栏数。','0 = auto. Force a column count.',2],
+  rows: ['layout','layout.grid','行数','Rows','0 = 自动。手动指定横向分行数。','0 = auto. Force a row count.',2],
+  margin: ['layout','layout.space','页边距','Margins','画面四周的安全留白。','Breathing room around the page edge.',1],
+  gutter: ['layout','layout.space','栏间距','Gutters','栏与栏之间的缝隙。','The gap between columns.',3],
+  baseline: ['layout','layout.space','基线步长','Baseline step','文字对齐的垂直节拍。','Vertical beat that text snaps to.',0],
+  zoneStrength: ['layout','layout.cards','色块分区强度','Zone fill','分区色块的显著程度。','How strongly zones are filled with colour.',3],
+  cornerRadius: ['layout','layout.cards','卡片圆角','Card corners','卡片构图里的圆角大小。','Corner roundness for card compositions.',2],
+  cardGap: ['layout','layout.cards','卡片间距','Card spacing','卡片之间的距离。','Space between cards.',3],
+  bandHeight: ['layout','layout.band','通栏高度','Band height','横贯画面的色带/图带高度。','Height of the full-width band.',3],
+  bandPos: ['layout','layout.band','通栏位置','Band position','通栏放在上、中还是下。','Where the band sits.',3],
+  bandBleed: ['layout','layout.band','通栏出血','Band bleeds','通栏是否延伸到纸边。','Run the band off the page edge.',0],
+  sidebarTpl: ['layout','layout.sidebar','边栏样式','Sidebar style','竖条、数据栏、时间线、刻度尺等 18 种。','18 templates: strips, data rows, timeline, ruler…',3],
+  sidebarSide: ['layout','layout.sidebar','边栏位置','Sidebar side','左侧或右侧。','Left or right.',3],
+  sidebarWidth: ['layout','layout.sidebar','边栏宽度','Sidebar width','边栏占画面宽度的比例。','Share of the page width.',3],
+  sidebarFont: ['layout','layout.sidebar','边栏字号','Sidebar text size','按模板单独记忆。','Remembered per template.',3],
+  sidebarRule: ['layout','layout.sidebar','边栏分隔线','Sidebar rule','边栏与主体之间的细线。','Hairline between sidebar and body.',3],
+  snapGrid: ['output','output.settings','拖动吸附网格','Snap to grid','在画布上拖动元素时吸附网格。','Snap dragged elements to the grid.',0],
+  smallGroups: ['type','type.hier','小标题组','Sub-groups','小标题组的数量。','How many small title groups.',3],
+  smallRel: ['type','type.hier','主次对比','Size contrast','小标题相对大标题的大小，越小对比越强。','Small titles relative to the headline — smaller = more drama.',2],
+  titleScale: ['type','type.hier','标题尺度','Headline scale','整体放大或收敛标题。','Scale the headline up or down.',1],
+  smallScale: ['type','type.hier','小字尺度','Small text scale','所有小字一起缩放。','Scale all small text together.',1],
+  typeRatio: ['type','type.hier','字号模数比','Type scale ratio','相邻字号的比例：1.25 克制，1.618 戏剧。','Ratio between steps: 1.25 restrained, 1.618 dramatic.',1],
+  align: ['type','type.hier','对齐方式','Alignment','左右、居中、阵列或随机。','Left/right, centre, array or random.',3],
+  case: ['type','type.hier','英文大小写','Latin case','自动、全大写、首字母或小写。','Auto, UPPER, Title or lower.',1],
+  tickText: ['type','type.blocks','刻度字','Tick labels','带刻度的小号数字/标注。','Small numeric tick annotations.',3],
+  proseCount: ['type','type.blocks','正文段落','Prose blocks','诗句或短文的段数。','Number of prose / poem blocks.',3],
+  proseSize: ['type','type.blocks','正文大小','Prose size','正文相对标题的大小。','Prose size relative to the headline.',3],
+  metaCount: ['type','type.blocks','页眉小字','Meta labels','日期、编号等信息标签数量。','How many dates, numbers and labels.',2],
+  blockBudget: ['type','type.blocks','文字块上限','Text block budget','限制画面中文字块总数，防止拥挤。','Caps text blocks to avoid clutter.',2],
+  maxLineWidth: ['type','type.rhythm','最大行宽','Line length','一行文字最多占多宽。','Maximum line measure.',3],
+  mainBreath: ['type','type.rhythm','标题呼吸','Headline air','主标题周围的空隙。','Space around the headline.',2],
+  subBreath: ['type','type.rhythm','小字呼吸','Small text air','小字之间的空隙。','Space between small text.',2],
+  ruleWeight: ['type','type.rhythm','短线粗细','Rule weight','标题旁装饰短线的粗细。','Weight of short rules beside titles.',3],
+  opticalTracking: ['type','type.rhythm','视觉字距','Optical tracking','大字收紧、小字放松。','Tighten display, open small labels.',2],
+  fontCount: ['output','output.settings','字体数量','Typefaces','一张海报里用几款字体。','How many typefaces per poster.',0],
+  englishBias: ['type','type.fonts','中英比例','Latin ↔ CJK','越高英文越多。','Higher means more Latin text.',2],
+  shakeOnDraw: ['output','output.settings','每次抽卡换字体','New fonts each draw','抽卡时同时摇一组新字体。','Shake a new pairing on every draw.',0],
+  colorMode: ['color','color.palette','配色性格','Colour character','普通稳妥 / 随机 / 实验大胆。','Normal, random or experimental.',2],
+  paletteSource: ['color','color.palette','颜色来自','Palette from','图片提取、和田配色、NICE 或指定底色。','From the image, Wada, NICE or a base colour.',1],
+  bgPref: ['color','color.palette','底色明暗','Ground','浅、深或彩色底。','Light, dark or coloured ground.',1],
+  soft: ['color','color.palette','柔和','Soften','降低饱和度，整体更温和。','Lower saturation for a gentler mood.',2],
+  minContrast: ['color','color.palette','最低对比度','Min contrast','文字与底色的最低 WCAG 对比度。','Minimum WCAG contrast for text.',3],
+  zoneColors: ['color','color.palette','分区色数','Zone colours','色块分区使用的颜色数量。','Colours used by zones.',0],
+  tuneOn: ['color','color.grade','启用调色','Grading on','对整张画面做对比/饱和/明暗调整。','Apply contrast / saturation / brightness.',3],
+  contrast: ['color','color.grade','对比度','Contrast','整张画面的对比。','Overall contrast.',1],
+  saturation: ['color','color.grade','饱和度','Saturation','整张画面的饱和度。','Overall saturation.',1],
+  brightness: ['color','color.grade','明暗','Brightness','整张画面的明暗。','Overall brightness.',1],
+  imageCount: ['image','image.amount','图片数量','Images','每张海报最多用几张图。','Max images per poster.',1],
+  imageShare: ['image','image.amount','图片占比','Image area','图片占画面面积的比例。','Share of the page covered by images.',3],
+  maskKind: ['image','image.cut','裁切形状','Cut shape','矩形、网格切片、撕纸、拱形、笔触……','Rect, slices, torn, arch, brush…',2],
+  imageZoom: ['image','image.cut','图片缩放','Zoom','图片在框内的放大程度。','How far images are zoomed in.',2],
+  tornRough: ['image','image.cut','撕边粗糙度','Torn edge','撕纸边缘的毛糙程度。','Roughness of torn edges.',3],
+  legibility: ['image','image.treat','文字可读性保护','Text protection','在图上压暗/加底以保证文字清晰。','Darken or plate images so text stays readable.',3],
+  busyScrim: ['image','image.treat','繁忙区渐变遮罩','Busy-area scrim','在复杂图像上自动加渐变。','Auto gradient on busy image areas.',3],
+  imgSat: ['image','image.treat','图片饱和','Image saturation','只作用于图片。','Images only.',2],
+  imgContrast: ['image','image.treat','图片对比','Image contrast','只作用于图片。','Images only.',2],
+  duotone: ['image','image.treat','双色调概率','Duotone chance','图片被处理成双色调的概率。','Chance an image becomes duotone.',2],
+  texture: ['texture','texture.surface','纸面','Surface','颗粒、纸张、孔版、网点、斜线、布纹。','Grain, paper, riso, halftone, lines, linen.',1],
+  textureAmount: ['texture','texture.surface','质感强度','Amount','纹理叠加的强度。','Strength of the surface texture.',1],
+  grainShare: ['engine','engine.plan','颗粒出现率','Grain frequency','抽卡时出现颗粒纹理的比例。','How often draws get grain.',2],
+  scriptShare: ['engine','engine.plan','手写纹理出现率','Script frequency','抽卡时出现手写字纹理的比例。','How often draws get script texture.',2],
+  noiseAmount: ['texture','texture.marks','杂点','Specks','随机小点与噪点的数量。','Random specks and noise marks.',3],
+  bigGlyph: ['details','details.glyph','装饰大字','Big glyph','背景里的超大字母/数字/汉字。','Oversized background letter, number or hanzi.',3],
+  glyphKind: ['details','details.glyph','大字内容','Glyph content','字母、数字、汉字或单词。','Letter, number, hanzi or word.',3],
+  glyphSize: ['details','details.glyph','大字尺寸','Glyph size','装饰大字的大小。','Size of the big glyph.',3],
+  glyphOpacity: ['details','details.glyph','大字透明度','Glyph opacity','装饰大字的不透明度。','Opacity of the big glyph.',0],
+  gridOpacity: ['details','details.lines','网格线可见度','Grid visibility','网格线画出来的明显程度。','How visible grid lines are.',3],
+  lineWeight: ['details','details.lines','线条粗细','Line weight','所有线条的粗细。','Weight of all lines.',2],
+  nodeSize: ['details','details.lines','交点尺寸','Node size','网格交点小圆点的大小。','Size of grid intersection dots.',3],
+  dashed: ['details','details.lines','虚线网格','Dashed grid','网格线改为虚线。','Draw grid lines dashed.',3],
+  guides: ['details','details.lines','辅助线','Guides','显示构图辅助线。','Show construction guides.',3],
+  zoneNumbers: ['details','details.lines','区域编号','Zone numbers','在分区角落标注编号。','Number each zone.',3],
+  curveCount: ['details','details.lines','曲线','Curves','数学曲线装饰的数量。','How many mathematical curves.',3],
+  ornaments: ['details','details.marks','图形装饰','Ornaments','星号、靶心、条码等小图形的数量。','Asterisks, targets, barcodes…',3],
+  ornamentSize: ['details','details.marks','图形尺寸','Ornament size','小图形的大小。','Ornament size.',3],
+  shapeCount: ['details','details.marks','几何图形','Shapes','圆、半圆等几何块的数量。','Circles, half-discs and other shapes.',3],
+  decorBudget: ['details','details.marks','装饰上限','Decor budget','装饰元素总数上限。','Caps total decoration.',3],
+  idea: ['engine','engine.plan','创意手法','Idea','先定一个主意（尺度冲击、替换、遮挡……），再排版。自动 = 每次抽卡随机。','One idea first (scale shock, substitution, occlusion…), then the layout. Auto = random per draw.',2],
+  fitOverride: ['color','color.palette','仍用我的颜色','Keep my colours','跳过可读性修正，坚持你选的配色。','Skip the legibility repair and keep your colours.',0],
+  planV2: ['engine','engine.plan','一图一招','One idea per draw','每次抽卡只用一种明确手法，更有设计感。','Each draw commits to one clear idea.',3],
+  typeOnlyShare: ['engine','engine.plan','纯排版比例','Type-only draws','不使用图片的抽卡比例。','Share of draws with no image.',2],
+  monoShare: ['engine','engine.plan','单色相比例','Mono-hue draws','只用一个色相的抽卡比例。','Share of single-hue palettes.',2],
+  clashShare: ['engine','engine.plan','撞色比例','Clash draws','高对比撞色的抽卡比例。','Share of clashing palettes.',2],
+  qualityGate: ['engine','engine.quality','质量守门','Quality gate','自动重抽杂乱或重叠的结果。','Auto-redraw cluttered or overlapping results.',3],
+  qualityMin: ['engine','engine.quality','最低版面分','Minimum score','低于此分数的结果会被重抽。','Results below this score are redrawn.',2],
+  qualityTries: ['engine','engine.quality','最多重抽','Max redraws','守门最多重抽几次。','How many redraws the gate may try.',3],
+  collisionFix: ['engine','engine.quality','文字避让','Collision avoidance','文字互相重叠时自动挪开。','Nudge overlapping text apart.',3],
+  artDirection: ['engine','engine.direction','版面导演','Art direction','控制层级、留白与元素预算。','Hierarchy, whitespace and element budgets.',2],
+  exportScale: ['output','output.export','导出倍率','Export scale','位图导出的分辨率倍数。','Resolution multiplier for bitmaps.',0],
+  embedFonts: ['output','output.export','SVG 内嵌字体','Embed fonts','SVG 中的文字保持可编辑。','Keep SVG text editable.',0],
+  replaySpeed: ['output','output.replay','回放间隔','Replay interval','录制回放时每张停留的时间。','Time per frame when replaying.',0],
+};
+export type UIParam = ParamDef & { intent: string; group: string; pzh: string; pen: string; hzh: string; hen: string; tier: number };
+export const UIPARAMS: UIParam[] = ENGINE_PARAMS.map((p) => {
+  const m = IA[p.key];
+  return (m ? { ...p, intent: m[0], group: m[1], pzh: m[2], pen: m[3], hzh: m[4], hen: m[5], tier: m[6] } : { ...p, intent: 'engine', group: 'engine.direction', pzh: p.zh, pen: p.en, hzh: '', hen: '', tier: 2 }) as UIParam;
+});
+export const uiParam = (k: string) => UIPARAMS.find((p) => p.key === k);
+// phase 13: presets are built only from parameters the audit shows working on today's compositions
+export const PRESETS: Record<string, { zh: string; en: string; p: Record<string, number | string | boolean> }[]> = {
+  layout: [
+    { zh: '安静', en: 'Calm', p: { density: 'simple', margin: 7, gridType: 'ortho' } },
+    { zh: '平衡', en: 'Balanced', p: { density: 'auto', margin: 4.5, gridType: 'auto' } },
+    { zh: '满载', en: 'Dense', p: { density: 'full', margin: 3, gridType: 'auto' } },
+    { zh: '瑞士', en: 'Swiss', p: { composition: 'swiss', gridType: 'ortho', gridStrength: 1.6 } },
+  ],
+  type: [
+    { zh: '克制', en: 'Quiet', p: { titleScale: 80, smallRel: 40, typeRatio: '1.25' } },
+    { zh: '标准', en: 'Standard', p: { titleScale: 100, smallRel: 32, typeRatio: 'auto' } },
+    { zh: '宣言', en: 'Loud', p: { titleScale: 160, smallRel: 20, typeRatio: '1.618' } },
+    { zh: '编辑', en: 'Editorial', p: { metaCount: 8, smallScale: 110, typeRatio: '1.333' } },
+  ],
+  color: [
+    { zh: '柔和', en: 'Soft', p: { soft: true, bgPref: 'light', saturation: 85 } },
+    { zh: '标准', en: 'Standard', p: { soft: false, colorMode: 'normal', bgPref: 'auto', saturation: 100, contrast: 100 } },
+    { zh: '高反差', en: 'Punchy', p: { bgPref: 'dark', contrast: 125, saturation: 120 } },
+    { zh: '实验', en: 'Experimental', p: { colorMode: 'experimental' } },
+  ],
+  image: [
+    { zh: '纯排版', en: 'Type only', p: { imageCount: 0 } },
+    { zh: '图文', en: 'Mixed', p: { imageCount: 1, duotone: 15, maskKind: 'auto' } },
+    { zh: '双色调', en: 'Duotone', p: { imageCount: 1, duotone: 100 } },
+    { zh: '拼贴', en: 'Collage', p: { imageCount: 3, maskKind: 'rounded', cornerRadius: 40 } },
+  ],
+  texture: [
+    { zh: '洁净', en: 'Clean', p: { texture: 'none', textureAmount: 0 } },
+    { zh: '纸感', en: 'Paper', p: { texture: 'paper', textureAmount: 22 } },
+    { zh: '孔版', en: 'Riso', p: { texture: 'riso', textureAmount: 34 } },
+    { zh: '颗粒', en: 'Grain', p: { texture: 'grain', textureAmount: 45 } },
+  ],
+  details: [
+    { zh: '细线', en: 'Hairline', p: { lineWeight: 0.5 } },
+    { zh: '标准', en: 'Standard', p: { lineWeight: 1 } },
+    { zh: '粗线', en: 'Heavy', p: { lineWeight: 2.5 } },
+  ],
+  engine: [
+    { zh: '稳妥', en: 'Safe', p: { qualityMin: 85, clashShare: 0, monoShare: 20, typeOnlyShare: 20 } },
+    { zh: '默认', en: 'Default', p: { qualityMin: 78, typeOnlyShare: 28, monoShare: 30, clashShare: 6 } },
+    { zh: '冒险', en: 'Wild', p: { clashShare: 30, typeOnlyShare: 10, monoShare: 10, grainShare: 40 } },
+  ],
+};
+
+// keep only presets whose keys/values exist in the engine schema
+for (const id of Object.keys(PRESETS)) {
+  PRESETS[id] = PRESETS[id].map((pr) => ({ ...pr, p: Object.fromEntries(Object.entries(pr.p).filter(([k, v]) => { const d = uiParam(k); return d && (d.type !== 'seg' || d.options.some((o) => o.v === v)); })) })).filter((pr) => Object.keys(pr.p).length);
+}

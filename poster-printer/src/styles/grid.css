@@ -1,0 +1,228 @@
+/* ============================================================
+   Poster Printer — UI layout grid & 8pt rhythm
+   ------------------------------------------------------------
+   Horizontal:  M | RAIL | G | 12 fluid columns (gutter G) | G | RAIL | M
+                24   48    24                                 24   48   24
+   Vertical:    M | BAR 48 | G | content … | dock band 64 | M
+   Rhythm:      every height, padding and gap is a multiple of 8px
+                (4px half-steps only inside 32px controls). Type sits on
+                a 4px sub-baseline: 16/20/24/32px line-heights.
+   Panels span whole columns: inspector & library 4, advanced 6, deck 2.
+   Press G (or ?grid=1) to draw this grid over the UI.
+   ============================================================ */
+:root {
+  --u: 8px;
+  --m: 24px;              /* outer margin */
+  --rail: 48px;           /* rail track width */
+  --g: 24px;              /* gutter */
+  --bar: 48px;            /* top bar height */
+  --dock: 64px;           /* dock band height */
+  --cols: 12;
+  --fl: calc(var(--m) + var(--rail) + var(--g));            /* field inset (96) */
+  --fw: calc(100vw - 2 * var(--fl));                         /* field width */
+  --col: calc((var(--fw) - 11 * var(--g)) / 12);             /* one column */
+  --span2: calc(2 * var(--col) + 1 * var(--g));
+  --span4: calc(4 * var(--col) + 3 * var(--g));
+  --span6: calc(6 * var(--col) + 5 * var(--g));
+  --top: calc(var(--m) + var(--bar) + var(--g));             /* content top (96) */
+  --tuck: 56px;           /* poster edge may run this far past the panel edge-line: 24 gutter + 32 under the glass rim (= bevel zone) */
+}
+
+/* ---------- top bar ---------- */
+.top { top: var(--m); left: var(--m); right: var(--m); height: var(--bar); gap: var(--u); }
+.cap { height: var(--bar); padding: 0 4px; gap: 0; }
+.top > .cap:first-child { gap: 4px; }
+.brand { height: 40px; padding: 0 16px 0 8px; gap: 8px; }
+.vsep { height: 24px; margin: 0 4px; }
+.icon-btn { width: 40px; height: 40px; }
+.text-btn { height: 40px; padding: 0 16px; gap: 8px; }
+.primary-btn { height: var(--bar); padding: 0 24px 0 16px; gap: 8px; }
+.search-btn { padding: 0 8px 0 16px; }
+.seg { padding: 4px; }
+.seg > button { height: 32px; padding: 0 12px; }
+.seg.sm > button { height: 24px; padding: 0 8px; }
+.seg-thumb { top: 4px; bottom: 4px; }
+.lock { height: 40px; padding: 0 12px; }
+.lock .lk { left: 23px; top: 22px; }
+.top .center { position: absolute; left: 50%; transform: translateX(-50%); }
+@media (max-width: 1480px) {
+  .top .center { position: static; transform: none; margin: 0 auto; }
+  .top .grow { display: none; }
+}
+@media (max-width: 1380px) {
+  #seg-ratio > button > .ratio-glyph { display: none; }
+  #seg-ratio > button { padding: 0 8px; }
+  .lock { padding: 0 8px; }
+  .lock .lk { left: 19px; }
+}
+
+/* ---------- rails: 48 wide, top-aligned with panels ---------- */
+.rail { top: var(--top); transform: none; width: var(--rail); padding: 4px; gap: 0; border-radius: 24px; }
+.rail-l { left: var(--m); }
+.rail-r { right: var(--m); }
+.rail button { width: 40px; height: 40px; }
+.rail .rsep { margin: 4px 8px 3px; }
+.rail button.on::before { left: -4px; top: 12px; bottom: 12px; }
+.rail-r button.on::before { left: auto; right: -4px; }
+
+/* ---------- free canvas zone ---------- */
+body { --cl: var(--fl); --cr: var(--fl); --cb: calc(var(--m) + var(--dock) / 2 + 8px); }
+body.lib-open { --cl: calc(var(--fl) + var(--span4) + var(--g) - var(--tuck)); }
+body.insp-open { --cr: calc(var(--fl) + var(--span4) + var(--g) - var(--tuck)); }
+body.adv-open { --cr: calc(var(--fl) + var(--span6) + var(--g) - var(--tuck)); }
+body.view-deck { --cl: calc(var(--fl) + var(--span2) + var(--g)); }
+body.film-open { --cb: calc(var(--m) + var(--dock) + 16px + 168px - var(--tuck)); }
+.canvas-area { left: var(--cl); right: var(--cr); top: var(--top); bottom: var(--cb); }
+body.insp-open .canvas-area, body.adv-open .canvas-area { right: var(--cr); justify-items: end; }
+body.lib-open .canvas-area { left: var(--cl); justify-items: start; }
+body.lib-open.insp-open .canvas-area, body.lib-open.adv-open .canvas-area { justify-items: center; }
+body.film-open .canvas-area { bottom: var(--cb); }
+body.view-deck .canvas-area { left: var(--cl); }
+.frame-wrap { flex-direction: column-reverse; gap: var(--u); align-items: stretch; }
+.caption { height: 16px; line-height: 16px; justify-content: flex-start; padding: 0 2px; }
+
+/* ---------- panels: whole-column spans ---------- */
+.panel { top: var(--top); bottom: var(--m); border-radius: 24px; }
+.inspector { right: var(--fl); width: var(--span4); }
+.advanced { right: var(--fl); width: var(--span6); }
+.library { left: var(--fl); width: var(--span4); }
+.p-head { padding: 16px 16px 8px; min-height: 56px; gap: 8px; }
+.p-head h2 { line-height: 24px; }
+.p-head .eyebrow { line-height: 16px; }
+.p-body { padding: 0 16px 24px; }
+.p-foot { padding: 16px; gap: 8px; }
+.sec { padding: 16px 0 8px; }
+.sec-h { margin-bottom: 8px; min-height: 24px; }
+.sec-h h3 { line-height: 16px; }
+.sec-h .act .icon-btn { width: 24px; height: 24px; }
+.hint { margin: 8px 0 0; line-height: 16px; }
+.ins-title { padding: 0 0 16px; }
+.ins-title .name { font-size: 32px; line-height: 40px; }
+.ins-title .meta { margin-top: 8px; gap: 8px; }
+.tag { height: 24px; padding: 0 8px; border-radius: 12px; }
+.swatches { height: 48px; border-radius: 12px; }
+.pairing { padding: 12px 16px; gap: 16px; border-radius: 16px; min-height: 64px; }
+.layer-grid, .chips { gap: 8px; }
+.chipt { height: 32px; border-radius: 10px; padding: 0 12px; }
+.scrub { height: 32px; border-radius: 10px; margin-bottom: 8px; }
+.scrub .lab { left: 12px; } .scrub .val { right: 12px; }
+.scrub .tick { top: 8px; bottom: 8px; }
+.ctl-row { min-height: 32px; margin-bottom: 8px; gap: 8px; }
+.ctl-col { margin-bottom: 8px; }
+.ctl-col > .lab { margin: 0 0 8px; line-height: 16px; }
+.sw { width: 40px; height: 24px; border-radius: 12px; }
+.sw::after { width: 20px; height: 20px; border-radius: 10px; }
+.sw:active::after { width: 26px; }
+.sw.on::after { left: 18px; } .sw.on:active::after { left: 12px; }
+.opt-grid { gap: 8px; }
+.opt { height: 32px; border-radius: 10px; }
+.comp-grid { gap: 8px; }
+.btn { height: 40px; padding: 0 16px; border-radius: 12px; gap: 8px; }
+.inp { height: 40px; padding: 0 12px; }
+textarea.inp { padding: 8px 12px; line-height: 24px; }
+.field { gap: 8px; margin-bottom: 16px; }
+.row { gap: 8px; }
+
+/* advanced */
+.adv-wrap { grid-template-columns: 192px 1fr; }
+.adv-nav { padding: 8px 8px 16px 16px; gap: 0; }
+.adv-nav button { height: 40px; border-radius: 12px; gap: 8px; padding: 0 8px; }
+.adv-nav .nsep { margin: 8px 8px; }
+.adv-main { padding: 0 16px 24px; }
+.adv-intro { padding: 8px 0 16px; }
+.adv-intro h3 { font-size: 28px; line-height: 32px; }
+.adv-intro p { margin: 0; line-height: 20px; }
+.preview-card { margin: 0 0 16px; padding: 16px; border-radius: 16px; grid-template-columns: 96px 1fr; gap: 16px; }
+.preview-card .pv { width: 96px; height: 96px; border-radius: 8px; }
+.grp { padding: 16px 0 8px; }
+.grp-h { margin: 0 0 8px; min-height: 24px; }
+.grp .two { gap: 0 8px; }
+.search-field { height: 40px; padding: 0 12px; }
+
+/* library */
+.lib-tabs { padding: 0 16px 8px; }
+.style-grid { gap: 16px 8px; }
+.img-grid { gap: 8px; }
+.pal-list { gap: 8px; }
+.comp-lib, .font-roles { gap: 8px; }
+
+/* ---------- dock: 48px caps + 64px Draw on one centre line, centred on the poster ---------- */
+.dock { left: var(--pcx, 50vw); bottom: var(--m); height: var(--dock); gap: var(--u); transition: left var(--d-4) var(--ease-liquid), opacity var(--d-3) var(--ease-out), transform var(--d-4) var(--ease-liquid); }
+.dock .cap { height: 48px; padding: 0 4px; border-radius: 24px; }
+.remix { height: 40px; padding: 0 16px; border-radius: 20px; gap: 8px; }
+.draw { height: 64px; padding: 0 24px; gap: 16px; }
+.dock.recede { opacity: .28; transform: translateX(-50%) translateY(8px) scale(.98); }
+.dock.recede:hover { opacity: 1; transform: translateX(-50%); }
+
+/* ---------- filmstrip: rides above the dock band ---------- */
+.film { left: var(--pcx, 50vw); bottom: calc(var(--m) + var(--dock) + 16px); width: min(864px, calc(100vw - var(--cl) - var(--cr) + 2 * var(--tuck) - 2 * var(--g))); padding: 16px; border-radius: 24px; }
+.film-head { padding: 0 0 8px; min-height: 32px; gap: 8px; }
+.film-strip { height: 96px; padding: 8px 0 0; gap: 8px; }
+.fthumb { height: 80px; } .fthumb.cur { height: 88px; }
+
+/* ---------- sheets ---------- */
+.scrim { background: rgb(10 10 14 / .1); -webkit-backdrop-filter: none; backdrop-filter: none; }
+[data-theme='dark'] .scrim { background: rgb(0 0 0 / .32); }
+.sheet { border-radius: 32px; }
+.export { width: 768px; grid-template-columns: 304px 1fr; }
+.export .pv { padding: 32px; background: transparent; }
+.export .opts { padding: 24px; gap: 16px; }
+.export h2 { line-height: 32px; }
+.fmt { padding: 16px; border-radius: 16px; gap: 4px; }
+.fmt-grid { gap: 8px; }
+.lbl { margin-bottom: 8px; line-height: 16px; }
+.mini-list { gap: 8px; }
+.cmdk { width: 640px; top: calc(var(--top) + 48px); }
+.cmdk .q { height: 56px; padding: 0 16px; gap: 16px; }
+.cmdk .res { padding: 8px; }
+.cmdk .gl { padding: 8px 8px 8px; line-height: 16px; }
+.cmdk .it { height: 40px; padding: 0 8px; gap: 16px; border-radius: 12px; }
+.cmdk .foot { height: 40px; padding: 0 16px; align-items: center; gap: 16px; }
+.shortcuts { width: 576px; padding: 24px; }
+.shortcuts h2 { margin: 0 0 16px; line-height: 32px; }
+.sc-grid { gap: 0 24px; }
+
+/* ---------- toasts, deck, palette ---------- */
+.toasts { left: var(--pcx, 50vw); bottom: calc(var(--m) + var(--dock) + 16px); gap: 8px; }
+.toast { height: 40px; padding: 0 16px 0 12px; border-radius: 20px; }
+.view-deck .deck-pages { left: var(--fl); top: var(--top); bottom: var(--m); width: var(--span2); border-radius: 24px; padding: 8px; gap: 8px; }
+.palette-view { inset: var(--top) var(--fl) calc(var(--m) + var(--dock) + var(--g)); gap: 16px; }
+.pv-big { border-radius: 32px; }
+.pv-big > div { padding: 24px; }
+
+/* ---------- ctxbar: 48 tall, 40px targets ---------- */
+.ctxbar { height: 48px; border-radius: 24px; padding: 0 4px; gap: 0; }
+.ctxbar .icon-btn { width: 40px; height: 40px; }
+.ctxbar .text-btn { height: 40px; padding: 0 12px; }
+
+/* ---------- UI grid overlay (G / ?grid=1) ---------- */
+#ui-grid { position: fixed; inset: 0; z-index: 95; pointer-events: none; display: none; }
+body.ui-grid #ui-grid { display: block; }
+#ui-grid svg { width: 100%; height: 100%; display: block; }
+#ui-grid .legend { position: absolute; left: var(--m); bottom: 4px; font: 500 10px/16px var(--font-mono); color: #e0245e; letter-spacing: .02em; }
+
+/* ---------- stage: ambient field + dot lattice on the 24px module ---------- */
+:root { --dot: rgba(11, 11, 14, .16); }
+[data-theme='dark'] { --dot: rgba(255, 255, 255, .13); }
+.aura { inset: 0; }
+.aura img { left: 0; top: 0; width: 100vw; height: 100vh; transform: none; filter: none; object-fit: fill; transition: opacity 900ms var(--ease-out); }
+.aura img.on, [data-theme='dark'] .aura img.on { opacity: 1; }
+.dots { background-image: radial-gradient(circle at 1px 1px, var(--dot) .7px, transparent 1.3px); background-size: 24px 24px; background-position: 24px 24px; opacity: 1;
+  /* lattice belongs to the canvas zone only: fades out under open side panels so frosted glass reads clean */
+  --dm: linear-gradient(90deg, transparent calc(var(--cl, 0px) - 16px), #000 calc(var(--cl, 0px) + 32px), #000 calc(100% - var(--cr, 0px) - 32px), transparent calc(100% - var(--cr, 0px) + 16px));
+  -webkit-mask: var(--dm); mask: var(--dm); transition: -webkit-mask .5s, mask .5s; }
+html.reduce-transparency .aura { display: block; }
+
+/* ---- Edge window: side panels thin their tint along the edge that overlaps the canvas,
+   so the bevel lensing of the tucked poster edge is actually visible (32px under the rim),
+   then reach full frost before any text column (p-body content starts at 16px, labels are
+   short and sit on ≥ 70% tint). ---- */
+.panel.lg { --win-a: calc(var(--glass-alpha) * .42); --win-w: 48px; }
+.panel.inspector, .panel.advanced { --win-dir: 90deg; }
+.panel.library { --win-dir: 270deg; }
+.panel.lg:not(.has-lens), .panel.lg > .lg-lens::after {
+  background:
+    linear-gradient(rgb(var(--amb) / var(--amb-alpha)), rgb(var(--amb) / var(--amb-alpha))),
+    linear-gradient(var(--win-dir, 90deg), rgb(var(--glass-tint) / var(--win-a)) 0, rgb(var(--glass-tint) / var(--glass-alpha)) var(--win-w));
+}
+html.reduce-transparency .panel.lg:not(.has-lens) { background: rgb(var(--glass-tint)); }
