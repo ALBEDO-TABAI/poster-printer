@@ -1,6 +1,6 @@
 """Bridge to the Node engine (engine/dist/engine.mjs).
 
-The engine bundles the real Poster Printer generator (rea-poster) and renders either in headless
+The engine bundles the real Ready Poster Printer generator (rea-poster) and renders either in headless
 Chrome (default, pixel-identical to the web app) or in Node (resvg, approximate). Every call is one
 subprocess: JSON payload on stdin, one JSON document on stdout.
 """
@@ -56,7 +56,7 @@ def find_engine() -> Path:
         if f.is_file():
             return f
     raise EngineError(
-        "poster-printer engine not found. Build it (cd engine && npm install && npm run build) and set "
+        "ready-poster-printer engine not found. Build it (cd engine && npm install && npm run build) and set "
         "POSTER_PRINTER_ENGINE=/path/to/engine, or add {\"engine\": \"/path/to/engine\"} to ~/.poster-printer/config.json",
         code=3,
     )

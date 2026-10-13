@@ -1,4 +1,4 @@
-// Original bilingual copy written for Poster Printer. Grouped into themed sets.
+// Original bilingual copy written for Ready Poster Printer. Grouped into themed sets.
 export interface TextSet {
   id: string; zh: string; en: string;
   headline: { en: string[]; zh: string[] };

@@ -172,6 +172,7 @@ function onKey(e: KeyboardEvent) {
   const mod = e.metaKey || e.ctrlKey; const u = useUI.getState(); const s = useStore.getState();
   if (mod && e.key.toLowerCase() === 'k') { e.preventDefault(); if (u.sheet === 'cmdk') A.closeSheets(); else A.openSheet('cmdk'); return; }
   if (e.key === 'Escape') {
+    if (u.layerPop) return useUI.setState({ layerPop: false });
     if (u.sheet) return A.closeSheets();
     if (u.imgEdit || s.editingText) return; // Stage handles these
     if (s.selected) { useStore.setState({ selected: null }); return; }
@@ -200,6 +201,8 @@ function onKey(e: KeyboardEvent) {
   else if (k === 's' || k === 'S') exportNow('png', useUI.getState().exportScale);
   else if (k === 'i') A.togglePanel('insp'); else if (k === 'a') A.togglePanel('adv'); else if (k === 'h') A.togglePanel('film'); else if (k === 'l') A.openLayers();
   else if ((k === 'Delete' || k === 'Backspace') && s.selected) A.hideSelected();
+  // phase 17: re-roll one layer of the structure (T 排字 · P 图位 · R 网格 / Raster); a held key does not repeat
+  else if ((k === 't' || k === 'T' || k === 'p' || k === 'P' || k === 'r' || k === 'R') && !e.repeat) A.relayer(({ t: 'type', p: 'place', r: 'grid' } as const)[k.toLowerCase() as 't' | 'p' | 'r']);
 }
 
 /* ---------- the shell ---------- */

@@ -3,13 +3,18 @@
 // then dump what the app renders: exportSVG(scene, false) (= window.__reaSVG) and a 1× PNG (window.__reaRaster).
 // usage: node app_roundtrip.mjs <appUrl> <outDir> <poster.json>...   → prints JSON [{file, method, svg, png, entryId}]
 import { chromium } from 'playwright-core';
-import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 const [appUrl, outDir, ...files] = process.argv.slice(2);
 if (!appUrl || !outDir || !files.length) { console.error('usage: app_roundtrip.mjs <appUrl> <outDir> <poster.json>...'); process.exit(2); }
 mkdirSync(outDir, { recursive: true });
-const browser = await chromium.launch({ executablePath: process.env.POSTER_PRINTER_CHROME || '/usr/bin/google-chrome', args: ['--no-sandbox', '--font-render-hinting=none'] });
+// the engine's browser discovery (Linux, macOS, Windows), or POSTER_PRINTER_CHROME
+const CHROME = process.env.POSTER_PRINTER_CHROME || ['/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/microsoft-edge',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Chromium.app/Contents/MacOS/Chromium',
+  '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge', '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser',
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'].find(existsSync);
+const browser = await chromium.launch({ executablePath: CHROME, args: ['--no-sandbox', '--font-render-hinting=none'] });
 const page = await (await browser.newContext({ viewport: { width: 1400, height: 1000 }, deviceScaleFactor: 1 })).newPage();
 await page.goto(appUrl);
 await page.waitForFunction(() => window.__rea?.getState().ready && window.__rea.getState().scene, null, { timeout: 90000 });

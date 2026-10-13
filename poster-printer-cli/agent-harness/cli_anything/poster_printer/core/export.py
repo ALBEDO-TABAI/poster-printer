@@ -28,7 +28,7 @@ def render(entry: dict, out_base: str, preset: str = "png", backend: str = "chro
         os.makedirs(os.path.dirname(os.path.abspath(out_base)) or ".", exist_ok=True)
         path = out_base + ".json"
         with open(path, "w", encoding="utf-8") as f:
-            json.dump({"app": "poster-printer", "kind": "poster", "version": 1, "entry": entry}, f, ensure_ascii=False, indent=1)
+            json.dump({"app": "ready-poster-printer", "kind": "poster", "version": 1, "entry": entry}, f, ensure_ascii=False, indent=1)
         return {"files": {"json": path}, "verify": {"json": {"ok": True, "bytes": os.path.getsize(path)}}}
     payload = {"entry": entry, "formats": p["formats"], "scale": scale or p["scale"], "embedFonts": p.get("embedFonts", True), "base": os.path.abspath(out_base), "extraFonts": extra_fonts or []}
     return be.run("render", payload, backend=backend)

@@ -26,7 +26,7 @@ export function makePdf(pages: PdfPage[], meta: { title?: string; producer?: str
   const pid = (i: number) => 4 + i * 3;
   obj(1, () => push('<< /Type /Catalog /Pages 2 0 R >>'));
   obj(2, () => push(`<< /Type /Pages /Count ${n} /Kids [${pages.map((_, i) => `${pid(i)} 0 R`).join(' ')}] >>`));
-  obj(3, () => push(`<< /Title (${esc(meta.title ?? 'Deck')}) /Producer (${esc(meta.producer ?? 'Poster Printer')}) >>`));
+  obj(3, () => push(`<< /Title (${esc(meta.title ?? 'Deck')}) /Producer (${esc(meta.producer ?? 'Ready Poster Printer')}) >>`));
   pages.forEach((pg, i) => {
     const w = pg.ptW.toFixed(2), h = pg.ptH.toFixed(2);
     obj(pid(i), () => push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${w} ${h}] /Resources << /XObject << /Im${i} ${pid(i) + 2} 0 R >> >> /Contents ${pid(i) + 1} 0 R >>`));

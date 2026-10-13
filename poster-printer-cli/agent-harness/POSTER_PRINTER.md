@@ -1,7 +1,7 @@
-# Poster Printer — CLI harness SOP
+# Ready Poster Printer — CLI harness SOP
 
 ## Software
-Poster Printer (`/workspace/rea-poster`) is a React/Vite web app that generates typographic posters
+Ready Poster Printer (`/workspace/rea-poster`) is a React/Vite web app that generates typographic posters
 from seeds, styles and parameters. It has an idea layer, a taste selector and deterministic replays.
 Its engine is pure TypeScript (`src/engine/**`); the browser supplies text measurement, fonts and rasterisation.
 
@@ -17,7 +17,7 @@ Its engine is pure TypeScript (`src/engine/**`); the browser supplies text measu
   the saved Poster JSON reproduces the image exactly in the app.
 
 ## Data model
-- The project is Poster JSON `{app:'poster-printer', kind:'poster', version:1, entry, x_cli?}`. `entry` is
+- The project is Poster JSON `{app:'ready-poster-printer', kind:'poster', version:1, entry, x_cli?}`. `entry` is
   the app's history entry (seeds, styleId, ratio, params, picked (comp, attempt, salt, texts, palette,
   images, plan, idea), fonts, custom). `x_cli` holds the CLI undo/redo stacks (max 50), the brief and the
   reasons. The app ignores it.

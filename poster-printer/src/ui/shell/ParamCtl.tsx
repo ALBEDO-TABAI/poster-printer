@@ -63,7 +63,8 @@ export const ParamCtl = memo(function ParamCtl({ k, compact, hover }: { k: strin
   const name = zh ? d.pzh : d.pen;
   const mod = v !== base;
   const sc = scopeOf(k);
-  const classicHere = sc === 'classic' && CLASSIC.has(comp);
+  // the grid compositions (phase 16) read the gutter too
+  const classicHere = sc === 'classic' && (CLASSIC.has(comp) || (k === 'gutter' && (comp === 'modular' || comp === 'bleedgrid')));
   const tag = SCOPE[sc][zh ? 0 : 1];
   const onHover = hover ? () => { if (useUI.getState().focus !== k) useUI.setState({ focus: k }); } : undefined;
   const reset = () => { if (!mod && !pinned) return; pushUndo((zh ? '复位 ' : 'Reset ') + name); useStore.getState().resetParams([k]); };

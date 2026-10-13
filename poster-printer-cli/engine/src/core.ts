@@ -1,5 +1,6 @@
 // Backend-agnostic operations. The same code runs in headless Chrome (exact app parity) and in Node (approximate).
-import { generate, DEFAULT_MODULES, type GenInput, type GenResult, type Picked, type Seeds } from '@rea/engine/generate';
+import { generate, DEFAULT_MODULES, type GenInput, type GenResult, type Picked, type Seeds, type Layer } from '@rea/engine/generate';
+import { FIXED_PLACE } from '@rea/engine/layers';
 import { BUILTIN_STYLES } from '@rea/data/styles';
 import { TEXT_SETS } from '@rea/data/texts';
 import { DEFAULT_PARAMS, PARAMS, REMOVED_PARAMS, type Params } from '@rea/engine/params';
@@ -15,7 +16,7 @@ import { resolveBrief, type Resolved, type Direction } from './resolve';
 import type { Brief } from './brief';
 import { evaluate, type Pixels, type Report } from './report';
 
-export const APP_SLUG = 'poster-printer';
+export const APP_SLUG = 'ready-poster-printer';
 export interface Entry {
   id: string; ts: number; seeds: Seeds; decorSalt: string; ratio: Ratio; styleId: string; params: Params;
   modules: Record<string, boolean>; modes: string[]; fonts: FontSet; picked: Picked; edits: Record<string, unknown>; custom: unknown; comp?: string; placed?: PlacedComponent[];
@@ -57,6 +58,8 @@ export function replayInput(env: Env, e: Entry): GenInput {
     lockedPalette: keep.palette, textSets: TEXT_SETS, custom: (e.custom ?? null) as GenInput['custom'],
     forceAttempt: keep.attempt ?? 0, lockedTexts: keep.texts, placed: e.placed ?? [], sidebarSizes: {}, forceSidebar: String(e.params.sidebarTpl ?? 'auto') !== 'auto',
     measure: env.measure, forceComp: keep.comp, forcePlan: keep.plan, forceIdea: keep.idea, layoutSalt: keep.salt, select: 0, recent: [], recentIdeas: [],
+    // app phase 17: the poster's layered streams (absent = a poster made before phase 17: its single stream, replayed exactly)
+    layers: keep.layers ?? null,
     // app phase 13: the params the app honoured for this poster (absent on older / CLI entries = none)
     honor: (e as Entry & { honor?: string[] }).honor ?? [],
   };
@@ -79,7 +82,7 @@ export async function render(env: Env, scene: Scene, o: RenderOpts): Promise<Ren
 export function summarize(e: Entry, sc: Scene) {
   const p = e.picked;
   return {
-    style: e.styleId, ratio: e.ratio, size: [sc.w, sc.h], comp: p.comp, idea: p.idea?.id ?? null, grid: String(sc.info?.grid ?? ''), attempt: p.attempt ?? 0, salt: p.salt ?? '',
+    style: e.styleId, ratio: e.ratio, size: [sc.w, sc.h], comp: p.comp, layout: ((sc.info?.sem as { vars?: { typology?: { value?: string } } } | undefined)?.vars?.typology?.value) ?? null, idea: p.idea?.id ?? null, grid: String(sc.info?.grid ?? ''), attempt: p.attempt ?? 0, salt: p.salt ?? '',
     seeds: e.seeds, taste: sceneTaste(sc), penalty: scenePenalty(sc), score: +(sceneTaste(sc) - scenePenalty(sc)).toFixed(3), quality: sc.info?.score ?? null, gates: sc.info?.gates ?? null,
     palette: { bg: p.palette.bg, ink: p.palette.ink, accent: p.palette.accent }, images: p.imageIds,
     fonts: [...new Set([e.fonts.en['big.main'].family, e.fonts.en['big.sub'].family, e.fonts.zh['big.main'].family])],
@@ -122,7 +125,7 @@ export function paletteFilterFn(f: Resolved['palette']['filter']) {
 export function resolveWith(env: Pick<Env, 'presetImages' | 'userImages'>, brief: Brief): Resolved {
   const cats: Record<string, number> = {};
   for (const a of [...env.presetImages, ...env.userImages]) { const k = String(a.category ?? 'other'); cats[k] = (cats[k] ?? 0) + 1; }
-  return resolveBrief(brief, { cutoutIds: new Set(env.presetImages.filter((a) => a.cutout && a.subject).map((a) => a.id)), imageCats: cats, userImageIds: env.userImages.map((a) => a.id) });
+  return resolveBrief(brief, { cutoutIds: new Set(env.presetImages.filter((a) => a.cutout && a.subject).map((a) => a.id)), imageCats: cats, userImageIds: env.userImages.map((a) => a.id), assets: [...env.presetImages, ...env.userImages] });
 }
 
 function lum(hex: string) { const n = parseInt(hex.slice(1, 7), 16); const f = (c: number) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f((n >> 16) & 255) + 0.7152 * f((n >> 8) & 255) + 0.0722 * f(n & 255); }
@@ -213,7 +216,7 @@ export function setParams(params: Params, set: Record<string, string | number | 
     // app phase 13 removed params the engine never read: old scripts still run, the value is dropped (and said so)
     if (REMOVED_PARAMS.includes(k)) { delete out[k]; console.warn(`note: param "${k}" was removed (it never changed the poster); ignored`); continue; }
     const spec = PARAMS.find((p) => p.key === k) as any;
-    if (!spec) throw Object.assign(new Error(`unknown param "${k}" (see: poster-printer catalog params)`), { code: 2 });
+    if (!spec) throw Object.assign(new Error(`unknown param "${k}" (see: ready-poster-printer catalog params)`), { code: 2 });
     let v: string | number | boolean = raw;
     if (spec.type === 'range') { v = Number(raw); if (!Number.isFinite(v)) throw Object.assign(new Error(`${k} must be a number`), { code: 2 }); v = Math.max(spec.min!, Math.min(spec.max!, v)); }
     else if (spec.type === 'bool') v = raw === true || raw === 'true' || raw === '1' || raw === 1;
@@ -228,6 +231,9 @@ export interface RefineArgs { entry: Entry; set?: Record<string, string | number
 export async function refine(env: Env, a: RefineArgs) {
   const e: Entry = JSON.parse(JSON.stringify(a.entry));
   if (a.set) e.params = setParams(e.params, a.set);
+  // phase 16: the grid compositions read these only when they were chosen explicitly (the app's `honor`); a refine is explicit
+  const GRID_HONOR = ['margin', 'gutter', 'imageCount', 'cols', 'rows'];
+  if (a.set) { const h = Object.keys(a.set).filter((k) => GRID_HONOR.includes(k)); if (h.length) (e as Entry & { honor?: string[] }).honor = [...new Set([...((e as Entry & { honor?: string[] }).honor ?? []), ...h])]; }
   if (a.styleId) { const st = styleById(a.styleId); if (st.id !== a.styleId) throw Object.assign(new Error('unknown style ' + a.styleId), { code: 2 }); e.styleId = st.id; e.fonts = st.fonts; e.params = { ...DEFAULT_PARAMS, ...st.params, ...pickContentParams(e.params) } as Params; e.modes = [...(st.modes ?? [])]; }
   if (a.ratio) e.ratio = a.ratio as Ratio;
   if (a.texts) {
@@ -246,7 +252,7 @@ export async function refine(env: Env, a: RefineArgs) {
   if ((a.set && 'composition' in a.set && comp !== 'auto') || a.ratio || a.styleId) {
     await env.ensureFonts(e.fonts);
     const inp = replayInput(env, e);
-    const r = generate({ ...inp, forceComp: comp !== 'auto' ? (comp as GenInput['forceComp']) : undefined, forcePlan: e.picked.plan, forceIdea: comp !== 'auto' ? undefined : e.picked.idea, forceAttempt: undefined, layoutSalt: undefined, select: comp === 'auto' ? 8 : 0 });
+    const r = generate({ ...inp, forceComp: comp !== 'auto' ? (comp as GenInput['forceComp']) : undefined, forcePlan: e.picked.plan, forceIdea: comp !== 'auto' ? undefined : e.picked.idea, forceAttempt: undefined, layoutSalt: undefined, select: comp === 'auto' ? 8 : 0, layers: e.picked.layers ?? undefined });
     e.picked = { ...r.picked, salt: r.picked.salt ?? '' } as Picked; e.comp = r.picked.comp; if (r.seeds) e.seeds = r.seeds;
   }
   const rep = await replay(env, e);
@@ -258,13 +264,27 @@ export async function refine(env: Env, a: RefineArgs) {
 const CONTENT_KEYS = ['smallGroups', 'metaCount', 'proseCount', 'imageCount', 'typeOnlyShare', 'imageShare', 'bgPref', 'margin', 'blockBudget', 'decorBudget', 'ornaments', 'smallScale', 'titleScale', 'composition', 'idea', 'paletteSource'];
 const pickContentParams = (p: Params): Params => Object.fromEntries(Object.entries(p).filter(([k]) => CONTENT_KEYS.includes(k)));
 
-export type Vary = 'layout' | 'color' | 'image' | 'structure' | 'decor' | 'tendency';
-/** the app's variant buttons; copy always stays (content is real) */
+export type Vary = 'layout' | 'color' | 'image' | 'structure' | 'decor' | 'tendency' | Layer;
+const LAYER_VARY: Vary[] = ['grid', 'place', 'type'];
+/** the app's variant buttons; copy always stays (content is real). grid / place / type re-roll one layer of the structure
+ *  (app phase 17: 网格 / 图位 / 排字) and keep the other two exactly */
 export async function variations(env: Env, a: { entry: Entry; vary: Vary; count: number; seed?: string; render?: RenderOpts }) {
   const out: any[] = [];
   for (let i = 0; i < a.count; i++) {
     const e: Entry = JSON.parse(JSON.stringify(a.entry));
     const tag = `${a.seed ?? 'v'}${i + 1}`;
+    if (LAYER_VARY.includes(a.vary)) {
+      await env.ensureFonts(e.fonts);
+      const base = replayInput(env, e);
+      const cur = generate(base);
+      const r = generate({ ...base, reroll: { layer: a.vary as Layer, salt: tag, base: cur.scene } });
+      const rr = r.scene.info.reroll as { changed?: boolean; kept?: boolean } | undefined;
+      e.picked = { ...r.picked, salt: e.picked.salt, taste: sceneTaste(r.scene), ...(r.picked.idea || !e.picked.idea ? {} : { idea: e.picked.idea }) } as Picked;
+      e.comp = r.picked.comp;
+      e.id = `${e.id.split('~')[0]}~${a.vary}${i + 1}`;
+      out.push({ entry: e, summary: { ...summarize(e, r.scene), layer: { vary: a.vary, changed: rr?.changed ?? true, picturesKept: rr?.kept ?? null, fixedPlacement: a.vary === 'place' && FIXED_PLACE.has(r.picked.comp) } }, rendered: a.render ? await render(env, r.scene, a.render) : undefined });
+      continue;
+    }
     let keepPal = true, keepImg = true;
     if (a.vary === 'color') { e.seeds = { ...e.seeds, color: e.seeds.color + '~' + tag }; keepPal = false; }
     if (a.vary === 'image') { e.seeds = { ...e.seeds, image: e.seeds.image + '~' + tag }; keepImg = false; }
@@ -279,7 +299,7 @@ export async function variations(env: Env, a: { entry: Entry; vary: Vary; count:
     const base = replayInput(env, e);
     const fresh = a.vary !== 'decor';
     const inp: GenInput = fresh
-      ? { ...base, forceAttempt: undefined, forceComp: undefined, forcePlan: a.vary === 'structure' || a.vary === 'tendency' ? undefined : e.picked.plan, forceIdea: undefined, layoutSalt: undefined, select: 8, lockedPalette: keepPal ? e.picked.palette : null, lockedImages: keepImg ? e.picked.imageIds : null, images: keepImg ? base.images : [...env.presetImages], params: { ...base.params, composition: a.vary === 'structure' || a.vary === 'tendency' ? 'auto' : base.params.composition } }
+      ? { ...base, layers: undefined, forceAttempt: undefined, forceComp: undefined, forcePlan: a.vary === 'structure' || a.vary === 'tendency' ? undefined : e.picked.plan, forceIdea: undefined, layoutSalt: undefined, select: 8, lockedPalette: keepPal ? e.picked.palette : null, lockedImages: keepImg ? e.picked.imageIds : null, images: keepImg ? base.images : [...env.presetImages], params: { ...base.params, composition: a.vary === 'structure' || a.vary === 'tendency' ? 'auto' : base.params.composition } }
       : { ...base };
     const r = generate(inp);
     e.picked = { ...r.picked } as Picked; e.comp = r.picked.comp; if (r.seeds) e.seeds = r.seeds;

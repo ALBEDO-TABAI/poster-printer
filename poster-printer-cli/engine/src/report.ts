@@ -1,7 +1,8 @@
 // Evaluation report: CORRECTNESS gates (pass / fail / n/a, measured) kept apart from AESTHETIC dimensions.
 // Every issue carries dimension + region (bbox in poster px) + evidence + impact + a concrete fix.
 // Scores here are relative, model- and heuristic-based; they need human calibration (see SKILL.md).
-import type { Scene, SceneNode, TextNode } from '@rea/engine/types';
+import type { Scene, SceneNode, TextNode, ImageNode } from '@rea/engine/types';
+import { imageDrawRect } from '@rea/engine/render/svg';
 import type { Entry } from './core';
 import { DEFAULT_PARAMS } from '@rea/engine/params';
 import { designAudit } from '@rea/engine/gen/audit';
@@ -248,6 +249,39 @@ export function evaluate(a: EvalArgs) {
   for (const x of cjk.single_char_last_line) add({ gate: 'cjk', dimension: 'CJK single-character last line (CLREQ)', blocking: false, region: x.region, evidence: `"${x.text}" ends with a lone "${x.last}" on its last line`, impact: ['craft'], fix: { command: `refine --set maxLineWidth=${Math.max(30, Number(P.maxLineWidth) - 5)}`, why: 'narrower measure pulls a second character down' } });
   for (const x of cjk.cjk_latin_spacing) { const fixed = x.slot ? (slots.find((s) => s.slot === x.slot)?.text ?? '').replace(/([\u3400-\u9fff])([A-Za-z])/g, '$1 $2').replace(/([A-Za-z])([\u3400-\u9fff])/g, '$1 $2') : null; add({ gate: 'cjk', dimension: 'CJK–Latin spacing (CLREQ)', blocking: false, region: x.region, evidence: `no space between Han and Latin in "${x.text}" (${x.pairs.join(' ')})`, impact: ['craft'], fix: { command: fixed && x.slot ? `refine --text ${x.slot}=${q(fixed)}` : null, why: 'CLREQ asks for about a quarter-em between Han and Latin; a space approximates it' } }); }
 
+  // ── pictures gate (phase 16): every picture the brief gives is drawn and visible; heavy crops and cut subjects warn
+  const picItems: { id: string; status: Status; required: boolean; visible_share: number; crop_loss: number | null; subject_visible: number | null; region: Box | null; why?: string }[] = [];
+  {
+    const asked = a.brief?.style?.imagery?.ids?.slice(0, 8) ?? [];
+    const drawn = all.filter((n): n is ImageNode => n.kind === 'image' && !n.cutout);
+    const ids = [...new Set([...asked, ...(e.picked.imageIds ?? [])])];
+    for (const id of ids) {
+      const required = asked.includes(id);
+      const nodes = drawn.filter((n) => n.imageId === id);
+      const asset = a.images.find((x) => x.id === id);
+      if (!nodes.length) {
+        if (required) { picItems.push({ id, status: 'fail', required, visible_share: 0, crop_loss: null, subject_visible: null, region: null, why: 'not drawn' }); add({ gate: 'images', dimension: `picture: ${id}`, blocking: true, region: null, evidence: `picture ${id} is not drawn on the poster`, impact: ['finding-info', 'expression'], fix: { command: 'refine --set composition=modular --set gridLayout=auto', why: 'the grid compositions lay out every given picture; most others show only the first' } }); }
+        continue;
+      }
+      const big = nodes.reduce((m, n) => (n.w * n.h > m.w * m.h ? n : m), nodes[0]);
+      const vis = Math.max(0, Math.min(W, big.x + big.w) - Math.max(0, big.x)) * Math.max(0, Math.min(H, big.y + big.h) - Math.max(0, big.y)) / (W * H);
+      const ar = asset ? asset.w / asset.h : big.iw / big.ih, s = big.w / Math.max(1, big.h);
+      const loss = 1 - Math.min(ar, s) / Math.max(ar, s);
+      let subjVis: number | null = null;
+      if (asset?.subject) {
+        const dr = imageDrawRect(big); const sj = asset.subject;
+        const sb = { x: dr.x + sj.x * dr.w, y: dr.y + sj.y * dr.h, w: sj.w * dr.w, h: sj.h * dr.h };
+        subjVis = sb.w * sb.h > 0 ? inter(sb, { x: big.x, y: big.y, w: big.w, h: big.h }) / (sb.w * sb.h) : null;
+      }
+      const tooSmall = vis < 0.012;
+      const status: Status = tooSmall && required ? 'fail' : 'pass';
+      picItems.push({ id, status, required, visible_share: +vis.toFixed(3), crop_loss: +loss.toFixed(2), subject_visible: subjVis === null ? null : +subjVis.toFixed(2), region: [Math.round(big.x), Math.round(big.y), Math.round(big.w), Math.round(big.h)], ...(tooSmall ? { why: 'too small to read' } : {}) });
+      if (tooSmall && required) add({ gate: 'images', dimension: `picture: ${id}`, blocking: true, region: [Math.round(big.x), Math.round(big.y), Math.round(big.w), Math.round(big.h)], evidence: `picture ${id} covers ${(vis * 100).toFixed(1)}% of the poster`, impact: ['finding-info'], fix: { command: 'refine --set gridLayout=blocks', why: 'modules give every picture a readable size' } });
+      if (loss > 0.4) add({ gate: 'images', dimension: `picture crop: ${id}`, blocking: false, region: [Math.round(big.x), Math.round(big.y), Math.round(big.w), Math.round(big.h)], evidence: `${Math.round(loss * 100)}% of picture ${id} is cropped away (picture ${ar.toFixed(2)}, frame ${s.toFixed(2)})`, impact: ['expression'], fix: { command: 'refine --set composition=bleedgrid --set gridLayout=mosaic', why: 'the bleed grid keeps every picture at its own proportion' } });
+      if (subjVis !== null && subjVis < 0.85) add({ gate: 'images', dimension: `picture subject: ${id}`, blocking: false, region: [Math.round(big.x), Math.round(big.y), Math.round(big.w), Math.round(big.h)], evidence: `only ${Math.round(subjVis * 100)}% of the subject of ${id} is in frame`, impact: ['expression', 'craft'], fix: { command: 'variations --vary layout -n 6', why: 'another layout gives this picture a span closer to its proportion' } });
+    }
+  }
+
   // ── gate summary
   const st = (items: any[], blockingOnly = false): Status => (!items.length ? 'n/a' : items.some((i) => i.status === 'fail' && (!blockingOnly || i.required !== false)) ? 'fail' : items.every((i) => i.status === 'n/a') ? 'n/a' : 'pass');
   const gatesOut = {
@@ -260,6 +294,7 @@ export function evaluate(a: EvalArgs) {
       cjk_latin_spacing: { status: cjk.cjk_latin_spacing.length ? 'fail' : 'pass', blocking: false, items: cjk.cjk_latin_spacing },
     } : { status: 'n/a', why: 'no Chinese text' },
     glyphs: { status: 'n/a', why: 'checked by the CLI against the font files' } as any,
+    images: picItems.length ? { status: st(picItems.filter((i) => i.required)), all_status: st(picItems), items: picItems } : { status: 'n/a' as Status, why: 'no pictures' },
   };
   const blocking = issues.filter((i) => i.blocking);
 

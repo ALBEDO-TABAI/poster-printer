@@ -15,7 +15,9 @@ export const PARAMS: ParamDef[] = [
   // ---- global: grid & structure
   S('global', 'grid', 'gridType', '网格类型', 'Grid type', [['auto', '自动', 'Auto'], ['ortho', '正交', 'Orthogonal'], ['skew', '非正交', 'Non-ortho'], ['curve', '数学曲线', 'Math curve'], ['image', '图片友好', 'Image-friendly']]),
   S('global', 'grid', 'density', '网格密度', 'Density', [['auto', '自动', 'Auto'], ['simple', '简单', 'Simple'], ['stable', '稳定', 'Stable'], ['full', '满载', 'Full'], ['aggressive', '激进', 'Aggressive'], ['curve', '曲线', 'Curve'], ['curve2', '曲线2', 'Curve 2']]),
-  S('global', 'grid', 'composition', '构图', 'Composition', [['auto', '自动', 'Auto'], ['split', '图文分割', 'Split'], ['checker', '切片棋盘', 'Checker'], ['fullbleed', '满版图', 'Full bleed'], ['giant', '巨字', 'Giant word'], ['partition', '色块分区', 'Partition'], ['cards', '卡片', 'Cards'], ['fan', '扇形', 'Fan'], ['typefill', '字中图', 'Type fill'], ['swiss', '结构网格', 'Swiss'], ['centered', '居中编排', 'Centered'], ['layered', '主体分层', 'Layered'], ['bands', '横带', 'Bands'], ['typo', '纯排版', 'Type only'], ['edge', '出血大字', 'Edge type'], ['ghost', '虚实同图', 'Ghost reveal'], ['bento', '便当卡片', 'Bento cards'], ['veil', '色片叠图', 'Veil panels'], ['mosaic', '单图拼格', 'Mosaic'], ['inset', '小图留白', 'Inset'], ['cover', '杂志封面', 'Cover'], ['index', '索引表', 'Index'], ['echo', '回声重复', 'Echo'], ['knockout', '镂空色块', 'Knockout'], ['vertical', '竖排', 'Vertical'], ['quote', '引语', 'Quote'], ['ring', '环形字', 'Ring'], ['object', '物件海报', 'Object'], ['panorama', '全景横幅', 'Panorama'], ['ma', '留白', 'Emptiness'], ['substitute', '替换', 'Substitution'], ['hanzi', '汉字即图', 'Hanzi'], ['anomaly', '重复例外', 'Anomaly'], ['calendar', '日历数据', 'Calendar'], ['window', '揭示窗', 'Window'], ['typeled', '字形主导', 'Type-led'], ['interleave', '图字穿插', 'Interleave'], ['programme', '节目单', 'Programme'], ['exhibit', '展览框', 'Exhibit']]),
+  S('global', 'grid', 'composition', '构图', 'Composition', [['auto', '自动', 'Auto'], ['split', '图文分割', 'Split'], ['checker', '切片棋盘', 'Checker'], ['fullbleed', '满版图', 'Full bleed'], ['giant', '巨字', 'Giant word'], ['partition', '色块分区', 'Partition'], ['cards', '卡片', 'Cards'], ['fan', '扇形', 'Fan'], ['typefill', '字中图', 'Type fill'], ['swiss', '结构网格', 'Swiss'], ['centered', '居中编排', 'Centered'], ['layered', '主体分层', 'Layered'], ['bands', '横带', 'Bands'], ['typo', '纯排版', 'Type only'], ['edge', '出血大字', 'Edge type'], ['ghost', '虚实同图', 'Ghost reveal'], ['bento', '便当卡片', 'Bento cards'], ['veil', '色片叠图', 'Veil panels'], ['mosaic', '单图拼格', 'Mosaic'], ['inset', '小图留白', 'Inset'], ['cover', '杂志封面', 'Cover'], ['index', '索引表', 'Index'], ['echo', '回声重复', 'Echo'], ['knockout', '镂空色块', 'Knockout'], ['vertical', '竖排', 'Vertical'], ['quote', '引语', 'Quote'], ['ring', '环形字', 'Ring'], ['object', '物件海报', 'Object'], ['panorama', '全景横幅', 'Panorama'], ['ma', '留白', 'Emptiness'], ['substitute', '替换', 'Substitution'], ['hanzi', '汉字即图', 'Hanzi'], ['anomaly', '重复例外', 'Anomaly'], ['calendar', '日历数据', 'Calendar'], ['window', '揭示窗', 'Window'], ['typeled', '字形主导', 'Type-led'], ['interleave', '图字穿插', 'Interleave'], ['programme', '节目单', 'Programme'], ['exhibit', '展览框', 'Exhibit'], ['modular', '模块网格', 'Modular grid'], ['bleedgrid', '满版拼图', 'Bleed grid']]),
+  // phase 16: the Swiss layout type of the modular / bleed-grid compositions
+  S('global', 'grid', 'gridLayout', '网格版式', 'Grid layout', [['auto', '自动', 'Auto'], ['hero', '主图卫星', 'Hero + satellites'], ['flow', '悬挂线', 'Flowline'], ['steps', '尺度递进', 'Scale steps'], ['strip', '图片横条', 'Strip'], ['blocks', '模块分区', 'Module blocks'], ['mosaic', '满版拼贴', 'Mosaic'], ['rows', '满版行列', 'Justified rows']]),
   R('global', 'grid', 'gridStrength', '网格强度', 'Grid strength', 0, 2, 1, 0.1, 'x'),
   R('global', 'grid', 'cols', '列数 (0=自动)', 'Columns (0=auto)', 0, 12, 0),
   R('global', 'grid', 'rows', '行数 (0=自动)', 'Rows (0=auto)', 0, 16, 0),
@@ -67,7 +69,7 @@ export const PARAMS: ParamDef[] = [
   R('color', 'color', 'minContrast', '最低对比度', 'Min contrast', 3, 7, 4.5, 0.5, ':1'),
   R('color', 'color', 'zoneColors', '分区色数量', 'Zone colors', 1, 5, 3),
   // ---- image
-  R('image', 'image', 'imageCount', '图片数量', 'Images', 0, 4, 1),
+  R('image', 'image', 'imageCount', '图片数量', 'Images', 0, 8, 1), // phase 16: 4 → 8 (the grid compositions lay out several pictures)
   R('image', 'image', 'imageShare', '图片占比', 'Image share', 0, 100, 55, 1, '%'),
   S('image', 'image', 'maskKind', '切割/蒙版', 'Cut / mask', [['auto', '自动', 'Auto'], ['rect', '矩形', 'Rect'], ['grid', '网格切割', 'Grid slice'], ['random', '随机切割', 'Random slice'], ['rounded', '圆角', 'Rounded'], ['torn', '撕纸', 'Torn'], ['fan', '扇形', 'Fan'], ['arch', '拱形', 'Arch'], ['circle', '圆', 'Circle'], ['brush', '笔触', 'Brush'], ['wave', '波浪', 'Wave']]),
   R('image', 'image', 'imageZoom', '图片缩放', 'Image zoom', 100, 250, 100, 1, '%'),
@@ -96,7 +98,7 @@ export const PARAMS: ParamDef[] = [
   R('more', 'quality', 'qualityMin', '最低版面分', 'Minimum layout score', 40, 95, 78, 1),
   R('more', 'quality', 'qualityTries', '最多重抽次数', 'Max redraws', 0, 8, 5, 1),
   B('more', 'quality', 'collisionFix', '文字避让', 'Text collision avoidance', true),
-  S('more', 'plan', 'idea', '创意（先定一个主意）', 'Idea (one per draw)', [['auto', '自动', 'Auto'], ['off', '关闭', 'Off'], ['scale', '尺度冲击', 'Scale shock'], ['substitution', '替换', 'Substitution'], ['occlusion', '遮挡', 'Occlusion'], ['anomaly', '重复与例外', 'Repetition + anomaly'], ['reveal', '揭示', 'Reveal'], ['tension', '边缘张力', 'Tension edge'], ['emptiness', '留白', 'Emptiness'], ['data', '数据成形', 'Data as form'], ['hanzi', '汉字即图', 'Hanzi as image'], ['split', '对立分割', 'Split meaning'], ['orbit', '环绕', 'Orbit'], ['voice', '声音', 'Voice'], ['specimen', '标本', 'Specimen'], ['immersion', '沉浸', 'Immersion']]),
+  S('more', 'plan', 'idea', '创意（先定一个主意）', 'Idea (one per draw)', [['auto', '自动', 'Auto'], ['off', '关闭', 'Off'], ['scale', '尺度冲击', 'Scale shock'], ['substitution', '替换', 'Substitution'], ['occlusion', '遮挡', 'Occlusion'], ['anomaly', '重复与例外', 'Repetition + anomaly'], ['reveal', '揭示', 'Reveal'], ['tension', '边缘张力', 'Tension edge'], ['emptiness', '留白', 'Emptiness'], ['data', '数据成形', 'Data as form'], ['hanzi', '汉字即图', 'Hanzi as image'], ['split', '对立分割', 'Split meaning'], ['orbit', '环绕', 'Orbit'], ['voice', '声音', 'Voice'], ['specimen', '标本', 'Specimen'], ['immersion', '沉浸', 'Immersion'], ['grid', '网格秩序', 'Grid order']]),
   B('more', 'plan', 'planV2', '一图一招（每次抽卡只用一种明确手法）', 'One idea per draw (art direction v2)', true),
   R('more', 'plan', 'typeOnlyShare', '纯排版比例', 'Type-only share', 0, 60, 28, 1, '%'),
   R('more', 'plan', 'monoShare', '单色相配色比例', 'Single-hue palette share', 0, 60, 30, 1, '%'),
@@ -123,7 +125,7 @@ export const SETTINGS_KEYS = ['exportScale', 'embedFonts', 'replaySpeed', 'snapG
 /** read only when a draw is planned: changing them cannot alter the poster on screen, so they always act as pins */
 export const DRAW_ONLY = ['typeOnlyShare', 'monoShare', 'clashShare', 'grainShare', 'scriptShare', 'qualityGate', 'qualityMin', 'qualityTries'];
 /** these change the plan or the skeleton: the poster is re-laid out (labelled 会重新排版) */
-export const RELAYOUT = ['composition', 'gridType', 'density', 'cols', 'rows', 'imageCount', 'idea', 'planV2'];
+export const RELAYOUT = ['composition', 'gridType', 'density', 'cols', 'rows', 'imageCount', 'idea', 'planV2', 'gridLayout'];
 /** adjusting these re-picks only the palette of this poster (layout, copy and pictures stay) */
 export const REPICK_PALETTE = ['colorMode', 'paletteSource', 'bgPref', 'soft', 'fitOverride'];
 /** adjusting these re-picks only the copy of this poster */

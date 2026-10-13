@@ -123,7 +123,7 @@ for f in sorted(glob.glob(os.path.join(RAW, 'proc', '*.jpg'))):
     name = os.path.basename(f)[:-4]
     cat = name.split('-')[0]
     cat = {'fluid': 'abstract', 'aura': 'abstract', 'dunes': 'abstract', 'pattern': 'abstract'}.get(cat, cat)
-    handle(f'{cat}-{name}', f, cat, dict(title=name, artist='Poster Printer (procedural)', license='CC0 1.0 — original procedural artwork (scripts/gen-procedural.py)'))
+    handle(f'{cat}-{name}', f, cat, dict(title=name, artist='Ready Poster Printer (procedural)', license='CC0 1.0 — original procedural artwork (scripts/gen-procedural.py)'))
 # contemporary CC0 photographs from Wikimedia Commons (scripts/fetch-commons.py; licence verified per file)
 COMMONS_CAT = {'arch': 'architecture', 'interior': 'architecture', 'still': 'still', 'food': 'still', 'object': 'still', 'plant': 'nature', 'land': 'nature', 'sky': 'nature', 'urban': 'city', 'figure': 'nature'}
 COMMONS_FIX = {'figure-171647544': 'architecture', 'object-143875268': 'city', 'urban-59157180': 'nature', 'urban-61967456': 'nature'}
@@ -137,7 +137,7 @@ for pr in (json.load(open(cpf)) if os.path.exists(cpf) else []):
 ipf = os.path.join(RAW, 'illus', 'provenance.json')
 for pr in (json.load(open(ipf)) if os.path.exists(ipf) else []):
     name = pr['file'][:-4]
-    handle(name, os.path.join(RAW, 'illus', pr['file']), 'illustration', dict(title=pr['title'], artist='Poster Printer (original illustration)', license='CC0 1.0 — original illustration (scripts/gen-illustrations.py)'))
+    handle(name, os.path.join(RAW, 'illus', pr['file']), 'illustration', dict(title=pr['title'], artist='Ready Poster Printer (original illustration)', license='CC0 1.0 — original illustration (scripts/gen-illustrations.py)'))
 TIER = {'photo': 3.0, 'illus': 1.6, 'museum': 0.7, 'proc': 0.25}
 for it in items:
     lic = it['credit'].get('license', '')

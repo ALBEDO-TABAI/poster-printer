@@ -125,7 +125,7 @@ export function RateApp() {
   const busy = useRef(false);
   const toast = (m: string) => { setMsg(m); setTimeout(() => setMsg(''), 2200); };
 
-  useEffect(() => { document.title = `${t('打分', 'Rate')} · Poster Printer`; document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en'; }, [lang]);
+  useEffect(() => { document.title = `${t('打分', 'Rate')} · Ready Poster Printer`; document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en'; }, [lang]);
   useEffect(() => { LS.set(OPT_KEY, opts); }, [opts]);
   useEffect(() => { G.auto(); G.refract(); }, []);
   useEffect(() => { G.refreshAll(); }, [theme]);

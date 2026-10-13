@@ -8,11 +8,14 @@ export type V2Comp = 'typo' | 'edge' | 'ghost' | 'bento' | 'veil' | 'mosaic' | '
 export type V3Comp = 'cover' | 'index' | 'echo' | 'knockout' | 'vertical' | 'quote' | 'ring' | 'object' | 'panorama' | 'ma' | 'substitute' | 'hanzi' | 'anomaly' | 'calendar' | 'window';
 /** phase 8: coupled-grammar strategies (src/engine/p8/grammar.ts) */
 export type V8Comp = 'typeled' | 'interleave' | 'programme' | 'exhibit';
-export type Comp = LegacyComp | V2Comp | V3Comp | V8Comp;
+/** phase 16: Swiss modular grid compositions (src/engine/swiss/) */
+export type V16Comp = 'modular' | 'bleedgrid';
+export type Comp = LegacyComp | V2Comp | V3Comp | V8Comp | V16Comp;
+export const V16_COMPS: V16Comp[] = ['modular', 'bleedgrid'];
 export const V8_COMPS: V8Comp[] = ['typeled', 'interleave', 'programme', 'exhibit'];
 export const V3_COMPS: V3Comp[] = ['cover', 'index', 'echo', 'knockout', 'vertical', 'quote', 'ring', 'object', 'panorama', 'ma', 'substitute', 'hanzi', 'anomaly', 'calendar', 'window'];
 export const V2_COMPS: V2Comp[] = ['typo', 'edge', 'ghost', 'bento', 'veil', 'mosaic', 'inset'];
-export const COMPS: Comp[] = ['split', 'checker', 'fullbleed', 'giant', 'partition', 'cards', 'fan', 'typefill', 'swiss', 'centered', 'layered', 'bands', ...V2_COMPS, ...V3_COMPS, ...V8_COMPS];
+export const COMPS: Comp[] = ['split', 'checker', 'fullbleed', 'giant', 'partition', 'cards', 'fan', 'typefill', 'swiss', 'centered', 'layered', 'bands', ...V2_COMPS, ...V3_COMPS, ...V8_COMPS, ...V16_COMPS];
 
 export interface Style {
   id: string;

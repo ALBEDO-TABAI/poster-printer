@@ -76,7 +76,7 @@ export function DeckView() {
         const ptW = 595.28, ptH = (ptW * scene.h) / scene.w; // A4-wide pages at the deck's ratio
         return { jpeg, pxW: sz.w, pxH: sz.h, ptW, ptH };
       }));
-      download(new Blob([makePdf(pdfPages, { title: 'Poster Printer deck' }) as BlobPart], { type: 'application/pdf' }), `poster-printer-deck-${stamp()}.pdf`);
+      download(new Blob([makePdf(pdfPages, { title: 'Ready Poster Printer deck' }) as BlobPart], { type: 'application/pdf' }), `ready-poster-printer-deck-${stamp()}.pdf`);
       useStore.getState().toast(t(`已导出 ${pages.length} 页 PDF`, `Exported a ${pages.length}-page PDF`));
     } finally { setBusy(null); }
   };
@@ -85,7 +85,7 @@ export function DeckView() {
       const pages = await rasterPages(1.5, 'image/png');
       setBusy(t('打包 ZIP…', 'Packing ZIP…'));
       const files = await Promise.all(pages.map(async ({ blob }, i) => ({ name: `page-${String(i + 1).padStart(2, '0')}.png`, data: new Uint8Array(await blob.arrayBuffer()) })));
-      download(new Blob([makeZip(files) as BlobPart], { type: 'application/zip' }), `poster-printer-deck-${stamp()}.zip`);
+      download(new Blob([makeZip(files) as BlobPart], { type: 'application/zip' }), `ready-poster-printer-deck-${stamp()}.zip`);
       useStore.getState().toast(t(`已导出 ${pages.length} 张 PNG`, `Exported ${pages.length} PNGs`));
     } finally { setBusy(null); }
   };

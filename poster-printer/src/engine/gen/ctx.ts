@@ -70,12 +70,24 @@ export class Ctx {
   plan: DrawPlan = OFF_PLAN; // art-direction plan (v2)
   idea: IdeaPick | null = null; // phase 7: the idea this draw realises
   occupied: Rect[] = []; // text boxes, for collision avoidance of decorations
+  /** phase 16: params the user chose explicitly for this draw (GenInput.honor); compositions may respect them */
+  honor: Set<string> = new Set();
   rd: Rng; // decoration stream (independent so 'new graphics' variants keep the layout)
+  /** phase 17: layered layout streams. `rng` places pictures, panels and blocks (图位); `rt` sets the type: line breaks,
+   *  alignment, which side / band the copy takes, which groups show (排字); `rg` draws the grid system (网格). Legacy
+   *  posters (no layers) share one stream for all three, so they replay exactly as before. */
+  rt: Rng;
+  rg: Rng;
+  /** layered streams are on (new posters): type variations that legacy posters never drew may draw from `rt` */
+  layered = false;
+  /** type choices that legacy posters drew from the decor stream (display face, accent use): the type layer on layered posters */
+  get rtd(): Rng { return this.layered ? this.rt : this.rd; }
   constructor(
     public rng: Rng, public grid: Grid, public p: Params, public pal: Palette, public fonts: FontSet,
     public texts: PickedTexts, public images: ImageAsset[], public measure: Measurer,
     public modules: Record<LayerKey, boolean>, public modes: Set<ModeKey>,
   ) {
+    this.rt = rng; this.rg = rng;
     this.rd = new Rng(rng.seed + '|decor|' + String(p.decorSalt ?? ''));
     this.W = grid.W; this.H = grid.H; this.S = Math.min(this.W, this.H); this.u = this.S / 100;
   }

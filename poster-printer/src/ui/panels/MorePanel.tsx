@@ -14,7 +14,7 @@ const stamp = () => new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');
 export async function doExport(kind: 'png' | 'svg' | 'jpg', scale = 2) {
   const s = useStore.getState();
   if (!s.scene) return;
-  const name = `poster-printer-${s.seeds.layout.slice(0, 6)}-${s.ratio.replace(':', 'x')}-${stamp()}`;
+  const name = `ready-poster-printer-${s.seeds.layout.slice(0, 6)}-${s.ratio.replace(':', 'x')}-${stamp()}`;
   if (kind === 'svg') download(await exportSVG(s.scene, Boolean(s.params.embedFonts)), name + '.svg');
   else download(await rasterize(s.scene, scale, kind === 'png' ? 'image/png' : 'image/jpeg'), `${name}@${scale}x.${kind}`);
   s.toast(s.lang === 'zh' ? '已导出' : 'Exported');
@@ -96,13 +96,13 @@ export function MorePanel() {
         <Range label={t('回放间隔', 'Interval')} value={Number(params.replaySpeed)} min={200} max={3000} step={50} unit="ms" onChange={(v) => s.setParam('replaySpeed', v)} />
         <p className="hint">{recorded.length ? t(`已录制 ${recorded.length} 张，可回放或导出。`, `${recorded.length} recorded — replay or export.`) : t('未录制时回放本次历史。', 'Without a recording, replay plays this session’s history.')}</p>
         <div className="btn-row">
-          <button disabled={!recorded.length && !history.length} onClick={() => download(sessionJson(recorded.length ? recorded : history), `poster-printer-session-${stamp()}.json`)}>{t('导出会话', 'Session JSON')}</button>
+          <button disabled={!recorded.length && !history.length} onClick={() => download(sessionJson(recorded.length ? recorded : history), `ready-poster-printer-session-${stamp()}.json`)}>{t('导出会话', 'Session JSON')}</button>
           <button disabled={!!busy || (!recorded.length && !history.length)} onClick={async () => {
             const list = (recorded.length ? recorded : history).slice(-40);
             setBusy('0/' + list.length);
             const b = await recordWebM(list, Number(params.replaySpeed), (i) => setBusy(`${i}/${list.length}`));
             setBusy('');
-            if (b) download(b, `poster-printer-replay-${stamp()}.webm`); else s.toast(t('浏览器不支持录屏', 'Video capture unsupported'), 'warn');
+            if (b) download(b, `ready-poster-printer-replay-${stamp()}.webm`); else s.toast(t('浏览器不支持录屏', 'Video capture unsupported'), 'warn');
           }}>{busy ? t('渲染 ', 'Rendering ') + busy : t('导出 WebM 视频', 'WebM video')}</button>
         </div>
       </Card>
@@ -150,7 +150,7 @@ export function MorePanel() {
         <button className="primary" onClick={() => { saveAiSettings(ai); s.toast(t('已保存（仅存于本浏览器）', 'Saved (this browser only)')); }}>{t('保存', 'Save')}</button>
         <p className="hint">{t('密钥只保存在本机浏览器 localStorage，不会上传到任何服务器（除你填写的接口外）。抠图使用本地 rembg 服务。', 'Keys stay in this browser’s localStorage and are only sent to the endpoint you enter. Cut-outs use the local rembg server.')}</p>
       </Card>
-      <div className="panel-foot">{APP_NAME} {APP_VERSION} · {t('快捷键：空格 抽卡 · ←/→ 历史 · F 收藏 · S 导出 PNG · Delete 隐藏元素', 'Keys: Space draw · ←/→ history · F favourite · S export PNG · Delete hide element')}</div>
+      <div className="panel-foot">{APP_NAME} {APP_VERSION} · {t('快捷键：空格 抽卡 · ←/→ 历史 · T/P/R 换排字/图位/网格 · F 收藏 · S 导出 PNG · Delete 隐藏元素', 'Keys: Space draw · ←/→ history · T/P/R new type/placement/grid · F favourite · S export PNG · Delete hide element')}</div>
     </div>
   );
 }

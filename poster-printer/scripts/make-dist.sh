@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Build the portable distributable: release/poster-printer-dist.zip (override with OUT=/path/file.zip)
+# Build the portable distributable: release/ready-poster-printer-dist.zip (override with OUT=/path/file.zip)
 set -euo pipefail
 cd "$(dirname "$0")/.."
-OUT=${OUT:-release/poster-printer-dist.zip}
+OUT=${OUT:-release/ready-poster-printer-dist.zip}
 npm run build
-R=release/poster-printer
+R=release/ready-poster-printer
 rm -rf release && mkdir -p "$R/server"
 cp -r dist "$R/app"
 cp server/serve.py server/cutout_server.py "$R/server/"
@@ -20,7 +20,7 @@ python3 - "$OUT" <<'PY'
 import os, sys, zipfile, stat
 out = sys.argv[1]
 with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as z:
-    for root, dirs, files in os.walk('release/poster-printer'):
+    for root, dirs, files in os.walk('release/ready-poster-printer'):
         dirs.sort()
         for f in sorted(files):
             p = os.path.join(root, f); arc = os.path.relpath(p, 'release')

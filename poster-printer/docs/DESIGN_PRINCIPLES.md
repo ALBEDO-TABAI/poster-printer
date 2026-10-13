@@ -166,3 +166,18 @@ All sizes below are in canvas units `u = min(W,H)/100`.
 - When content exceeds a structure's capacity, switch structure; never shrink type to fit.
 - Declared breaks: a deliberate overlap is licensed in the scene, not flagged.
 - Real copy is sacred: never invent numbers, years, mastheads or quotes; names, dates, venues and prices never split.
+
+## Phase 17 principles (the structure in layers; `docs/PHASE17_LAYERS.md`)
+- **A structure has layers, and each layer can change alone.** The grid system, the picture placement and the typesetting draw from separate streams. Re-rolling one never moves the others.
+- **The pictures are placed against blocks, not against glyphs.** Where a picture hangs from the type (type-led layouts, title bands), the block it hangs from belongs to the placement. The type is set inside that block.
+- **A re-roll must be visible.** A type re-roll prefers a setting that moves, re-sizes or re-breaks the type over a colour change. If a layer has nothing else to offer, the poster stays and the reason is shown.
+- **Old work never changes.** A poster without layers replays its single stream exactly.
+
+## Phase 16 principles (the Swiss modular grid; `docs/PHASE16_SWISS_GRID.md`)
+- **Fields, not coordinates.** The type area is divided into fields by gutters. One field plus one gutter is a whole number of baseline lines, so all small text shares one baseline grid. Every picture and text region spans whole fields.
+- **A picture keeps its proportion.** Its span is chosen to match its own width / height. A crop above ~12 % costs, past ~40 % it is a fault, and the subject box always stays in frame.
+- **One hero, then a clear step.** The hero is the largest picture by ≥ 1.8× in area; the others form a row, column, grid or progression. Equal sizes are a deliberate rhythm (strip, modules), never an accident.
+- **Bleed is from a field edge.** A picture on an outer field may run to the trim; its inner edges stay on the grid. Text never bleeds.
+- **White fields are part of the order.** White space is planned per layout type. An empty band across the middle (rows or columns with nothing between two that carry something) is a hole, not white space.
+- **Full bleed keeps proportions too.** Edge to edge, pictures are packed in a slicing tree solved for the sheet's proportion; the type cell takes the slack. Busy pictures get seams or gutters rather than butt joints.
+- **Type hangs or stands.** The headline hangs from a field top or stands on a flowline, flush left on its ink, sized to fill its fields. The info block runs in sub-columns on the grid's columns.

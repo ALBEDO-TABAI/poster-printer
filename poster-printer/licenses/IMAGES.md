@@ -13,14 +13,14 @@ Phase 5: `scripts/precompute-cutouts.py` re-ran IS-Net offline over every preset
 
 | id | tier | category | title | artist / source | date | licence | cut-out |
 |---|---|---|---|---|---|---|---|
-| illus-arches | illus | illustration | Three arches with long shadows | Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
-| illus-dunes-sun | illus | illustration | Sun over layered dunes | Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
-| illus-geometry | illus | illustration | Primary geometric shapes | Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
-| illus-moon-sea | illus | illustration | Moon over a night sea | Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
-| illus-palm | illus | illustration | Palm against a low sun | Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
-| illus-stairs-door | illus | illustration | Stairs climbing to a green door | Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
-| illus-still-life | illus | illustration | Vase and fruit on a table | Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
-| illus-window-plant | illus | illustration | Window with a potted plant | Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
+| illus-arches | illus | illustration | Three arches with long shadows | Ready Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
+| illus-dunes-sun | illus | illustration | Sun over layered dunes | Ready Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
+| illus-geometry | illus | illustration | Primary geometric shapes | Ready Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
+| illus-moon-sea | illus | illustration | Moon over a night sea | Ready Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
+| illus-palm | illus | illustration | Palm against a low sun | Ready Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
+| illus-stairs-door | illus | illustration | Stairs climbing to a green door | Ready Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
+| illus-still-life | illus | illustration | Vase and fruit on a table | Ready Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
+| illus-window-plant | illus | illustration | Window with a potted plant | Ready Poster Printer (original illustration) |  | CC0 1.0 — original illustration (scripts/gen-illustrations.py) |  |
 | abstract-839178 | museum | abstract | [An introduction to the study of conchology : including observations on the Linnæan genera, and the arrangement of M. Lamarck, a glossary, and a table of English names / by Samuel Brookes](https://www.metmuseum.org/art/collection/search/839178) | Samuel Brookes | 1815 | CC0 1.0 (The Met Open Access) |  |
 | abstract-892571 | museum | abstract | [A manual of the art of bookbinding : containing full instructions in the different branches of forwarding, gilding, and finishing : also, the art of marbling book-edges and paper, the whole designed for the practical workman, the amateur, and the book-collector](https://www.metmuseum.org/art/collection/search/892571) | James Bartram Nicholson | 1856 | CC0 1.0 (The Met Open Access) |  |
 | east-36971 | museum | east | [Spring Rain at Tsuchiyama, from the series Fifty-three Stations of the Tōkaidō](https://www.metmuseum.org/art/collection/search/36971) | Utagawa Hiroshige | 1834–35 | CC0 1.0 (The Met Open Access) |  |
@@ -125,30 +125,30 @@ Phase 5: `scripts/precompute-cutouts.py` re-ran IS-Net offline over every preset
 | still-object61337727 | photo | still | [Boots of a man](https://commons.wikimedia.org/wiki/File:Boots_of_a_man.jpg) | W.carter | 2017-04-14 15:25:15 | CC0 1.0 (Wikimedia Commons, verified LicenseShortName=CC0) |  |
 | still-still103765429 | photo | still | [Park Anse-à-Cartier](https://commons.wikimedia.org/wiki/File:Park_Anse-%C3%A0-Cartier.jpg) | Wilfredor | 2021-04-13 17:02:53 | CC0 1.0 (Wikimedia Commons, verified LicenseShortName=CC0) |  |
 | still-still151468251 | photo | still | [Espresso Coffee 01](https://commons.wikimedia.org/wiki/File:Espresso_Coffee_01.jpg) | Jubair1985 | 2024-08-02 15:12:52 | CC0 1.0 (Wikimedia Commons, verified LicenseShortName=CC0) | yes |
-| abstract-aura-01 | proc | abstract | aura-01 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-aura-02 | proc | abstract | aura-02 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-aura-03 | proc | abstract | aura-03 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-dunes-01 | proc | abstract | dunes-01 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-dunes-02 | proc | abstract | dunes-02 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-fluid-01 | proc | abstract | fluid-01 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-fluid-02 | proc | abstract | fluid-02 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-fluid-03 | proc | abstract | fluid-03 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-fluid-04 | proc | abstract | fluid-04 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-fluid-05 | proc | abstract | fluid-05 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-fluid-06 | proc | abstract | fluid-06 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-fluid-07 | proc | abstract | fluid-07 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-pattern-waves-01 | proc | abstract | pattern-waves-01 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| abstract-pattern-waves-02 | proc | abstract | pattern-waves-02 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| landscape-landscape-01 | proc | landscape | landscape-01 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| landscape-landscape-02 | proc | landscape | landscape-02 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| landscape-landscape-03 | proc | landscape | landscape-03 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| landscape-landscape-04 | proc | landscape | landscape-04 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| landscape-landscape-05 | proc | landscape | landscape-05 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| space-space-01 | proc | space | space-01 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| space-space-02 | proc | space | space-02 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| space-space-03 | proc | space | space-03 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| space-space-04 | proc | space | space-04 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
-| space-space-05 | proc | space | space-05 | Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-aura-01 | proc | abstract | aura-01 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-aura-02 | proc | abstract | aura-02 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-aura-03 | proc | abstract | aura-03 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-dunes-01 | proc | abstract | dunes-01 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-dunes-02 | proc | abstract | dunes-02 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-fluid-01 | proc | abstract | fluid-01 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-fluid-02 | proc | abstract | fluid-02 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-fluid-03 | proc | abstract | fluid-03 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-fluid-04 | proc | abstract | fluid-04 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-fluid-05 | proc | abstract | fluid-05 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-fluid-06 | proc | abstract | fluid-06 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-fluid-07 | proc | abstract | fluid-07 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-pattern-waves-01 | proc | abstract | pattern-waves-01 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| abstract-pattern-waves-02 | proc | abstract | pattern-waves-02 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| landscape-landscape-01 | proc | landscape | landscape-01 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| landscape-landscape-02 | proc | landscape | landscape-02 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| landscape-landscape-03 | proc | landscape | landscape-03 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| landscape-landscape-04 | proc | landscape | landscape-04 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| landscape-landscape-05 | proc | landscape | landscape-05 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| space-space-01 | proc | space | space-01 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| space-space-02 | proc | space | space-02 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| space-space-03 | proc | space | space-03 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| space-space-04 | proc | space | space-04 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
+| space-space-05 | proc | space | space-05 | Ready Poster Printer (procedural) |  | CC0 1.0 — original procedural artwork (scripts/gen-procedural.py) |  |
 
 ## Phase 9: layout-first generated images (tier `gen`)
 

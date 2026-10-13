@@ -1,4 +1,4 @@
-"""Poster Printer — one-process local server for the built app.
+"""Ready Poster Printer — one-process local server for the built app.
 
 Serves the static build (dist/ or ./app next to this file) and, when the optional AI extras are installed
 (rembg + onnxruntime, see setup-ai.*), the background-removal API at /api/cutout in the same process.
@@ -85,7 +85,7 @@ def free_port(host, start):
     raise SystemExit('no free port found')
 
 def main():
-    ap = argparse.ArgumentParser(description='Poster Printer local server')
+    ap = argparse.ArgumentParser(description='Ready Poster Printer local server')
     ap.add_argument('--port', type=int, default=int(os.environ.get('REA_PORT', 5180)))
     ap.add_argument('--host', default=os.environ.get('REA_HOST', '127.0.0.1'))
     ap.add_argument('--root', default=None)
@@ -97,7 +97,7 @@ def main():
     port = free_port(a.host, a.port)
     url = f'http://{"localhost" if a.host in ("127.0.0.1", "0.0.0.0") else a.host}:{port}/'
     srv = ThreadingHTTPServer((a.host, port), partial(Handler, directory=os.path.abspath(root)))
-    print(f'Poster Printer  →  {url}', flush=True)
+    print(f'Ready Poster Printer  →  {url}', flush=True)
     print(f'  palettes  →  {url}color.html   ·   deck  →  {url}?view=deck', flush=True)
     print(f'  AI cut-out: {"on (" + MODEL + ")" if ai_available() else "off (optional: run setup-ai)"}', flush=True)
     print('  Ctrl+C to stop.', flush=True)

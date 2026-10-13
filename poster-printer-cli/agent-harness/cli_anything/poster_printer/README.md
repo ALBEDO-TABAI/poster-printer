@@ -1,6 +1,6 @@
-# cli-anything-poster-printer
+# cli-anything-ready-poster-printer
 
-Content-driven poster generation from the command line, built on the real **Poster Printer** engine.
+Content-driven poster generation from the command line, built on the real **Ready Poster Printer** engine.
 You write a brief with the real copy (title, date, venue, programme, speakers…) and the style intent.
 The CLI analyses the content, picks styles, ideas, compositions and type scale (with a reason for each
 choice), places the real copy into the layout slots, and renders N candidates ranked by the app's own
@@ -13,12 +13,12 @@ fonts and rasteriser. `--backend node` (resvg) is a faster approximate alternati
 ## Install
 
 Requirements: Python ≥ 3.10, Node ≥ 20, Google Chrome / Chromium (for the default backend), and the
-Poster Printer app repository (`REA_POSTER`, default: the sibling `poster-printer/` directory) for its assets.
+Ready Poster Printer app repository (`REA_POSTER`, default: the sibling `poster-printer/` directory) for its assets.
 
 ```bash
 cd poster-printer-cli/engine && npm install && node build.mjs      # bundles the app engine
-cd ../agent-harness && pip install -e .                             # cli-anything-poster-printer + poster-printer
-poster-printer doctor
+cd ../agent-harness && pip install -e .                             # cli-anything-ready-poster-printer + ready-poster-printer
+ready-poster-printer doctor
 ```
 
 Environment: `REA_POSTER` (app repo), `POSTER_PRINTER_CHROME` (browser binary),
@@ -29,16 +29,34 @@ Environment: `REA_POSTER` (app repo), `POSTER_PRINTER_CHROME` (browser binary),
 ## Usage (quick start)
 
 ```bash
-poster-printer brief template --lang zh > brief.json         # fill in the real content
-poster-printer brief resolve brief.json                      # what will be used, and why
-poster-printer --json generate --brief brief.json --count 6 --min-score 6.5 -o out/
-poster-printer --project out/01-*.json refine --set titleScale=130 --text sub="新的副标题"
-poster-printer --project out/01-*.json undo
-poster-printer export out/01-*.json --format pdf -o poster.pdf
-poster-printer                                                # interactive REPL
+ready-poster-printer brief template --lang zh > brief.json         # fill in the real content
+ready-poster-printer brief resolve brief.json                      # what will be used, and why
+ready-poster-printer --json generate --brief brief.json --count 6 --min-score 6.5 -o out/
+ready-poster-printer --project out/01-*.json refine --set titleScale=130 --text sub="新的副标题"
+ready-poster-printer --project out/01-*.json undo
+ready-poster-printer export out/01-*.json --format pdf -o poster.pdf
+ready-poster-printer                                                # interactive REPL
 ```
 
-Quick mode without a brief file: `poster-printer generate --title "Paper Weekend" --date 2026-11-08 --line "10:00 Opening" --line "13:00 Workshop" --mood playful`.
+Quick mode without a brief file: `ready-poster-printer generate --title "Paper Weekend" --date 2026-11-08 --line "10:00 Opening" --line "13:00 Workshop" --mood playful`.
+
+### Pictures and Swiss grid layouts (phase 16)
+
+Give the user's pictures in the brief in importance order; the first is the hero. Files are added automatically, with stable ids.
+
+```json
+"style": { "imagery": { "use": "hero", "files": ["hero.jpg", "a.jpg", "b.jpg", "c.jpg"], "layout": "auto" } }
+```
+
+- `brief resolve` analyses the set (proportions, orientation mix, series, busyness) and recommends grid layouts, each with its reasons.
+- With several pictures, every direction uses the grid compositions:
+  - `modular` (模块网格) with `hero` · `flow` · `steps` · `strip` · `blocks`
+  - `bleedgrid` (满版拼图, edge to edge) with `mosaic` · `rows`
+- `layout` forces one of these; `single` keeps the one-picture compositions.
+- The report's `images` gate checks that every picture is drawn, its `crop_loss` and its `subject_visible`.
+- `images add FILE…` and `images inspect ID…` show what a layout decision needs. `catalog layouts` lists the layouts.
+- Quick mode: `ready-poster-printer generate --title "…" --image a.jpg --image b.jpg --layout auto`.
+- The method an agent should follow is in `skills/LAYOUT_METHOD.md` (next to `skills/SKILL.md`).
 
 ## Commands
 
@@ -48,11 +66,11 @@ it is saved after mutations, with undo/redo history kept in `x_cli`), `--dry-run
 | Group | Commands |
 |---|---|
 | brief | `schema`, `template [--lang zh/en]`, `validate F`, `analyze F`, `resolve F [--top N] [--full]` |
-| generate | `--brief F` or `--title/--subtitle/--date/--venue/--line/--mood`; `--count N --min-score S --ratio R --seed S --direction d1 --format png,svg,jpeg --scale X -o DIR --no-font-fix --no-sheet` |
-| iterate | `refine [F] --set k=v --text slot=v --style ID --ratio R`, `variations [F] --vary layout/structure/color/image/decor/tendency -n N [--pick N]`, `audit [F]`, `info [F]` |
+| generate | `--brief F` or `--title/--subtitle/--date/--venue/--line/--mood/--image/--layout`; `--count N --min-score S --ratio R --seed S --direction d1 --format png,svg,jpeg --scale X -o DIR --no-font-fix --no-sheet` |
+| iterate | `refine [F] --set k=v --text slot=v --style ID --ratio R`, `variations [F] --vary layout/structure/grid/place/type/color/image/decor/tendency -n N [--pick N]` (grid / place / type re-roll one layer of the structure: 网格 / 图位 / 排字), `audit [F]`, `info [F]` |
 | history | `undo`, `redo`, `history`, `open F`, `save [F]` |
 | output | `export [F] --format png/png@2x/png@4x/jpg/svg/svg-light/pdf/json -o PATH`, `deck [F] --pages N --format pdf,zip,png` |
-| catalogues | `styles list/show`, `palettes search/show`, `fonts list/pairings/check [--fix]`, `images list/add/remove`, `catalog ideas/comps/params/ratios/exports` |
+| catalogues | `styles list/show`, `palettes search/show`, `fonts list/pairings/check [--fix]`, `images list/add/inspect/remove`, `catalog layouts/ideas/comps/params/ratios/exports` |
 | system | `doctor`, `repl` |
 
 Exit codes: 0 ok · 1 engine failure · 2 usage / invalid input · 3 missing file · 4 output verification failed · 5 nothing reached `--min-score`.
@@ -61,23 +79,23 @@ Exit codes: 0 ok · 1 engine failure · 2 usage / invalid input · 3 missing fil
 
 ```bash
 # 1. scaffold and fill a brief, check it, see how it maps to engine settings (with reasons)
-poster-printer brief template --lang zh > talk.json
-poster-printer brief validate talk.json
-poster-printer --json brief resolve talk.json
+ready-poster-printer brief template --lang zh > talk.json
+ready-poster-printer brief validate talk.json
+ready-poster-printer --json brief resolve talk.json
 
 # 2. six candidates that pass the correctness gates with taste >= 6.5, plus a contact sheet
-poster-printer generate --brief talk.json --count 6 --min-score 6.5 -o out/talk
+ready-poster-printer generate --brief talk.json --count 6 --min-score 6.5 -o out/talk
 
 # 3. read one candidate's report at its real display size, apply a suggested fix, undo it
-poster-printer audit out/talk/01-*.json --brief talk.json --display print --print-size A2 --distance 1.0
-poster-printer --project out/talk/01-*.json refine --set smallScale=130
-poster-printer --project out/talk/01-*.json audit
-poster-printer --project out/talk/01-*.json undo
+ready-poster-printer audit out/talk/01-*.json --brief talk.json --display print --print-size A2 --distance 1.0
+ready-poster-printer --project out/talk/01-*.json refine --set smallScale=130
+ready-poster-printer --project out/talk/01-*.json audit
+ready-poster-printer --project out/talk/01-*.json undo
 
 # 4. alternatives and outputs
-poster-printer variations out/talk/01-*.json --vary structure -n 4
-poster-printer export out/talk/01-*.json --format pdf -o talk.pdf
-poster-printer deck out/talk/01-*.json --pages 3 --format pdf
+ready-poster-printer variations out/talk/01-*.json --vary structure -n 4
+ready-poster-printer export out/talk/01-*.json --format pdf -o talk.pdf
+ready-poster-printer deck out/talk/01-*.json --pages 3 --format pdf
 ```
 
 ## The brief

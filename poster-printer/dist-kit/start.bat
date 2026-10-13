@@ -1,5 +1,5 @@
 @echo off
-rem Poster Printer - start the local app (Windows). Double-click or run: start.bat [--port 5180]
+rem Ready Poster Printer - start the local app (Windows). Double-click or run: start.bat [--port 5180]
 cd /d "%~dp0"
 if exist ".venv\Scripts\python.exe" (
   ".venv\Scripts\python.exe" server\serve.py %*

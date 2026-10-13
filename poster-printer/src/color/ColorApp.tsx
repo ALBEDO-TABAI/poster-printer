@@ -68,7 +68,7 @@ export function ColorApp() {
   const copy = async (s: string, key = s) => { try { await navigator.clipboard.writeText(s); } catch { /* insecure context */ const ta = document.createElement('textarea'); ta.value = s; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); } setCopied(key); setTimeout(() => setCopied(null), 1200); };
   const exportAs = async (kind: 'png' | 'svg' | 'json' | 'css' | 'ase') => {
     if (!pal || !meta) return;
-    const base = `poster-printer-palette-${pal.id}-${cur!.layout}`;
+    const base = `ready-poster-printer-palette-${pal.id}-${cur!.layout}`;
     if (kind === 'png' || kind === 'svg') {
       const css = await fontFaceCss(CARD_FONTS);
       const full = renderCard(cur!.layout, pal, meta, { fontCss: css });

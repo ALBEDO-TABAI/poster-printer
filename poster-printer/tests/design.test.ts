@@ -112,7 +112,8 @@ describe('composition rules', () => {
       expect(a.blocks).toBeLessThanOrEqual(10);
       expect(a.penalty).toBeGreaterThanOrEqual(0);
       pen += a.penalty;
-      expect(r.scene.info.direction).toBeTruthy();
+      // compositions with declared semantics (phase 8 strategies, phase 16 grids) direct themselves
+      expect(r.scene.info.direction ?? r.scene.info.sem).toBeTruthy();
     }
     expect(pen / 24).toBeLessThan(15);
   });

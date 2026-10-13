@@ -10,6 +10,8 @@ export const COMP_KEYS = ['layered', 'split', 'checker', 'fullbleed', 'giant', '
 // (object / panorama are new in phase 6: no training labels yet, so they carry no one-hot and are scored by structure alone)
 /** phase 7: compositions added after the phase-6 training sets (one-hots, so future ratings can teach the model about them) */
 export const COMP_KEYS_7 = ['object', 'panorama', 'ma', 'substitute', 'hanzi', 'anomaly', 'calendar', 'window'];
+/** phase 16: the Swiss grid compositions (no training labels yet: scored by structure alone) */
+export const COMP_KEYS_16 = ['modular', 'bleedgrid'];
 
 function flat(nodes: SceneNode[], out: SceneNode[] = []): SceneNode[] {
   for (const n of nodes) { if (n.kind === 'group') flat(n.children, out); else out.push(n); }
@@ -123,6 +125,7 @@ export function sceneFeatures(scene: Scene): Record<string, number> {
   f.texture = scene.texture && scene.texture.amount > 0 ? 1 : 0;
   // ---- phase 7: idea layer, Itten contrast, gate measurements, Ngo-style layout measures
   for (const c of COMP_KEYS_7) f['c_' + c] = comp === c ? 1 : 0;
+  for (const c of COMP_KEYS_16) f['c_' + c] = comp === c ? 1 : 0;
   const idea = (info.idea ?? {}) as { id?: string; contrast?: string };
   for (const i of IDEA_IDS) f['i_' + i] = idea.id === i ? 1 : 0;
   for (const k of ITTEN) f['k_' + k] = idea.contrast === k ? 1 : 0;

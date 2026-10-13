@@ -1,6 +1,6 @@
 """Session: the current poster project held in memory, with undo / redo and locked saves.
 
-The project file is the web app's own *Poster JSON* (``{"app": "poster-printer", "kind": "poster", "version": 1,
+The project file is the web app's own *Poster JSON* (``{"app": "ready-poster-printer", "kind": "poster", "version": 1,
 "entry": {...}}``) so it imports into the app unchanged. CLI state (history for undo/redo, provenance) lives in the
 extra ``x_cli`` key, which the app ignores.
 """
@@ -80,7 +80,7 @@ class Session:
     def apply(self, entry: dict, label: str, extra: Optional[dict] = None) -> None:
         """Replace the current entry (after a snapshot) and mark the project modified."""
         if self.project is None:
-            self.project = {"app": "poster-printer", "kind": "poster", "version": 1, "entry": entry, "x_cli": {"undo": [], "redo": []}}
+            self.project = {"app": "ready-poster-printer", "kind": "poster", "version": 1, "entry": entry, "x_cli": {"undo": [], "redo": []}}
         else:
             self.snapshot(label)
             self.project["entry"] = entry

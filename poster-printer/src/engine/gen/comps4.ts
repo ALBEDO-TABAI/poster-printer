@@ -18,13 +18,13 @@ function object(ctx: Ctx) {
   const field = pal.bg;
   const T = ctx.texts;
   const hw = heroWord(ctx, land ? 10 : 8);
-  const fam = hw.zh ? zhHeavy(ctx, true) : ctx.rd.chance(0.7) ? condFam(ctx) : { family: 'Archivo Black', weight: 400 };
+  const fam = hw.zh ? zhHeavy(ctx, true) : ctx.rtd.chance(0.7) ? condFam(ctx) : { family: 'Archivo Black', weight: 400 };
   const capR = capOf(ctx, fam, hw.zh);
   const tr = hw.zh ? 0.02 : -0.01;
   let size = (C.w + u * 1.5) / width100(ctx, hw.t, fam, tr);
   size = Math.min(size, (H * (land ? 0.5 : 0.36)) / capR);
   const cap = capR * size;
-  const wordFill = wcag(pal.accent, field) >= 2.2 && ctx.rd.chance(0.6) ? pal.accent : strong(ctx, field);
+  const wordFill = wcag(pal.accent, field) >= 2.2 && ctx.rtd.chance(0.6) ? pal.accent : strong(ctx, field);
   // the word sits a little above the middle; the subject stands on a ground line below it
   const wy = H * (land ? 0.5 : 0.42) + cap / 2;
   rawText(ctx, { id: ctx.id('objw'), role: 'big.main', text: hw.t, lang: hw.zh ? 'zh' : 'en', x: W / 2, y: wy, size, family: fam.family, weight: fam.weight, fill: wordFill, anchor: 'middle', tracking: tr });

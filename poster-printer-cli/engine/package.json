@@ -1,9 +1,9 @@
 {
-  "name": "poster-printer-engine",
+  "name": "ready-poster-printer-engine",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.3.0",
   "type": "module",
-  "description": "Headless engine for the poster-printer CLI: content analyzer, brief resolver, generate/replay/export on top of the Poster Printer (rea-poster) generator.",
+  "description": "Headless engine for the ready-poster-printer CLI: content analyzer, brief resolver, generate/replay/export on top of the Ready Poster Printer (rea-poster) generator.",
   "scripts": {
     "build": "node build.mjs",
     "test": "python3 -m pytest ../agent-harness/cli_anything/poster_printer/tests/test_core.py -q"

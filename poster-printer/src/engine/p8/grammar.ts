@@ -1,3 +1,4 @@
+import { Rng } from '../rng';
 // Phase 8: conditional design grammars. Each strategy is a chain of coupled decisions where one choice propagates to
 // the next (content → line breaks → silhouette → image position / crop → secondary density → ornament). When the
 // content exceeds a strategy's capacity the grammar SWITCHES structure instead of shrinking type. Every element gets a
@@ -12,7 +13,7 @@ import { strong, accentOn, condFam, zhHeavy } from '../gen/comps3';
 import { canon, eyes } from '../gen/frame';
 import { imageDrawRect } from '../render/svg';
 import { wcag } from '../color/contrast';
-import { semanticBreak, silhouette, silhouetteFor, opticalLeft, type Silhouette } from './typeset';
+import { semanticBreak, silhouette, silhouetteFor, opticalLeft, type Silhouette, type SetLine } from './typeset';
 import { emptySem, unionBox, type SceneSemantics, type Role8 } from './semantic';
 
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
@@ -29,7 +30,8 @@ export function contentOf(ctx: Ctx): Content {
   let items = T.groups.map((g, i) => ({ main: g.main, note: T.custom && T.customNotes && !T.customNotes[i] ? { t: '', lang: g.note.lang } : g.note })).filter((g) => g.main.t);
   if (T.custom && T.customItems !== undefined) items = items.slice(0, T.customItems);
   // synthetic copy: commit to a plausible amount of information (2–4 items) instead of all six filler groups
-  if (!real) items = items.slice(0, ctx.rng.int(2, 4));
+  // how many stand-in facts a poster shows is content, not type: a layered poster keeps the count when a layer is re-rolled
+  if (!real) items = items.slice(0, ctx.layered ? new Rng(ctx.rd.seed + '|items').int(2, 4) : ctx.rng.int(2, 4));
   const hl = T.headline;
   const zh = hl.lang === 'zh';
   const chars = Array.from(hl.t.replace(/\s/g, '')).length;
@@ -53,11 +55,15 @@ const display = (ctx: Ctx, zh: boolean, heavy: boolean) => {
   return condFam(ctx);
 };
 /** set a headline as one text node per line (each line may carry its own size); returns ids + bbox */
-function setHeadline(ctx: Ctx, o: Out, lines: string[], sil: Silhouette, box: Rect, fam: { family: string; weight: number }, zh: boolean, fill: string, size: number, align: 'start' | 'end' = 'start', layer: TextNode['layer'] = 'text') {
+/** the lines of a headline set in a silhouette (no nodes): what setHeadline draws */
+function headLayout(ctx: Ctx, lines: string[], sil: Silhouette, box: Rect, fam: { family: string; weight: number }, zh: boolean, size: number, align: 'start' | 'end' = 'start') {
   const tr = zh ? 0.02 : lines.join('').length > 8 ? -0.015 : -0.025;
   const spec = (s: number) => ({ family: fam.family, weight: fam.weight, size: s, tracking: tr });
   const cap = zh ? 0.86 : ctx.measure.metrics(spec(100)).cap;
-  const set = silhouette(lines, sil, box, spec, ctx.measure, { size, leading: zh ? 1.08 : 0.98, cap, zh, align });
+  return { tr, spec, cap, set: silhouette(lines, sil, box, spec, ctx.measure, { size, leading: zh ? 1.08 : 0.98, cap, zh, align }) };
+}
+function setHeadline(ctx: Ctx, o: Out, lines: string[], sil: Silhouette, box: Rect, fam: { family: string; weight: number }, zh: boolean, fill: string, size: number, align: 'start' | 'end' = 'start', layer: TextNode['layer'] = 'text') {
+  const { tr, spec, set } = headLayout(ctx, lines, sil, box, fam, zh, size, align);
   const ids: string[] = [];
   for (const l of set.lines) {
     const dx = l.size > ctx.u * 6 ? -opticalLeft(ctx.measure, l.text, spec(l.size)) : 0; // big type aligns on ink
@@ -162,13 +168,16 @@ export function typeled(ctx: Ctx, from?: Strategy): void {
   const k = c.zh ? (c.hlChars <= 3 ? 1 : c.hlChars <= 8 ? 2 : 3) : c.hlWords <= 1 ? 1 : c.hlWords <= 3 ? Math.min(c.hlWords, 3) : c.hlWords <= 6 ? 3 : 4;
   const fam = display(ctx, c.zh, true);
   const wf = (s: string) => ctx.measure.width(s, { family: fam.family, weight: fam.weight, size: 100, tracking: 0 });
-  const profile = ctx.rng.pick(['balanced', 'descending', 'any'] as const);
+  // phase 17: on a layered poster the headline's block (measure, height, silhouette) is placement, drawn from its own fork of
+  // the placement stream; the picture is placed against it and the type layer sets the headline inside it (below)
+  const rs = ctx.layered ? ctx.rng.fork('typeled-head') : ctx.rt;
+  const profile = rs.pick(['balanced', 'descending', 'any'] as const);
   const lines = semanticBreak(c.hl.t, { k, profile, width: wf }) ?? [c.hl.t];
-  const sil = silhouetteFor(lines, wf, () => ctx.rng.next());
+  const sil = silhouetteFor(lines, wf, () => rs.next());
   o.sem.vars.lines = { kind: 'coupled', value: lines.length, from: 'headline.length' };
   o.sem.vars.silhouette = { kind: 'coupled', value: sil, from: 'lines.profile' };
   // 2. size: the widest line fills the measure; capacity = the display size must stay a display size
-  const measure = land ? C.w * ctx.rng.range(0.55, 0.68) : C.w;
+  const measure = land ? C.w * rs.range(0.55, 0.68) : C.w;
   const widest = Math.max(...lines.map(wf)) / 100;
   let size = measure / widest;
   const capH = (c.zh ? 0.86 : 0.72) * size * (1 + (lines.length - 1) * 1.05);
@@ -178,25 +187,50 @@ export function typeled(ctx: Ctx, from?: Strategy): void {
   // 3. where the headline sits decides where the image can go
   const top = ctx.rng.chance(0.55);
   const hb = { x: C.x, y: top ? C.y + u * 2 : C.y, w: measure, h: maxH };
-  const align = land && ctx.rng.chance(0.3) ? 'end' : 'start';
+  const align = land && ctx.rt.chance(0.3) ? 'end' : 'start';
   if (align === 'end') hb.x = C.x + C.w - measure;
   const ink = strong(ctx, on);
   const accent = accentOn(ctx, on, 2.6);
-  const hlFill = accent && ctx.rng.chance(0.3) ? accent : ink;
+  const hlFill = accent && ctx.rt.chance(0.3) ? accent : ink;
   // dry layout to know the height, then place top or bottom
   const dry = silhouette(lines, sil, hb, (s) => ({ family: fam.family, weight: fam.weight, size: s, tracking: 0 }), ctx.measure, { size, leading: c.zh ? 1.08 : 0.98, cap: c.zh ? 0.86 : 0.72, zh: c.zh });
   if (!top) hb.y = C.y + C.h - dry.h;
-  const head = setHeadline(ctx, o, lines, sil, hb, fam, c.zh, hlFill, size, align);
-  const lv = levels(ctx, Math.max(...head.lines.map((l) => l.size)));
+  // the block the picture and the info are placed against (on a legacy poster: the headline itself)
+  let geo: { box: Rect; lines: SetLine[] } | null = null;
+  let tset = { lines, sil, size, box: hb as Rect };
+  if (ctx.layered) {
+    const ref = headLayout(ctx, lines, sil, hb, fam, c.zh, size, align).set;
+    const x0 = Math.min(...ref.lines.map((l) => l.x));
+    geo = { box: { x: x0, y: hb.y, w: ref.w, h: ref.h }, lines: ref.lines };
+    // the type layer: another break / silhouette of the same line count, set inside the block (never taller, never
+    // reaching into the room beside the short line where a picture may stand)
+    if (!ctx.rt.chance(0.3)) {
+      const prof2 = ctx.rt.pick(['balanced', 'descending', 'any'] as const);
+      const l2 = semanticBreak(c.hl.t, { k, profile: prof2, width: wf }) ?? [c.hl.t];
+      const s2 = silhouetteFor(l2, wf, () => ctx.rt.next());
+      const z2 = Math.min(measure / (Math.max(...l2.map(wf)) / 100), size * 1.15);
+      const b2 = { ...hb, h: ref.h };
+      const t2 = headLayout(ctx, l2, s2, b2, fam, c.zh, z2, align).set;
+      const short = ref.lines.reduce((a, l) => (l.w < a.w ? l : a), ref.lines[0]);
+      const sideX = short.x + short.w + u * 4, sideY = short.y - short.size * 0.8;
+      const intrudes = t2.lines.some((l) => l.x + l.w > sideX && l.y > sideY);
+      const big = Math.max(...t2.lines.map((l) => l.size)) >= Math.max(...ref.lines.map((l) => l.size)) * 0.8;
+      if ((l2.join('|') !== lines.join('|') || s2 !== sil) && t2.h <= ref.h + 1 && big && (!intrudes || ref.lines.length < 2)) tset = { lines: l2, sil: s2, size: z2, box: top ? b2 : { ...b2, y: hb.y + ref.h - t2.h } };
+    }
+  }
+  const head = setHeadline(ctx, o, tset.lines, tset.sil, tset.box, fam, c.zh, hlFill, tset.size, align);
+  const hg = geo ?? head;
+  o.sem.vars.silhouette = { kind: 'coupled', value: tset.sil, from: 'lines.profile' };
+  const lv = levels(ctx, Math.max(...hg.lines.map((l) => l.size)));
   // 4–5 run as one coupled step: if the info does not fit, the image yields first; if it still does not fit, the
   // structure switches (programme) instead of shrinking the type
   const snap = { n: ctx.nodes.length, occ: ctx.occupied.length, sem: JSON.stringify(o.sem) };
   const restore = () => { ctx.nodes.length = snap.n; ctx.occupied.length = snap.occ; Object.assign(o.sem, JSON.parse(snap.sem)); };
   const place = (withImg: boolean) => {
     // 4. negative space of the silhouette: right of the short lines (step / wedge / ragged) or the opposite band
-    const free: Rect = top ? { x: C.x, y: head.box.y + head.box.h + u * 4, w: C.w, h: C.y + C.h - (head.box.y + head.box.h) - u * 4 } : { x: C.x, y: C.y, w: C.w, h: head.box.y - C.y - u * 4 };
-    const shortest = head.lines.reduce((a, l) => (l.w < a.w ? l : a), head.lines[0]);
-    const side = !land && head.lines.length >= 2 && shortest.w < measure * 0.55 && sil !== 'block';
+    const free: Rect = top ? { x: C.x, y: hg.box.y + hg.box.h + u * 4, w: C.w, h: C.y + C.h - (hg.box.y + hg.box.h) - u * 4 } : { x: C.x, y: C.y, w: C.w, h: hg.box.y - C.y - u * 4 };
+    const shortest = hg.lines.reduce((a, l) => (l.w < a.w ? l : a), hg.lines[0]);
+    const side = !land && hg.lines.length >= 2 && shortest.w < measure * 0.55 && sil !== 'block';
     const asset = withImg && hasPic(ctx) ? ctx.images[0] : null;
     let imgBox: Rect | null = null;
     if (asset) {
@@ -288,7 +322,7 @@ export function interleave(ctx: Ctx): void {
   const measure = W - u * 8;
   let size = measure / (Math.max(...lines.map(wf)) / 100);
   size = Math.min(size, H * 0.3 / lines.length);
-  const by = clamp(sTop + sH * ctx.rng.range(0.12, 0.3), u * 6, H * 0.55);
+  const by = clamp(sTop + sH * ctx.rt.range(0.12, 0.3), u * 6, H * 0.55);
   const lg = ctx.legible(a, frame, { x: u * 4, y: by, w: measure, h: size }, 200, true);
   const fill = lg.lum > 0.55 ? ctx.pal.dark : ctx.pal.light;
   const head = setHeadline(ctx, o, lines, 'stack', { x: u * 4, y: by, w: measure, h: H }, fam, c.zh, fill, size);
@@ -336,7 +370,10 @@ export function programme(ctx: Ctx, from?: Strategy): void {
   let size = headW / (Math.max(...lines.map(wf)) / 100);
   size = Math.min(size, (H * (n > 6 ? 0.2 : 0.3)) / lines.length);
   const ink = strong(ctx, on);
-  const head = setHeadline(ctx, o, lines, lines.length > 1 && ctx.rng.chance(0.4) ? 'block' : 'stack', { x: C.x, y: C.y + u, w: headW, h: H }, fam, c.zh, ink, size);
+  // phase 17: the type layer of a layered poster may set the headline flush right or in the accent (same block, same height)
+  const pAlign = ctx.layered && !land && ctx.rt.chance(0.3) ? 'end' : 'start';
+  const pFill = ctx.layered && wcag(pal.accent, on) >= 3 && ctx.rt.chance(0.3) ? pal.accent : ink;
+  const head = setHeadline(ctx, o, lines, lines.length > 1 && ctx.rt.chance(0.4) ? 'block' : 'stack', { x: C.x, y: C.y + u, w: headW, h: H }, fam, c.zh, pFill, size, pAlign);
   const lv = levels(ctx, size);
   let y = head.box.y + head.box.h + u * 3;
   const colX = land ? C.x + C.w * 0.5 : C.x;
@@ -401,20 +438,28 @@ export function exhibit(ctx: Ctx, from?: Strategy): void {
   const fam = display(ctx, c.zh, false);
   const wf = (s: string) => ctx.measure.width(s, { family: fam.family, weight: fam.weight, size: 100, tracking: 0 });
   const tb = land ? { x: fx <= cn.x + 1 ? fx + fw + u * 5 : cn.x, y: fy, w: cn.w - fw - u * 5, h: fh } : { x: fx, y: fy + fh + u * 4, w: fw, h: H - (fy + fh) - u * 12 };
-  const k2 = c.zh ? (c.hlChars > 6 ? 2 : 1) : c.hlWords > 2 ? 2 : 1;
-  const lines = semanticBreak(c.hl.t, { k: k2, width: wf }) ?? [c.hl.t];
+  let k2 = c.zh ? (c.hlChars > 6 ? 2 : 1) : c.hlWords > 2 ? 2 : 1;
+  // phase 17: the type layer of a layered poster sets the caption its own way: one or two lines, flush left or right on
+  // the frame, ink or accent, the info under the caption or on the foot line
+  const tv = ctx.layered;
+  if (tv && (c.zh ? c.hlChars >= 4 : c.hlWords >= 2) && ctx.rt.chance(0.4)) k2 = k2 === 1 ? 2 : 1;
+  const lines = semanticBreak(c.hl.t, { k: k2, width: wf, ...(tv ? { profile: ctx.rt.pick(['balanced', 'descending', 'any'] as const) } : {}) }) ?? [c.hl.t];
   let size = Math.min(tb.w / (Math.max(...lines.map(wf)) / 100), u * (c.zh ? 9 : 10));
   if (from === 'interleave') size = Math.min(size * 1.15, tb.w / (Math.max(...lines.map(wf)) / 100));
-  const head = setHeadline(ctx, o, lines, 'stack', tb, fam, c.zh, strong(ctx, on), size);
+  const hAlign = tv && ctx.rt.chance(0.35) ? 'end' : 'start';
+  const hFill = tv && wcag(pal.accent, on) >= 3 && ctx.rt.chance(0.25) ? pal.accent : strong(ctx, on);
+  const infoUp = tv && ctx.rt.chance(0.4);
+  const head = setHeadline(ctx, o, lines, 'stack', tb, fam, c.zh, hFill, size, hAlign);
   o.sem.relations.push({ type: 'align', a: im.id, b: head.ids[0], edge: 'left' }, { type: 'anchor', a: im.id, b: head.ids[0], side: land ? 'right' : 'below', gap: u * 4 });
   const lv = levels(ctx, size);
   let y = head.box.y + head.box.h + u * 2.5;
-  const ex = line(ctx, o, c.sub, tb.x, y + lv.expl * 0.6, Math.min(lv.expl, u * 2.2), on, 'explanation', 'start', 'big.sub', tb.w);
+  const ex = line(ctx, o, c.sub, hAlign === 'end' ? tb.x + tb.w : tb.x, y + lv.expl * 0.6, Math.min(lv.expl, u * 2.2), on, 'explanation', hAlign, 'big.sub', tb.w);
   if (ex) y = ex.box.y + ex.box.h + u * 4;
   // info row at the foot, aligned to the frame's left edge, columns on the frame's width
   const C = ctx.grid.content;
   const footY = C.y + C.h - u * 7;
-  const ia = { x: land ? tb.x : fx, y: Math.max(y, footY - u * 2), w: land ? tb.w : Math.max(fw, C.w * 0.6), h: C.y + C.h - Math.max(y, footY - u * 2) };
+  const iy = infoUp ? y : Math.max(y, footY - u * 2);
+  const ia = { x: land ? tb.x : fx, y: iy, w: land ? tb.w : Math.max(fw, C.w * 0.6), h: C.y + C.h - iy };
   const ib = infoGroup(ctx, o, c.items, ia, on, c.items.length > 1 ? 'columns' : 'stack', lv.info);
   if (ib) o.sem.relations.push({ type: 'align', a: im.id, b: 'info', edge: 'left' });
   if (c.meta[0]) line(ctx, o, c.meta[0], C.x + C.w, C.y + u, ctx.size('meta'), on, 'ornament', 'end', 'small.note');
@@ -477,7 +522,7 @@ export function zoned(ctx: Ctx): void {
   const bgHz = lg.lum > 0.5 ? '#e8e4dc' : '#101420';
   const zoneBg = a.palette[0] ?? bgHz;
   // the picture's accent colours the headline when it reads on the zone; otherwise it marks the explanation / rule
-  const hlAcc = accOk(zoneBg) && ctx.rng.chance(0.45);
+  const hlAcc = accOk(zoneBg) && ctx.rt.chance(0.45);
   const head = setHeadline(ctx, o, lines, 'stack', { x: hz.x, y: hz.y, w: hz.w, h: hz.h }, fam, c.zh, hlAcc ? acc! : ink, size);
   o.sem.vars.accent = { kind: 'coupled', value: acc ?? 'none', from: 'image.accent' };
   // interleave: the cut-out is drawn over the headline where it crosses the letterforms

@@ -37,7 +37,7 @@ export interface GateReport {
 
 export type GateStyle = 'centered' | 'minimal' | 'hero' | 'editorial';
 /** composition → gate style. Ranges from /workspace/art-kb/knowledge/poster-aesthetics-01.md §6 (596 measured works) */
-const GATE_STYLE: Record<string, GateStyle> = { quote: 'centered', ring: 'centered', centered: 'centered', fan: 'centered', ma: 'minimal', inset: 'minimal', fullbleed: 'hero', cover: 'hero', object: 'hero', window: 'hero', ghost: 'hero', hanzi: 'hero', giant: 'hero', substitute: 'hero', exhibit: 'minimal', interleave: 'hero' };
+const GATE_STYLE: Record<string, GateStyle> = { quote: 'centered', ring: 'centered', centered: 'centered', fan: 'centered', ma: 'minimal', inset: 'minimal', fullbleed: 'hero', cover: 'hero', object: 'hero', window: 'hero', ghost: 'hero', hanzi: 'hero', giant: 'hero', substitute: 'hero', exhibit: 'minimal', interleave: 'hero', bleedgrid: 'hero' };
 /** acceptable visual-centroid offset per style (R5): general 5–15 %, centred 0–5 %, minimal up to 35 % (we keep a margin) */
 const CENTROID: Record<GateStyle, [number, number]> = { centered: [0, 0.07], minimal: [0.03, 0.35], hero: [0.02, 0.2], editorial: [0.04, 0.17] };
 function hueFamilies(hexes: string[]): number {

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { generate, DEFAULT_MODULES, type GenResult, type GenInput, type Picked, type Seeds } from './engine/generate';
+import { generate, DEFAULT_MODULES, type GenResult, type GenInput, type Picked, type Seeds, type Layer } from './engine/generate';
+import { FIXED_PLACE, layerHint } from './engine/layers';
 import { COMPONENTS, compSize, freeSlots, type PlacedComponent, type ColorRole } from './engine/components';
 import { DEFAULT_PARAMS, SETTINGS_KEYS, DRAW_ONLY, RELAYOUT, REPICK_PALETTE, REPICK_TEXT, REMOVED_PARAMS, type Params } from './engine/params';
 import { newSeed } from './engine/rng';
@@ -78,7 +79,7 @@ export interface State {
   toast(msg: string, kind?: 'ok' | 'warn', group?: string): void;
   draw(): Promise<void>;
   regen(push?: boolean, extra?: Extra): Promise<void>;
-  variant(kind: 'text' | 'decor' | 'color' | 'tendency' | 'structure' | 'image'): Promise<void>;
+  variant(kind: 'text' | 'decor' | 'color' | 'tendency' | 'structure' | 'image' | Layer): Promise<void>;
   go(delta: number): Promise<void>;
   restore(e: Entry, push?: boolean): Promise<void>;
   setParam(k: string, v: number | string | boolean): void;
@@ -144,7 +145,7 @@ const entryOf = (s: State, r: GenResult): Entry => ({ honor: s.honor.length ? [.
 
 
 /** keepLayout: re-render the current poster with its plan, composition, idea, salt and attempt (the "adjust this poster" path) */
-type Extra = Partial<{ keepPicked: Picked; keepTexts: boolean; keepPalette: boolean; keepImages: boolean; keepLayout: boolean; touch: string; preview: boolean; base: Scene }>;
+type Extra = Partial<{ keepPicked: Picked; keepTexts: boolean; keepPalette: boolean; keepImages: boolean; keepLayout: boolean; touch: string; preview: boolean; base: Scene; keepLayers: boolean; reroll: { layer: Layer; salt: string } }>;
 const styleBase = (s: State): Params => ({ ...DEFAULT_PARAMS, ...styleById(s, s.styleId).params } as Params);
 const settingsOf = (p: Params): Params => Object.fromEntries(SETTINGS_KEYS.filter((k) => p[k] !== undefined).map((k) => [k, p[k]]));
 /** parameters a draw starts from: the style, the app settings and the pins */
@@ -180,6 +181,10 @@ export function buildInput(s: State, extra: Extra = {}, paramPatch: Params = {})
       forcePlan: keep?.plan ?? lay?.plan,
       forceIdea: keep?.idea ?? lay?.idea,
       layoutSalt: keep ? keep.salt : lay ? lay.salt : undefined,
+      // phase 17: the poster's layer streams (a poster made before phase 17 has none: null replays its single stream);
+      // an adjustment that re-lays out keeps the layer salts it had
+      layers: keep ? keep.layers ?? null : lay ? lay.layers ?? null : extra.keepLayers && cur?.layers ? cur.layers : undefined,
+      reroll: extra.reroll && lay ? { ...extra.reroll, base: s.result?.scene ?? null } : undefined,
       select: keep || lay ? 0 : SELECT_K,
       honor: s.honor,
       recent: (lay || keep ? s.history.slice(Math.max(0, s.hIndex - 4), Math.max(0, s.hIndex)) : s.history.slice(-4)).map((e) => String(e.comp ?? '')),
@@ -271,8 +276,11 @@ export const useStore = create<State>((set, get) => ({
     await ensureFontSet(s.fonts);
     if (token !== genToken) return;
     // not pushed = adjust this poster: same plan / composition / salt / copy / pictures / palette unless the caller re-picks one
-    const ex: Extra = push ? extra : { keepLayout: true, keepTexts: true, keepPalette: true, keepImages: true, ...extra };
+    const ex: Extra = push ? extra : { keepLayout: true, keepTexts: true, keepPalette: true, keepImages: true, keepLayers: true, ...extra };
     const res = generate({ ...buildInput(s, ex), ...(ex.preview ? { preview: true } : {}) });
+    // phase 17: a layer re-roll that found nothing else to do leaves the poster (and the history) as it was
+    const rr = res.scene.info.reroll as { layer: Layer; changed: boolean } | undefined;
+    if (ex.reroll && rr && !rr.changed && sceneSig(res.scene) === sceneSig(s.result?.scene)) { get().toast(layerHint(s.lang, rr.layer, res.picked.comp), 'warn', 'reroll'); return; }
     // the selector's salt / route live only on the winner's picks: carry them over, so the next tweak and history restores
     // keep the very same layout stream (the phase 12 drift)
     const src = ex.keepPicked ?? (ex.keepLayout ? s.result?.picked : undefined);
@@ -308,6 +316,13 @@ export const useStore = create<State>((set, get) => ({
       set({ seeds: { ...s.seeds, image: newSeed() } }); return get().regen(true, { ...L, keepTexts: true, keepPalette: true });
     }
     if (kind === 'structure') { set({ seeds: { ...s.seeds, layout: newSeed() } }); return get().regen(true, { keepTexts: true, keepPalette: true, keepImages: true }); }
+    if (kind === 'grid' || kind === 'place' || kind === 'type') {
+      // phase 17: 网格 / 图位 / 排字 re-roll one layer of the structure; the other two stay exactly where they are
+      if (!s.result) return;
+      if (kind === 'place' && FIXED_PLACE.has(s.result.picked.comp)) { get().toast(layerHint(s.lang, 'place', s.result.picked.comp), 'warn', 'reroll'); return; }
+      if (!s.result.picked.layers) get().toast(s.lang === 'zh' ? '这张是旧版本的海报：先整体转成分层结构（重排一次），之后网格 / 图位 / 排字就能分开换了' : 'A poster from an earlier version: it is converted to layers once (one re-layout); after that grid / placement / type change separately', 'warn', 'reroll');
+      return get().regen(true, { ...L, keepPalette: true, keepImages: true, keepTexts: true, reroll: { layer: kind, salt: newSeed(6) } });
+    }
     if (kind === 'tendency') {
       // 换风格: another style of the same library; pins stay
       const lib = styleById(s, s.styleId).lib;

@@ -34,7 +34,7 @@ def _reset(pp_home):
 class TestProject:
     def test_create_has_app_shape(self):
         p = proj_mod.create_project(_entry())
-        assert p["app"] == "poster-printer" and p["kind"] == "poster" and p["version"] == 1
+        assert p["app"] == "ready-poster-printer" and p["kind"] == "poster" and p["version"] == 1
 
     def test_save_open_roundtrip(self, tmp_path):
         f = str(tmp_path / "p.json")
@@ -43,7 +43,7 @@ class TestProject:
 
     def test_open_session_file_takes_last_entry(self, tmp_path):
         f = tmp_path / "s.json"
-        f.write_text(json.dumps({"app": "poster-printer", "kind": "session", "version": 1, "entries": [_entry(1), _entry(2)]}))
+        f.write_text(json.dumps({"app": "ready-poster-printer", "kind": "session", "version": 1, "entries": [_entry(1), _entry(2)]}))
         assert proj_mod.open_project(str(f))["entry"]["id"] == "e2"
 
     def test_open_rejects_other_files(self, tmp_path):

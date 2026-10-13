@@ -10,6 +10,8 @@ import { validateBrief, type Brief, IDEA_IDS, type Issue } from './brief';
 import { STYLE_TAGS, STYLE_RISKY } from './styletags';
 import { displayModel } from './report';
 import { canvasSize, type Ratio } from '@rea/engine/types';
+import type { ImageAsset } from '@rea/engine/gen/ctx';
+import { analyseSet, recommendLayouts, type SetInfo, type LayoutRec } from './layouts';
 
 export interface Reason { field: string; value: unknown; why: string }
 export interface PaletteSpec { source: string; filter: { src?: string; light?: string[]; chroma?: string[]; contrast?: string[]; tags?: string[]; hue?: 'warm' | 'cool' | 'neutral' } | null; pinned: string[] | null }
@@ -23,6 +25,8 @@ export interface Resolved {
   directions: Direction[];
   palette: PaletteSpec & { reasons: string[] };
   images: ImageSpec & { reasons: string[] };
+  /** phase 16: the picture set and the grid layouts that can carry it (best first, with reasons) */
+  layouts: { set: SetInfo | null; recommendations: LayoutRec[]; multi: boolean };
   format: { ratio: string; count: number; minScore: number; formats: string[]; scale: number };
   seed: string; reasons: Reason[]; warnings: Issue[];
 }
@@ -246,7 +250,7 @@ function titleScale(a: Analysis, b: Brief, dens: string): { v: number; why: stri
   return { v: clamp(Math.round(v), 50, 180), why: parts.join(', ') };
 }
 
-export function resolveBrief(b: Brief, env: { cutoutIds: Set<string>; imageCats: Record<string, number>; userImageIds?: string[] }): Resolved {
+export function resolveBrief(b: Brief, env: { cutoutIds: Set<string>; imageCats: Record<string, number>; userImageIds?: string[]; assets?: ImageAsset[] }): Resolved {
   const { errors, warnings } = validateBrief(b);
   if (errors.length) throw Object.assign(new Error('invalid brief: ' + errors.map((e) => `${e.path}: ${e.msg}`).join('; ')), { code: 2, issues: errors });
   const a = analyze(b);
@@ -266,8 +270,13 @@ export function resolveBrief(b: Brief, env: { cutoutIds: Set<string>; imageCats:
   const catOK = (im.subject ?? []).filter((x) => env.imageCats[x]);
   const badCats = (im.subject ?? []).filter((x) => !env.imageCats[x]);
   if (badCats.length) warnings.push({ path: 'style.imagery.subject', msg: `unknown image categories ${badCats.join(', ')} (known: ${Object.keys(env.imageCats).join(', ')})` });
-  const images: Resolved['images'] = { categories: catOK.length ? catOK : null, ids: im.ids?.length ? im.ids : null, cutoutOnly: false, reasons: [] };
-  images.reasons.push(imgOn ? `imagery ${use}${catOK.length ? ' from ' + catOK.join(', ') : ''}${images.ids ? ', ids ' + images.ids.join(', ') : ''}` : 'type only (imagery: none)');
+  // pictures given by id (the CLI turns imagery.files into user-image ids before resolving): order = importance
+  const known = new Set((env.assets ?? []).map((a) => a.id));
+  const givenIds = (im.ids ?? []).filter((id) => !env.assets || known.has(id)).slice(0, 8);
+  for (const id of (im.ids ?? []).filter((id) => env.assets && !known.has(id))) warnings.push({ path: 'style.imagery.ids', msg: `unknown picture id "${id}" (add it with \`images add\`, or list ids with \`images list\`)` });
+  if (im.files?.length && !im.ids?.length) warnings.push({ path: 'style.imagery.files', msg: 'files are added by the CLI (generate / brief resolve); the engine only sees ids' });
+  const images: Resolved['images'] = { categories: catOK.length ? catOK : null, ids: imgOn && givenIds.length ? givenIds : null, cutoutOnly: false, reasons: [] };
+  images.reasons.push(imgOn ? `imagery ${use}${catOK.length ? ' from ' + catOK.join(', ') : ''}${images.ids ? ', ids ' + images.ids.join(', ') + ' (first = hero)' : ''}` : 'type only (imagery: none)');
   const cutouts = imgOn && (images.ids ? images.ids.some((i) => env.cutoutIds.has(i)) : true);
   // ---- ranked styles / ideas
   const styles = rankStyles(a, b);
@@ -297,7 +306,17 @@ export function resolveBrief(b: Brief, env: { cutoutIds: Set<string>; imageCats:
   base.decorBudget = dens === 'airy' ? 1 : dens === 'packed' ? 4 : 2;
   base.ornaments = dens === 'airy' ? 1 : dens === 'packed' ? 3 : 2;
   R('blockBudget/decorBudget', [base.blockBudget, base.decorBudget], `density ${dens}${a.copy.load === 'heavy' ? ', heavy copy' : ''}`);
-  base.imageCount = imgOn ? 1 : 0;
+  // ---- phase 16: several pictures → the Swiss grid compositions, the layout chosen from the picture set and the copy
+  const nPics = images.ids ? images.ids.length : imgOn ? Math.max(1, Math.min(8, im.count ?? 1)) : 0;
+  const assetsById = new Map((env.assets ?? []).map((x) => [x.id, x] as [string, ImageAsset]));
+  const set = images.ids ? analyseSet(images.ids.map((id) => assetsById.get(id)!).filter(Boolean)) : null;
+  const synth: SetInfo = set ?? { n: nPics, pics: [], orientations: {}, spread: 0.2, series: false, busy: 0.35, note: `${nPics} catalogue picture${nPics > 1 ? 's' : ''} (not chosen yet)` };
+  const askedLayout = im.layout ?? 'auto';
+  const recs = imgOn && askedLayout !== 'single' ? recommendLayouts(synth, { ratio: b.format?.ratio ?? '3:4', density: dens, mood: b.style?.mood ?? [], listItems: a.list.items.length, heavyCopy: a.copy.load === 'heavy', use, asked: askedLayout }) : [];
+  const multi = nPics >= 2 && askedLayout !== 'single';
+  if (set) R('pictures', set.note, 'picture-set analysis (count, proportions, series, busyness)');
+  if (recs.length) R('layouts', recs.slice(0, 3).map((r) => `${r.composition}/${r.layout} ${r.score}`).join(', '), multi ? 'several pictures: the Swiss grid compositions lay them all out' : 'one picture: the grid layouts are offered next to the single-picture compositions');
+  base.imageCount = nPics;
   base.typeOnlyShare = imgOn ? (use === 'accent' ? 15 : 0) : 60;
   base.imageShare = use === 'full-bleed' ? 85 : use === 'hero' ? 70 : 55;
   R('imageCount/typeOnlyShare/imageShare', [base.imageCount, base.typeOnlyShare, base.imageShare], `imagery ${use}`);
@@ -331,7 +350,7 @@ export function resolveBrief(b: Brief, env: { cutoutIds: Set<string>; imageCats:
   if (bg && bg !== 'auto') planPatch.tone = bg === 'color' ? 'sat' : bg;
   if (!m.some((x) => ['playful', 'warm', 'retro'].includes(x))) planPatch.script = false;
   if (m.some((x) => ['calm', 'minimal', 'elegant', 'luxurious'].includes(x)) || dens === 'airy') planPatch.material = 'none';
-  if (use === 'none') planPatch.typeOnly = true; else if (use === 'hero' || use === 'full-bleed') planPatch.typeOnly = false;
+  if (use === 'none') planPatch.typeOnly = true; else if (use === 'hero' || use === 'full-bleed' || images.ids || nPics >= 2) planPatch.typeOnly = false;
   if (tex === 'flat') planPatch.grain = 0;
   R('plan', planPatch, 'the plan normally rolls tone / script lettering / torn-stamp material / type-only per draw; the brief fixes them');
   // ---- fonts
@@ -357,9 +376,16 @@ export function resolveBrief(b: Brief, env: { cutoutIds: Set<string>; imageCats:
     let composition = 'auto'; let idea = I ? I.id : 'auto';
     if (I && I.comp !== 'auto' && (k % 2 === 0 || I.id === 'data')) composition = I.comp;
     if (composition === 'calendar' && !a.date) composition = 'auto';
+    // phase 16: several pictures → every direction is a grid layout (the others would show only the first picture);
+    // one picture → every other direction tries a grid layout next to the idea-led ones
+    const topRecs = recs.filter((r) => r.score >= (recs[0]?.score ?? 0) - 2.5).slice(0, 3);
+    const rec = topRecs.length && (multi || (nPics === 1 && k % 2 === 1)) ? topRecs[(k + Math.floor(k / Math.max(1, topS.length))) % topRecs.length] : null;
+    if (rec) composition = rec.composition;
     params.composition = composition; params.idea = composition === 'auto' ? idea : 'auto';
+    if (rec) params.gridLayout = rec.layout;
     if (composition !== 'auto') idea = '(from composition)';
-    why.push(I ? `idea ${I.id} (${I.reasons.join('; ')})${composition !== 'auto' ? ` → composition ${composition}` : ''}` : 'idea auto');
+    if (rec) why.push(`layout ${rec.composition}/${rec.layout} (score ${rec.score}): ${rec.reasons.slice(0, 3).join('; ')}`);
+    else why.push(I ? `idea ${I.id} (${I.reasons.join('; ')})${composition !== 'auto' ? ` → composition ${composition}` : ''}` : 'idea auto');
     let fonts: FontSet | null = null; let fontsLabel = `style fonts (${style.fonts.en['big.main'].family} / ${style.fonts.zh['big.main'].family})`;
     const tg = STYLE_TAGS[s.id];
     if (fmood && !(ty.voice && tg?.voice === ty.voice && !ty.mood)) {
@@ -372,5 +398,5 @@ export function resolveBrief(b: Brief, env: { cutoutIds: Set<string>; imageCats:
     }
     directions.push({ planPatch, id: `d${k + 1}`, styleId: s.id, idea, composition, fonts, fontsLabel, params, modes: [...(style.modes ?? [])], score: +(s.score + (I?.score ?? 0)).toFixed(2), reasons: why });
   }
-  return { analysis: a, texts: T.texts, custom: T.custom, styles: styles.slice(0, 8), ideas, directions, palette: pal, images, format, seed, reasons, warnings };
+  return { analysis: a, texts: T.texts, custom: T.custom, styles: styles.slice(0, 8), ideas, directions, palette: pal, images, layouts: { set, recommendations: recs, multi }, format, seed, reasons, warnings };
 }

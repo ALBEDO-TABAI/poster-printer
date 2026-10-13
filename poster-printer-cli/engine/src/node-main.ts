@@ -1,4 +1,4 @@
-// poster-printer engine CLI: `node dist/engine.mjs <op> [--backend chromium|node]` with a JSON payload on stdin,
+// ready-poster-printer engine CLI: `node dist/engine.mjs <op> [--backend chromium|node]` with a JSON payload on stdin,
 // one JSON document on stdout ({ok, result} or {ok:false, error, code}). Used by the Python harness.
 import { readFileSync, writeFileSync, existsSync, mkdirSync, statSync, unlinkSync } from 'node:fs';
 import { join, dirname, resolve as presolve, extname, basename } from 'node:path';
@@ -22,6 +22,7 @@ import { BRIEF_SCHEMA, briefTemplate, validateBrief, RATIOS, type Brief } from '
 import { analyze } from './analyze';
 import { resolveWith, type Env } from './core';
 import { runOp } from './ops';
+import { LAYOUT_CATALOG, analyseSet } from './layouts';
 import { STYLE_TAGS } from './styletags';
 
 declare const __BUILD_INFO__: { rea: string; reaCommit: string; built: string };
@@ -30,7 +31,14 @@ const REA = process.env.REA_POSTER ?? __BUILD_INFO__.rea;
 const PUB = process.env.REA_POSTER_PUBLIC ?? join(REA, 'public');
 const FONTS_SRC = process.env.POSTER_PRINTER_FONTS ?? '/workspace/fonts';
 const HOME = process.env.POSTER_PRINTER_HOME ?? join(homedir(), '.poster-printer');
-const CHROME = process.env.POSTER_PRINTER_CHROME ?? ['/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find(existsSync) ?? '';
+// Chrome / Chromium (or another Chromium browser: Edge, Brave) — Linux, macOS and Windows install paths
+const CHROME = process.env.POSTER_PRINTER_CHROME ?? [
+  '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/microsoft-edge',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Chromium.app/Contents/MacOS/Chromium',
+  '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge', '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser',
+  join(homedir(), 'Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+].find(existsSync) ?? '';
 const PAGE_JS = join(HERE, 'page.js');
 
 class OpError extends Error { constructor(msg: string, public code = 1) { super(msg); } }
@@ -133,7 +141,7 @@ function writeJSON(path: string, o: unknown) { mkdirSync(dirname(path), { recurs
 
 async function pdfFrom(jpegsB64: string[], out: string, title: string) {
   const pages = jpegsB64.map((b) => { const jpeg = new Uint8Array(Buffer.from(b, 'base64')); const s = jpegSize(jpeg)!; return { jpeg, pxW: s.w, pxH: s.h, ptW: s.w * 0.75, ptH: s.h * 0.75 }; });
-  writeFileSync(out, makePdf(pages, { title, producer: 'poster-printer CLI' }));
+  writeFileSync(out, makePdf(pages, { title, producer: 'ready-poster-printer CLI' }));
   const b = readFileSync(out);
   if (b.subarray(0, 5).toString() !== '%PDF-') throw new OpError('pdf verification failed', 4);
   return { file: out, bytes: b.length, pages: pages.length };
@@ -160,6 +168,8 @@ function catalog(what: string, p: any) {
   if (what === 'params') return (PARAMS as any[]).filter((x) => !p.section || x.section === p.section).map((x) => ({ key: x.key, type: x.type, section: x.section, min: x.min, max: x.max, options: x.options?.map((o) => o.v), default: x.def, en: x.en, zh: x.zh }));
   if (what === 'compositions') return (PARAMS as any[]).find((x) => x.key === 'composition')!.options!.map((o: any) => ({ id: o.v, en: o.en, zh: o.zh }));
   if (what === 'ratios') return RATIOS;
+  if (what === 'layouts') return LAYOUT_CATALOG;
+  if (what === 'imageset') { const all = [...presetImages(), ...userImages()]; const ids: string[] = p.ids ?? []; const miss = ids.filter((id) => !all.some((a) => a.id === id)); if (miss.length) throw new OpError('unknown picture ids: ' + miss.join(', '), 2); return analyseSet(ids.map((id) => all.find((a) => a.id === id)!)); }
   throw new OpError('unknown catalogue ' + what, 2);
 }
 
@@ -185,7 +195,43 @@ async function analyseImage(file: string, id: string): Promise<ImageAsset> {
   const detail: number[] = [];
   for (let j = 0; j < 16; j++) for (let i = 0; i < 16; i++) { let e = 0; for (let y = j * 4; y < j * 4 + 4; y++) for (let x = i * 4; x < i * 4 + 4; x++) e += Math.abs(gray(x + 1, y) - gray(x, y)) + Math.abs(gray(x, y + 1) - gray(x, y)); detail.push(+Math.min(1, e / 16 / 0.25).toFixed(2)); }
   const name = basename(file);
-  return { id, src: 'data:image/jpeg;base64,' + main.toString('base64'), thumb: 'data:image/jpeg;base64,' + thumb.toString('base64'), w, h, palette: pal, lum, lumW: 16, lumH: 16, detail, focus: { x: 0.5, y: 0.45 }, cutout: null, category: 'mine', title: name, credit: { title: name, license: 'user upload' }, user: true } as unknown as ImageAsset;
+  const { focus, subject } = saliency(await raw(48, 48), 48);
+  return { id, src: 'data:image/jpeg;base64,' + main.toString('base64'), thumb: 'data:image/jpeg;base64,' + thumb.toString('base64'), w, h, palette: pal, lum, lumW: 16, lumH: 16, detail, focus, subject, cutout: null, category: 'mine', title: name, credit: { title: name, license: 'user upload' }, user: true } as unknown as ImageAsset;
+}
+
+/** phase 16: the salient subject of a picture (frequency-tuned colour distinctness + local detail, mild centre prior):
+ *  its bounding box (0..1, the mass between the 6th and 94th percentiles of the salient cells) and its centroid. The
+ *  grid layouts keep this box inside each picture's crop. */
+function saliency(px: Uint8ClampedArray, S: number): { focus: { x: number; y: number }; subject: { x: number; y: number; w: number; h: number } } {
+  const L = new Float32Array(S * S), A = new Float32Array(S * S), B = new Float32Array(S * S);
+  for (let i = 0; i < S * S; i++) { const r = px[i * 4] / 255, g = px[i * 4 + 1] / 255, b = px[i * 4 + 2] / 255; L[i] = 0.299 * r + 0.587 * g + 0.114 * b; A[i] = r - g; B[i] = (r + g) / 2 - b; }
+  const blur = (X: Float32Array) => { const o = new Float32Array(S * S); for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) { let s = 0, c = 0; for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const xx = x + dx, yy = y + dy; if (xx >= 0 && yy >= 0 && xx < S && yy < S) { s += X[yy * S + xx]; c++; } } o[y * S + x] = s / c; } return o; };
+  const bl = blur(L), ba = blur(A), bb = blur(B);
+  const mean = (X: Float32Array) => X.reduce((s, v) => s + v, 0) / X.length;
+  const mL = mean(bl), mA = mean(ba), mB = mean(bb);
+  const sal = new Float32Array(S * S);
+  let mx = 1e-6;
+  for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) {
+    const i = y * S + x;
+    const tone = Math.hypot(bl[i] - mL, (ba[i] - mA) * 0.8, (bb[i] - mB) * 0.8);
+    const gx = x + 1 < S ? Math.abs(L[i + 1] - L[i]) : 0, gy = y + 1 < S ? Math.abs(L[i + S] - L[i]) : 0;
+    const cx = (x + 0.5) / S - 0.5, cy = (y + 0.5) / S - 0.5;
+    const v = (tone + 0.6 * (gx + gy)) * (1 - 0.9 * (cx * cx + cy * cy));
+    sal[i] = v; if (v > mx) mx = v;
+  }
+  const m = mean(sal), sd = Math.sqrt(sal.reduce((s, v) => s + (v - m) ** 2, 0) / sal.length);
+  const t = m + 0.4 * sd;
+  const colM = new Float32Array(S), rowM = new Float32Array(S);
+  let tot = 0, fx = 0, fy = 0;
+  for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) { const v = sal[y * S + x]; if (v <= t) continue; const w = v - t; colM[x] += w; rowM[y] += w; tot += w; fx += w * (x + 0.5); fy += w * (y + 0.5); }
+  if (tot <= 0) return { focus: { x: 0.5, y: 0.45 }, subject: { x: 0.15, y: 0.12, w: 0.7, h: 0.76 } };
+  const q = (M: Float32Array, p: number) => { let acc = 0; for (let i = 0; i < S; i++) { acc += M[i]; if (acc >= p * tot) return i / S; } return 1; };
+  let x0 = q(colM, 0.06), x1 = q(colM, 0.94) + 1 / S, y0 = q(rowM, 0.06), y1 = q(rowM, 0.94) + 1 / S;
+  // never a sliver: at least 18 % of each side, centred on the mass
+  const grow = (a: number, b: number) => { const need = 0.18 - (b - a); if (need <= 0) return [a, b]; const c = (a + b) / 2; return [Math.max(0, c - 0.09), Math.min(1, c + 0.09)]; };
+  [x0, x1] = grow(x0, x1); [y0, y1] = grow(y0, y1);
+  const r3 = (v: number) => Math.round(v * 1000) / 1000;
+  return { focus: { x: r3(fx / tot / S), y: r3(fy / tot / S) }, subject: { x: r3(x0), y: r3(y0), w: r3(Math.min(1, x1) - x0), h: r3(Math.min(1, y1) - y0) } };
 }
 
 // ------------------------------------------------------------------ doctor
@@ -238,7 +284,7 @@ async function main() {
     case 'images.analyse': return analyseImage(p.file, p.id);
     case 'fonts.families': return p.styles ? Object.fromEntries((p.styles as string[]).map((id) => { const s = BUILTIN_STYLES.find((x) => x.id === id); if (!s) throw new OpError('unknown style ' + id, 2); return [id, familiesOf(s.fonts)]; })) : familiesOf(p.fonts);
     case 'sheet': return sheet(p);
-    case 'pdf': return pdfFrom(p.jpegs, p.out, p.title ?? 'Poster Printer');
+    case 'pdf': return pdfFrom(p.jpegs, p.out, p.title ?? 'Ready Poster Printer');
   }
   // ops that render
   let ch: Chromium | null = null; let env: Env | null = null;
@@ -273,7 +319,7 @@ async function main() {
           res.files.pdf = (await pdfFrom([r.rendered.jpeg], base + '.pdf', p.entry.id)).file;
           if (!(p.formats ?? []).some((f: string) => f === 'jpeg' || f === 'jpg')) { unlinkSync(res.files.jpg); delete res.files.jpg; delete res.verify.jpg; }
         }
-        if ((p.formats ?? []).includes('json')) { writeJSON(base + '.json', { app: 'poster-printer', kind: 'poster', version: 1, entry: p.entry }); res.files.json = base + '.json'; }
+        if ((p.formats ?? []).includes('json')) { writeJSON(base + '.json', { app: 'ready-poster-printer', kind: 'poster', version: 1, entry: p.entry }); res.files.json = base + '.json'; }
       } else res.rendered = r.rendered;
       return res;
     }
@@ -285,13 +331,13 @@ async function main() {
       for (const [i, v] of list.entries()) {
         const name = `${op === 'deck' ? 'page' : 'var'}-${String(i + 1).padStart(2, '0')}`;
         const item: any = { name, ...v.summary, entry: v.entry };
-        if (out) { const base = join(out, name); writeJSON(base + '.json', { app: 'poster-printer', kind: 'poster', version: 1, entry: v.entry }); const w = await writeRendered(base, v.rendered); item.files = { json: base + '.json', ...w.files }; item.verify = w.verify; }
+        if (out) { const base = join(out, name); writeJSON(base + '.json', { app: 'ready-poster-printer', kind: 'poster', version: 1, entry: v.entry }); const w = await writeRendered(base, v.rendered); item.files = { json: base + '.json', ...w.files }; item.verify = w.verify; }
         items.push(item);
       }
       const res: any = { backend, items };
       if (op === 'deck' && out) {
         const jpegs = list.map((v: any) => v.rendered.jpeg);
-        if ((p.formats ?? ['pdf']).includes('pdf')) res.pdf = await pdfFrom(jpegs, join(out, 'deck.pdf'), 'Poster Printer deck');
+        if ((p.formats ?? ['pdf']).includes('pdf')) res.pdf = await pdfFrom(jpegs, join(out, 'deck.pdf'), 'Ready Poster Printer deck');
         if ((p.formats ?? []).includes('zip')) { const z = makeZip(list.map((v: any, i: number) => ({ name: `page-${String(i + 1).padStart(2, '0')}.jpg`, data: new Uint8Array(Buffer.from(v.rendered.jpeg, 'base64')) }))); writeFileSync(join(out, 'deck.zip'), z); res.zip = join(out, 'deck.zip'); }
       }
       return res;

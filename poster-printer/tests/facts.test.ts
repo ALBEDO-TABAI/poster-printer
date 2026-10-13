@@ -1,4 +1,4 @@
-// Real facts (texts.facts) for content-driven callers such as the poster-printer CLI: when present they replace the
+// Real facts (texts.facts) for content-driven callers such as the ready-poster-printer CLI: when present they replace the
 // synthetic issue numbers / years / calendar date; when absent the generator is unchanged.
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';

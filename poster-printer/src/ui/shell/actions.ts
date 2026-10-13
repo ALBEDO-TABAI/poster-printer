@@ -5,6 +5,8 @@ import { useUI, pushUndo, undo as undoFn, redo as redoFn } from './ui';
 import { uiParam } from './ia';
 import { doExport } from '../panels/MorePanel';
 import G from '../glass/glass';
+import type { Layer } from '../../engine/generate';
+import { LAYER_INFO } from '../../engine/layers';
 
 const S = () => useStore.getState();
 const t = (zh: string, en: string) => (S().lang === 'zh' ? zh : en);
@@ -37,6 +39,16 @@ export function remix(kind: (typeof REMIX)[number][0]) {
   pushUndo(t('换' + r[2], 'New ' + r[3].toLowerCase()));
   document.querySelector(`[data-remix="${kind}"]`)?.classList.add('busy');
   return release(afterPaint(() => S().variant(kind))).finally(() => document.querySelector(`[data-remix="${kind}"]`)?.classList.remove('busy'));
+}
+/** phase 17: re-roll one layer of the structure — 网格 grid / 图位 placement / 排字 type — keeping the other two */
+export const LAYER_ICON: Record<Layer, string> = { grid: 'grid-3x3', place: 'move', type: 'pilcrow' };
+export function relayer(layer: Layer) {
+  if (!guard() || S().replaying || !S().result) return;
+  const L = LAYER_INFO[layer];
+  pushUndo(t('换' + L.zh, 'New ' + L.en.toLowerCase()));
+  const q = `[data-layer="${layer}"]`;
+  document.querySelectorAll(q).forEach((b) => b.classList.add('busy'));
+  return release(afterPaint(() => S().variant(layer))).finally(() => document.querySelectorAll(q).forEach((b) => b.classList.remove('busy')));
 }
 export const go = (d: number) => S().go(d);
 export function setRatio(r: Ratio) { if (r === S().ratio) return; pushUndo(t('画幅 ', 'Ratio ') + r); useUI.setState({ pendingRatio: r }); return afterPaint(() => S().setRatio(r)).finally(() => { if (useUI.getState().pendingRatio === r) useUI.setState({ pendingRatio: null }); }); }

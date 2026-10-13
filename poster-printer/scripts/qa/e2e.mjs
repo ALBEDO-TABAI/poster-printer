@@ -10,7 +10,10 @@ fs.mkdirSync(out, { recursive: true });
 const base = (process.env.REA_URL || 'http://127.0.0.1:5180/').replace(/\/?$/, '/');
 const RATIOS = ['3:4', '9:16', '1:1', '4:3', '16:9', '21:9'];
 const MODES = ['experimental', 'card', 'clash', 'random', 'layered', 'nice', 'wada', 'brushImage', 'brushMask', 'bandMask'];
-const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox'] });
+// Chrome / Chromium / Edge / Brave on Linux, macOS or Windows (or POSTER_PRINTER_CHROME)
+const { existsSync } = await import('node:fs');
+const CHROME = process.env.POSTER_PRINTER_CHROME || ['/usr/bin/google-chrome', '/usr/bin/chromium', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Chromium.app/Contents/MacOS/Chromium', '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge', '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser', 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'].find(existsSync);
+const browser = await chromium.launch({ executablePath: CHROME, args: ['--no-sandbox'] });
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, acceptDownloads: true });
 const page = await ctx.newPage();
 const errs = [];
@@ -101,6 +104,36 @@ const c1 = await pal(); await page.keyboard.press('Space'); await wait(150); con
 check(c1 && c1.length > 10 && c1 === c2, 'colour lock keeps palette');
 await page.keyboard.press(`Shift+Digit${colorIdx}`); await wait(80);
 console.log('history/variants/locks ok');
+
+// 4b. phase 17: the 结构 split button opens the layer menu; 排字 re-sets the type with every picture frame unchanged,
+// 图位 keeps the composition, the menu stays open between re-rolls, Esc closes it, T / P / R are the shortcuts
+await S(() => { const s = window.__rea.getState(); window.__rea.setState({ pins: { ...s.pins, composition: 'modular' } }); });
+await page.click('[data-qa=draw]'); await wait(300);
+const pics = () => st((s) => { const f = (ns, o = []) => { for (const n of ns) { if (n.kind === 'group') f(n.children, o); else o.push(n); } return o; }; return f(s.scene.nodes).filter((n) => n.kind === 'image' && !n.cutout).map((n) => [n.imageId, Math.round(n.x), Math.round(n.y), Math.round(n.w), Math.round(n.h)].join()).sort().join('|'); });
+const grew = async (n) => page.waitForFunction((n) => window.__rea.getState().history.length > n, n, { timeout: 15000 }).then(() => true, () => false);
+const p0 = await pics();
+await page.click('[data-qa=layer-menu]'); await wait(300);
+check(!!(await page.$('.layer-pop')), 'layer menu opens from the 结构 caret');
+await page.screenshot({ path: `${out}/layer-menu.png` });
+let hL = await st((s) => s.history.length);
+await page.click('[data-qa=layer-type]');
+check(await grew(hL), '排字 adds a history entry');
+check(p0.length > 0 && (await pics()) === p0, '排字 keeps every picture frame');
+check(await st((s) => !!s.result.picked.layers?.type), '排字 stores its layer salt');
+check(!!(await page.$('.layer-pop')), 'layer menu stays open after a re-roll');
+hL = await st((s) => s.history.length);
+await page.click('[data-qa=layer-place]'); await grew(hL);
+check((await st((s) => s.result.picked.comp)) === 'modular', '图位 keeps the composition');
+await page.keyboard.press('Escape'); await wait(200);
+check(!(await page.$('.layer-pop')), 'Esc closes the layer menu');
+const p1 = await pics(); hL = await st((s) => s.history.length);
+await page.keyboard.press('t'); await grew(hL);
+check((await pics()) === p1, 'T re-sets the type, the pictures stay');
+const sig1 = await S(() => document.querySelector('.frame .paper svg')?.outerHTML.length);
+await page.keyboard.press('ArrowLeft'); await wait(250); await page.keyboard.press('ArrowRight'); await wait(400);
+check((await S(() => document.querySelector('.frame .paper svg')?.outerHTML.length)) === sig1, 'a layered poster restores exactly from history');
+await S(() => { const s = window.__rea.getState(); const pins = { ...s.pins }; delete pins.composition; window.__rea.setState({ pins }); });
+console.log('layer re-rolls ok');
 
 // 5. determinism: restoring an entry reproduces the same SVG
 const same = await S(async () => {

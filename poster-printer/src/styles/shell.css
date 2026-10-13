@@ -1,5 +1,5 @@
 /* ============================================================
-   Poster Printer — shell & components
+   Ready Poster Printer — shell & components
    ============================================================ */
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -50,6 +50,7 @@ kbd, .kbd {
 .brand svg { flex: none; }
 .wordmark { font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: -.025em; white-space: nowrap; }
 .wordmark i { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 17px; letter-spacing: -.01em; margin-left: 1px; }
+.wordmark .wm-ready { font-weight: 500; color: var(--ink-2); margin-right: 1px; }
 .vsep { width: 1px; height: 20px; background: var(--hair-2); margin: 0 4px; flex: none; }
 .top .center { position: absolute; left: 50%; transform: translateX(-50%); }
 .icon-btn {
@@ -526,3 +527,28 @@ body.has-pins .film, body.has-pins .toasts { bottom: calc(var(--m) + var(--dock)
 .pin-chip .x:hover { background: var(--fill); color: var(--ink); }
 .pin-clear { height: 26px; padding: 0 10px; border-radius: 13px; display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--ink-3); white-space: nowrap; }
 .pin-clear:hover { color: var(--bad, #d70015); background: var(--fill); }
+
+/* ---------- phase 17: 结构 split button + the layer menu (网格 / 图位 / 排字 / 整体结构) ---------- */
+.remix-split { display: inline-flex; align-items: center; border-radius: 22px; }
+.remix-split > .remix { padding-right: 10px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+.remix-caret { position: relative; height: 44px; width: 26px; display: inline-grid; place-items: center; border-radius: 8px 22px 22px 8px; color: var(--ink-3); }
+.remix-caret::before { content: ''; position: absolute; left: -1px; top: 13px; bottom: 13px; width: 1px; background: var(--hair-2, rgb(127 127 127 / .25)); }
+.remix-caret:hover, .remix-split.open .remix-caret { background: var(--fill); color: var(--ink); }
+.remix-split.open .remix-caret { color: var(--accent); }
+.layer-pop { position: absolute; bottom: calc(100% + 12px); transform: translateX(-50%); width: 324px; max-width: calc(100vw - 32px); padding: 8px; border-radius: 22px; z-index: 30; display: flex; flex-direction: column; gap: 2px; transform-origin: 50% 100%; animation: lpIn 280ms var(--ease-spring, cubic-bezier(.2, .9, .3, 1.2)) both; }
+@keyframes lpIn { from { opacity: 0; transform: translateX(-50%) translateY(8px) scale(.96); } to { opacity: 1; transform: translateX(-50%); } }
+.lp-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 6px 10px 8px; font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); }
+.lp-head small { font-weight: 400; color: var(--ink-3); }
+.lp-row { display: grid; grid-template-columns: 32px 1fr auto; align-items: center; gap: 10px; min-height: 52px; padding: 6px 10px 6px 8px; border-radius: 14px; text-align: left; color: var(--ink); }
+.lp-row:hover { background: var(--fill); }
+.lp-row .lp-ic { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--fill); color: var(--ink-2); transition: color var(--d-2); }
+.lp-row:hover .lp-ic, .lp-row.busy .lp-ic { color: var(--accent); }
+.lp-row.busy .lp-ic svg { animation: busyPulse 600ms var(--e-std) infinite alternate; }
+.lp-row b { display: block; font-size: var(--fs-md); font-weight: 600; letter-spacing: -.01em; }
+.lp-row small { display: block; font-size: var(--fs-xs); color: var(--ink-3); line-height: 1.35; margin-top: 1px; }
+.lp-row.off { opacity: .5; cursor: default; }
+.lp-row.off:hover { background: transparent; }
+.lp-row.off:hover .lp-ic { color: var(--ink-2); }
+.lp-sep { height: 1px; margin: 4px 10px; background: var(--hair-2, rgb(127 127 127 / .2)); }
+body.layer-pop-open .toasts { bottom: calc(var(--m) + var(--dock) + 312px); }
+@media (prefers-reduced-motion: reduce) { .layer-pop { animation: none; } }

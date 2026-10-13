@@ -9,6 +9,7 @@ import { Icon } from '../Icon';
 import { LSeg, Switch, Scrub } from '../controls';
 import { useUI, useLinger } from './ui';
 import { INTENTS, UIPARAMS } from './ia';
+import { LAYERS, LAYER_INFO } from '../../engine/layers';
 import { LIBS } from './Chrome';
 import { SceneThumb, replay, toggleRecording } from './thumbs';
 import * as A from './actions';
@@ -42,7 +43,7 @@ export async function exportNow(fmt: 'png' | 'jpg' | 'svg', scale: number, name?
 }
 function defaultName(fmt: string, scale: number) {
   const s = useStore.getState();
-  return `poster-printer-${s.seeds.layout.slice(0, 6)}-${s.ratio.replace(':', 'x')}${fmt === 'svg' ? '' : '@' + scale + 'x'}.${fmt}`;
+  return `ready-poster-printer-${s.seeds.layout.slice(0, 6)}-${s.ratio.replace(':', 'x')}${fmt === 'svg' ? '' : '@' + scale + 'x'}.${fmt}`;
 }
 /** phase 13: app preferences moved out of 高级调校 (they never change a poster) */
 function Prefs() {
@@ -116,6 +117,7 @@ function useCommands(): Cmd[] {
     const add = (g: string, icn: string, zh: string, en: string, run: () => void, key?: string, sub?: string) => C.push({ g, icn, label: t(zh, en), alt: zh + ' ' + en, run, key, sub });
     add('act', 'shuffle', '抽一张', 'Draw a poster', () => A.draw(), t('空格', 'Space'));
     A.REMIX.forEach(([k, i, z, e]) => add('act', i, '换' + z, 'New ' + e.toLowerCase(), () => A.remix(k)));
+    LAYERS.forEach((k) => add('act', A.LAYER_ICON[k], '换' + LAYER_INFO[k].zh + '（只换这一层）', 'New ' + LAYER_INFO[k].en.toLowerCase() + ' (this layer only)', () => A.relayer(k), { grid: 'R', place: 'P', type: 'T' }[k]));
     add('act', 'heart', '收藏当前', 'Favourite current', A.favorite, 'F');
     add('act', 'download', '导出…', 'Export…', () => A.openSheet('export'), 'E');
     add('act', 'file-image', '快速导出 PNG', 'Quick export PNG', () => exportNow('png', useUI.getState().exportScale), 'S');
@@ -185,7 +187,7 @@ function Cmdk() {
 }
 
 /* ---------- shortcuts ---------- */
-const K: [string, string, string, string][] = [['空格', 'Space', '抽一张', 'Draw'], ['← →', '← →', '历史前后', 'History'], ['⌘K', '⌘K', '命令面板', 'Command palette'], ['⌘Z / ⇧⌘Z', '⌘Z / ⇧⌘Z', '撤销 / 重做', 'Undo / redo'], ['F', 'F', '收藏', 'Favourite'], ['E', 'E', '导出面板', 'Export sheet'], ['S', 'S', '快速导出 PNG', 'Quick PNG'], ['1 – 6', '1 – 6', '切换画幅', 'Ratio'], ['⇧1 – ⇧4', '⇧1 – ⇧4', '锁定 文字/配色/主图/全部', 'Lock text/colour/image/all'], ['I', 'I', '检查器', 'Inspector'], ['A', 'A', '高级调校', 'Advanced'], ['L', 'L', '图层与模式', 'Layers & modes'], ['H', 'H', '历史胶片', 'Filmstrip'], ['G', 'G', 'UI 布局网格', 'UI layout grid'], ['⇧G', '⇧G', '海报网格', 'Poster grid'], ['⇧D / ⇧L', '⇧D / ⇧L', '明暗 / 语言', 'Theme / language'], ['Esc', 'Esc', '取消选择 / 关闭', 'Deselect / close'], ['Delete', 'Delete', '隐藏所选元素', 'Hide selection'], ['双击文字', 'Dbl-click text', '直接改字', 'Edit text in place'], ['双击数值条', 'Dbl-click value', '复位', 'Reset a value'], ['⇧ / ⌥ 拖动', '⇧ / ⌥ drag', '相对 / 精细调整', 'Relative / fine'], ['方向键', 'Arrows', '聚焦数值条时步进', 'Step a focused value']];
+const K: [string, string, string, string][] = [['空格', 'Space', '抽一张', 'Draw'], ['← →', '← →', '历史前后', 'History'], ['⌘K', '⌘K', '命令面板', 'Command palette'], ['⌘Z / ⇧⌘Z', '⌘Z / ⇧⌘Z', '撤销 / 重做', 'Undo / redo'], ['T', 'T', '换排字（图片不动）', 'New type (pictures stay)'], ['P', 'P', '换图位', 'New placement'], ['R', 'R', '换网格', 'New grid'], ['F', 'F', '收藏', 'Favourite'], ['E', 'E', '导出面板', 'Export sheet'], ['S', 'S', '快速导出 PNG', 'Quick PNG'], ['1 – 6', '1 – 6', '切换画幅', 'Ratio'], ['⇧1 – ⇧4', '⇧1 – ⇧4', '锁定 文字/配色/主图/全部', 'Lock text/colour/image/all'], ['I', 'I', '检查器', 'Inspector'], ['A', 'A', '高级调校', 'Advanced'], ['L', 'L', '图层与模式', 'Layers & modes'], ['H', 'H', '历史胶片', 'Filmstrip'], ['G', 'G', 'UI 布局网格', 'UI layout grid'], ['⇧G', '⇧G', '海报网格', 'Poster grid'], ['⇧D / ⇧L', '⇧D / ⇧L', '明暗 / 语言', 'Theme / language'], ['Esc', 'Esc', '取消选择 / 关闭', 'Deselect / close'], ['Delete', 'Delete', '隐藏所选元素', 'Hide selection'], ['双击文字', 'Dbl-click text', '直接改字', 'Edit text in place'], ['双击数值条', 'Dbl-click value', '复位', 'Reset a value'], ['⇧ / ⌥ 拖动', '⇧ / ⌥ drag', '相对 / 精细调整', 'Relative / fine'], ['方向键', 'Arrows', '聚焦数值条时步进', 'Step a focused value']];
 function KeysSheet() {
   const t = useT();
   return (<>

@@ -1,5 +1,5 @@
 {
-  "$schema": "poster-printer/brief.v1",
+  "$schema": "ready-poster-printer/brief.v1",
   "purpose": "music",
   "context": {
     "use": "promo",

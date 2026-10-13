@@ -1,4 +1,4 @@
-"""Original flat 'modern illustration' scenes (released CC0 1.0 by the Poster Printer project). Pure geometry, no references.
+"""Original flat 'modern illustration' scenes (released CC0 1.0 by the Ready Poster Printer project). Pure geometry, no references.
 Writes scripts/img_raw/illus/*.jpg + provenance.json."""
 import os, json, math, random
 from PIL import Image, ImageDraw, ImageFilter

@@ -1,4 +1,6 @@
-# Poster Printer
+# Ready Poster Printer
+
+(Renamed from *Poster Printer* in phase 16. Saved data, storage keys and older JSON exports keep working.)
 
 **网格为骨 · 偶然为风** — a rule-based generative poster "draw" (抽卡) tool for the desktop browser.
 Press one big button and get a new, deterministic, designer-grade layout: Swiss grids, title groups, CJK-aware type,
@@ -14,7 +16,7 @@ as refractive glass (top caps, rails, dock, panels, sheets). Simple by default, 
 inspector for this poster or the selected element, and an **Advanced** layer with every engine parameter organised by intent.
 Design and porting notes: `docs/UX_REDESIGN.md` (§9 is the porting plan / old→new mapping).
 
-The app name lives in one constant, `src/config.ts → APP_NAME`.
+The app name lives in one constant, `src/config.ts → APP_NAME` (with `APP_SLUG` and `APP_SHORT`).
 
 ![contact sheet](showcase/contact_sheet.jpg)
 
@@ -28,7 +30,7 @@ The app name lives in one constant, `src/config.ts → APP_NAME`.
 ## Run
 
 ### On your own Mac / PC (no Node needed)
-Unzip **`release/poster-printer-dist.zip`** and double-click `start.command` (macOS) or `start.bat` (Windows), or run `./start.sh`.
+Unzip **`release/ready-poster-printer-dist.zip`** and double-click `start.command` (macOS) or `start.bat` (Windows), or run `./start.sh`.
 It needs only Python 3.9+ and opens `http://localhost:5180/`. Optional AI cut-out: `setup-ai.sh` / `setup-ai.bat`.
 Full instructions (zh/en) are in the zip's `README.md` (source: `dist-kit/README-DIST.md`). Rebuild the zip with `npm run dist`.
 
@@ -90,6 +92,8 @@ src/
                             centered, layered, bands) + mode post-pass (brush image, brush mask, band mask)
     gen/decor.ts            grid decoration, nodes, numbers, ticks, curves, shapes, big glyphs, textures
     gen/sidebar.ts          18 sidebar templates in 10 families, per-template saved type size
+    swiss/                  phase 16: the Swiss modular grid (lattice, template slicing solver, bleed-grid slicing trees,
+                            typologies, the modular / bleedgrid compositions, companions for random draws)
     gen/quality.ts          layout-quality pass: collision avoidance (text vs text / giant glyphs / ornaments), occlusion
                             rule, effective-background contrast repair (recolour → label plate → outline), 0–100 score
     components.ts           14 placeable components (stamp, ticket, date, barcode, tag, star, index, caption, chips, arrow,
@@ -125,6 +129,7 @@ scripts/                    asset pipelines (palettes, fonts subsetting, Met CC0
 
 **Generation flow:** `seeds + style params + locks → grid → composition → mode post-pass → decor → scene graph → SVG`.
 Each seed controls its own stream, so "换文字 / 换图形 / 换色调 / 换图片 / 换倾向 / 换结构" re-roll just one dimension.
+Since phase 17 the structure itself has three streams: grid (网格), picture placement (图位) and type (排字). Each can be re-rolled alone.
 History entries store seeds plus the picked texts, palette and images, so restore is exact even after the libraries change.
 Direct edits (move, re-type, image pan/zoom, hide) are stored as per-node overrides and applied after generation, so a parameter change keeps your edits.
 
@@ -174,14 +179,14 @@ Direct edits (move, re-type, image pan/zoom, hide) are stored as per-node overri
 | Image usage-count badges | ✅ done | count across history + favourites, top-left badge with tooltip |
 | Layout-quality scorer / redraw | ✅ done | every draw scored (overlap, glyph hits, contrast, off-canvas, clutter, emptiness); redraws up to `qualityTries` within 120 ms; score shown in 更多 and the lab |
 | Experimental colour within perceptual bounds | ✅ done | OKLCH construction + per-hue chroma caps (cyan ≤ 0.095) and lightness envelope; 300-palette test |
-| Portable distributable | ✅ done | `release/poster-printer-dist.zip` (~93 MB): build + Python server + start scripts + optional AI setup |
+| Portable distributable | ✅ done | `release/ready-poster-printer-dist.zip` (~95 MB): build + Python server + start scripts + optional AI setup |
 
 ---
 
 ## Glass UI (phase 7)
 
 **Layout.** Top caps (brand + 海报/多页/配色 · ratio + locks + undo/redo · ⌘K · 中/EN + theme · 导出), left rail (libraries),
-right rail (inspector, advanced, layers, history, shortcuts), bottom dock (← n/N → · 文字/配色/图片 · **抽一张** · 结构/图形/倾向 · ♥ · history).
+right rail (inspector, advanced, layers, history, shortcuts), bottom dock (← n/N → · 文字/配色/图片 · **抽一张** · 结构 ▾/图形/倾向 · ♥ · history). The ▾ on 结构 opens the layer menu (网格 / 图位 / 排字 / 整体结构).
 Panels open in fixed 12-column zones; the poster re-fits into the free zone and tucks slightly under the glass by design.
 
 **Shortcuts.** Space draw · ←/→ history · 1–6 ratio · ⇧1–4 locks (text / colour / image / images) · ⌘K command palette ·
@@ -316,6 +321,52 @@ The app is now called **Poster Printer** (slug `poster-printer`). The name lives
 
 ## Phase 8
 Design strategy (coupled grammars: typeled / interleave / programme / exhibit) is now a unit of randomness on top of the P7 selector, with scene semantics, semantic line breaking, exemplar-retrieved routes, problem-tied mutations and a MAP-Elites archive. Real copy is never padded with filler. See docs/PHASE8_STATS.md.
+
+## Phase 16: the Swiss modular grid, several pictures, full bleed
+
+Two new compositions lay out **several pictures of different sizes** on a real modular grid. Details are in `docs/PHASE16_SWISS_GRID.md`.
+
+**The grid.** Fields are separated by gutters, and one field plus one gutter is a whole number of baseline lines. Every picture and text region spans whole fields.
+
+**模块网格 `modular`.** Typologies (control 网格版式 / `gridLayout`):
+- hero + satellites (主图卫星)
+- flowline (悬挂线)
+- scale steps (尺度递进)
+- strip (图片横条)
+- module blocks (模块分区)
+
+A dynamic-programming slicing solver fits each picture's span to its own proportion and keeps the subject in frame. The hero is the largest and may bleed off its outer edges. White fields are planned, and empty bands across the middle are rejected.
+
+**满版拼图 `bleedgrid`.** Pictures fill the sheet edge to edge in a slicing tree solved for the sheet's proportion, so every picture keeps its own proportion. The type gets a cell of its own: paper, accent or ink, with seams none, hairline or gap. Typologies: mosaic (满版拼贴) and justified rows (满版行列).
+
+**Random draws** add 2–6 companions from the same source tier and category. With several pictures of your own (uploaded, picked or locked), the grid compositions lead.
+
+**CLI.**
+- Briefs take picture sets: `style.imagery.files` / `ids` / `layout` / `count`.
+- The resolver analyses the set and recommends layouts with reasons.
+- A new `images` correctness gate checks that every given picture is drawn and readable.
+- User images get a subject box.
+- New and extended commands: `images add` (stable ids), `images inspect`, `catalog layouts`, `generate --image … --layout …`.
+
+**Agent skill.** `poster-printer-cli/skills/ready-poster-printer/` (`SKILL.md` + `LAYOUT_METHOD.md`) is the method for choosing a layout from the user's pictures and copy.
+
+## Phase 17: the structure in three layers (网格 / 图位 / 排字)
+
+**结构** is now a split button. Its label re-lays out the whole structure, as before. The ▾ opens the layer menu:
+- **网格 Grid** (`R`): a new grid system (columns, margins, baseline, modules). Pictures and type re-flow into it.
+- **图位 Placement** (`P`): the pictures move. The type is set again around them.
+- **排字 Type** (`T`): only the typesetting changes: line breaks, alignment, headline size, colour, where the info block sits. **Every picture stays exactly where it is.**
+
+The menu stays open, so you can press 排字 a few times in a row. Each press is one undo step.
+
+In layouts where the picture position is part of the design (full bleed, a set plate, a disc), 图位 is disabled with the reason.
+
+Under the hood:
+- The layout seed feeds three independent streams. A re-roll salts one of them, and the salts are stored with the poster.
+- Posters made before this version replay exactly as before (checked against the phase-16 build).
+- CLI: `variations --vary type|place|grid`.
+
+Details are in `docs/PHASE17_LAYERS.md`.
 
 ## License
 

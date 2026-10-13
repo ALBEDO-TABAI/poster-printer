@@ -1,4 +1,4 @@
-"""Local background-removal service for Poster Printer.
+"""Local background-removal service for Ready Poster Printer.
 
 POST /api/cutout   body: image bytes (jpeg/png/webp)  ->  image/png with alpha
 GET  /api/health   -> {"ok": true, "model": ...}

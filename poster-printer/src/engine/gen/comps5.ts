@@ -63,7 +63,7 @@ function ma(ctx: Ctx) {
   // tracked meta on the canon head
   label(ctx, `${T.meta[0]?.t ?? issue(ctx)}`.toUpperCase(), cn.x, cn.y, on, { tracking: 0.24 });
   label(ctx, year(ctx), cn.x + cn.w, cn.y, on, { anchor: 'end', tracking: 0.24 });
-  if (ctx.rng.chance(0.5)) groupArray(ctx, { x: right ? cn.x + cn.w - bw : cn.x, y: cn.y + cn.h + u * 2, w: bw, h: H - (cn.y + cn.h) - u * 6 }, on, 1, { valign: 'top', maxPerRow: 1 });
+  if (ctx.rt.chance(0.5)) groupArray(ctx, { x: right ? cn.x + cn.w - bw : cn.x, y: cn.y + cn.h + u * 2, w: bw, h: H - (cn.y + cn.h) - u * 6 }, on, 1, { valign: 'top', maxPerRow: 1 });
 }
 
 // ---------------------------------------------------------------- substitution
@@ -76,7 +76,7 @@ function substitute(ctx: Ctx) {
   const hw = heroWord(ctx, land(ctx) ? 10 : 7);
   const ink = strong(ctx, on);
   const accentInk = accentOn(ctx, on, 3);
-  const fill = accentInk && ctx.rng.chance(0.3) ? accentInk : ink;
+  const fill = accentInk && ctx.rt.chance(0.3) ? accentInk : ink;
   if (hw.zh) {
     const full = Array.from(T.headline.t.replace(/[\s，。、！？：；“”「」·]/g, ''));
     const chars = full.length <= 6 ? full : Array.from(hw.t).slice(0, 4);
@@ -148,7 +148,7 @@ function hanzi(ctx: Ctx) {
   // a character with enough structure to read as an image once cropped (frame-like 日 口 回 read as plain shapes)
   const rich = chars.filter((c) => !SIMPLE_HAN.has(c));
   const ch = (rich.length ? rich[ctx.rng.int(0, Math.min(1, rich.length - 1))] : chars[0]) ?? '白';
-  const fam = ctx.rng.chance(0.5) ? zhHeavy(ctx, true) : { family: ctx.rng.chance(0.5) ? 'Source Han Serif CN' : 'Source Han Sans CN', weight: 900 };
+  const fam = ctx.rt.chance(0.5) ? zhHeavy(ctx, true) : { family: ctx.rt.chance(0.5) ? 'Source Han Serif CN' : 'Source Han Sans CN', weight: 900 };
   const size = (S * ctx.rng.range(0.78, 0.98)) / 0.88;
   const E = eyes(W, H);
   const wide = land(ctx);
@@ -160,7 +160,7 @@ function hanzi(ctx: Ctx) {
   else if (edge === 'l') { cx = size / 2 - bleed; cy = H / 2; }
   else { cx = E[ctx.rng.pick([0, 1])].x; cx = clamp(cx, size / 2, W - size / 2); cy = H - size / 2 + bleed; }
   const inkCol = strong(ctx, on);
-  const glyphFill = pal.source === 'itten:lightdark' || !accentOn(ctx, on, 2.2) || ctx.rng.chance(0.6) ? inkCol : pal.accent;
+  const glyphFill = pal.source === 'itten:lightdark' || !accentOn(ctx, on, 2.2) || ctx.rt.chance(0.6) ? inkCol : pal.accent;
   rawText(ctx, { id: ctx.id('hz'), role: 'big.main', text: ch, lang: 'zh', x: cx, y: cy + size * 0.38, size, family: fam.family, weight: fam.weight, fill: glyphFill, anchor: 'middle' });
   const gBox = { x: cx - size / 2, y: cy - size / 2, w: size, h: size };
   // the free side: vertical headline column + horizontal sub, on the canon block
@@ -184,7 +184,7 @@ function hanzi(ctx: Ctx) {
   }
   const tx = colX + vs + u * 3;
   const tb = { x: tx, y: free.y + free.h * 0.55, w: Math.max(u * 16, free.x + free.w - tx), h: free.h * 0.45 };
-  ctx.group({ main: T.sub, note: T.note }, 'small', tb, { mainSize: ctx.size('smallMain') * 0.8, align: 'start', valign: 'bottom', on, mode: 'balance', maxLines: 3 });
+  ctx.group({ main: T.sub, note: T.note }, 'small', tb, { mainSize: ctx.size('smallMain') * 0.8, align: 'start', valign: ctx.layered && ctx.rt.chance(0.4) ? 'top' : 'bottom', on, mode: 'balance', maxLines: 3 });
   label(ctx, issue(ctx), tx, free.y + u * 1, on);
   // optional small picture as the counterweight in the opposite quadrant (≤ 6%)
   const asset = img(ctx);

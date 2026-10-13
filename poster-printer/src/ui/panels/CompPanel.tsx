@@ -49,7 +49,7 @@ export function CompPanel() {
   const selPc = selected?.startsWith('pc-') ? placed.find((p) => 'pc-' + p.id === selected) : undefined;
   const selNode = selected && scene && !selected.startsWith('pc-') ? findNode(scene, selected) : null;
 
-  const exportLib = () => download(new Blob([JSON.stringify({ kind: 'rea-components', version: 1, items: lib.map(({ id: _id, ...r }) => r) }, null, 2)], { type: 'application/json' }), 'poster-printer-components.json');
+  const exportLib = () => download(new Blob([JSON.stringify({ kind: 'rea-components', version: 1, items: lib.map(({ id: _id, ...r }) => r) }, null, 2)], { type: 'application/json' }), 'ready-poster-printer-components.json');
   const importLib = async (f: File | undefined) => {
     if (!f) return;
     try { const j = JSON.parse(await f.text()); s.importCompLib(Array.isArray(j) ? j : j.items ?? []); } catch { s.toast(t('无法读取组件库文件', 'Cannot read component library'), 'warn'); }

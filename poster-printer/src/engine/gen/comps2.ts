@@ -11,6 +11,7 @@ import { tonal } from '../color/strategy';
 import { roundedPath, tornPath, archPath, rectPath, stampPath, shardPath, wedgePath, halfDiscPath, stairPath } from './masks';
 import { header, groupArray, bigTitle, img, headlineSize, prose } from './comps';
 import type { PT } from './pick';
+import type { Rng } from '../rng';
 import { zhHeavy } from './comps3';
 
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
@@ -104,13 +105,13 @@ function typo(ctx: Ctx) {
     anchorGlyph(ctx, anchorText(ctx, 'numeral'), { hFrac: land ? 0.86 : ctx.rng.range(0.55, 0.72), ax: right ? 'end' : 'start', ay: 'bottom', bleed: ctx.rng.range(0, 0.12), outline });
     header(ctx, { x: C.x, y: C.y, w: C.w, h: 0 }, on, 'top');
     const hw = land ? C.w * 0.5 : C.w * 0.78;
-    bigTitle(ctx, { x: right ? C.x : C.x + C.w - hw, y: C.y + u * 7, w: hw, h: C.h * 0.38 }, on, { align: right ? 'start' : 'end', size: Math.min(headlineSize(ctx, hw), u * ctx.rng.range(land ? 12 : 9, land ? 16 : 13)), withNote: true });
+    bigTitle(ctx, { x: right ? C.x : C.x + C.w - hw, y: C.y + u * 7, w: hw, h: C.h * 0.38 }, on, { align: right ? 'start' : 'end', size: Math.min(headlineSize(ctx, hw), u * ctx.rt.range(land ? 12 : 9, land ? 16 : 13)), withNote: true });
     const gh = ctx.size('smallMain') * 2.2 + ctx.size('note') * 3 + u * 2;
     groupArray(ctx, { x: right ? C.x : C.x + C.w * 0.45, y: C.y + C.h - gh, w: C.w * 0.55, h: gh }, on, land ? 3 : 2, { valign: 'bottom', maxPerRow: land ? 3 : 2 });
     if (land) prose(ctx, { x: right ? C.x : C.x + C.w - hw, y: C.y + C.h * 0.5, w: hw * 0.45, h: C.h * 0.2 }, on, right ? 'start' : 'end', 0);
   } else if (v === 'stack') {
     header(ctx, { x: C.x, y: C.y, w: C.w, h: 0 }, on, 'top');
-    const hs = headlineSize(ctx, C.w) * ctx.rng.range(0.9, 1.15);
+    const hs = headlineSize(ctx, C.w) * ctx.rt.range(0.9, 1.15);
     const h = bigTitle(ctx, { x: C.x, y: C.y + u * 6, w: C.w, h: C.h * 0.55 }, on, { align: 'start', size: hs, mode: 'words', lines: 3, withSub: true });
     const ry = C.y + u * 6 + h + u * 3;
     hair(ctx, C.x, ry, C.x + C.w, ry);
@@ -123,7 +124,7 @@ function typo(ctx: Ctx) {
     anchorGlyph(ctx, anchorText(ctx, ctx.rd.chance(0.5) ? 'letter' : 'numeral'), { hFrac: land ? 0.82 : 0.5, ax: 'middle', ay: 'middle', outline });
     const T = ctx.texts;
     const hw = C.w * (land ? 0.55 : 0.8);
-    const cy = H * ctx.rng.range(0.4, 0.52);
+    const cy = H * ctx.rt.range(0.4, 0.52);
     const small = label(ctx, `— ${(T.meta[0]?.t || 'No.').toUpperCase()} —`, W / 2, cy - u * 12, on, { anchor: 'middle' });
     void small;
     bigTitle(ctx, { x: W / 2 - hw / 2, y: cy - u * 8, w: hw, h: H * 0.35 }, on, { align: 'middle', size: Math.min(headlineSize(ctx, hw), u * (land ? 16 : 12)), withNote: true });
@@ -172,7 +173,7 @@ function edge(ctx: Ctx) {
   const on = pal.bg;
   const hl = ctx.texts.headline;
   const zh = hl.lang === 'zh';
-  const fam = zh ? zhHeavy(ctx) : (() => { const f = ctx.rd.pick(['Anton', 'Bebas Neue', 'Oswald', 'Anton']); return { family: f, weight: f === 'Oswald' ? 700 : 400 }; })();
+  const fam = zh ? zhHeavy(ctx) : (() => { const f = ctx.rtd.pick(['Anton', 'Bebas Neue', 'Oswald', 'Anton']); return { family: f, weight: f === 'Oswald' ? 700 : 400 }; })();
   const raw = zh ? hl.t.replace(/[\s，。、！？：；]/g, '') : hl.t.toUpperCase();
   const words = zh ? Array.from(raw) : raw.split(/\s+/);
   const nLines = zh ? (words.length > 4 ? 2 : 1) : Math.min(3, words.length > 3 ? 3 : words.length);
@@ -196,7 +197,7 @@ function edge(ctx: Ctx) {
   const blockH = hOf(size);
   if (shortZh) { anchor = 'start'; x = C.x; }
   const y0 = shortZh ? (top ? C.y + cap : C.y + C.h - blockH + cap) : top ? cap - cap * ctx.rng.range(0.02, 0.1) : H - blockH + cap + cap * ctx.rng.range(0.02, 0.08);
-  const fill = ctx.rd.chance(0.35) && wcag(pal.accent, on) > 3 ? pal.accent : ctx.textColor(on, 200);
+  const fill = ctx.rtd.chance(0.35) && wcag(pal.accent, on) > 3 ? pal.accent : ctx.textColor(on, 200);
   const hNode = rawText(ctx, { id: ctx.id('edge'), role: 'big.main', text: lines.join('\n'), lang: zh ? 'zh' : 'en', x, y: y0, size, family: fam.family, weight: fam.weight, fill, anchor, tracking: -0.005, leading: lead });
   // the micro system lives in the remaining band
   const R = top ? { x: C.x, y: hNode.box.y + hNode.box.h + u * 4, w: C.w, h: 0 } : { x: C.x, y: C.y, w: C.w, h: 0 };
@@ -218,9 +219,13 @@ function edge(ctx: Ctx) {
   }
   const free = [...Array(cols).keys()].map((i) => ({ x: colX(i), y: R.y + (top ? u * 2 : 0), w: cw, h: R.h - u * 2 })).filter((b) => !ctx.occupied.some((o) => o.x < b.x + b.w && o.x + o.w > b.x && o.y < b.y + b.h && o.y + o.h > b.y));
   const T = ctx.texts;
-  if (free[0]) ctx.group({ main: T.sub, note: T.note }, 'small', free[0], { mainSize: ctx.size('smallMain') * 0.9, align: 'start', valign: top ? 'top' : 'bottom', on, mode: 'words', lines: 3 });
-  if (free[1]) prose(ctx, { ...free[1], h: free[1].h * 0.8 }, on, 'start', 0);
-  if (free[2]) ctx.group({ main: T.groups[0].main, note: T.groups[0].note }, 'small', free[2], { mainSize: ctx.size('smallSub') * 1.3, align: free[2].x + free[2].w > W - C.x - 2 ? 'end' : 'start', valign: top ? 'bottom' : 'top', on, mode: 'words', lines: 2 });
+  // phase 17: on layered posters the type layer decides which column takes which block, and where it hangs
+  const slot = ctx.layered ? ctx.rt.shuffle(free.slice()) : free;
+  const vflip = ctx.layered && ctx.rt.chance(0.35);
+  const va = (a: 'top' | 'bottom') => (vflip ? (a === 'top' ? 'bottom' : 'top') : a);
+  if (slot[0]) ctx.group({ main: T.sub, note: T.note }, 'small', slot[0], { mainSize: ctx.size('smallMain') * 0.9, align: 'start', valign: va(top ? 'top' : 'bottom'), on, mode: 'words', lines: 3 });
+  if (slot[1]) prose(ctx, { ...slot[1], h: slot[1].h * 0.8 }, on, 'start', 0);
+  if (slot[2]) ctx.group({ main: T.groups[0].main, note: T.groups[0].note }, 'small', slot[2], { mainSize: ctx.size('smallSub') * 1.3, align: slot[2].x + slot[2].w > W - C.x - 2 ? 'end' : 'start', valign: va(top ? 'bottom' : 'top'), on, mode: 'words', lines: 2 });
   // cropped paragraph texture running off the canvas edge
   if (ctx.rng.chance(0.45) && ctx.on('zones')) {
     const txt = T.prose.map((p) => p.t).join(' ').repeat(3);
@@ -290,7 +295,7 @@ function ghost(ctx: Ctx) {
       { x: rv.x + rv.w + u * 4, y: C.y + u * 5, w: C.x + C.w - rv.x - rv.w - u * 4, h: C.h - u * 5 },
     ].filter((r) => r.w >= u * 22 && r.h >= u * 14);
     const prefer = kind === 'word' ? cands : cands;
-    if (prefer.length) textArea = prefer.sort((a, b) => b.w * Math.min(b.h, u * 60) - a.w * Math.min(a.h, u * 60))[0];
+    if (prefer.length) { const ord = prefer.sort((a, b) => b.w * Math.min(b.h, u * 60) - a.w * Math.min(a.h, u * 60)); textArea = ctx.layered && ord.length > 1 && ctx.rt.chance(0.4) ? ord[1] : ord[0]; }
     else textArea = { x: C.x, y: C.y + u * 5, w: C.w, h: C.h * 0.3 };
   }
   const crispNode = ctx.image(asset, full, { clip, filter: crisp(ctx, asset), fx, fy });
@@ -437,7 +442,7 @@ function veil(ctx: Ctx) {
   const on = mix(pfill, '#808080', 0) && pfill;
   header(ctx, { x: inner.x, y: inner.y, w: inner.w, h: 0 }, on, 'top');
   const gh = ctx.size('smallMain') * 2.2 + ctx.size('note') * 3 + u * 2;
-  bigTitle(ctx, { x: inner.x, y: inner.y + u * 6, w: inner.w, h: inner.h - gh - u * 8 }, on, { align: 'start', valign: ctx.rng.chance(0.5) ? 'top' : 'bottom', size: Math.min(headlineSize(ctx, inner.w), u * 12), withSub: true });
+  bigTitle(ctx, { x: inner.x, y: inner.y + u * 6, w: inner.w, h: inner.h - gh - u * 8 }, on, { align: 'start', valign: ctx.rt.chance(0.5) ? 'top' : 'bottom', size: Math.min(headlineSize(ctx, inner.w), u * 12), withSub: true });
   groupArray(ctx, { x: inner.x, y: inner.y + inner.h - gh, w: inner.w, h: gh }, on, 2, { valign: 'bottom', maxPerRow: 2 });
 }
 
@@ -552,7 +557,17 @@ function inset(ctx: Ctx) {
     hair(ctx, C.x, y, C.x + C.w, y, 0.8);
   } else {
     y += u * 2;
-    const h = bigTitle(ctx, { x: C.x, y, w: C.w, h: C.h * 0.3 }, on, { align: 'middle', size: Math.min(headlineSize(ctx, C.w), u * 9), withSub: false });
+    const tb = { x: C.x, y, w: C.w, h: C.h * 0.3 }, to = { align: 'middle' as const, size: Math.min(headlineSize(ctx, C.w), u * 9), withSub: false };
+    let h: number;
+    if (ctx.layered) {
+      // phase 17: the picture hangs from the title band, so the band's height is placement (measured with the placement
+      // stream); the type layer's setting is used when it fits the band, else the band's own setting
+      const withRt = <T,>(r: Rng, f: () => T) => { const rt0 = ctx.rt; ctx.rt = r; try { return f(); } finally { ctx.rt = rt0; } };
+      const trial = (r: Rng) => { const n0 = ctx.nodes.length, o0 = ctx.occupied.length; const hh = withRt(r, () => bigTitle(ctx, tb, on, to)); ctx.nodes.length = n0; ctx.occupied.length = o0; return hh; };
+      h = trial(ctx.rng.fork('inset-title'));
+      const fits = trial(ctx.rt.fork('inset-title')) <= h + 1;
+      withRt((fits ? ctx.rt : ctx.rng).fork('inset-title'), () => bigTitle(ctx, tb, on, to));
+    } else h = bigTitle(ctx, tb, on, to);
     y += h + u * 2;
     hair(ctx, C.x, y, C.x + C.w, y, 0.8);
   }

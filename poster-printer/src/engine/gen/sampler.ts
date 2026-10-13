@@ -5,7 +5,7 @@ import type { ImageAsset } from './ctx';
 import type { DrawPlan } from './plan';
 import type { ModeKey } from '../types';
 
-export type Arch = 'GG' | 'SPL' | 'SWI' | 'CTR' | 'FAN' | 'CARD' | 'MOD' | 'PART' | 'INSET' | 'FB' | 'LAY' | 'BAND';
+export type Arch = 'GG' | 'SPL' | 'SWI' | 'CTR' | 'FAN' | 'CARD' | 'MOD' | 'PART' | 'INSET' | 'FB' | 'LAY' | 'BAND' | 'GRID';
 /** composition → archetype (the same coding as the phase 3–6 evaluation labels) */
 export const COMP_ARCH: Record<string, Arch> = {
   edge: 'GG', echo: 'GG', typo: 'GG', giant: 'GG', typefill: 'GG',
@@ -22,11 +22,12 @@ export const COMP_ARCH: Record<string, Arch> = {
   bands: 'BAND', panorama: 'BAND',
   ma: 'INSET', substitute: 'GG', hanzi: 'GG', anomaly: 'MOD', calendar: 'SWI', window: 'FB',
   typeled: 'GG', interleave: 'LAY', programme: 'SWI', exhibit: 'INSET', zoned: 'FB',
+  modular: 'GRID', bleedgrid: 'GRID',
 };
 export const archOf = (comp: string, hasCut: boolean): Arch => (comp === 'cover' && !hasCut ? 'FB' : COMP_ARCH[comp] ?? 'GG');
 
 /** target archetype shares: close to uniform, a little more weight on the type-led families that carry most copy */
-const TARGET: Record<Arch, number> = { GG: 0.85, SPL: 0.85, SWI: 1.0, CTR: 1.0, FAN: 0.9, CARD: 0.9, MOD: 0.85, PART: 0.95, INSET: 0.8, FB: 0.9, LAY: 1.1, BAND: 0.85 };
+const TARGET: Record<Arch, number> = { GG: 0.85, SPL: 0.85, SWI: 1.0, CTR: 1.0, FAN: 0.9, CARD: 0.9, MOD: 0.85, PART: 0.95, INSET: 0.8, FB: 0.9, LAY: 1.1, BAND: 0.85, GRID: 1.0 };
 /** preference inside an archetype */
 const WITHIN: Record<string, number> = {
   edge: 1.3, echo: 0.8, typo: 0.6, giant: 0.35, typefill: 0.2,
@@ -42,6 +43,7 @@ const WITHIN: Record<string, number> = {
   object: 1.2, layered: 0,
   bands: 0.3, panorama: 1.2,
   ma: 1.0, substitute: 1.0, hanzi: 1.0, anomaly: 1.0, calendar: 1.0, window: 1.0,
+  modular: 1.2, bleedgrid: 1.0,
 };
 /** compositions that averaged < 7 when picked blind in phases 4–5: only their best candidates are accepted */
 // phase 15: swiss, window, fullbleed and inset left probation — 白's U1 ratings put them at or above the mean (shrunk 7.37–7.6)
@@ -55,15 +57,19 @@ export const USER_SHRUNK: Record<string, number> = {
   calendar: 7.18, partition: 7.18, ghost: 7.16, ring: 7.09, ma: 7.07, veil: 7.07, mosaic: 7.06, substitute: 7.05, hanzi: 6.99, centered: 6.91,
 };
 export const userPrior = (c: string) => (USER_SHRUNK[c] === undefined ? 1 : Math.min(1.8, Math.max(0.5, Math.exp(2.5 * (USER_SHRUNK[c] - 7.285)))));
-const NEEDS_IMG = new Set(['fullbleed', 'ghost', 'veil', 'partition', 'mosaic', 'checker', 'bento', 'inset', 'layered', 'object', 'split', 'cards', 'panorama', 'substitute', 'window', 'ma']);
+const NEEDS_IMG = new Set(['fullbleed', 'ghost', 'veil', 'partition', 'mosaic', 'checker', 'bento', 'inset', 'layered', 'object', 'split', 'cards', 'panorama', 'substitute', 'window', 'ma', 'modular', 'bleedgrid']);
+/** phase 16: compositions that lay out several pictures (every other composition shows only the first) */
+export const MULTI_IMG = new Set(['modular', 'bleedgrid']);
 /** long formats: the layouts that can fill a long canvas (phase 6: echo, mosaic and object rated 5–6 on 16:9/21:9 and were dropped there) */
-const WIDE_OK = new Set(['knockout', 'cover', 'panorama', 'edge', 'quote', 'veil', 'bands', 'split', 'fullbleed', 'ring', 'ma', 'substitute', 'anomaly', 'calendar', 'window', 'hanzi']);
+const WIDE_OK = new Set(['knockout', 'cover', 'panorama', 'edge', 'quote', 'veil', 'bands', 'split', 'fullbleed', 'ring', 'ma', 'substitute', 'anomaly', 'calendar', 'window', 'hanzi', 'modular', 'bleedgrid']);
 
 export function v2Weights(o: { plan: DrawPlan; images: ImageAsset[]; imagesOn: boolean; modes: Set<ModeKey>; W: number; H: number; zh: boolean; styleComp?: Record<string, number>; recent?: string[]; exclude?: string[] }): Record<string, number> {
   const { W, H } = o;
   const hasImg = o.images.length > 0 && o.imagesOn && !o.plan.typeOnly;
   const hasCut = hasImg && o.images.some((a) => a.cutout && a.subject);
   const wide = W / H > 1.5, xwide = W / H > 2, land = W > H * 1.15;
+  // phase 16: several pictures given (the user's own, a locked set, a picked set): the compositions that show them all lead
+  const multi = hasImg && o.images.length >= 2;
   const w: Record<string, number> = {};
   for (const [c, v] of Object.entries(WITHIN)) {
     let x = v * (1 + 0.35 * (o.styleComp?.[c] ?? 0));
@@ -77,6 +83,7 @@ export function v2Weights(o: { plan: DrawPlan; images: ImageAsset[]; imagesOn: b
     if (land && !wide) { if (c === 'vertical') x *= 0.3; if (c === 'bands') x = 0; if (c === 'edge') x *= 0.6; }
     if (c === 'echo' && o.zh) x *= 0.35;
     if (c === 'hanzi' && !o.zh) x = 0;
+    if (multi) x *= MULTI_IMG.has(c) ? 4 : 0.3;
     if (o.exclude?.includes(c)) x = 0;
     w[c] = x;
   }

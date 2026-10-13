@@ -37,7 +37,10 @@ export interface BriefStyle {
   color?: { temperature?: 'warm' | 'cool' | 'neutral'; lightness?: 'light' | 'dark' | 'any'; chroma?: 'muted' | 'rich' | 'neon' | 'mono'; contrast?: 'gentle' | 'strong'; palette_tags?: string[]; must_include?: string[]; background?: 'light' | 'dark' | 'color' | 'auto' };
   typography?: { voice?: 'serif' | 'sans' | 'mono' | 'display' | 'script' | 'brush' | 'round' | 'mixed'; weight?: 'light' | 'regular' | 'heavy'; mood?: 'literary' | 'editorial' | 'swiss' | 'poster' | 'geometric' | 'technical' | 'avant'; case?: 'as-is' | 'upper' };
   density?: 'airy' | 'balanced' | 'packed' | number;
-  imagery?: { use?: 'none' | 'accent' | 'hero' | 'full-bleed'; subject?: string[]; ids?: string[] };
+  /** pictures: `ids` (user images from `images add`, or catalogue ids) in importance order, the first is the hero;
+   *  `files` are added as user images by the CLI and prepended to `ids`; `layout` picks the Swiss grid layout
+   *  (phase 16); `count` asks for that many catalogue pictures when no ids are given */
+  imagery?: { use?: 'none' | 'accent' | 'hero' | 'full-bleed'; subject?: string[]; ids?: string[]; files?: string[]; layout?: GridLayout; count?: number };
   texture?: 'flat' | 'grain' | 'paper' | 'riso' | 'halftone' | 'auto';
   references?: { kind: 'style-id' | 'poster-json' | 'note' | 'url'; value: string; note?: string }[];
   styles?: string[];
@@ -69,13 +72,16 @@ export const PURPOSES: Purpose[] = ['event', 'exhibition', 'talk', 'product-laun
 export const MOODS = ['calm', 'bold', 'playful', 'elegant', 'technical', 'literary', 'raw', 'retro', 'futuristic', 'warm', 'minimal', 'traditional', 'editorial', 'loud', 'luxurious', 'dark'];
 export const ERAS = ['swiss', 'bauhaus', 'art-deco', '70s', '80s', '90s', 'y2k', 'contemporary', 'east-traditional', 'newspaper', 'brutalist'];
 export const RATIOS = ['3:4', '9:16', '1:1', '4:3', '16:9', '21:9'];
-export const IDEA_IDS = ['scale', 'substitution', 'occlusion', 'anomaly', 'reveal', 'tension', 'emptiness', 'data', 'hanzi', 'split', 'orbit', 'voice', 'specimen', 'immersion'];
+export const IDEA_IDS = ['scale', 'substitution', 'occlusion', 'anomaly', 'reveal', 'tension', 'emptiness', 'data', 'hanzi', 'split', 'orbit', 'voice', 'specimen', 'immersion', 'grid'];
+/** phase 16: Swiss grid layouts for several pictures (modular: hero / flow / steps / strip / blocks; bleed grid: mosaic / rows); 'single' = one-picture compositions */
+export const GRID_LAYOUTS = ['auto', 'hero', 'flow', 'steps', 'strip', 'blocks', 'mosaic', 'rows', 'single'] as const;
+export type GridLayout = typeof GRID_LAYOUTS[number];
 
 const str = { type: 'string' };
 const strs = { type: 'array', items: str };
 /** JSON Schema (draft 2020-12) of the brief */
 export const BRIEF_SCHEMA = {
-  $schema: 'https://json-schema.org/draft/2020-12/schema', $id: 'poster-printer/brief.v1', title: 'Poster Printer brief', type: 'object', required: ['content'],
+  $schema: 'https://json-schema.org/draft/2020-12/schema', $id: 'ready-poster-printer/brief.v1', title: 'Ready Poster Printer brief', type: 'object', required: ['content'],
   properties: {
     purpose: { enum: PURPOSES },
     content: {
@@ -93,7 +99,7 @@ export const BRIEF_SCHEMA = {
         color: { type: 'object', properties: { temperature: { enum: ['warm', 'cool', 'neutral'] }, lightness: { enum: ['light', 'dark', 'any'] }, chroma: { enum: ['muted', 'rich', 'neon', 'mono'] }, contrast: { enum: ['gentle', 'strong'] }, palette_tags: strs, must_include: strs, background: { enum: ['light', 'dark', 'color', 'auto'] } } },
         typography: { type: 'object', properties: { voice: { enum: ['serif', 'sans', 'mono', 'display', 'script', 'brush', 'round', 'mixed'] }, weight: { enum: ['light', 'regular', 'heavy'] }, mood: { enum: ['literary', 'editorial', 'swiss', 'poster', 'geometric', 'technical', 'avant'] }, case: { enum: ['as-is', 'upper'] } } },
         density: { anyOf: [{ enum: ['airy', 'balanced', 'packed'] }, { type: 'integer', minimum: 1, maximum: 5 }] },
-        imagery: { type: 'object', properties: { use: { enum: ['none', 'accent', 'hero', 'full-bleed'] }, subject: strs, ids: strs } },
+        imagery: { type: 'object', properties: { use: { enum: ['none', 'accent', 'hero', 'full-bleed'] }, subject: strs, ids: { ...strs, description: 'picture ids in importance order (first = hero)' }, files: { ...strs, description: 'image files; the CLI adds them as user images (ids prepended)' }, layout: { enum: GRID_LAYOUTS, description: 'Swiss grid layout for several pictures' }, count: { type: 'integer', minimum: 1, maximum: 8, description: 'catalogue pictures to use when no ids are given' } } },
         texture: { enum: ['flat', 'grain', 'paper', 'riso', 'halftone', 'auto'] },
         references: { type: 'array', items: { type: 'object', required: ['kind', 'value'], properties: { kind: { enum: ['style-id', 'poster-json', 'note', 'url'] }, value: str, note: str } } },
         styles: strs, ideas: { type: 'array', items: { enum: IDEA_IDS } }, avoid: strs,
@@ -142,6 +148,14 @@ export function validateBrief(b: unknown): { errors: Issue[]; warnings: Issue[] 
     if (Array.isArray(s.mood)) for (const m of s.mood) if (!MOODS.includes(String(m))) warnings.push({ path: 'style.mood', msg: `unknown mood "${m}" (ignored); known: ${MOODS.join(', ')}` });
     if (s.era !== undefined && !ERAS.includes(String(s.era))) warnings.push({ path: 'style.era', msg: `unknown era "${s.era}" (ignored); known: ${ERAS.join(', ')}` });
     if (Array.isArray(s.ideas)) for (const m of s.ideas) if (!IDEA_IDS.includes(String(m))) errors.push({ path: 'style.ideas', msg: `unknown idea "${m}"; one of ${IDEA_IDS.join(', ')}` });
+    const im = s.imagery as Record<string, unknown> | undefined;
+    if (im && typeof im === 'object') {
+      known(im, ['use', 'subject', 'ids', 'files', 'layout', 'count'], 'style.imagery.');
+      if (im.layout !== undefined && !(GRID_LAYOUTS as readonly string[]).includes(String(im.layout))) errors.push({ path: 'style.imagery.layout', msg: `one of ${GRID_LAYOUTS.join(', ')}` });
+      for (const k of ['ids', 'files', 'subject']) if (im[k] !== undefined && !Array.isArray(im[k])) errors.push({ path: 'style.imagery.' + k, msg: 'must be an array' });
+      if (Array.isArray(im.ids) && im.ids.length > 8) warnings.push({ path: 'style.imagery.ids', msg: `${im.ids.length} pictures: the grid layouts show at most 8 (the first 8 are used)` });
+      if (im.count !== undefined && !(Number.isInteger(im.count) && Number(im.count) >= 1 && Number(im.count) <= 8)) errors.push({ path: 'style.imagery.count', msg: 'an integer 1–8' });
+    }
   }
   const f = o.format as Record<string, unknown> | undefined;
   if (f && typeof f === 'object') {
@@ -154,6 +168,6 @@ export function validateBrief(b: unknown): { errors: Issue[]; warnings: Issue[] 
 
 export function briefTemplate(lang: 'zh' | 'en' = 'en'): Brief {
   return lang === 'zh'
-    ? { $schema: 'poster-printer/brief.v1', purpose: 'talk', content: { title: '（标题）', subtitle: '', date: '2026-11-21T19:30', venue: '', organizers: [], speakers: [], program: [], price: '', url: '', body: '', language: 'zh' }, context: { use: 'info', audience: '', display: { kind: 'screen' }, priority: ['title', 'date', 'venue'] }, style: { mood: ['calm'], density: 'balanced', imagery: { use: 'accent' }, color: { background: 'auto' } }, format: { ratio: '3:4', count: 6, min_score: 6 } }
-    : { $schema: 'poster-printer/brief.v1', purpose: 'event', content: { title: '(title)', subtitle: '', date: '2026-11-21T19:30', venue: '', organizers: [], speakers: [], program: [], price: '', url: '', body: '', language: 'en' }, context: { use: 'promo', audience: '', display: { kind: 'screen' }, priority: ['title', 'date', 'venue'] }, style: { mood: ['bold'], density: 'balanced', imagery: { use: 'accent' }, color: { background: 'auto' } }, format: { ratio: '3:4', count: 6, min_score: 6 } };
+    ? { $schema: 'ready-poster-printer/brief.v1', purpose: 'talk', content: { title: '（标题）', subtitle: '', date: '2026-11-21T19:30', venue: '', organizers: [], speakers: [], program: [], price: '', url: '', body: '', language: 'zh' }, context: { use: 'info', audience: '', display: { kind: 'screen' }, priority: ['title', 'date', 'venue'] }, style: { mood: ['calm'], density: 'balanced', imagery: { use: 'accent' }, color: { background: 'auto' } }, format: { ratio: '3:4', count: 6, min_score: 6 } }
+    : { $schema: 'ready-poster-printer/brief.v1', purpose: 'event', content: { title: '(title)', subtitle: '', date: '2026-11-21T19:30', venue: '', organizers: [], speakers: [], program: [], price: '', url: '', body: '', language: 'en' }, context: { use: 'promo', audience: '', display: { kind: 'screen' }, priority: ['title', 'date', 'venue'] }, style: { mood: ['bold'], density: 'balanced', imagery: { use: 'accent' }, color: { background: 'auto' } }, format: { ratio: '3:4', count: 6, min_score: 6 } };
 }

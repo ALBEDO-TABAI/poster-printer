@@ -30,17 +30,20 @@ async function main() {
     const modes = (q.get('modes') ? q.get('modes')!.split(',') : style.modes || []) as ModeKey[];
     const params = { ...DEFAULT_PARAMS, ...style.params, ...(q.get('comp') ? { composition: q.get('comp')! } : {}), ...(q.get('all') ? { composition: COMPS[i % COMPS.length] } : {}), ...Object.fromEntries((q.get('p') || '').split(',').filter(Boolean).map((kv) => { const [k, v] = kv.split(':'); return [k, isNaN(Number(v)) ? (v === 'true' ? true : v === 'false' ? false : v) : Number(v)]; })) };
     const t0 = performance.now();
+    // phase 16: ?honor=imageCount,margin (params the user set) and ?imgs=id1,id2 (a locked picture set, hero first)
+    const locked = q.get('imgs') ? q.get('imgs')!.split(',').filter((id) => images.some((a) => a.id === id)) : null;
     const res = generate({
       seeds: { layout: base + i + 'L', text: base + i + 'T', color: base + i + 'C', image: base + i + 'I' }, ratio, style, params, modules: DEFAULT_MODULES, modes,
-      fonts: style.fonts, images, palettes, textSets: TEXT_SETS, measure,
+      fonts: style.fonts, images, palettes, textSets: TEXT_SETS, measure, lockedImages: locked, honor: q.get('honor') ? q.get('honor')!.split(',') : undefined,
+      select: Number(q.get('select') || 0),
     });
     const svg = renderSVG(res.scene);
     const d = document.createElement('div');
     d.className = 'c';
     const scale = w / res.scene.w;
-    d.innerHTML = svg.replace(/width="[\d.]+" height="[\d.]+"/, `width="${w}" height="${res.scene.h * scale}"`) + `<div>${style.id} · ${res.picked.comp} · ${res.picked.grid.type}/${res.picked.grid.density} · ${(performance.now() - t0).toFixed(0)}ms · q${res.picked.quality ? Math.round(res.picked.quality.score) : '-'}/a${res.attempts ?? 1}${res.picked.quality ? ` mv${res.picked.quality.moved} dr${res.picked.quality.dropped} rc${res.picked.quality.recolored} pl${res.picked.quality.scrims}` : ''}</div>`;
+    d.innerHTML = svg.replace(/width="[\d.]+" height="[\d.]+"/, `width="${w}" height="${res.scene.h * scale}"`) + `<div>${style.id} · ${res.picked.comp}${(res.scene.info.sem as { strategy?: string } | undefined)?.strategy ? ' ' + (res.scene.info.sem as { strategy?: string }).strategy : ''} · ${res.picked.imageIds.length}img · ${res.picked.grid.nc}×${res.picked.grid.nr} · ${(performance.now() - t0).toFixed(0)}ms · q${res.picked.quality ? Math.round(res.picked.quality.score) : '-'}/a${res.attempts ?? 1}${res.picked.quality ? ` mv${res.picked.quality.moved} dr${res.picked.quality.dropped} rc${res.picked.quality.recolored} pl${res.picked.quality.scrims}` : ''}</div>`;
     g.appendChild(d);
-    out.push({ style: style.id, comp: res.picked.comp, ms: Math.round(res.ms), q: res.picked.quality, a: res.attempts });
+    out.push({ style: style.id, comp: res.picked.comp, ms: Math.round(res.ms), q: res.picked.quality?.score, a: res.attempts, sem: (res.scene.info.sem as { strategy?: string; vars?: Record<string, { value: unknown }> } | undefined)?.vars?.template?.value ?? (res.scene.info.sem as { strategy?: string } | undefined)?.strategy, gates: res.scene.info.gates, geo: res.scene.info.geo, n: res.picked.imageIds.length });
   }
   (window as any).__labDone = out;
 }

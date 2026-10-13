@@ -17,11 +17,13 @@ import { COMPOSERS_V3, stickersFor } from './gen/comps3';
 import { COMPOSERS_V2, meanImageDetail } from './gen/comps2';
 import { applyExtras } from './gen/kit';
 import { drawPlan, type DrawPlan } from './gen/plan';
-import { v2Weights, PROBATION, archOf } from './gen/sampler';
+import { v2Weights, PROBATION, archOf, MULTI_IMG } from './gen/sampler';
 import { tasteScore } from './aesthetic/score';
 import { COMPOSERS_V4 } from './gen/comps4';
 import { COMPOSERS_V5 } from './gen/comps5';
 import { COMPOSERS_V8 } from './p8/grammar';
+import { modular, bleedgrid } from './swiss/compose';
+import { companions, gridCount } from './swiss/pick';
 import { parseMutation, diagnose, cellOf, cellKey, type Mutation } from './p8/search';
 import { problemOf, retrieve } from '../data/recipes';
 import { contentRelevance, contentMiss } from './p8/relevance';
@@ -46,6 +48,10 @@ const withFrame = (s: { xs: number[]; ys: number[] }, W: number, H: number) => {
 import { addComponents, type PlacedComponent } from './components';
 
 export interface Seeds { layout: string; text: string; color: string; image: string }
+/** phase 17: layered layout streams. Grid (网格), picture placement (图位) and type (排字) draw from separate streams, so
+ *  one layer can be re-rolled while the others stay exactly as they were. A salt re-seeds one layer. */
+export interface Layers { v: 2; grid?: string; place?: string; type?: string }
+export type Layer = 'grid' | 'place' | 'type';
 export interface GenInput {
   seeds: Seeds;
   ratio: Ratio;
@@ -107,15 +113,21 @@ export interface GenInput {
   honor?: string[];
   /** @deprecated ignored since phase 7: retries are counted (qualityTries), never timed, so replays are exact on any machine */
   budgetMs?: number;
+  /** phase 17: layered streams. undefined = a new poster (layered); null = a poster made before phase 17 (one shared
+   *  stream: its exact replay); an object = layered, with the salts of the layers re-rolled so far */
+  layers?: Layers | null;
+  /** phase 17: re-roll one layer of this poster (pass the poster's own comp / plan / idea / salt / attempt / picks). A few
+   *  salts are tried; the first that visibly changes the layer (against `base`) and passes the gates is kept. */
+  reroll?: { layer: Layer; salt: string; base?: Scene | null };
 }
-export interface Picked { texts: PickedTexts; palette: Palette; imageIds: string[]; comp: Comp; grid: { type: string; density: string; nc: number; nr: number }; sidebar?: string; attempt?: number; quality?: QualityReport; plan?: DrawPlan; salt?: string; taste?: number; idea?: IdeaPick; /** phase 8: search route (p7 or an exemplar recipe id), the strategy's semantics name, and the mutation applied */ route?: string; strategy?: string; mutation?: string }
+export interface Picked { /** phase 17: layered streams of this poster (absent = made before phase 17) */ layers?: Layers; texts: PickedTexts; palette: Palette; imageIds: string[]; comp: Comp; grid: { type: string; density: string; nc: number; nr: number }; sidebar?: string; attempt?: number; quality?: QualityReport; plan?: DrawPlan; salt?: string; taste?: number; idea?: IdeaPick; /** phase 8: search route (p7 or an exemplar recipe id), the strategy's semantics name, and the mutation applied */ route?: string; strategy?: string; mutation?: string }
 export interface GenResult { scene: Scene; picked: Picked; ms: number; attempts?: number; /** phase 8: MAP-Elites archive of the search (one elite per lead × density × stability cell) */ archive?: ArchiveEntry[]; /** the seeds of the winning candidate (the selector may re-draw picture / colour seeds) */ seeds?: GenInput['seeds'] }
 
 export interface ArchiveEntry { cell: string; comp: string; route: string; salt: string; score: number; taste: number; seeds: GenInput['seeds']; idea?: IdeaPick; mutation?: string }
 
 export const DEFAULT_MODULES: Record<LayerKey, boolean> = Object.fromEntries(LAYERS.map((l) => [l, true])) as Record<LayerKey, boolean>;
 
-const ALL_COMPOSERS: Record<Comp, (ctx: Ctx) => void> = { ...COMPOSERS, ...COMPOSERS_V2, ...COMPOSERS_V3, ...COMPOSERS_V4, ...COMPOSERS_V5, ...COMPOSERS_V8 };
+const ALL_COMPOSERS: Record<Comp, (ctx: Ctx) => void> = { ...COMPOSERS, ...COMPOSERS_V2, ...COMPOSERS_V3, ...COMPOSERS_V4, ...COMPOSERS_V5, ...COMPOSERS_V8, modular, bleedgrid };
 /** the idea a hand-picked composition most naturally realises (for replays and manual composition choice) */
 const ideaForComp = (c: string) => { const best = [...IDEAS].sort((a, b) => (b.realisers[c] ?? 0) - (a.realisers[c] ?? 0))[0]; return best?.realisers[c] ? best.id : undefined; };
 // phase 5: compositions that rate ≥ 7.5 lead; legacy layouts that averaged below 7 are kept for explicit choice only
@@ -149,6 +161,7 @@ const now = () => (typeof performance !== 'undefined' ? performance.now() : Date
 
 function generateOne(inp: GenInput): GenResult {
   const t0 = now();
+  const layers: Layers | null = inp.layers === undefined ? { v: 2 } : inp.layers;
   const [W, H] = canvasSize(inp.ratio);
   const modes = new Set(inp.modes);
   const p: Params = { ...DEFAULT_PARAMS, ...inp.params };
@@ -329,10 +342,15 @@ function generateOne(inp: GenInput): GenResult {
 
   const attemptOnce = (attempt: number) => {
     const lseed = inp.seeds.layout + (inp.layoutSalt ?? '').replace(/µ[A-Z]/g, ''); // a mutation keeps the structure's layout stream
-    const rL = new Rng(attempt ? `${lseed}~${attempt}` : lseed);
+    const lseedA = attempt ? `${lseed}~${attempt}` : lseed;
+    // phase 17: layered posters draw the grid, the picture placement and the type from separate streams (a legacy poster
+    // shares one stream, exactly as before)
+    const rL = new Rng(layers?.place ? `${lseedA}|place:${layers.place}` : lseedA);
+    const rG = layers ? new Rng(`${lseedA}|grid${layers.grid ? ':' + layers.grid : ''}`) : rL;
+    const rT = layers ? new Rng(`${lseedA}|type${layers.type ? ':' + layers.type : ''}`) : rL;
     const pp: Params = attempt ? { ...p, decorSalt: `${p.decorSalt ?? ''}~${attempt}` } : p;
   // ---- grid & composition
-    const grid = makeGrid(rL, W, H, p);
+    const grid = makeGrid(rG, W, H, p);
     let comp = String(p.composition) as Comp | 'auto';
     if (comp === 'auto') {
       let w: Record<string, number> = { split: 3, checker: 2, fullbleed: 2, giant: 1.5, partition: 1, cards: 1, fan: 0.8, typefill: 1, swiss: 1.5, centered: 1.5, layered: 0, bands: 1.5, ...(inp.style.comp || {}) };
@@ -357,7 +375,20 @@ function generateOne(inp: GenInput): GenResult {
     }
     // phase 15: restraint keeps its breathing room unless the margin was set by hand
     if (RESTRAINT.has(comp) && !honor.has('margin')) padGrid(grid, Math.round(Math.min(W, H) * RESTRAINT_MARGIN));
-    const ctx = new Ctx(rL, grid, pp, palette, inp.fonts, texts, images, inp.measure, inp.modules, modes);
+    // phase 16: the grid compositions show a set of pictures; a draw with one picture gets companions from the pool
+    // (own stream; the ids are stored with the draw, so replays lock them). A locked / given set is never extended.
+    let imgs = images;
+    if (MULTI_IMG.has(comp) && images.length && !inp.lockedImages?.length && inp.modules.images) {
+      const pool = inp.images.filter((a) => !images.includes(a));
+      // a small pool is a chosen set (picked pictures, a narrow filter): show all of it
+      const total = images.length + pool.length;
+      const want = honor.has('imageCount') ? Number(p.imageCount) : total <= 8 ? total : gridCount(new Rng(inp.seeds.image + '|gridn'), total, W / H > 1.5);
+      if (want > images.length) imgs = [...images, ...companions(images[0], pool, images, want, inp.seeds.image)];
+      for (const a of imgs) if (!gateAssets.has(a.id)) gateAssets.set(a.id, a as GateAsset);
+    }
+    const ctx = new Ctx(rL, grid, pp, palette, inp.fonts, texts, imgs, inp.measure, inp.modules, modes);
+    if (layers) { ctx.layered = true; ctx.rt = rT; ctx.rg = rG; ctx.rd = new Rng(`${lseedA}|decor|${String(pp.decorSalt ?? '')}`); } // decor keeps its stream when a layer is re-rolled
+    ctx.honor = honor;
     ctx.comp = comp;
     ctx.plan = plan;
     ctx.idea = idea;
@@ -421,7 +452,7 @@ function generateOne(inp: GenInput): GenResult {
       const paired = pairWeights(scene, inp.measure);
       if (!inp.preview) scene.info.balance = { ...balanceOf(scene, inp.measure), paired };
     }
-    return { scene, comp, grid, sbTpl, quality, g, geo };
+    return { scene, comp, grid, sbTpl, quality, g, geo, imgs };
   };
   const gateAssets = new Map<string, GateAsset>(images.map((a) => [a.id, a] as [string, GateAsset]));
   const gate = p.qualityGate !== false;
@@ -442,7 +473,7 @@ function generateOne(inp: GenInput): GenResult {
   }
   const { scene, comp, grid, sbTpl, quality } = best;
   const ms = now() - t0;
-  return { scene, picked: { texts, palette, imageIds: images.map((a) => a.id), comp, grid: { type: grid.type, density: grid.density, nc: grid.nc, nr: grid.nr }, sidebar: sbTpl, attempt: bestAttempt, quality, plan: plan0, ...(idea ? { idea } : {}) }, ms, attempts: tries };
+  return { scene, picked: { ...(layers ? { layers } : {}), texts, palette, imageIds: best.imgs.map((a) => a.id), comp, grid: { type: grid.type, density: grid.density, nc: grid.nc, nr: grid.nr }, sidebar: sbTpl, attempt: bestAttempt, quality, plan: plan0, ...(idea ? { idea } : {}) }, ms, attempts: tries };
 }
 
 /**
@@ -460,6 +491,7 @@ const ROUTE_OK = new Set<string>(['typeled', 'interleave', 'programme', 'exhibit
 export const SEARCH = { routes: 2, perRoute: 2, mutate: 2, margin: 0.25, /** the type-led family is already the sampler's largest: a route into it needs a larger win */ ggMargin: 0.2, /** rank cost of a fully dropped content list (real copy only) */ missW: 1.2, /** phase 9: a picture generated with declared text zones was planned for its layout: the zoned route gets this prior */ zonedBonus: 0.5 };
 
 export function generate(inp: GenInput): GenResult {
+  if (inp.reroll) return rerollLayer(inp);
   const K = Math.floor(inp.select ?? 0);
   const auto = String({ ...DEFAULT_PARAMS, ...inp.params }.composition) === 'auto';
   if (K <= 1 || !auto || inp.forceComp || inp.forceAttempt !== undefined) return generateOne(inp);
@@ -571,4 +603,46 @@ export function generate(inp: GenInput): GenResult {
   const sem = win.r.scene.info.sem as { strategy?: string } | undefined;
   if (sem?.strategy) win.r.picked.strategy = sem.strategy;
   return { ...win.r, ms: now() - t0, attempts: n, archive: [...archive.values()].sort((a, b) => b.score - a.score) };
+}
+
+// ---------------------------------------------------------------- phase 17: re-roll one layer
+const r1 = (v: number) => Math.round(v);
+/** a signature of one layer of a scene: type = text boxes, sizes, colours and faces; place = picture frames and filled panels; pics = the
+ *  picture frames alone; grid = the grid */
+export function layerSig(sc: Scene, layer: Layer | 'pics' | 'typeGeo'): string {
+  if (layer === 'grid') return String(sc.info?.grid ?? '') + JSON.stringify((sc.info?.snap as unknown) ?? null);
+  const out: string[] = [];
+  const walk = (ns: SceneNode[]) => { for (const n of ns) {
+    if (n.kind === 'group') { walk(n.children); continue; }
+    if (layer === 'type' && n.kind === 'text' && n.layer !== 'noise' && n.layer !== 'texture') out.push(`${n.role}:${r1(n.box.x)},${r1(n.box.y)},${r1(n.size)},${n.lines.length},${n.fill},${n.family},${n.anchor ?? ''}`);
+    if (layer === 'typeGeo' && n.kind === 'text' && n.layer !== 'noise' && n.layer !== 'texture') out.push(`${n.role}:${r1(n.box.x / 8)},${r1(n.box.y / 8)},${r1(n.size / 2)},${n.lines.length},${n.anchor ?? ''}`);
+    if ((layer === 'place' || layer === 'pics') && n.kind === 'image' && !n.cutout) out.push(`${n.imageId}:${r1(n.x)},${r1(n.y)},${r1(n.w)},${r1(n.h)}`);
+    if (layer === 'place' && n.kind === 'rect' && n.layer === 'zones') out.push(`z:${r1(n.x)},${r1(n.y)},${r1(n.w)},${r1(n.h)}`);
+  } };
+  walk(sc.nodes);
+  return out.sort().join('|');
+}
+/** re-roll one layer: a few salts are tried; the first that visibly changes the layer (a type re-roll: moves, re-sizes or
+ *  re-breaks the type, not only its colour), keeps the pictures where they were (type) and passes the gates is kept, else
+ *  the best of them */
+function rerollLayer(inp: GenInput): GenResult {
+  const { layer, salt, base } = inp.reroll!;
+  const prev: Layers = inp.layers ? { ...inp.layers } : { v: 2 }; // a legacy poster becomes layered (it re-lays out once)
+  const was = base ? layerSig(base, layer) : null;
+  const wasGeo = base && layer === 'type' ? layerSig(base, 'typeGeo') : null;
+  const pics = base && layer === 'type' ? layerSig(base, 'pics') : null;
+  let best: GenResult | null = null, bestKey = -Infinity;
+  const tries = layer === 'type' ? 6 : 4;
+  for (let k = 0; k < tries; k++) {
+    const r = generateOne({ ...inp, reroll: undefined, select: 0, layers: { ...prev, v: 2, [layer]: k ? `${salt}~${k}` : salt } });
+    const changed = was === null || layerSig(r.scene, layer) !== was;
+    const strong = changed && (wasGeo === null || layerSig(r.scene, 'typeGeo') !== wasGeo);
+    const kept = pics === null || layerSig(r.scene, 'pics') === pics;
+    const fails = ((r.scene.info.gates as { fails?: string[] } | undefined)?.fails ?? []).length + ((r.scene.info.geo as { fails?: string[] } | undefined)?.fails ?? []).length;
+    const key = (kept ? 2000 : 0) + (strong ? 1000 : changed ? 600 : 0) - 100 * fails + (r.picked.quality?.score ?? 100) / 10;
+    if (key > bestKey) { best = r; bestKey = key; }
+    if (strong && kept && !fails) break;
+  }
+  best!.scene.info.reroll = { layer, changed: was === null || layerSig(best!.scene, layer) !== was, kept: pics === null || layerSig(best!.scene, 'pics') === pics };
+  return best!;
 }

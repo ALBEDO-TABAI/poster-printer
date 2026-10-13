@@ -1,6 +1,6 @@
 # Background-removal models & libraries
 
-Poster Printer's AI cut-out runs **locally** (no third-party API) through `server/cutout_server.py`.
+Ready Poster Printer's AI cut-out runs **locally** (no third-party API) through `server/cutout_server.py`.
 
 | Component | Use | Licence | Source |
 |---|---|---|---|

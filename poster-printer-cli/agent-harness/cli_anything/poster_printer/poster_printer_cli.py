@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Poster Printer CLI — content-driven poster generation for agents and humans.
+"""Ready Poster Printer CLI — content-driven poster generation for agents and humans.
 
-The real Poster Printer generator runs underneath (Node engine; headless Chrome by default, so every
+The real Ready Poster Printer generator runs underneath (Node engine; headless Chrome by default, so every
 poster is pixel-identical to the web app). Write a brief with the real content, resolve it, generate
 ranked candidates, refine, export. Poster files are the app's own Poster JSON.
 
 Usage:
-    poster-printer brief template --lang zh > brief.json      # fill it with the real content
-    poster-printer --json brief resolve brief.json             # see the chosen params + reasons
-    poster-printer --json generate --brief brief.json --count 6 --min-score 6.5 --out out/
-    poster-printer --project out/01-….json refine --set titleScale=130 -o v2.json
-    poster-printer                                             # interactive REPL
+    ready-poster-printer brief template --lang zh > brief.json      # fill it with the real content
+    ready-poster-printer --json brief resolve brief.json             # see the chosen params + reasons
+    ready-poster-printer --json generate --brief brief.json --count 6 --min-score 6.5 --out out/
+    ready-poster-printer --project out/01-….json refine --set titleScale=130 -o v2.json
+    ready-poster-printer                                             # interactive REPL
 """
 from __future__ import annotations
 
@@ -178,10 +178,10 @@ def _fonts_for_entry(entry: dict, fix: bool) -> tuple[list, dict]:
 @click.option("-s", "--save", "auto_save", is_flag=True, help="Save the project after a mutating command (one-shot; on by default with --project)")
 @click.option("--dry-run", "dry_run", is_flag=True, default=False, help="Run without writing the project file")
 @click.option("--backend", type=click.Choice(be.BACKENDS), default=lambda: os.environ.get("POSTER_PRINTER_BACKEND", "chromium"), help="chromium = exact app renderer (default); node = resvg, approximate")
-@click.version_option(__version__, prog_name="cli-anything-poster-printer")
+@click.version_option(__version__, prog_name="cli-anything-ready-poster-printer")
 @click.pass_context
 def cli(ctx, use_json, project_path, auto_save, dry_run, backend):
-    """Poster Printer CLI — content-driven poster generation (the real app engine underneath).
+    """Ready Poster Printer CLI — content-driven poster generation (the real app engine underneath).
 
     Run without a subcommand to enter the interactive REPL.
     """
@@ -381,8 +381,19 @@ def images_list(category, cutout, user):
 @click.option("--category", default="mine")
 @handle_error
 def images_add(files, category):
-    """Analyse and add image files (palette, luminance, detail map) to ~/.poster-printer/images."""
+    """Analyse and add image files (palette, luminance, detail map, subject box) to ~/.poster-printer/images.
+
+    Ids are stable (content hash): adding the same file again reuses its id. The summary lists what a layout
+    decision needs: proportion, orientation, subject box, busyness and palette."""
     output(images_mod.add_images(list(files), category), f"Added {len(files)} image(s)")
+
+
+@images.command("inspect")
+@click.argument("ids", nargs=-1, required=True)
+@handle_error
+def images_inspect(ids):
+    """Analyse a picture set (ids in importance order): proportions, orientation mix, series, busyness."""
+    output(be.run("catalog", {"what": "imageset", "ids": list(ids)}, backend="node"))
 
 
 @images.command("remove")
@@ -411,6 +422,13 @@ def catalog_ideas():
 def catalog_comps():
     """All compositions."""
     output(be.run("catalog", {"what": "compositions"}, backend="node"))
+
+
+@catalog.command("layouts")
+@handle_error
+def catalog_layouts():
+    """The Swiss grid layouts for several pictures (composition, layout, picture count, when to use)."""
+    output(be.run("catalog", {"what": "layouts"}, backend="node"))
 
 
 @catalog.command("params")
@@ -487,8 +505,9 @@ def brief_analyze(path):
 @handle_error
 def brief_resolve(path, top, full):
     """Resolve a brief into generator params: styles, ideas, directions, copy slots — each with reasons."""
-    r = be.run("resolve", {"brief": _load_json(path)}, backend="node")
-    keys = ["titleScale", "smallScale", "smallGroups", "metaCount", "proseCount", "whitespace", "blockBudget", "decorBudget", "imageCount", "typeOnlyShare", "imageShare", "bgPref", "colorMode", "paletteSource", "composition", "idea", "englishBias"]
+    b = images_mod.prepare_brief(_load_json(path))
+    r = be.run("resolve", {"brief": b}, backend="node")
+    keys = ["titleScale", "smallScale", "smallGroups", "metaCount", "proseCount", "whitespace", "blockBudget", "decorBudget", "imageCount", "typeOnlyShare", "imageShare", "bgPref", "colorMode", "paletteSource", "composition", "gridLayout", "idea", "englishBias"]
     dirs = [{"id": d["id"], "style": d["styleId"], "idea": d["idea"], "composition": d["composition"], "fonts": d["fontsLabel"], "score": d["score"], "plan": d["planPatch"],
              "params": d["params"] if full else {k: d["params"].get(k) for k in keys}, "reasons": d["reasons"]} for d in r["directions"][:top]]
     t = r["texts"]
@@ -497,7 +516,7 @@ def brief_resolve(path, top, full):
     a = r["analysis"]
     res = {"analysis": {"language": a["lang"], "hierarchy": [{"key": f["key"], "tier": f["tier"], "importance": f["importance"], "text": f["text"]} for f in a["fields"]], "list": {"kind": a["list"]["kind"], "items": len(a["list"]["items"]), "why": a["list"]["why"]},
                         "date": a["date"], "numerals": a["numerals"], "title": a["title"], "quote": a["quote"], "copy": a["copy"]},
-           "styles": r["styles"][:5], "ideas": r["ideas"], "directions": dirs, "copy_slots": slots, "palette": r["palette"], "images": r["images"], "format": r["format"], "context": _load_json(path).get("context"), "seed": r["seed"], "reasons": r["reasons"], "warnings": r["warnings"]}
+           "styles": r["styles"][:5], "ideas": r["ideas"], "directions": dirs, "copy_slots": slots, "palette": r["palette"], "images": r["images"], "layouts": r.get("layouts"), "format": r["format"], "context": b.get("context"), "seed": r["seed"], "reasons": r["reasons"], "warnings": r["warnings"]}
     if _json_output:
         return output(res)
     click.echo(f"language {a['lang']['overall']} ({a['lang']['why']}); list: {a['list']['why']}; copy {a['copy']['load']}")
@@ -508,9 +527,15 @@ def brief_resolve(path, top, full):
     click.echo(f"  groups    {slots['groups']}\n  meta      {slots['meta']}\n  facts     {slots['facts']}")
     click.echo("directions:")
     for d in dirs:
-        click.echo(f"  {d['id']:<4} {d['style']:<18} idea {d['idea']:<20} comp {d['composition']:<9} TS {d['params']['titleScale']}  {d['fonts']}")
+        lay = f"/{d['params'].get('gridLayout')}" if d["composition"] in ("modular", "bleedgrid") else ""
+        click.echo(f"  {d['id']:<4} {d['style']:<18} idea {d['idea']:<20} comp {d['composition'] + lay:<16} TS {d['params']['titleScale']}  {d['fonts']}")
         for why in d["reasons"]:
             click.echo(f"         · {why}")
+    lays = r.get("layouts") or {}
+    if lays.get("set"):
+        click.echo("pictures: " + lays["set"]["note"])
+    for rec in (lays.get("recommendations") or [])[:4]:
+        click.echo(f"  layout {rec['composition']}/{rec['layout']:<7} {rec['score']:>5}  " + "; ".join(rec["reasons"][:3]))
     click.echo("palette: " + "; ".join(r["palette"]["reasons"]))
     click.echo("reasons:")
     for x in r["reasons"]:
@@ -520,13 +545,15 @@ def brief_resolve(path, top, full):
 
 
 # ── generate ────────────────────────────────────────────────────
-def _inline_brief(title, subtitle, date, venue, lines, body, lang, mood, ratio) -> dict:
+def _inline_brief(title, subtitle, date, venue, lines, body, lang, mood, ratio, pictures=(), layout=None) -> dict:
     content = {k: v for k, v in {"title": title, "subtitle": subtitle, "date": date, "venue": venue, "body": body, "language": lang}.items() if v}
     if lines:
         content["program"] = list(lines)
     b: dict = {"content": content}
     if mood:
         b["style"] = {"mood": [m.strip() for m in mood.split(",") if m.strip()]}
+    if pictures or layout:
+        b.setdefault("style", {})["imagery"] = {k: v for k, v in {"use": "hero", "files": list(pictures) or None, "layout": layout}.items() if v}
     if ratio:
         b["format"] = {"ratio": ratio}
     return b
@@ -542,6 +569,8 @@ def _inline_brief(title, subtitle, date, venue, lines, body, lang, mood, ratio) 
 @click.option("--body", default=None)
 @click.option("--lang", type=click.Choice(["zh", "en", "bilingual", "auto"]), default=None)
 @click.option("--mood", default=None, help="quick mode: comma-separated moods")
+@click.option("--image", "pictures", multiple=True, help="quick mode: picture file (repeatable, importance order: the first is the hero)")
+@click.option("--layout", type=click.Choice(["auto", "hero", "flow", "steps", "strip", "blocks", "mosaic", "rows", "single"]), default=None, help="quick mode: Swiss grid layout for the pictures")
 @click.option("--count", "-n", type=int, default=None, help="candidates to keep (default: brief format.count or 6)")
 @click.option("--min-score", type=float, default=None, help="minimum taste score 1–10 (oversamples up to 3×count)")
 @click.option("--max-tries", type=int, default=None)
@@ -555,7 +584,7 @@ def _inline_brief(title, subtitle, date, venue, lines, body, lang, mood, ratio) 
 @click.option("--sheet/--no-sheet", default=True, help="write a contact sheet (sheet.jpg)")
 @click.option("--strict", is_flag=True, help="never return candidates that fail a correctness gate (default: fill up with flagged ones)")
 @handle_error
-def generate(brief_path, title, subtitle, date, venue, lines, body, lang, mood, count, min_score, max_tries, ratio, seed, directions, formats, scale, out_dir, no_font_fix, sheet, strict):
+def generate(brief_path, title, subtitle, date, venue, lines, body, lang, mood, pictures, layout, count, min_score, max_tries, ratio, seed, directions, formats, scale, out_dir, no_font_fix, sheet, strict):
     """Render N content-driven candidates from a brief.
 
     Correctness gates come first (content rendered verbatim, checked text contrast, minimum size at the
@@ -566,9 +595,10 @@ def generate(brief_path, title, subtitle, date, venue, lines, body, lang, mood, 
     if brief_path:
         b = _load_json(brief_path)
     elif title:
-        b = _inline_brief(title, subtitle, date, venue, lines, body, lang, mood, ratio)
+        b = _inline_brief(title, subtitle, date, venue, lines, body, lang, mood, ratio, pictures, layout)
     else:
         raise ValueError("give --brief FILE or --title …")
+    b = images_mod.prepare_brief(b)
     fmts = [f.strip().replace("jpg", "jpeg") for f in formats.split(",") if f.strip() and f.strip() != "json"]
     extra, font_rep = [], {}
     if _backend == "chromium":
@@ -591,7 +621,7 @@ def generate(brief_path, title, subtitle, date, venue, lines, body, lang, mood, 
                     "note": "fallback glyphs are not in the web app's fonts: those characters render with the app's fallback face after import" if extra else ""}
     if sheet and res["posters"] and "png" in (fmts or ["png"]):
         imgs = [p["files"]["png"] for p in res["posters"]]
-        labels = [f"#{p['rank']} {p['style']} · {p['comp']}/{p['idea'] or '-'} · taste {p['taste']:.2f}{'' if p['gates_passed'] else ' · FLAGGED'}" for p in res["posters"]]
+        labels = [f"#{p['rank']} {p['style']} · {p['comp']}{'/' + p['layout'] if p.get('layout') else ''}/{p['idea'] or '-'} · taste {p['taste']:.2f}{'' if p['gates_passed'] else ' · FLAGGED'}" for p in res["posters"]]
         res["sheet"] = be.run("sheet", {"images": imgs, "labels": labels, "out": os.path.join(os.path.abspath(out_dir), "sheet.jpg"), "cols": min(6, len(imgs)), "cell": 260, "title": (b.get("content") or {}).get("title", "")}, backend="node")["file"]
     sess = get_session()
     if sess.project_path and res["posters"]:
@@ -607,8 +637,9 @@ def generate(brief_path, title, subtitle, date, venue, lines, body, lang, mood, 
             a = p["report"]["aesthetic"]
             facets = " ".join(f"{k[:4]} {a[k]['value'] if a[k]['value'] is not None else '–'}" for k in ("classical", "expressive", "color", "craft"))
             gate = "GATES OK" if p["gates_passed"] else "FLAGGED: " + "; ".join(p["blocking_failures"][:3])
-            click.echo(f"  #{p['rank']} {p['style']:<18} {p['comp']:<9} {str(p['idea'] or '-'):<10} taste {p['taste']:.2f} − {p['penalty']:.2f}  [{facets}]  {gate}")
-            click.echo(f"      {p['files'].get('png', p['files']['json'])}  ({len(p['report']['issues'])} issues: poster-printer audit FILE)")
+            comp = p["comp"] + ("/" + p["layout"] if p.get("layout") else "")
+            click.echo(f"  #{p['rank']} {p['style']:<18} {comp:<16} {str(p['idea'] or '-'):<10} taste {p['taste']:.2f} − {p['penalty']:.2f}  [{facets}]  {gate}")
+            click.echo(f"      {p['files'].get('png', p['files']['json'])}  ({len(p['report']['issues'])} issues: ready-poster-printer audit FILE)")
         for g in res.get("gate_failed", []):
             click.echo(f"  excluded {g['name']} ({g['comp']}, taste {g['taste']:.2f}): {'; '.join(g['blocking_failures'][:3])}")
         if res.get("sheet"):
@@ -653,14 +684,20 @@ def refine(src, sets, texts, style_id, ratio, out, png):
 
 @cli.command()
 @click.argument("src", required=False)
-@click.option("--vary", type=click.Choice(["layout", "structure", "color", "image", "decor", "tendency"]), default="layout")
+@click.option("--vary", type=click.Choice(["layout", "structure", "grid", "place", "type", "color", "image", "decor", "tendency"]), default="layout",
+              help="structure = the whole layout; grid / place / type re-roll ONE layer of it (网格 / 图位 / 排字) and keep the other two exactly")
 @click.option("--count", "-n", type=int, default=6)
 @click.option("--seed", default=None)
 @click.option("--out", "-o", "out_dir", default="variations")
 @click.option("--pick", type=int, default=None, help="put variation N into the project (undoable)")
 @handle_error
 def variations(src, vary, count, seed, out_dir, pick):
-    """The app's variant buttons (换结构 / 换色调 / 换图片 / 换倾向 …); copy always stays."""
+    """The app's variant buttons (换结构 / 换色调 / 换图片 / 换倾向 …); copy always stays.
+
+    --vary type keeps every picture frame and re-sets only the type (breaks, alignment, size, colour, where the info
+    sits); --vary place moves the pictures and sets the type around them; --vary grid draws a new grid system. Each item
+    reports layer.changed / layer.picturesKept; a full-bleed or set-plate layout has no other placement
+    (layer.fixedPlacement)."""
     entry = _entry_from(src)
     r = be.run("variations", {"entry": entry, "vary": vary, "count": count, "seed": seed, "out": os.path.abspath(out_dir), "formats": ["png"]}, backend=_backend)
     items = [{k: v for k, v in it.items() if k != "entry"} for it in r["items"]]
@@ -744,7 +781,7 @@ def _print_report(r: dict) -> None:
         click.echo(f"  [{'BLOCKING' if i['blocking'] else 'advisory'}] {i['dimension']}  region {i['region']}  impact {'/'.join(i['impact'])}")
         click.echo(f"      evidence: {i['evidence']}")
         if i["fix"]["command"]:
-            click.echo(f"      fix:      poster-printer {i['fix']['command']}   ({i['fix']['why']})")
+            click.echo(f"      fix:      ready-poster-printer {i['fix']['command']}   ({i['fix']['why']})")
 
 
 @cli.command()
@@ -886,6 +923,7 @@ REPL_HELP = {
     "open FILE / save [PATH] / info / history": "project",
     "refine --set k=v --text slot=v --style ID": "change the current poster",
     "variations --vary layout|color|image|structure|tendency --pick N": "app variant buttons",
+    "variations --vary type|place|grid --pick N": "re-roll one layer of the structure (排字 / 图位 / 网格), the rest stays",
     "undo / redo": "history",
     "audit": "design audit",
     "export --format png|png@2x|svg|pdf|json -o PATH": "export",

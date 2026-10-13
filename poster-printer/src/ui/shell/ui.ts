@@ -14,6 +14,8 @@ export interface UIState {
   /** phase 14: the ratio a click asked for, shown by the segmented control before the engine has re-rendered */
   pendingRatio: string | null;
   canUndo: number; canRedo: number; imgEdit: string | null; frame: { w: number; h: number };
+  /** phase 17: the 结构 layer menu (网格 / 图位 / 排字 / 整体结构) above the dock */
+  layerPop: boolean;
   set(p: Partial<UIState>): void;
 }
 export const useUI = create<UIState>((set) => ({
@@ -21,7 +23,7 @@ export const useUI = create<UIState>((set) => ({
   advIntent: 'layout', advQuery: '', focus: 'margin', expanded: {},
   filmTab: 'hist', exportFmt: 'png', exportScale: 2, cmdQ: '',
   reduceT: false, uiGrid: false, posterGrid: 0, posterRect: null, selBottom: 0,
-  pendingRatio: null, canUndo: 0, canRedo: 0, imgEdit: null, frame: { w: 0, h: 0 },
+  pendingRatio: null, canUndo: 0, canRedo: 0, imgEdit: null, frame: { w: 0, h: 0 }, layerPop: false,
   set: (p) => set(p),
 }));
 if (typeof window !== 'undefined') (window as unknown as { __ui: unknown }).__ui = useUI;

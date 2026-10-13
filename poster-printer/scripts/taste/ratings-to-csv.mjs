@@ -1,4 +1,4 @@
-// Converts rating exports from /rate.html (poster-printer-ratings-*.json) into train.csv rows for the taste model.
+// Converts rating exports from /rate.html (ready-poster-printer-ratings-*.json; older poster-printer-ratings-*.json too) into train.csv rows for the taste model.
 // usage: node scripts/taste/ratings-to-csv.mjs <ratings.json> [more.json…] [--set U1] [--out scripts/taste/train.csv] [--replace]
 // Appends by default (rows of the same set are replaced first). y = the 1–9 rating, the same scale as the by-eye labels.
 // Phase 10: ratings made with finer steps (record.step < 1) go to set <set>f (train_user.py reads them as ±0.25, integer

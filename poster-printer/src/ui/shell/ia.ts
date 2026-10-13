@@ -26,6 +26,7 @@ export const GROUPS: Record<string, [string, string]> = {
 };
 const IA: Record<string, IARow> = {
   composition: ['layout','layout.compose','构图手法','Composition','决定这张海报的“招式”：分割、满版、巨字、卡片……','The overall move: split, full-bleed, giant word, cards…',1],
+  gridLayout: ['layout','layout.compose','网格版式','Grid layout','模块网格与满版拼图的版式：主图卫星、悬挂线、尺度递进、图片横条、模块分区，或满版拼贴、满版行列。图片按自身比例占整格。','Layout type of the modular and bleed-grid compositions: hero + satellites, flowline, scale steps, strip, modules, or edge-to-edge mosaic / rows. Pictures span whole fields at their own proportion.',1],
   gridType: ['layout','layout.grid','网格形态','Grid shape','直角网格最稳；非正交与曲线网格更有张力。','Orthogonal is calm; skewed and curved grids add tension.',1],
   density: ['layout','layout.grid','信息密度','Density','元素多少与网格切分的细碎程度。','How many cells and elements the grid carries.',1],
   gridStrength: ['layout','layout.grid','对齐严格度','Grid adherence','越高越严格贴合网格，越低越自由。','Higher snaps everything to the grid; lower loosens it.',2],
@@ -76,7 +77,7 @@ const IA: Record<string, IARow> = {
   contrast: ['color','color.grade','对比度','Contrast','整张画面的对比。','Overall contrast.',1],
   saturation: ['color','color.grade','饱和度','Saturation','整张画面的饱和度。','Overall saturation.',1],
   brightness: ['color','color.grade','明暗','Brightness','整张画面的明暗。','Overall brightness.',1],
-  imageCount: ['image','image.amount','图片数量','Images','每张海报最多用几张图。','Max images per poster.',1],
+  imageCount: ['image','image.amount','图片数量','Images','每张海报用几张图。模块网格与满版拼图会把它们全部排进网格；其他构图只用第一张。','Pictures per poster. The modular and bleed-grid compositions lay them all out; other compositions use the first.',1],
   imageShare: ['image','image.amount','图片占比','Image area','图片占画面面积的比例。','Share of the page covered by images.',3],
   maskKind: ['image','image.cut','裁切形状','Cut shape','矩形、网格切片、撕纸、拱形、笔触……','Rect, slices, torn, arch, brush…',2],
   imageZoom: ['image','image.cut','图片缩放','Zoom','图片在框内的放大程度。','How far images are zoomed in.',2],
@@ -134,6 +135,7 @@ export const PRESETS: Record<string, { zh: string; en: string; p: Record<string,
     { zh: '平衡', en: 'Balanced', p: { density: 'auto', margin: 4.5, gridType: 'auto' } },
     { zh: '满载', en: 'Dense', p: { density: 'full', margin: 3, gridType: 'auto' } },
     { zh: '瑞士', en: 'Swiss', p: { composition: 'swiss', gridType: 'ortho', gridStrength: 1.6 } },
+    { zh: '模块网格', en: 'Grid', p: { composition: 'modular', gridLayout: 'auto' } },
   ],
   type: [
     { zh: '克制', en: 'Quiet', p: { titleScale: 80, smallRel: 40, typeRatio: '1.25' } },
@@ -151,7 +153,7 @@ export const PRESETS: Record<string, { zh: string; en: string; p: Record<string,
     { zh: '纯排版', en: 'Type only', p: { imageCount: 0 } },
     { zh: '图文', en: 'Mixed', p: { imageCount: 1, duotone: 15, maskKind: 'auto' } },
     { zh: '双色调', en: 'Duotone', p: { imageCount: 1, duotone: 100 } },
-    { zh: '拼贴', en: 'Collage', p: { imageCount: 3, maskKind: 'rounded', cornerRadius: 40 } },
+    { zh: '拼贴', en: 'Collage', p: { imageCount: 5, composition: 'bleedgrid', gridLayout: 'auto' } },
   ],
   texture: [
     { zh: '洁净', en: 'Clean', p: { texture: 'none', textureAmount: 0 } },

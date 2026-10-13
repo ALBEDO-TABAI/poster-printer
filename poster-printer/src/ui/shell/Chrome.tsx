@@ -8,6 +8,8 @@ import { LSeg } from '../controls';
 import { useUI } from './ui';
 import * as A from './actions';
 import { PARAMS } from '../../engine/params';
+import { LAYERS, LAYER_INFO, FIXED_PLACE, layerHint } from '../../engine/layers';
+import type { Layer } from '../../engine/generate';
 
 export function BrandMark({ s = 26 }: { s?: number }) {
   return (
@@ -21,7 +23,7 @@ export function BrandMark({ s = 26 }: { s?: number }) {
     </svg>
   );
 }
-export const Wordmark = () => <span className="wordmark">Poster <i>Printer</i></span>;
+export const Wordmark = () => <span className="wordmark"><span className="wm-ready">Ready</span> Poster <i>Printer</i></span>;
 
 const ratioGlyph = (r: string) => { const [a, b] = r.split(':').map(Number); const k = 12 / Math.max(a, b); return <i className="ratio-glyph" style={{ width: +(a * k).toFixed(1), height: +(b * k).toFixed(1) }} />; };
 
@@ -131,12 +133,65 @@ export function Dock({ deck }: { deck?: { cur: number; n: number; prev: () => vo
         <span className="led" /><span>{deck ? t('重抽本页', 'Redraw page') : t('抽一张', 'Draw')}</span><span className="kbd">{t('空格', 'Space')}</span>
       </button>
       {!deck && <div className="lg cap adaptive" {...capProps}>
-        {A.REMIX.slice(3).map(([k, i, z, e]) => <button key={k} className="remix press hl" data-remix={k} title={t('换' + z, 'New ' + e.toLowerCase())} onClick={(e) => { if (e.detail <= 1) A.remix(k); }}><span className="hl-glow" /><Icon name={i} size={15} /><span className="rl">{t(z, e)}</span></button>)}
+        {A.REMIX.slice(3).map(([k, i, z, e]) => k === 'structure' ? <StructureSplit key={k} icon={i} zh={z} en={e} /> : <button key={k} className="remix press hl" data-remix={k} title={t('换' + z, 'New ' + e.toLowerCase())} onClick={(e) => { if (e.detail <= 1) A.remix(k); }}><span className="hl-glow" /><Icon name={i} size={15} /><span className="rl">{t(z, e)}</span></button>)}
       </div>}
+      {!deck && <LayerMenu />}
       {!deck && <div className="lg cap adaptive" {...capProps}>
         <button className={'icon-btn fav tip press' + (isFav ? ' on' : '')} id="btn-fav" data-tip={`${t('收藏', 'Favourite')} · F`} onClick={A.favorite}><Icon name="heart" size={19} /></button>
         <button className={'icon-btn tip press' + (film ? ' on' : '')} id="btn-film" data-tip={`${t('历史胶片', 'History')} · H`} onClick={() => A.togglePanel('film')}><Icon name="history" size={19} /></button>
       </div>}
+    </div>
+  );
+}
+
+/** phase 17: 结构 is a split button — the label re-lays out the whole structure (as before), the caret opens the layer menu */
+function StructureSplit({ icon, zh, en }: { icon: string; zh: string; en: string }) {
+  const t = useT();
+  const open = useUI((u) => u.layerPop);
+  return (
+    <span className={'remix-split' + (open ? ' open' : '')} id="structure-split">
+      <button className="remix press hl" data-remix="structure" title={t('换' + zh + '（整体重排）', 'New ' + en.toLowerCase() + ' (whole layout)')} onClick={(e) => { if (e.detail <= 1) A.remix('structure'); }}><span className="hl-glow" /><Icon name={icon} size={15} /><span className="rl">{t(zh, en)}</span></button>
+      <button className="remix-caret press" data-qa="layer-menu" aria-haspopup="menu" aria-expanded={open} title={t('分层换：网格 / 图位 / 排字', 'By layer: grid / placement / type')} onClick={() => useUI.setState({ layerPop: !open })}><Icon name={open ? 'chevron-down' : 'chevron-up'} size={14} /></button>
+    </span>
+  );
+}
+
+/** phase 17: the layer menu. It stays open while you re-roll (try 排字 a few times in a row); Esc or a click outside closes it */
+function LayerMenu() {
+  const t = useT();
+  const open = useUI((u) => u.layerPop);
+  const comp = useStore((s) => s.result?.picked.comp ?? '');
+  const legacy = useStore((s) => !!s.result && !s.result.picked.layers);
+  const ref = useRef<HTMLDivElement>(null);
+  const [x, setX] = useState(0);
+  useEffect(() => {
+    if (!open) return;
+    const place = () => {
+      const b = document.getElementById('structure-split'), d = document.getElementById('dock');
+      if (b && d) { const rb = b.getBoundingClientRect(), rd = d.getBoundingClientRect(); setX(rb.left - rd.left + rb.width / 2); }
+    };
+    place();
+    const away = (e: PointerEvent) => { const tg = e.target as HTMLElement; if (!ref.current?.contains(tg) && !tg.closest?.('#structure-split')) useUI.setState({ layerPop: false }); };
+    window.addEventListener('resize', place); document.addEventListener('pointerdown', away, true);
+    document.body.classList.add('layer-pop-open');
+    return () => { window.removeEventListener('resize', place); document.removeEventListener('pointerdown', away, true); document.body.classList.remove('layer-pop-open'); };
+  }, [open]);
+  if (!open) return null;
+  const fixed = FIXED_PLACE.has(comp);
+  const row = (k: Layer | 'structure', icon: string, zh: string, en: string, dzh: string, den: string, key: string | null, off = false, why = '') => (
+    <button key={k} role="menuitem" className={'lp-row press' + (off ? ' off' : '')} data-layer={k === 'structure' ? undefined : k} data-qa={'layer-' + k} aria-disabled={off} title={off ? why : undefined}
+      onClick={(e) => { if (e.detail > 1) return; if (off) { useStore.getState().toast(why, 'warn', 'reroll'); return; } if (k === 'structure') A.remix('structure'); else A.relayer(k); }}>
+      <span className="lp-ic"><Icon name={icon} size={17} /></span>
+      <span className="lp-tx"><b>{t(zh, en)}</b><small>{off ? why : t(dzh, den)}</small></span>
+      {key && <kbd>{key}</kbd>}
+    </button>
+  );
+  return (
+    <div ref={ref} className="lg strong layer-pop" role="menu" aria-label={t('分层换结构', 'Re-roll a layer')} style={{ left: x }}>
+      <div className="lp-head"><span>{t('分层换结构', 'Re-roll one layer')}</span><small>{legacy ? t('旧版海报：第一次会整体转换', 'Older poster: converts once') : t('其余两层保持不动', 'the other two stay put')}</small></div>
+      {LAYERS.map((k) => { const L = LAYER_INFO[k]; const off = k === 'place' && fixed; return row(k, A.LAYER_ICON[k], L.zh, L.en, L.dzh, L.den, { grid: 'R', place: 'P', type: 'T' }[k], off, off ? layerHint(useStore.getState().lang, 'place', comp) : ''); })}
+      <div className="lp-sep" />
+      {row('structure', 'layout-grid', '整体结构', 'Whole structure', '网格、图位、排字一起重新布局', 'Grid, placement and type all re-laid out', null)}
     </div>
   );
 }

@@ -7,7 +7,7 @@ from typing import Any, Optional
 
 from cli_anything.poster_printer.core.session import _locked_save_json
 
-APP_SLUG = "poster-printer"
+APP_SLUG = "ready-poster-printer"
 PROFILES = {
     "3:4": {"size": [1200, 1600], "use": "classic poster / print (A-series approx.)"},
     "9:16": {"size": [1080, 1920], "use": "phone story / vertical screen"},
@@ -32,7 +32,7 @@ def open_project(path: str) -> dict:
     if isinstance(data, dict) and data.get("kind") == "session" and data.get("entries"):
         data = create_project(data["entries"][-1])
     if not (isinstance(data, dict) and data.get("kind") == "poster" and isinstance(data.get("entry"), dict)):
-        raise ValueError(f"{path} is not a Poster Printer poster JSON (kind: poster)")
+        raise ValueError(f"{path} is not a Ready Poster Printer poster JSON (kind: poster)")
     if data.get("app") not in (APP_SLUG, None):
         raise ValueError(f"{path} was written by {data.get('app')}, not {APP_SLUG}")
     for k in ("seeds", "ratio", "styleId", "params", "picked", "fonts"):

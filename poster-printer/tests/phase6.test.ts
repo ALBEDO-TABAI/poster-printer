@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { generate, DEFAULT_MODULES } from '../src/engine/generate';
+import { generate, DEFAULT_MODULES, SELECT } from '../src/engine/generate';
 import { DEFAULT_PARAMS } from '../src/engine/params';
 import { BUILTIN_STYLES } from '../src/data/styles';
 import { TEXT_SETS } from '../src/data/texts';
@@ -59,8 +59,9 @@ describe('taste selector', () => {
       const inp = input(`gain${i}`, RATIOS[i % 6], BUILTIN_STYLES[(i * 11) % BUILTIN_STYLES.length].id);
       const one = generate(inp);
       const sel = generate({ ...(inp as object), select: 8, selectMode: 'taste' } as never);
-      // phase 7: the taste selector ranks by taste − gate penalty (phase 11: − geometry / palette-fit fails)
-      const pen = (r: { scene: { info: { gates?: { penalty?: number }; geo?: { fails?: string[] }; paletteFit?: { fails?: string[] } } } }) => Number(r.scene.info.gates?.penalty ?? 0) + 3 * (r.scene.info.geo?.fails?.length ?? 0) + 2 * (r.scene.info.paletteFit?.fails?.length ?? 0);
+      // phase 7: the taste selector ranks by taste − gate penalty (phase 11: − geometry / palette-fit fails; phase 12: −
+      // an unanchored lopsided candidate)
+      const pen = (r: { scene: { info: { gates?: { penalty?: number }; geo?: { fails?: string[] }; paletteFit?: { fails?: string[] }; balance?: unknown } } }) => Number(r.scene.info.gates?.penalty ?? 0) + 3 * (r.scene.info.geo?.fails?.length ?? 0) + 2 * (r.scene.info.paletteFit?.fails?.length ?? 0) + SELECT.lopW * ((r.scene.info.balance as { lopsided?: boolean } | undefined)?.lopsided ? 1 : 0);
       expect(sel.picked.taste! - pen(sel as never)).toBeGreaterThanOrEqual(tasteScore(one.scene) - pen(one as never) - 1e-9);
     }
   });

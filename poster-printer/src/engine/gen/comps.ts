@@ -15,9 +15,9 @@ const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 export function alignPick(ctx: Ctx, side?: 'left' | 'right'): Align {
   const a = ctx.str('align');
   if (a === 'center') return 'middle';
-  if (a === 'lr') return side === 'right' ? 'end' : ctx.rng.chance(0.7) ? 'start' : 'end';
+  if (a === 'lr') return side === 'right' ? 'end' : ctx.rt.chance(0.7) ? 'start' : 'end';
   if (a === 'array') return 'start';
-  return ctx.rng.weighted<Align>({ start: 6, end: 2, middle: 1.5 });
+  return ctx.rt.weighted<Align>({ start: 6, end: 2, middle: 1.5 });
 }
 
 export function imgFilter(ctx: Ctx, onDark = true): ImgFilter {
@@ -90,7 +90,7 @@ export function groupArray(ctx: Ctx, area: Rect, on: string, n: number, o: { val
     const gp = ctx.u * 1.2;
     const box = { x: x0 + (c0 > 0 ? gp / 2 : 0), y: area.y, w: Math.max(0, x1 - x0 - gp), h: Math.max(0, area.h) };
     const grp = ctx.texts.groups[((o.startIdx ?? 0) + i) % ctx.texts.groups.length];
-    const h = ctx.group({ main: grp.main, note: ctx.rng.chance(0.75) ? grp.note : undefined, sub: ctx.rng.chance(0.25) ? grp.sub : undefined }, 'small', box, { mainSize: ctx.size('smallMain'), align: o.align ?? 'start', valign: o.valign ?? 'bottom', on, mode: 'words', lines: 2, maxLines: 3, accentRule: ctx.rng.chance(0.3) });
+    const h = ctx.group({ main: grp.main, note: ctx.rt.chance(0.75) ? grp.note : undefined, sub: ctx.rt.chance(0.25) ? grp.sub : undefined }, 'small', box, { mainSize: ctx.size('smallMain'), align: o.align ?? 'start', valign: o.valign ?? 'bottom', on, mode: 'words', lines: 2, maxLines: 3, accentRule: ctx.rt.chance(0.3) });
     hmax = Math.max(hmax, h);
   }
   return hmax;
@@ -102,7 +102,7 @@ export function bigTitle(ctx: Ctx, box: Rect, on: string, o: { align?: Align; va
   const w = box.w * ctx.num('maxLineWidth') / 100;
   const bx = { ...box, w, x: o.align === 'end' ? box.x + box.w - w : o.align === 'middle' ? box.x + (box.w - w) / 2 : box.x };
   return ctx.group({ main: T.headline, sub: o.withSub === false ? undefined : T.sub, note: o.withNote ? T.note : undefined }, 'big', bx, {
-    mainSize: o.size ?? headlineSize(ctx, w), align: o.align ?? 'start', valign: o.valign, on, fill: o.fill, accentRule: ctx.rng.chance(0.35), mode: o.mode ?? (ctx.rng.chance(0.5) ? 'words' : 'balance'), lines: o.lines ?? ctx.rng.int(2, 3),
+    mainSize: o.size ?? headlineSize(ctx, w), align: o.align ?? 'start', valign: o.valign, on, fill: o.fill, accentRule: ctx.rt.chance(0.35), mode: o.mode ?? (ctx.rt.chance(0.5) ? 'words' : 'balance'), lines: o.lines ?? ctx.rt.int(2, 3),
   });
 }
 
@@ -204,7 +204,7 @@ function splitText(ctx: Ctx, T: Rect, on: string, frame: Rect, asset: ImageAsset
     const clip = maskShape(ctx, mk, fr, { tornEdges: edges });
     const im = ctx.image(asset, fr, { clip, filter: imgFilter(ctx) });
     // caption on image
-    if (ctx.on('text') && ctx.rng.chance(0.45)) {
+    if (ctx.on('text') && ctx.rt.chance(0.45)) {
       const grp = ctx.texts.groups[5];
       const bw = Math.min(fr.w * 0.45, ctx.u * 26);
       const region = { x: fr.x + ctx.u * 2.5 + (bleed ? g.m.l * 0.6 : 0), y: fr.y + fr.h - ctx.u * 14, w: bw, h: ctx.u * 11 };
@@ -215,19 +215,19 @@ function splitText(ctx: Ctx, T: Rect, on: string, frame: Rect, asset: ImageAsset
   }
   // header
   let top = T.y, bottom = T.y + T.h;
-  if (ctx.rng.chance(0.75)) { const hh = header(ctx, { ...T, y: top }, on, 'top'); top += hh + ctx.u * 3; }
-  if (ctx.rng.chance(0.35)) { const hh = header(ctx, { ...T, y: T.y, h: T.h }, on, 'bottom', 3); bottom -= hh + ctx.u * 2; }
+  if (ctx.rt.chance(0.75)) { const hh = header(ctx, { ...T, y: top }, on, 'top'); top += hh + ctx.u * 3; }
+  if (ctx.rt.chance(0.35)) { const hh = header(ctx, { ...T, y: T.y, h: T.h }, on, 'bottom', 3); bottom -= hh + ctx.u * 2; }
   const align = alignPick(ctx);
   // big glyph (behind)
   if (ctx.rng.chance(0.35)) bigGlyph(ctx, { x: T.x, y: top, w: T.w * 0.7, h: (bottom - top) * 0.75 }, on, { align: align === 'end' ? 'end' : 'start' });
   // title & groups: decide vertical arrangement
   const smallN = ctx.num('smallGroups');
-  const titleAtTop = land ? ctx.rng.chance(0.6) : !imgFirst || ctx.rng.chance(0.6);
+  const titleAtTop = land ? ctx.rt.chance(0.6) : !imgFirst || ctx.rt.chance(0.6);
   const region = { x: T.x, y: top, w: T.w, h: bottom - top };
   const estGroups = smallN > 0 ? ctx.size('smallMain') * 2.2 + ctx.size('note') * 3 + ctx.u * 4 : 0;
   const titleBox = { ...region, h: Math.max(region.h * 0.35, region.h - estGroups - ctx.u * 4) };
   if (titleAtTop) {
-    const th = bigTitle(ctx, titleBox, on, { align, withNote: ctx.rng.chance(0.3) });
+    const th = bigTitle(ctx, titleBox, on, { align, withNote: ctx.rt.chance(0.3) });
     const rest = { x: region.x, y: region.y + th + ctx.u * 4, w: region.w, h: region.h - th - ctx.u * 4 };
     if (rest.h > ctx.u * 10) groupArray(ctx, rest, on, smallN, { valign: 'bottom', align: ctx.str('align') === 'center' ? 'middle' : 'start' });
     if (rest.h > ctx.u * 30) prose(ctx, { x: align === 'end' ? rest.x : rest.x + rest.w * 0.55, y: rest.y + ctx.u * 2, w: rest.w * 0.4, h: rest.h * 0.4 }, on, align === 'end' ? 'start' : 'start');
@@ -271,7 +271,7 @@ function checker(ctx: Ctx) {
   // headline cell: prefer top-row non-image cell
   const fills = pal.fills.slice(0, Math.max(1, ctx.num('zoneColors')));
   nonImg.forEach((c) => (c.fill = ctx.rng.chance(0.35) ? on : ctx.rng.pick(fills)));
-  const tcells = ctx.rng.shuffle(nonImg);
+  const tcells = ctx.rt.shuffle(nonImg);
   const titleCell = tcells.sort((a, b) => a.j - b.j)[0];
   // image slices
   if (asset) {
@@ -299,16 +299,16 @@ function checker(ctx: Ctx) {
     if (span === 2) { const nb = cells.find((c) => c.i === titleCell.i + 1 && c.j === titleCell.j)!; nb.fill = titleCell.fill; nb.kind = 'text'; ctx.add({ kind: 'rect', id: ctx.id('cell'), layer: 'zones', ...nb.r, fill: titleCell.fill! }); }
     titleCell.kind = 'text';
     const box = inset({ ...titleCell.r, w: titleCell.r.w * span }, pad);
-    const al = ctx.rng.chance(0.5) ? 'end' : 'start';
+    const al = ctx.rt.chance(0.5) ? 'end' : 'start';
     bigTitle(ctx, box, titleCell.fill!, { align: al, size: headlineSize(ctx, box.w) * 0.8, withNote: true, lines: 3, mode: 'words' });
   }
   const rest = tcells.filter((c) => c.kind === 'color');
   let gi = 0, glyphN = 0;
   for (const c of rest) {
-    if (gi < ctx.num('smallGroups') && ctx.rng.chance(0.75)) {
+    if (gi < ctx.num('smallGroups') && ctx.rt.chance(0.75)) {
       const grp = ctx.texts.groups[gi++];
-      const al: Align = ctx.rng.chance(0.5) ? 'end' : 'start';
-      ctx.group({ main: grp.main, note: grp.note }, 'small', inset(c.r, pad), { mainSize: ctx.size('smallMain'), align: al, valign: ctx.rng.chance(0.5) ? 'top' : 'bottom', on: c.fill!, mode: 'words', lines: 2 });
+      const al: Align = ctx.rt.chance(0.5) ? 'end' : 'start';
+      ctx.group({ main: grp.main, note: grp.note }, 'small', inset(c.r, pad), { mainSize: ctx.size('smallMain'), align: al, valign: ctx.rt.chance(0.5) ? 'top' : 'bottom', on: c.fill!, mode: 'words', lines: 2 });
       c.kind = 'text';
     } else if (ctx.rng.chance(glyphN ? 0.25 : 0.5) && ctx.bool('bigGlyph')) {
       const gt = glyphN === 0 ? undefined : glyphN === 1 ? ((v: string) => ctx.texts.facts?.numeral || v)(String(ctx.rd.int(1, 12)).padStart(2, '0')) : ctx.rd.pick(['+', '*', '→', '§', '&']);
@@ -332,7 +332,7 @@ function fullbleed(ctx: Ctx) {
   const brushMask = ctx.mode('brushMask');
   const im = ctx.image(asset, frame, { filter: imgFilter(ctx) });
   void im;
-  const pos = ctx.rng.weighted(brushMask ? { bottom: 5, top: 3 } : { bottom: 5, top: 3, middle: 1 });
+  const pos = ctx.rt.weighted(brushMask ? { bottom: 5, top: 3 } : { bottom: 5, top: 3, middle: 1 });
   const tb = pos === 'bottom' ? { x: C.x, y: C.y + C.h * 0.4, w: C.w, h: C.h * 0.6 } : pos === 'top' ? { x: C.x, y: C.y + ctx.u * 5, w: C.w, h: C.h * 0.55 } : { x: C.x, y: C.y + C.h * 0.25, w: C.w, h: C.h * 0.5 };
   // legibility scrim
   const lg = overImage(ctx, asset, frame, tb, 80);
@@ -401,7 +401,7 @@ function giant(ctx: Ctx) {
   size = Math.min(size, maxH / cap0);
   const cap = cap0 * size;
   const gy = top ? g.m.t + (ctx.rng.chance(0.4) ? 0 : ctx.u * 4) : H - g.m.b - cap - ctx.u * 2;
-  const giantFill = ctx.rng.chance(0.5) && wcag(pal.accent, on) > 1.6 ? pal.accent : ctx.textColor(on, 200);
+  const giantFill = ctx.rt.chance(0.5) && wcag(pal.accent, on) > 1.6 ? pal.accent : ctx.textColor(on, 200);
   const gnode = () => ctx.add({ kind: 'text', id: ctx.id('giant'), layer: 'text', role: 'big.main', lang: hl.lang, lines: [{ text: word, x: W / 2, y: gy + cap }], size, family: rf.family, weight: rf.weight, tracking: -0.01, fill: giantFill, anchor: 'middle', box: { x: W / 2 - (w1 * size) / 2, y: gy, w: w1 * size, h: cap }, raw: word });
   // image strip / block
   const variant = ctx.rng.weighted({ block: 3, strip: 2 });
@@ -492,7 +492,7 @@ function partition(ctx: Ctx) {
   // headline across top
   const C = g.content;
   const hl = ctx.texts.headline;
-  const across = ctx.rng.chance(0.5);
+  const across = ctx.rt.chance(0.5);
   let acrossH = 0;
   if (across && ctx.on('text')) {
     const lang = hl.lang;
@@ -544,7 +544,7 @@ function cards(ctx: Ctx) {
   }
   // headline top
   const hl = ctx.texts.headline;
-  const r1 = ctx.on('text') ? ctx.text(hl, 'big.main', { x: C.x, y: C.y, w: C.w, h: H * 0.2 }, { size: headlineSize(ctx, C.w) * 1.2, align: ctx.rng.chance(0.7) ? 'middle' : 'start', on, mode: 'single', fit: true, maxLines: 1 }) : { h: 0 };
+  const r1 = ctx.on('text') ? ctx.text(hl, 'big.main', { x: C.x, y: C.y, w: C.w, h: H * 0.2 }, { size: headlineSize(ctx, C.w) * 1.2, align: ctx.rt.chance(0.7) ? 'middle' : 'start', on, mode: 'single', fit: true, maxLines: 1 }) : { h: 0 };
   let y = C.y + r1.h + ctx.u * 2;
   y += header(ctx, { x: C.x, y, w: C.w, h: 0 }, on, 'top', 1) + gap;
   const footH = ctx.size('meta') * 2.5;
@@ -561,7 +561,7 @@ function cards(ctx: Ctx) {
   ctx.add({ kind: 'rect', id: ctx.id('card'), layer: 'zones', ...tc, rx: rad, fill: cardFill });
   // title card: headline group anchored bottom-right, a meta column top-left and a running index bottom-left
   const ti = inset(tc, ctx.u * 3);
-  const valign = ctx.rng.chance(0.6) ? 'bottom' : 'top';
+  const valign = ctx.rt.chance(0.6) ? 'bottom' : 'top';
   ctx.group({ main: ctx.texts.groups[0].main, sub: ctx.texts.sub }, 'big', { x: ti.x + ti.w * 0.3, y: ti.y, w: ti.w * 0.7, h: ti.h }, { mainSize: Math.min(rh * 0.34, ctx.u * 8.5), align: 'end', valign, on: cardFill, mode: 'balance' });
   const metaTop = valign === 'bottom';
   let my = metaTop ? ti.y : ti.y + ti.h * 0.45;
@@ -651,7 +651,7 @@ function fan(ctx: Ctx) {
   gridDecor(ctx, R, ctx.textColor(on, 10), { rows: true, nodes: true, numbers: false });
   if (tcell) {
     const b = inset(tcell, ctx.u * 2.5);
-    bigTitle(ctx, b, on, { align: ctx.rng.chance(0.5) ? 'start' : 'end', valign: ctx.rng.chance(0.5) ? 'top' : 'bottom', size: headlineSize(ctx, b.w) * 0.75, withNote: true, mode: 'words' });
+    bigTitle(ctx, b, on, { align: ctx.rt.chance(0.5) ? 'start' : 'end', valign: ctx.rt.chance(0.5) ? 'top' : 'bottom', size: headlineSize(ctx, b.w) * 0.75, withNote: true, mode: 'words' });
   }
   ornaments(ctx, R, on, Math.min(1, ctx.num('ornaments')));
 }
@@ -672,7 +672,7 @@ function typefill(ctx: Ctx) {
   let yy = T.y + T.h * 0.2;
   for (let i = 0; i < Math.min(3, ctx.num('smallGroups')); i++) {
     const grp = ctx.texts.groups[i + 1];
-    yy += ctx.group({ main: grp.main, note: ctx.rng.chance(0.5) ? grp.note : undefined }, 'small', { x: rx, y: yy, w: rw, h: T.h }, { mainSize: ctx.size('smallMain') * 0.6, align: 'end', on, mode: 'words', lines: 2 }) + ctx.u * 3;
+    yy += ctx.group({ main: grp.main, note: ctx.rt.chance(0.5) ? grp.note : undefined }, 'small', { x: rx, y: yy, w: rw, h: T.h }, { mainSize: ctx.size('smallMain') * 0.6, align: 'end', on, mode: 'words', lines: 2 }) + ctx.u * 3;
   }
   ornaments(ctx, { ...T, w: T.w * 0.4 }, on, 1);
   metaRow(ctx, C, splitY - ctx.u * 3, on, 'bottom', 3, 5);
@@ -785,7 +785,7 @@ function swiss(ctx: Ctx) {
   const th = bigTitle(ctx, { x: C.x, y: C.y, w: tw, h: C.h * (wide ? 0.55 : 0.4) }, on, { align: wide ? 'start' : align, withSub: true, size: headlineSize(ctx, tw) * (wide ? 0.85 : 0.7) });
   // small labels at nodes
   for (let i = 0; i < ctx.num('metaCount'); i++) {
-    const x = g.x[ctx.rng.int(0, g.nc - 1)] + 5, y = g.y[ctx.rng.int(2, g.nr - 1)] + 5;
+    const x = g.x[ctx.rt.int(0, g.nc - 1)] + 5, y = g.y[ctx.rt.int(2, g.nr - 1)] + 5;
     const box = { x, y, w: ctx.u * 12, h: ctx.u * 3 };
     if (ctx.occupied.some((r) => overlap(r, box)) || y < C.y + th) continue;
     ctx.text(ctx.texts.meta[i], 'small.note', box, { size: ctx.size('meta'), on, mode: 'single', fit: true });
@@ -810,7 +810,7 @@ function centered(ctx: Ctx) {
   if (ctx.on('text')) {
     const lab = ctx.texts.meta[0];
     y += ctx.text({ t: lab.t, lang: lab.lang }, 'small.note', { x: cx - colW / 2, y, w: colW, h: 20 }, { size: ctx.size('meta') * 1.15, align: 'middle', on, mode: 'single', weight: 700, tracking: 0.12 }).h + ctx.u * 2;
-    y += ctx.group({ main: ctx.texts.headline }, 'big', { x: cx - colW / 2, y, w: colW, h: C.h * 0.3 }, { mainSize: headlineSize(ctx, colW) * 0.7, align: 'middle', on, mode: 'balance', maxLines: 2 }) + ctx.u * 1.5;
+    y += ctx.group({ main: ctx.texts.headline }, 'big', { x: cx - colW / 2, y, w: colW, h: C.h * 0.3 }, { mainSize: headlineSize(ctx, colW) * 0.7, align: 'middle', on, mode: 'balance', maxLines: 2, ...(ctx.layered && wcag(pal.accent, on) >= 3 && ctx.rt.chance(0.35) ? { fill: pal.accent } : {}) }) + ctx.u * 1.5;
     y += ctx.text(ctx.texts.note, 'big.note', { x: cx - colW / 2, y, w: colW, h: 100 }, { size: ctx.size('note') * 1.05, align: 'middle', on, mode: 'greedy', fit: false, tracking: 0.06 }).h + ctx.u * 4;
   }
   const asset = img(ctx);
@@ -831,7 +831,7 @@ function centered(ctx: Ctx) {
     ctx.group({ main: grp.main, note: grp.note }, 'small', { x: cx - gw / 2, y: y + i * step, w: gw, h: step }, { mainSize: ctx.size('smallMain') * 0.75, align: 'middle', on, mode: 'balance' });
   }
   // bottom spaced word (an occasional signature, not a tic): otherwise a ruled meta row closes the column
-  if (ctx.on('text') && !ctx.rd.chance(0.3)) {
+  if (ctx.on('text') && !ctx.rtd.chance(0.3)) {
     const ry = C.y + C.h - ctx.u * 6;
     ctx.add({ kind: 'line', id: ctx.id('rule'), layer: 'lines', x1: C.x, y1: ry, x2: C.x + C.w, y2: ry, stroke: ctx.textColor(on, 10), sw: Math.max(1, ctx.u * 0.09), opacity: 0.7 });
     metaRow(ctx, C, C.y + C.h, on, 'bottom', 3, 2);
@@ -842,7 +842,7 @@ function centered(ctx: Ctx) {
     const sp = { family: rf.family, weight: rf.weight, size: 100, tracking: 0.35 };
     const w1 = ctx.measure.width(word, sp) / 100;
     const size = Math.min(C.w / w1, bottomWordH / 0.72);
-    const col = ctx.rng.chance(0.6) && wcag(pal.accent, on) > 1.8 ? pal.accent : ctx.textColor(on, 100);
+    const col = ctx.rt.chance(0.6) && wcag(pal.accent, on) > 1.8 ? pal.accent : ctx.textColor(on, 100);
     ctx.add({ kind: 'text', id: ctx.id('bw'), layer: 'text', role: 'big.main', lang: 'en', lines: [{ text: word, x: W / 2, y: C.y + C.h }], size, family: rf.family, weight: rf.weight, tracking: 0.35, fill: col, anchor: 'middle', box: { x: C.x, y: C.y + C.h - size * 0.72, w: C.w, h: size * 0.72 }, raw: word });
     metaRow(ctx, C, C.y + C.h - size * 0.72 - ctx.u * 3, on, 'bottom', 3, 2);
   }
@@ -885,7 +885,7 @@ function centeredWide(ctx: Ctx) {
       ctx.group({ main: grp.main, note: grp.note }, 'small', { x: x0 + i * gw + u, y, w: gw - u * 2, h: A.h * 0.2 }, { mainSize: ctx.size('smallMain') * 0.7, align: 'middle', on, mode: 'balance' });
     }
     // tracked display word across the column foot (occasionally)
-    if (ctx.rd.chance(0.3)) {
+    if (ctx.rtd.chance(0.3)) {
     const cands = [...ctx.texts.headline.t.split(/\s+/), ...ctx.texts.words.flatMap((w) => w.t.split(/\s+/))].filter((w) => /^[A-Za-z]{3,8}$/.test(w));
     const word = (cands.sort((a, b) => Math.abs(a.length - 5) - Math.abs(b.length - 5))[0] ?? 'FORM').toUpperCase();
     const rf = ctx.role('big.main', 'en');
@@ -893,7 +893,7 @@ function centeredWide(ctx: Ctx) {
     const w1 = ctx.measure.width(word, sp) / 100;
     const size = Math.min(A.w / w1, (A.h * 0.2) / 0.72);
     const ww = w1 * size;
-    const col = ctx.rng.chance(0.6) && wcag(pal.accent, on) > 1.8 ? pal.accent : ctx.textColor(on, 100);
+    const col = ctx.rt.chance(0.6) && wcag(pal.accent, on) > 1.8 ? pal.accent : ctx.textColor(on, 100);
     ctx.add({ kind: 'text', id: ctx.id('bw'), layer: 'text', role: 'big.main', lang: 'en', lines: [{ text: word, x: cx, y: A.y + A.h }], size, family: rf.family, weight: rf.weight, tracking: 0.3, fill: col, anchor: 'middle', box: { x: cx - ww / 2, y: A.y + A.h - size * 0.72, w: ww, h: size * 0.72 }, raw: word });
     }
   }
@@ -937,7 +937,7 @@ function layered(ctx: Ctx) {
   }
   const region = { x: C.x, y: gy, w: C.w, h: cap };
   const lg = ctx.legible(asset, frame, region, 200, true);
-  const col = ctx.rng.chance(0.5) ? pal.accent : lg.lum > 0.5 ? pal.dark : pal.light;
+  const col = ctx.rt.chance(0.5) ? pal.accent : lg.lum > 0.5 ? pal.dark : pal.light;
   ctx.add({ kind: 'text', id: ctx.id('giant'), layer: 'text', role: 'big.main', lang: hl.lang, lines: [{ text: word, x: W / 2, y: gy + cap }], size, family: rf.family, weight: rf.weight, tracking: -0.01, fill: col, anchor: 'middle', box: { x: W / 2 - (w1 * size) / 2, y: gy, w: w1 * size, h: cap }, raw: word, opacity: 0.95 });
   if (!inFront) ctx.image(asset, frame, { cutout: true, filter: imgFilter(ctx) });
   // small text bottom-left with scrim

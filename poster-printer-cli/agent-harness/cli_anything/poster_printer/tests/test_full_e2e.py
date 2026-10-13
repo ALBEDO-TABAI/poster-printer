@@ -1,7 +1,7 @@
 """End-to-end tests: the installed command (subprocess), real renders, and the web-app round trip.
 
 Requires node, the built engine (engine/dist) and Chrome (skipped where Chrome is missing).
-Set CLI_ANYTHING_FORCE_INSTALLED=1 to insist on the installed ``cli-anything-poster-printer``.
+Set CLI_ANYTHING_FORCE_INSTALLED=1 to insist on the installed ``cli-anything-ready-poster-printer``.
 Set POSTER_PRINTER_APP_URL to reuse a running web app for the round trip (otherwise it is built and served).
 """
 from __future__ import annotations
@@ -46,12 +46,31 @@ def _paths() -> dict:
     return be.run("paths", {}, backend="node")
 
 
-HAVE_CHROME = os.path.exists(os.environ.get("POSTER_PRINTER_CHROME", "") or "/usr/bin/google-chrome") or bool(shutil.which("google-chrome") or shutil.which("chromium"))
+def _have_chrome() -> bool:
+    """The engine's own browser discovery (Linux, macOS and Windows paths, or POSTER_PRINTER_CHROME)."""
+    try:
+        return bool(be.run("paths", {}, backend="node").get("chrome"))
+    except Exception:  # engine not built
+        return bool(shutil.which("google-chrome") or shutil.which("chromium"))
+
+
+HAVE_CHROME = _have_chrome()
+
+
+def _have_full_fonts() -> bool:
+    """The glyph fixer subsets the full (unsubset) font files: POSTER_PRINTER_FONTS, default /workspace/fonts."""
+    try:
+        return os.path.isfile(os.path.join(be.run("paths", {}, backend="node").get("fonts", ""), "catalog.json"))
+    except Exception:
+        return False
+
+
+needs_full_fonts = pytest.mark.skipif(not _have_full_fonts(), reason="full font files not available (set POSTER_PRINTER_FONTS)")
 needs_chrome = pytest.mark.skipif(not HAVE_CHROME, reason="Chrome/Chromium not installed")
 
 
 class TestCLISubprocess:
-    CLI_BASE = _resolve_cli("cli-anything-poster-printer")
+    CLI_BASE = _resolve_cli("cli-anything-ready-poster-printer")
 
     def _run(self, args: list[str], check: bool = True, env: dict | None = None) -> subprocess.CompletedProcess:
         e = os.environ.copy()
@@ -67,12 +86,14 @@ class TestCLISubprocess:
     # ── basics ──
     def test_help_and_version(self):
         r = self._run(["--help"])
-        assert "Poster Printer CLI" in r.stdout and "generate" in r.stdout
-        assert "0.1.0" in self._run(["--version"]).stdout
+        assert "Ready Poster Printer CLI" in r.stdout and "generate" in r.stdout
+        from cli_anything.poster_printer import __version__
+        assert __version__ in self._run(["--version"]).stdout
 
     def test_alias_command_installed(self):
         if os.environ.get("CLI_ANYTHING_FORCE_INSTALLED") == "1":
-            assert shutil.which("poster-printer") or (Path(sys.executable).parent / "poster-printer").exists()
+            for name in ("ready-poster-printer", "poster-printer"):  # the name before the rename stays as an alias
+                assert shutil.which(name) or (Path(sys.executable).parent / name).exists(), name
 
     def test_doctor(self):
         d = self._json(["doctor"])
@@ -123,7 +144,7 @@ class TestCLISubprocess:
             assert png[:8] == PNG and len(png) > 20000
             assert Path(p["files"]["svg"]).read_text()[:4] == "<svg"
             j = json.loads(Path(p["files"]["json"]).read_text())
-            assert j["app"] == "poster-printer" and j["kind"] == "poster"
+            assert j["app"] == "ready-poster-printer" and j["kind"] == "poster"
             assert j["entry"]["picked"]["texts"]["headline"]["t"] == "夜航"
         assert Path(d["sheet"]).exists()
         # correctness gates are separate from aesthetics; passing candidates come first, flagged last
@@ -199,6 +220,22 @@ class TestCLISubprocess:
         assert Path(d["pdf"]).read_bytes()[:5] == b"%PDF-" and len(d["pages"]) == 3
 
     @needs_chrome
+    def test_layer_variations(self, briefs, tmp_path):
+        # app phase 17: --vary type / place / grid re-roll one layer of the structure; type keeps every picture frame
+        g = self._json(["generate", "--brief", briefs["exhibition"], "-n", "1", "-o", str(tmp_path / "g"), "--no-sheet"])
+        src = g["posters"][0]["files"]["json"]
+        t = self._json(["variations", src, "--vary", "type", "-n", "3", "-o", str(tmp_path / "t")])
+        assert len(t["items"]) == 3
+        assert all(it["layer"]["vary"] == "type" and it["layer"]["picturesKept"] is True for it in t["items"])
+        assert any(it["layer"]["changed"] for it in t["items"])
+        entry = json.loads(Path(t["items"][0]["files"]["json"]).read_text())["entry"]
+        assert entry["picked"]["layers"]["v"] == 2 and entry["picked"]["layers"]["type"]
+        p = self._json(["variations", src, "--vary", "place", "-n", "2", "-o", str(tmp_path / "p")])
+        assert all(it["layer"]["vary"] == "place" and it["comp"] == g["posters"][0]["comp"] for it in p["items"])
+        r = self._json(["variations", src, "--vary", "grid", "-n", "1", "-o", str(tmp_path / "r")])
+        assert r["items"][0]["layer"]["vary"] == "grid"
+
+    @needs_chrome
     def test_audit_gates_and_actionable_fix(self, briefs, tmp_path):
         g = self._json(["generate", "--brief", briefs["exhibition"], "-n", "1", "-o", str(tmp_path / "g"), "--no-sheet"])
         src = g["posters"][0]["files"]["json"]
@@ -229,6 +266,7 @@ class TestCLISubprocess:
             assert not after or after[0] > before
 
     @needs_chrome
+    @needs_full_fonts
     def test_fonts_check_fix(self, tmp_path):
         d = self._json(["fonts", "check", "--text", "鱻", "--family", "Noto Sans SC", "--fix"])
         assert "鱻" in d["missing"]["Noto Sans SC"]
@@ -276,19 +314,22 @@ def app_url(tmp_path_factory):
 class TestAppRoundTrip:
     """A CLI poster JSON imported into the web app (its Import JSON input) must render identically."""
 
-    CLI = _resolve_cli("cli-anything-poster-printer")
+    CLI = _resolve_cli("cli-anything-ready-poster-printer")
 
     def test_import_renders_identically(self, briefs, tmp_path, app_url):
         out = tmp_path / "rt"
         files = []
+        # a clean library: pictures other tests added (CLI user images) do not exist in the web app, so a draw that picks
+        # one could never round-trip (a documented limit); this test is about the engine parity
+        env = {**os.environ, "POSTER_PRINTER_HOME": str(tmp_path / "home")}
         for name in ("music", "exhibition", "talk"):
             d = json.loads(subprocess.run(self.CLI + ["--json", "generate", "--brief", briefs[name], "-n", "2", "-o", str(out / name), "--no-sheet", "--no-font-fix"],
-                                          capture_output=True, text=True, check=True, timeout=600).stdout)
+                                          capture_output=True, text=True, check=True, timeout=600, env=env).stdout)
             files += [p["files"]["json"] for p in d["posters"]]
         for f in files:
             base = f[:-5]
-            subprocess.run(self.CLI + ["export", f, "--format", "svg-light", "-o", base + ".cli", "--no-font-fix"], check=True, capture_output=True, timeout=300)
-            subprocess.run(self.CLI + ["export", f, "--format", "png", "-o", base + ".cli", "--no-font-fix"], check=True, capture_output=True, timeout=300)
+            subprocess.run(self.CLI + ["export", f, "--format", "svg-light", "-o", base + ".cli", "--no-font-fix"], check=True, capture_output=True, timeout=300, env=env)
+            subprocess.run(self.CLI + ["export", f, "--format", "png", "-o", base + ".cli", "--no-font-fix"], check=True, capture_output=True, timeout=300, env=env)
         script = Path(_paths()["engine"]).parent / "scripts" / "app_roundtrip.mjs"
         res = json.loads(subprocess.run(["node", str(script), app_url, str(out / "app"), *files], capture_output=True, text=True, check=True, timeout=900).stdout)
         from PIL import Image, ImageChops
@@ -302,4 +343,7 @@ class TestAppRoundTrip:
             a, c = Image.open(r["png"]).convert("RGB"), Image.open(base + ".cli.png").convert("RGB")
             assert a.size == c.size
             diff = ImageChops.difference(a, c)
-            assert diff.getbbox() is None, f"raster differs for {r['file']}: bbox {diff.getbbox()}"
+            # the SVG above is the exact parity check. Two Chromium pages may antialias the edges of very large glyphs
+            # one level apart (seen: 134 px at ±1 on a 230 px CJK headline); anything visible is still a failure
+            worst = max(hi for _, hi in diff.getextrema())
+            assert worst <= 2, f"raster differs for {r['file']}: bbox {diff.getbbox()}, max level {worst}"

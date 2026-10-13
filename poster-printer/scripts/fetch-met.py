@@ -20,7 +20,7 @@ PROV = _o.environ.get('MET_PROV', 'provenance.json')
 def get(url):
     for i in range(4):
         try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'poster-printer-asset-fetch/1.0'})
+            req = urllib.request.Request(url, headers={'User-Agent': 'ready-poster-printer-asset-fetch/1.0'})
             return urllib.request.urlopen(req, timeout=60).read()
         except Exception as e:
             time.sleep(1 + i)

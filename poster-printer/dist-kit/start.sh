@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Poster Printer — start the local app (macOS / Linux). Usage: ./start.sh [--port 5180] [--no-open]
+# Ready Poster Printer — start the local app (macOS / Linux). Usage: ./start.sh [--port 5180] [--no-open]
 cd "$(dirname "$0")" || exit 1
 if [ -x ".venv/bin/python" ]; then PY=".venv/bin/python"
 elif command -v python3 >/dev/null 2>&1; then PY=python3

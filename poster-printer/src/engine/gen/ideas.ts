@@ -6,7 +6,7 @@
 import type { Rng } from '../rng';
 import type { Itten } from '../color/itten';
 
-export type IdeaId = 'scale' | 'substitution' | 'occlusion' | 'anomaly' | 'reveal' | 'tension' | 'emptiness' | 'data' | 'hanzi' | 'split' | 'orbit' | 'voice' | 'specimen' | 'immersion';
+export type IdeaId = 'scale' | 'substitution' | 'occlusion' | 'anomaly' | 'reveal' | 'tension' | 'emptiness' | 'data' | 'hanzi' | 'split' | 'orbit' | 'voice' | 'specimen' | 'immersion' | 'grid';
 export type Brk = 'bleed' | 'intrusion' | 'overlap' | 'anomaly' | 'window' | 'offgrid' | 'crop' | 'seam' | 'rotate' | 'hang' | 'none';
 export type Frame = 'grid' | 'canon' | 'eyes';
 
@@ -42,8 +42,10 @@ export const IDEAS: Idea[] = [
   { id: 'split', zh: '对立分割', en: 'Split meaning', rule: 'two fields with opposite treatments (photo / type, hot / cold, dense / empty) meet at one seam', realisers: { knockout: 0.6, panorama: 1.2, split: 0.5, veil: 0.7, partition: 0.3 }, contrasts: { complement: 2, coldwarm: 2, hue: 2, lightdark: 1 }, frame: 'grid', brk: 'seam', weight: 0.85, wide: 1.5 },
   { id: 'orbit', zh: '环绕', en: 'Orbit', rule: 'the copy circles one disc; the disc is the only full-colour thing', realisers: { ring: 1, fan: 0.25 }, contrasts: { saturation: 2, hue: 1, coldwarm: 1, complement: 1 }, frame: 'grid', brk: 'rotate', weight: 0.9, wide: 0.5 },
   { id: 'voice', zh: '声音', en: 'Voice', rule: 'a sentence is the hero, set large with a hanging quote; the picture is evidence', realisers: { quote: 1, centered: 0.25 }, contrasts: { saturation: 2, lightdark: 1, extension: 1, coldwarm: 1 }, frame: 'canon', brk: 'hang', weight: 0.75, wide: 0.3 },
-  { id: 'specimen', zh: '标本', en: 'Specimen', rule: 'the picture is cut into modules and filed like a specimen sheet; one module holds the number', realisers: { bento: 1, mosaic: 1, cards: 0.35, checker: 0.3 }, contrasts: { saturation: 1, lightdark: 1, extension: 1, hue: 1 }, frame: 'grid', brk: 'none', weight: 1.0, needs: { img: true }, wide: 0.4 },
-  { id: 'immersion', zh: '沉浸', en: 'Immersion', rule: 'the picture is the world; the type is a caption laid on its quietest region', realisers: { fullbleed: 2, veil: 0.6, bands: 0.3, cover: 0.4 }, contrasts: { saturation: 1, coldwarm: 1, lightdark: 1 }, frame: 'grid', brk: 'none', weight: 1.3, needs: { img: true }, wide: 1 },
+  { id: 'specimen', zh: '标本', en: 'Specimen', rule: 'the picture is cut into modules and filed like a specimen sheet; one module holds the number', realisers: { bento: 1, mosaic: 1, cards: 0.35, checker: 0.3, modular: 0.6, bleedgrid: 0.8 }, contrasts: { saturation: 1, lightdark: 1, extension: 1, hue: 1 }, frame: 'grid', brk: 'none', weight: 1.0, needs: { img: true }, wide: 0.4 },
+  // phase 16: the Swiss modular grid as an idea of its own: order is the message, pictures keep their proportions
+  { id: 'grid', zh: '网格秩序', en: 'Grid order', rule: 'every element sits on fields of one modular grid; pictures span whole fields at their own proportion; one hero, the rest a clear step smaller; white fields are part of the order', realisers: { modular: 1.3, bleedgrid: 1.0, swiss: 0.3 }, contrasts: { lightdark: 2, extension: 2, saturation: 1, hue: 1 }, frame: 'grid', brk: 'bleed', weight: 1.0, needs: { img: true }, wide: 1.2 },
+  { id: 'immersion', zh: '沉浸', en: 'Immersion', rule: 'the picture is the world; the type is a caption laid on its quietest region', realisers: { fullbleed: 2, veil: 0.6, bands: 0.3, cover: 0.4, bleedgrid: 0.7 }, contrasts: { saturation: 1, coldwarm: 1, lightdark: 1 }, frame: 'grid', brk: 'none', weight: 1.3, needs: { img: true }, wide: 1 },
 ];
 export const IDEA_IDS = IDEAS.map((i) => i.id);
 export const ideaById = (id: string) => IDEAS.find((i) => i.id === id);

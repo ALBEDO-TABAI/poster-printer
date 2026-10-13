@@ -26,7 +26,7 @@ export function zhHeavy(ctx: Ctx, strict = false): { family: string; weight: num
 }
 const MASTHEADS_EN = ['FORMA', 'MARGIN', 'ATLAS', 'SIGNAL', 'NORTH', 'LUMEN', 'PAPER', 'FIELD', 'OBJECT', 'PLAIN', 'CIRCA', 'RANGE', 'STILL', 'ORBIT', 'GRAIN', 'TIDE', 'VERSO', 'MERIDIAN', 'HALCYON', 'OPAL', 'QUIET', 'KIOSK', 'ARC', 'DUSK', 'CANVAS', 'TEMPO', 'RELIEF', 'LOOM'];
 const MASTHEADS_ZH = ['白页', '片刻', '纸上', '日常', '一隅', '平面', '回声', '远方'];
-export const condFam = (ctx: Ctx) => { const f = ctx.rd.pick(COND); return { family: f, weight: f === 'Oswald' ? 700 : 400 }; };
+export const condFam = (ctx: Ctx) => { const f = ctx.rtd.pick(COND); return { family: f, weight: f === 'Oswald' ? 700 : 400 }; };
 export const capOf = (ctx: Ctx, fam: { family: string; weight: number }, zh: boolean) => (zh ? 0.86 : ctx.measure.metrics({ family: fam.family, weight: fam.weight, size: 100, tracking: 0 }).cap);
 export const width100 = (ctx: Ctx, t: string, fam: { family: string; weight: number }, tr = 0) => ctx.measure.width(t, { family: fam.family, weight: fam.weight, size: 100, tracking: tr }) / 100;
 /** strong contrast colour for type on `on` */
@@ -86,9 +86,9 @@ function cover(ctx: Ctx) {
   const asset = img(ctx);
   const land = W > H * 1.2;
   const mf = ctx.texts.facts?.masthead;
-  const mw0 = ctx.texts.headline.lang === 'zh' && ctx.rd.chance(0.6) ? { t: MASTHEADS_ZH[Math.floor(ctx.rng.next() * MASTHEADS_ZH.length)], zh: true } : { t: MASTHEADS_EN[Math.floor(new Rng(ctx.rng.seed + '|mast|' + ctx.texts.headline.t).next() * MASTHEADS_EN.length)], zh: false };
+  const mw0 = ctx.texts.headline.lang === 'zh' && ctx.rd.chance(0.6) ? { t: MASTHEADS_ZH[Math.floor(ctx.rt.next() * MASTHEADS_ZH.length)], zh: true } : { t: MASTHEADS_EN[Math.floor(new Rng(ctx.rt.seed + '|mast|' + ctx.texts.headline.t).next() * MASTHEADS_EN.length)], zh: false };
   const mw = mf ? { t: mf, zh: /[\u3400-\u9fff]/.test(mf) } : mw0;
-  const fam = mw.zh ? zhHeavy(ctx) : ctx.rd.chance(0.55) ? condFam(ctx) : ctx.rd.pick([{ family: 'DM Serif Display', weight: 400 }, { family: 'Bodoni Moda', weight: 700 }, { family: 'Archivo Black', weight: 400 }]);
+  const fam = mw.zh ? zhHeavy(ctx) : ctx.rtd.chance(0.55) ? condFam(ctx) : ctx.rtd.pick([{ family: 'DM Serif Display', weight: 400 }, { family: 'Bodoni Moda', weight: 700 }, { family: 'Archivo Black', weight: 400 }]);
   const capR = capOf(ctx, fam, mw.zh);
   const tr = mw.zh ? 0.02 : -0.01;
   let size = (C.w + u * 2) / width100(ctx, mw.t, fam, tr);
@@ -112,7 +112,7 @@ function cover(ctx: Ctx) {
     // masthead colour from the photo under it
     const lg = ctx.legible(asset, full, { x: C.x, y: my, w: C.w, h: cap }, 200, true);
     const acc = accentOn(ctx, lg.lum > 0.5 ? '#ffffff' : '#000000', 1);
-    const useAcc = ctx.rd.chance(0.4) && acc && (lg.lum > 0.5 ? relLum(pal.accent) < 0.2 : relLum(pal.accent) > 0.45);
+    const useAcc = ctx.rtd.chance(0.4) && acc && (lg.lum > 0.5 ? relLum(pal.accent) < 0.2 : relLum(pal.accent) > 0.45);
     mastFill = useAcc ? pal.accent : lg.fill;
     // busy or mid-tone sky behind the masthead: a soft scrim keeps the title legible
     if (lg.opacity > 0.08) ctx.add({ kind: 'rect', id: ctx.id('scrim'), layer: 'images', x: 0, y: 0, w: W, h: my + cap + u * 10, fill: `lg(90,${lg.color},${Math.min(0.7, lg.opacity * 1.4 + 0.1).toFixed(2)},${lg.color},0)` });
@@ -186,7 +186,7 @@ function index(ctx: Ctx) {
   const on = pal.bg;
   const land = W > H * 1.15;
   const wide = W > H * 1.6;
-  const v = ctx.rng.weighted({ programme: 1.2, list: 1.2, spec: 1 });
+  const v = ctx.rt.weighted({ programme: 1.2, list: 1.2, spec: 1 });
   const T = ctx.texts;
   const acc = accentOn(ctx, on, 2.2);
   // head: either a knockout accent block or a big set headline
@@ -230,7 +230,7 @@ function index(ctx: Ctx) {
       const val0 = ctx.rd.pick([`${ctx.rd.int(12, 96)}%`, `${ctx.rd.int(2, 48)}`, `${ctx.rd.int(100, 980)}`, `${ctx.rd.int(1, 9)}.${ctx.rd.int(0, 9)}`, `×${ctx.rd.int(2, 12)}`]);
       const val = T.facts?.values ? (T.facts.values[i] ?? '') : val0;
       const vs = Math.min(rowH * 0.62, u * 8);
-      const vf = ctx.rd.chance(0.5) ? { family: 'Archivo Black', weight: 400 } : { family: f.en['big.main'].family, weight: f.en['big.main'].weight };
+      const vf = ctx.rtd.chance(0.5) ? { family: 'Archivo Black', weight: 400 } : { family: f.en['big.main'].family, weight: f.en['big.main'].weight };
       rawText(ctx, { role: 'small.main', text: val, x: tableArea.x, y: y + vs * 0.92 + u * 1.2, size: vs, family: vf.family, weight: vf.weight, fill: i === 0 && acc && !blockHead ? acc : ink, tracking: -0.02 });
       ctx.group({ main, note }, 'small', { x: tableArea.x + tableArea.w * 0.42, y: y + u * 1.6, w: tableArea.w * 0.58, h: rowH - u * 2.4 }, { mainSize: Math.min(u * 2.6, rowH * 0.3) / (ctx.size('smallMain') / ctx.size('smallMain')), align: 'start', on, mode: 'words', lines: 2 });
     } else {
@@ -286,7 +286,7 @@ function echo(ctx: Ctx) {
   const cardH = Math.min(H * 0.34, u * 34);
   const cardW = land ? C.w * 0.36 : C.w * 0.62;
   const topHalf = hotY > H / 2;
-  const right = ctx.rng.chance(0.5);
+  const right = ctx.rt.chance(0.5);
   const card = { x: right ? C.x + C.w - cardW : C.x, y: topHalf ? C.y + u * 2 : C.y + C.h - cardH, w: cardW, h: cardH };
   ctx.add({ kind: 'rect', id: ctx.id('card'), layer: 'zones', x: card.x - u * 2.5, y: card.y - u * 2.5, w: card.w + u * 5, h: card.h + u * 5, fill: on });
   ctx.occupied.push(card);
@@ -430,7 +430,7 @@ function quote(ctx: Ctx) {
   const q = T.prose[0] ?? T.sub;
   const zh = q.lang === 'zh';
   const acc = accentOn(ctx, on, 1.8) ?? strong(ctx, on);
-  const serif = zh ? zhHeavy(ctx) : ctx.rd.pick([{ family: 'Instrument Serif', weight: 400 }, { family: 'DM Serif Display', weight: 400 }, { family: 'Playfair Display', weight: 500 }]);
+  const serif = zh ? zhHeavy(ctx) : ctx.rtd.pick([{ family: 'Instrument Serif', weight: 400 }, { family: 'DM Serif Display', weight: 400 }, { family: 'Playfair Display', weight: 500 }]);
   header(ctx, C, on, 'top');
   const A = land ? { x: C.x + C.w * 0.3, y: C.y + u * 8, w: C.w * 0.66, h: C.h * 0.66 } : { x: C.x, y: C.y + C.h * 0.27, w: C.w * 0.94, h: C.h * 0.5 };
   const asset = img(ctx);
@@ -479,7 +479,7 @@ function ring(ctx: Ctx) {
   // ring text: each glyph placed and rotated on the circle
   const src = (T.custom ? T.headline.t : T.headline.lang === 'en' ? T.headline.t : T.words.find((w) => w.lang === 'en')?.t ?? T.sub.t).toUpperCase(); // real copy: no invented ring words
   const ringT = `${src} · ${T.meta[0]?.t ?? ''} · ${year(ctx)} · `.toUpperCase();
-  const f = ctx.rd.chance(0.5) ? { family: 'IBM Plex Mono', weight: 600 } : { family: 'Archivo Black', weight: 400 };
+  const f = ctx.rtd.chance(0.5) ? { family: 'IBM Plex Mono', weight: 600 } : { family: 'Archivo Black', weight: 400 };
   const glyphs = Array.from(ringT);
   const rr = R * 0.92;
   const circ = 2 * Math.PI * rr;
