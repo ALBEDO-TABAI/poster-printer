@@ -10,7 +10,7 @@
 
 </div>
 
-![Ready Poster Printer 的编辑界面](.github/assets/hero-zh.jpg)
+![Ready Poster Printer](.github/assets/banner.jpg)
 
 标题、日期、地点都有了，就是排不好看？把内容交给它，按一下「抽一张」，一张排好版的海报就出来了。不喜欢就再抽，抽到喜欢的再慢慢调。
 
@@ -28,6 +28,8 @@
 ## 用起来是什么样
 
 ### 抽卡：说不清想要什么，看到就知道
+
+![Ready Poster Printer 的编辑界面](.github/assets/hero-zh.jpg)
 
 不用对着空白画布发呆。按空格或「抽一张」，它会先排出 8 个候选，自动打分，把最好的一张给你。不满意就接着抽，按 ← / → 可以翻回前面的。
 

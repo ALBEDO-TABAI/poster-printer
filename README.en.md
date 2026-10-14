@@ -10,7 +10,7 @@
 
 </div>
 
-![The Ready Poster Printer editor](.github/assets/hero-en.jpg)
+![Ready Poster Printer](.github/assets/banner.jpg)
 
 You have the title, the date and the venue, but you can't make them look good together. Hand them over, press **Draw**, and you get a finished poster. Don't like it? Draw again. When one clicks, fine-tune it.
 
@@ -28,6 +28,8 @@ Speed is a side effect. What it really cares about is getting each poster right:
 ## What using it is like
 
 ### Draw until you see the one
+
+![The Ready Poster Printer editor](.github/assets/hero-en.jpg)
 
 No blank canvas. Press Space or **Draw**. It lays out 8 candidates, scores them, and shows you the best. Keep drawing until something clicks; ← / → takes you back through what you've seen.
 
