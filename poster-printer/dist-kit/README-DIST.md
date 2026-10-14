@@ -96,4 +96,4 @@ Rating page (to train the taste selector on your own taste): `http://localhost:5
 
 Original program code is licensed under **GNU AGPL v3.0 only**; see [LICENSE](LICENSE).
 Third-party code, fonts, images and palette data retain their respective licenses and credits in [licenses/](licenses/).
-Source: https://github.com/ALBEDO-TABAI/poster-printer
+Source: https://github.com/ALBEDO-TABAI/ready-poster-printer

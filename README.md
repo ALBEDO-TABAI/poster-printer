@@ -13,8 +13,8 @@ A local generative poster tool with a browser editor, a Swiss modular grid for s
 需要 Node.js 22.12 或更新版本。字体、预设图片和配色数据已包含在仓库中。
 
 ```bash
-git clone https://github.com/ALBEDO-TABAI/poster-printer.git
-cd poster-printer/poster-printer
+git clone https://github.com/ALBEDO-TABAI/ready-poster-printer.git
+cd ready-poster-printer/poster-printer
 npm ci
 npm run dev
 ```
