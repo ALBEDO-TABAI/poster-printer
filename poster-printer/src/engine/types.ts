@@ -44,6 +44,9 @@ export interface TextNode extends NodeBase {
   fill: string; anchor: 'start' | 'middle' | 'end';
   box: { x: number; y: number; w: number; h: number }; // layout box for editing/hit-testing
   raw: string; rotate?: number; vertical?: boolean; stroke?: string; sw?: number;
+  /** phase 18: the text this node is part of (a construction sets each line and script run as its own node; readers
+   *  that match copy join the nodes of one unit in order). Renderers ignore it. */
+  unit?: string;
 }
 export interface GroupNode extends NodeBase { kind: 'group'; children: SceneNode[]; transform?: string }
 export type SceneNode = RectNode | PathNode | CircleNode | LineNode | ImageNode | TextNode | GroupNode;

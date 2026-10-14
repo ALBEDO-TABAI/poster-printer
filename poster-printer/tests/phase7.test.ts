@@ -96,8 +96,9 @@ describe('phase 7 variety', () => {
     for (let i = 0; i < N; i++) {
       const st = BUILTIN_STYLES[(i * 7) % BUILTIN_STYLES.length];
       const r = generate(input(`${process.env.VARIETY_SEED ?? 'var7'}-${i}`, R[i % R.length], st.id, 'auto', { select: Number(process.env.VARIETY_K ?? 8), recent: recent.slice(-4), recentIdeas: recentI.slice(-4) }));
-      recent.push(r.picked.comp); recentI.push(r.picked.idea?.id ?? '');
-      const a = archOf(r.picked.comp, r.scene.nodes.some((n: { cutout?: boolean }) => n.cutout));
+      recent.push(r.picked.kind ?? r.picked.comp); recentI.push(r.picked.idea?.id ?? '');
+      // phase 18: a construction-engine poster counts as its page archetype
+      const a = r.picked.kind ?? archOf(r.picked.comp, r.scene.nodes.some((n: { cutout?: boolean }) => n.cutout));
       arch[a] = (arch[a] ?? 0) + 1; comps[r.picked.comp] = (comps[r.picked.comp] ?? 0) + 1; ideas[recentI[i]] = (ideas[recentI[i]] ?? 0) + 1;
     }
     const eff = (c: Record<string, number>) => { const n = Object.values(c).reduce((s, v) => s + v, 0); return 2 ** -Object.values(c).reduce((s, v) => s + (v / n) * Math.log2(v / n), 0); };

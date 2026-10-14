@@ -157,13 +157,31 @@ export function evaluate(a: EvalArgs) {
     validity.set(t, { ok: !p.length, problems: p });
   }
 
+  // app phase 18: a construction sets each line and script run of one text as its own node (Han in the CJK face, Latin and
+  // digits in the Latin face); the nodes of one `unit` read as one text, valid when every node of it is
+  const members = new Map<TextNode, TextNode[]>();
+  {
+    const byUnit = new Map<string, TextNode[]>();
+    for (const t of texts) { const u = (t as TextNode & { unit?: string }).unit; if (u) { const l = byUnit.get(u) ?? []; l.push(t); byUnit.set(u, l); } }
+    for (const ns of byUnit.values()) {
+      if (ns.length < 2) continue;
+      const x0 = Math.min(...ns.map((n) => n.box.x)), y0 = Math.min(...ns.map((n) => n.box.y));
+      const x1 = Math.max(...ns.map((n) => n.box.x + n.box.w)), y1 = Math.max(...ns.map((n) => n.box.y + n.box.h));
+      const m: TextNode = { ...ns[0], lines: ns.flatMap((n) => n.lines), raw: ns.map((n) => n.raw).join(''), box: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 } };
+      const problems = ns.flatMap((n) => validity.get(n)?.problems ?? []);
+      validity.set(m, { ok: !problems.length, problems });
+      members.set(m, ns);
+    }
+  }
+  const readable = [...texts, ...members.keys()];
+
   // ── content gate
   const exp = a.brief ? expectedContent(a.brief) : slots.filter((s) => s.slot === 'headline').map((s) => ({ field: 'headline', label: 'headline', required: true, variants: [s.text], kind: 'text' as const }));
   const contentItems: any[] = []; const reqNodes = new Set<TextNode>(); const optFails = new Map<string, { labels: string[]; region: Box | null; why: string; fix: Issue['fix']; impact: Impact[] }>();
   for (const x of exp) {
     let best: { t: TextNode; how: string } | null = null; const bad: { t: TextNode; problems: string[] }[] = []; let partial: TextNode | null = null;
     for (const v of x.variants) {
-      for (const t of texts) {
+      for (const t of readable) {
         const drawn = lineText(t);
         const hit = normCase(drawn).includes(normCase(v)) ? 'verbatim' : norm(drawn).includes(norm(v)) ? 'verbatim (case changed by the style)' : null;
         if (!hit) { if (!partial && norm(t.raw).includes(norm(v))) partial = t; continue; }  // in the intended string but not in the drawn lines → truncated
@@ -176,7 +194,7 @@ export function evaluate(a: EvalArgs) {
     const item: any = { field: x.field, label: x.label, required: x.required, expected: x.variants[0] };
     if (best) {
       Object.assign(item, { status: 'pass', rendered: best.how, region: boxOf(best.t), size_px: r1(best.t.size), css_px: r1(best.t.size * disp.cssPerPx), slot: slotOf(best.t) ?? null });
-      if (x.required) reqNodes.add(best.t);
+      if (x.required) { reqNodes.add(best.t); for (const n of members.get(best.t) ?? []) reqNodes.add(n); }
     } else {
       const why = bad.length ? bad[0].problems.join('; ') : partial ? `only partly drawn: "${lineText(partial).replace(/\n/g, ' ')}"` : 'not drawn anywhere';
       Object.assign(item, { status: 'fail', evidence: why, region: bad[0] ? boxOf(bad[0].t) : partial ? boxOf(partial) : null });

@@ -159,7 +159,7 @@ export function gradAt(fill: string, r: Box, x: number, y: number): { c: string;
   const c0 = parts[1 + i * 2], a0 = Number(parts[2 + i * 2]), c1 = parts[3 + i * 2], a1 = Number(parts[4 + i * 2]);
   return { c: mix(c0, c1, f), a: a0 + (a1 - a0) * f };
 }
-function textContrast(ctx: Ctx, nodes: SceneNode[], idx: number, t: TextNode, fill: string, bg: string, assets: Map<string, ImageAsset>, q = 0.2, nx = 5) {
+export function textContrast(ctx: Ctx, nodes: SceneNode[], idx: number, t: TextNode, fill: string, bg: string, assets: Map<string, ImageAsset>, q = 0.2, nx = 5) {
   const b = t.box; const vals: number[] = [];
   for (let i = 0; i < nx; i++) for (let j = 0; j < 3; j++) {
     const x = b.x + ((i + 0.5) / nx) * b.w, y = b.y + ((j + 0.5) / 3) * b.h;

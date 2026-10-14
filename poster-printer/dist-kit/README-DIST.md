@@ -1,15 +1,20 @@
 # Ready Poster Printer — 本地运行包 / Local package
 
 一个在浏览器里运行的生成式海报工具：单页海报、多页文档（PDF / PNG 压缩包导出）、配色抽卡页。
+多数抽卡使用「构成编排」：文字组按设计构成来排（34 种：两端对齐砖、等高侧栏、双线夹心、票据框、阶梯……），配 19 种页面原型（图带、满版、开放侧、刊头、居中框、图条、主次拼图……）。高级面板的「页面原型」「文字组构成」可以指定其中一种。
 多张图片可以排进瑞士网格：构图选「模块网格」（主图卫星、悬挂线、尺度递进、图片横条、模块分区）或「满版拼图」（满版拼贴、满版行列），在图片面板挑选或上传图片即可。
-底部「结构」按钮右侧的 ▾ 可以只换结构的一层：网格（R）、图位（P）、排字（T）。只想换文字排法时按 T，图片的位置完全不动。
+底部「结构」按钮右侧的 ▾ 可以只换结构的一层：网格（R）、图位（P）、排字（T）。只想换文字排法时按 T，图片的位置完全不动；按 P 换一种页面原型，按 R 换一套网格。
 全部在你自己的电脑上运行，不需要联网（AI 抠图为可选项）。（原名 Poster Printer。）
 
 A generative poster tool that runs in your browser: single posters, multi-page decks (PDF / PNG-zip export)
-and a palette-drawing page. Several pictures can be laid out on a Swiss grid. Pick the composition **Modular grid**
+and a palette-drawing page. Most draws use the **Construction** composition: the copy is set as a designed text
+group (34 constructions: justified brick, cap-locked side stack, rule sandwich, ticket frame, staircase…) on one of
+19 page archetypes (photo band, full bleed, open side, masthead, centre frame, picture strip, mosaic…). Advanced ›
+Page archetype / Text construction pins one. Several pictures can be laid out on a Swiss grid. Pick the composition **Modular grid**
 (hero, flowline, scale steps, strip, modules) or **Bleed grid** (edge-to-edge mosaic or rows), then pick or upload
 pictures in the Images panel. The ▾ next to **Structure** in the dock re-rolls one layer of the layout: grid (R),
-placement (P) or type (T). Press T to re-set only the type; the pictures stay exactly where they are.
+placement (P) or type (T). Press T to re-set only the type; the pictures stay exactly where they are. P moves to
+another page archetype, R onto another grid.
 Everything runs locally on your machine; no internet needed (AI cut-out is optional).
 (Formerly Poster Printer.)
 

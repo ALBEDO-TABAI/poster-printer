@@ -120,6 +120,8 @@ Work on the chosen poster as a project. It is saved after every change, and undo
 P="--project out/01-….json"
 ready-poster-printer --json $P refine --set gridLayout=steps            # another grid layout, same pictures
 ready-poster-printer --json $P refine --set composition=bleedgrid --set gridLayout=mosaic
+ready-poster-printer --json $P refine --set composition=build --set archetype=masthead     # 构成编排: pin a page archetype
+ready-poster-printer --json $P refine --set composition=build --set construction=ticket   # … or the main text construction
 ready-poster-printer --json $P refine --set titleScale=130 --set margin=6
 ready-poster-printer --json $P refine --text sub="新的副标题" --text groups.0.note="opening"
 ready-poster-printer --json $P refine --style zh-song-edit             # new style, same copy / palette / pictures
@@ -139,12 +141,17 @@ ready-poster-printer --json $P deck --pages 6 -o deck/
   - "The text is good, move the pictures" → `--vary place`. In full-bleed / set-plate layouts (`layer.fixedPlacement: true`) the picture position is part of the design; use `--vary structure` or change `composition`.
   - "Same idea, different rhythm / margins" → `--vary grid`.
   - `--vary structure` / `layout` re-does all three. Use it only when the user wants a different layout.
+  - On a 构成编排 poster (`comp: build`, `picked.kind: build:<archetype>`) every layer variation shows something new:
+    - `--vary type` sets the copy in another construction;
+    - `--vary place` moves to another page archetype and keeps the construction where it fits;
+    - `--vary grid` moves the page onto another grid (margins, columns, rows) and keeps archetype and construction.
   - Show the variations side by side and let the user pick (`--pick N` puts one into the project, undoable).
 - **The loop:** audit → apply the most important fix (blocking first, then by impact) → audit again. Stop when the gates pass and the user is happy.
 
 ## Reference
 - Catalogues: `styles list [--mood calm]`, `styles show ID`, `palettes search --light dark --tag noir --near '#c33'`, `fonts list --cjk`, `fonts pairings --mood literary`, `fonts check --brief brief.json [--fix]`, `images list [--user]`, `images add FILE…`, `images inspect ID…`, `catalog layouts|ideas|comps|params|ratios|exports`.
-- Grid params for `refine --set`: `composition` (`modular`, `bleedgrid`, …), `gridLayout`, `cols`, `rows`, `margin`, `gutter`, `imageCount`, `titleScale`, `smallScale`.
+- Grid params for `refine --set`: `composition` (`build`, `modular`, `bleedgrid`, …), `gridLayout`, `cols`, `rows`, `margin`, `gutter`, `imageCount`, `titleScale`, `smallScale`.
+- Construction params (composition `build`): `archetype` (`photoBand`, `fullBleed`, `openSide`, `masthead`, `centreFrame`, `windowInset`, `split`, `plate`, `strip`, `mosaic`, `giantBlock`, `typeFill`, `latinArch`, `gate`, `scattered`, `quietEmblem`, `totem`, `infoForm`, `colourMass`) and `construction` (34 ids: `catalog params`). `auto` draws. LAYOUT_METHOD.md §8 says which fits which copy.
 - Text slots for `--text`: `headline`, `sub`, `note`, `groups.N.main|sub|note`, `prose.N`, `meta.N`, `words.N`.
 - Exit codes: 0 ok · 1 engine · 2 usage / invalid · 3 missing file · 4 output verification failed · 5 nothing reached min-score.
 
@@ -171,5 +178,6 @@ ready-poster-printer --json $P deck --pages 6 -o deck/
 - `--backend node` is approximate: it has no browser, so text measurement differs.
 
 ## Version
+0.4.0 (phase 18: the construction engine — composition `build`, `archetype` / `construction` params)
 0.3.0 (phase 17: the structure in layers — `variations --vary grid|place|type`)
 0.2.0 (phase 16: Swiss modular grid, several pictures, bleed grid)

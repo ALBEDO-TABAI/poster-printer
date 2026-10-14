@@ -80,6 +80,11 @@ export class Ctx {
   rg: Rng;
   /** layered streams are on (new posters): type variations that legacy posters never drew may draw from `rt` */
   layered = false;
+  /** phase 18: the layout kinds of the last draws (session variety inside the construction engine) */
+  recent: string[] = [];
+  forceKind?: string;
+  /** phase 18: what a layer re-roll moves away from */
+  avoid?: { kind?: string; constructions?: string[] };
   /** type choices that legacy posters drew from the decor stream (display face, accent use): the type layer on layered posters */
   get rtd(): Rng { return this.layered ? this.rt : this.rd; }
   constructor(

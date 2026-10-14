@@ -10,7 +10,7 @@ with open("cli_anything/poster_printer/README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="cli-anything-ready-poster-printer",
-    version="0.3.0",
+    version="0.4.0",
     license="AGPL-3.0-only",
     author="cli-anything contributors",
     author_email="",

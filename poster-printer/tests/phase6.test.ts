@@ -82,8 +82,9 @@ describe('taste selector', () => {
     for (let i = 0; i < 120; i++) {
       const st = BUILTIN_STYLES[(i * 7) % BUILTIN_STYLES.length];
       const r = generate(input(`ent${i}`, R[i % R.length], st.id, 'auto', { select: 8, recent: [...recent] }));
-      recent.push(r.picked.comp);
-      const a = archOf(r.picked.comp, r.scene.nodes.some((n: { cutout?: boolean }) => n.cutout));
+      recent.push(r.picked.kind ?? r.picked.comp);
+      // phase 18: a construction-engine poster counts as its page archetype
+      const a = r.picked.kind ?? archOf(r.picked.comp, r.scene.nodes.some((n: { cutout?: boolean }) => n.cutout));
       arch[a] = (arch[a] ?? 0) + 1;
     }
     expect(eff(arch)).toBeGreaterThanOrEqual(9.5);

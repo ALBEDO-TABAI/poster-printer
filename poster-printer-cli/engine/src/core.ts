@@ -57,7 +57,7 @@ export function replayInput(env: Env, e: Entry): GenInput {
     palettes: env.palettes, paletteFilter: () => true, pinnedPalette: null, baseColor: e.params.paletteSource === 'base' ? '#f1ede4' : null,
     lockedPalette: keep.palette, textSets: TEXT_SETS, custom: (e.custom ?? null) as GenInput['custom'],
     forceAttempt: keep.attempt ?? 0, lockedTexts: keep.texts, placed: e.placed ?? [], sidebarSizes: {}, forceSidebar: String(e.params.sidebarTpl ?? 'auto') !== 'auto',
-    measure: env.measure, forceComp: keep.comp, forcePlan: keep.plan, forceIdea: keep.idea, layoutSalt: keep.salt, select: 0, recent: [], recentIdeas: [],
+    measure: env.measure, forceComp: keep.comp, forcePlan: keep.plan, forceIdea: keep.idea, forceKind: keep.kind, avoid: keep.avoid, layoutSalt: keep.salt, select: 0, recent: [], recentIdeas: [],
     // app phase 17: the poster's layered streams (absent = a poster made before phase 17: its single stream, replayed exactly)
     layers: keep.layers ?? null,
     // app phase 13: the params the app honoured for this poster (absent on older / CLI entries = none)
@@ -205,7 +205,8 @@ export async function generateCandidates(env: Env, args: GenerateArgs) {
   flagged.sort((a, b) => a.report.blocking_failures.length - b.report.blocking_failures.length || b.summary.score - a.summary.score);
   const fill = args.includeFlagged === false ? [] : flagged.slice(0, Math.max(0, count - kept.length));
   for (const c of fill) { c.flagged = true; if (args.render) c.rendered = await render(env, c.scene!, args.render); delete c.scene; kept.push(c); }
-  const gateFailed = flagged.filter((c) => !fill.includes(c)).map((c) => ({ name: c.name, direction: c.direction, taste: c.summary.taste, comp: c.summary.comp, blocking_failures: c.report.blocking_failures }));
+  // each failure says why (the evidence and where), so a caller can tell a missing field from an overlapped one
+  const gateFailed = flagged.filter((c) => !fill.includes(c)).map((c) => ({ name: c.name, direction: c.direction, taste: c.summary.taste, comp: c.summary.comp, blocking_failures: c.report.blocking_failures, why: c.report.issues.filter((i) => i.blocking).map((i) => ({ dimension: i.dimension, evidence: i.evidence, region: i.region })) }));
   return { resolved: R, candidates: kept, rejected, gateFailed, tries: kept.length + rejected.length + gateFailed.length, count, minScore };
 }
 

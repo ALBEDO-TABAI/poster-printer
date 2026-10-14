@@ -5,7 +5,8 @@ recommendations and `reasons` come from them), so you can predict and explain wh
 user's intent says so, and judge the results.
 
 Layout names: `modular` (模块网格) with `hero` 主图卫星 · `flow` 悬挂线 · `steps` 尺度递进 · `strip` 图片横条 ·
-`blocks` 模块分区; `bleedgrid` (满版拼图) with `mosaic` 满版拼贴 · `rows` 满版行列; `single` = the one-picture compositions.
+`blocks` 模块分区; `bleedgrid` (满版拼图) with `mosaic` 满版拼贴 · `rows` 满版行列; `single` = the one-picture compositions;
+`build` (构成编排) = a page archetype plus a text construction (§8).
 
 ---
 
@@ -121,3 +122,37 @@ Adjust:
 - **Bleed** gives a picture scale, but it starts from a field edge.
 - **White fields** are active space, chosen per layout. A gap with no reason is a mistake.
 - **Full bleed** (满版) is still a grid: pictures meet at their own proportions, and the type takes the remaining cell.
+
+## 8. The construction composition (构成编排, `build`)
+
+`build` sets the copy as a designed text group (a construction) on a page archetype, on a modular grid. Most automatic
+draws use it. Pin it when the copy is the point (a title with a few facts), when a cover look is wanted, or when the
+user wants the typesetting to feel designed rather than placed.
+
+**Archetype by material** (`--set archetype=…`):
+
+| Material | Good archetypes |
+|---|---|
+| One photo with a clear subject and open space | `openSide`, `fullBleed` (type only on a calm zone; else it becomes a band), `masthead` with a short word |
+| One busy photo | `photoBand`, `split`, `centreFrame`, `windowInset` |
+| One small or precious picture (object, artwork) | `plate`, `centreFrame` |
+| 2–4 pictures | `strip` (a series), `mosaic` (one leads) |
+| No picture, short title | `giantBlock` (2 or 4 Han characters), `typeFill`, `colourMass` |
+| No picture, Latin title of 2+ words | `latinArch`, `typeFill` |
+| No picture, calm / literary | `quietEmblem`, `totem`, `gate` |
+| A list of ≥ 4 info groups | `infoForm` |
+
+**Construction by copy** (`--set construction=…`):
+- **Short Han title (≤ 4) + 2–4 small facts:** `side-lock` (a stack as tall as the title's cap height) or `corner-sat`.
+- **A numeral is the message** (price, date, count): `numeral-hero`, `number-lock`, `price`, `date-group`.
+- **≥ 3 lines of different length:** `justified-brick`, or `centred-stack` / `staircase`.
+- **Bilingual title, same meaning:** `cn-en-justify`, `spine-split`, `display-en`.
+- **≥ 4 small facts:** `under-row`, `ticket`, `general-specific` (not stacked).
+- **A long one-line title:** `title-para`, `rule-sandwich`, `two-col` (never `side-lock`).
+- **Promo / event:** `sandwich`, `bracketed`, `inline-chain`, `emblem`.
+
+**What the engine guarantees:**
+- Sizes step by at least 1.5×.
+- Gaps are line heights, display leading is 0.9–1.0, and the accent sits on one level only.
+- Text never sits on a busy or low-contrast part of a photo, and never on the subject.
+- Real copy is never padded with invented words or numbers.

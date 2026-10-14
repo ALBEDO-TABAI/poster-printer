@@ -27,6 +27,8 @@ export const GROUPS: Record<string, [string, string]> = {
 const IA: Record<string, IARow> = {
   composition: ['layout','layout.compose','构图手法','Composition','决定这张海报的“招式”：分割、满版、巨字、卡片……','The overall move: split, full-bleed, giant word, cards…',1],
   gridLayout: ['layout','layout.compose','网格版式','Grid layout','模块网格与满版拼图的版式：主图卫星、悬挂线、尺度递进、图片横条、模块分区，或满版拼贴、满版行列。图片按自身比例占整格。','Layout type of the modular and bleed-grid compositions: hero + satellites, flowline, scale steps, strip, modules, or edge-to-edge mosaic / rows. Pictures span whole fields at their own proportion.',1],
+  archetype: ['layout','layout.compose','页面原型','Page archetype','“构成编排”构图的页面原型：图带、满版、开放侧、刊头、居中框、图条、主次拼图……“自动”时随机抽取。','Page archetype of the Construction composition: photo band, full bleed, open side, masthead, centre frame, strip, mosaic… Auto draws one.',2],
+  construction: ['type','type.blocks','文字组构成','Text construction','“构成编排”构图的主文字组：两端对齐砖、等高侧栏、双线夹心、票据框、阶梯……“自动”时按版面挑选。','Main text group of the Construction composition: justified brick, cap-locked side stack, rule sandwich, ticket frame, staircase… Auto picks one that suits the room.',2],
   gridType: ['layout','layout.grid','网格形态','Grid shape','直角网格最稳；非正交与曲线网格更有张力。','Orthogonal is calm; skewed and curved grids add tension.',1],
   density: ['layout','layout.grid','信息密度','Density','元素多少与网格切分的细碎程度。','How many cells and elements the grid carries.',1],
   gridStrength: ['layout','layout.grid','对齐严格度','Grid adherence','越高越严格贴合网格，越低越自由。','Higher snaps everything to the grid; lower loosens it.',2],
@@ -136,6 +138,7 @@ export const PRESETS: Record<string, { zh: string; en: string; p: Record<string,
     { zh: '满载', en: 'Dense', p: { density: 'full', margin: 3, gridType: 'auto' } },
     { zh: '瑞士', en: 'Swiss', p: { composition: 'swiss', gridType: 'ortho', gridStrength: 1.6 } },
     { zh: '模块网格', en: 'Grid', p: { composition: 'modular', gridLayout: 'auto' } },
+    { zh: '构成编排', en: 'Construction', p: { composition: 'build', archetype: 'auto', construction: 'auto' } },
   ],
   type: [
     { zh: '克制', en: 'Quiet', p: { titleScale: 80, smallRel: 40, typeRatio: '1.25' } },

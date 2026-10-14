@@ -23,6 +23,7 @@ import { COMPOSERS_V4 } from './gen/comps4';
 import { COMPOSERS_V5 } from './gen/comps5';
 import { COMPOSERS_V8 } from './p8/grammar';
 import { modular, bleedgrid } from './swiss/compose';
+import { build } from './build/compose';
 import { companions, gridCount } from './swiss/pick';
 import { parseMutation, diagnose, cellOf, cellKey, type Mutation } from './p8/search';
 import { problemOf, retrieve } from '../data/recipes';
@@ -119,15 +120,19 @@ export interface GenInput {
   /** phase 17: re-roll one layer of this poster (pass the poster's own comp / plan / idea / salt / attempt / picks). A few
    *  salts are tried; the first that visibly changes the layer (against `base`) and passes the gates is kept. */
   reroll?: { layer: Layer; salt: string; base?: Scene | null };
+  /** phase 18: replay the stored layout kind (build:<page archetype>); a placement re-roll releases it */
+  forceKind?: string;
+  /** phase 18: what a layer re-roll moves away from (the base poster's page archetype / constructions) */
+  avoid?: { kind?: string; constructions?: string[] };
 }
-export interface Picked { /** phase 17: layered streams of this poster (absent = made before phase 17) */ layers?: Layers; texts: PickedTexts; palette: Palette; imageIds: string[]; comp: Comp; grid: { type: string; density: string; nc: number; nr: number }; sidebar?: string; attempt?: number; quality?: QualityReport; plan?: DrawPlan; salt?: string; taste?: number; idea?: IdeaPick; /** phase 8: search route (p7 or an exemplar recipe id), the strategy's semantics name, and the mutation applied */ route?: string; strategy?: string; mutation?: string }
+export interface Picked { /** phase 17: layered streams of this poster (absent = made before phase 17) */ layers?: Layers; texts: PickedTexts; palette: Palette; imageIds: string[]; comp: Comp; grid: { type: string; density: string; nc: number; nr: number }; sidebar?: string; attempt?: number; quality?: QualityReport; plan?: DrawPlan; salt?: string; taste?: number; idea?: IdeaPick; /** phase 8: search route (p7 or an exemplar recipe id), the strategy's semantics name, and the mutation applied */ route?: string; strategy?: string; mutation?: string; /** phase 18: the layout kind for session variety: the composition, or build:<page archetype> */ kind?: string; /** phase 18: what the layer re-roll that made this poster moved away from (replays pass it back) */ avoid?: { kind?: string; constructions?: string[] } }
 export interface GenResult { scene: Scene; picked: Picked; ms: number; attempts?: number; /** phase 8: MAP-Elites archive of the search (one elite per lead × density × stability cell) */ archive?: ArchiveEntry[]; /** the seeds of the winning candidate (the selector may re-draw picture / colour seeds) */ seeds?: GenInput['seeds'] }
 
 export interface ArchiveEntry { cell: string; comp: string; route: string; salt: string; score: number; taste: number; seeds: GenInput['seeds']; idea?: IdeaPick; mutation?: string }
 
 export const DEFAULT_MODULES: Record<LayerKey, boolean> = Object.fromEntries(LAYERS.map((l) => [l, true])) as Record<LayerKey, boolean>;
 
-const ALL_COMPOSERS: Record<Comp, (ctx: Ctx) => void> = { ...COMPOSERS, ...COMPOSERS_V2, ...COMPOSERS_V3, ...COMPOSERS_V4, ...COMPOSERS_V5, ...COMPOSERS_V8, modular, bleedgrid };
+const ALL_COMPOSERS: Record<Comp, (ctx: Ctx) => void> = { ...COMPOSERS, ...COMPOSERS_V2, ...COMPOSERS_V3, ...COMPOSERS_V4, ...COMPOSERS_V5, ...COMPOSERS_V8, modular, bleedgrid, build };
 /** the idea a hand-picked composition most naturally realises (for replays and manual composition choice) */
 const ideaForComp = (c: string) => { const best = [...IDEAS].sort((a, b) => (b.realisers[c] ?? 0) - (a.realisers[c] ?? 0))[0]; return best?.realisers[c] ? best.id : undefined; };
 // phase 5: compositions that rate ≥ 7.5 lead; legacy layouts that averaged below 7 are kept for explicit choice only
@@ -357,6 +362,13 @@ function generateOne(inp: GenInput): GenResult {
       if (plan.v2) {
         // phase 6: archetype-first, entropy-aware sampler (gen/sampler.ts)
         w = ideaW ?? v2Weights({ plan, images, imagesOn: inp.modules.images, modes, W, H, zh: texts.headline.lang === 'zh', styleComp: inp.style.comp as Record<string, number> | undefined, recent: inp.recent, exclude: inp.excludeComps });
+        // phase 18: the construction engine (build/) takes most new draws; its page archetypes vary inside it. Legacy
+        // posters (no layers) keep their exact draw.
+        if (layers && !inp.excludeComps?.includes('build')) {
+          const others = Object.entries(w).filter(([c]) => c !== 'build').reduce((a, [, v]) => a + (v || 0), 0);
+          const share = images.length >= 2 && inp.modules.images ? 0.5 : BUILD_SHARE;
+          w = { ...w, build: others > 0 ? (others * share) / (1 - share) * (String((inp.recent ?? []).slice(-1)[0] ?? '').startsWith('build') ? 0.8 : 1) : 1 };
+        }
       } else {
         if (grid.type === 'curve') w.fan += 5;
         if (grid.type === 'image') { w.checker += 2; w.split += 2; }
@@ -378,17 +390,22 @@ function generateOne(inp: GenInput): GenResult {
     // phase 16: the grid compositions show a set of pictures; a draw with one picture gets companions from the pool
     // (own stream; the ids are stored with the draw, so replays lock them). A locked / given set is never extended.
     let imgs = images;
-    if (MULTI_IMG.has(comp) && images.length && !inp.lockedImages?.length && inp.modules.images) {
+    // phase 18: a construction-engine page shows a strip / mosaic of pictures about a quarter of the time (own stream)
+    const buildMulti = comp === 'build' && images.length === 1 && (['strip', 'mosaic'].includes(String(p.archetype ?? '')) || new Rng(inp.seeds.image + '|bmulti').chance(0.25));
+    if ((MULTI_IMG.has(comp) || buildMulti) && images.length && !inp.lockedImages?.length && inp.modules.images) {
       const pool = inp.images.filter((a) => !images.includes(a));
       // a small pool is a chosen set (picked pictures, a narrow filter): show all of it
       const total = images.length + pool.length;
-      const want = honor.has('imageCount') ? Number(p.imageCount) : total <= 8 ? total : gridCount(new Rng(inp.seeds.image + '|gridn'), total, W / H > 1.5);
+      const want = buildMulti ? Math.min(total, new Rng(inp.seeds.image + '|bmultin').pick([2, 3, 3, 4])) : honor.has('imageCount') ? Number(p.imageCount) : total <= 8 ? total : gridCount(new Rng(inp.seeds.image + '|gridn'), total, W / H > 1.5);
       if (want > images.length) imgs = [...images, ...companions(images[0], pool, images, want, inp.seeds.image)];
       for (const a of imgs) if (!gateAssets.has(a.id)) gateAssets.set(a.id, a as GateAsset);
     }
     const ctx = new Ctx(rL, grid, pp, palette, inp.fonts, texts, imgs, inp.measure, inp.modules, modes);
     if (layers) { ctx.layered = true; ctx.rt = rT; ctx.rg = rG; ctx.rd = new Rng(`${lseedA}|decor|${String(pp.decorSalt ?? '')}`); } // decor keeps its stream when a layer is re-rolled
     ctx.honor = honor;
+    ctx.recent = inp.recent ?? [];
+    ctx.forceKind = inp.forceKind;
+    ctx.avoid = inp.avoid;
     ctx.comp = comp;
     ctx.plan = plan;
     ctx.idea = idea;
@@ -473,7 +490,8 @@ function generateOne(inp: GenInput): GenResult {
   }
   const { scene, comp, grid, sbTpl, quality } = best;
   const ms = now() - t0;
-  return { scene, picked: { ...(layers ? { layers } : {}), texts, palette, imageIds: best.imgs.map((a) => a.id), comp, grid: { type: grid.type, density: grid.density, nc: grid.nc, nr: grid.nr }, sidebar: sbTpl, attempt: bestAttempt, quality, plan: plan0, ...(idea ? { idea } : {}) }, ms, attempts: tries };
+  const arche = (scene.info.sem as { vars?: Record<string, { value?: unknown }> } | undefined)?.vars?.archetype?.value;
+  return { scene, picked: { ...(layers ? { layers } : {}), ...(comp === 'build' && arche ? { kind: `build:${String(arche)}` } : {}), ...(comp === 'build' && inp.avoid ? { avoid: inp.avoid } : {}), texts, palette, imageIds: best.imgs.map((a) => a.id), comp, grid: { type: grid.type, density: grid.density, nc: grid.nc, nr: grid.nr }, sidebar: sbTpl, attempt: bestAttempt, quality, plan: plan0, ...(idea ? { idea } : {}) }, ms, attempts: tries };
 }
 
 /**
@@ -483,6 +501,8 @@ function generateOne(inp: GenInput): GenResult {
  * The winner's salt, composition and plan are stored in `picked`, so replays are exact.
  */
 /** selector knobs (tuned in phase 6 by simulation + by-eye rounds) */
+/** phase 18: the share of new automatic draws that go to the construction engine */
+export const BUILD_SHARE = 0.7;
 export const SELECT = { accept: 7.0, alts: 1, retries: 12, /** phase 11: 'light' = gates filter, then a nearly random pick among the survivors (taste only a small weight / tie-break), the default until the user's A/B data arrives; 'taste' = the learned taste ranking of phases 6–10 */ mode: 'light' as 'light' | 'taste', tasteW: 0.15, /** phase 12: cost of an unanchored lopsided candidate (optical balance) */ lopW: 1.5 };
 /** phase 8 search budget (counted candidates, never ms) */
 /** compositions a search route may force: the phase 8 strategies (the P7
@@ -631,10 +651,15 @@ function rerollLayer(inp: GenInput): GenResult {
   const was = base ? layerSig(base, layer) : null;
   const wasGeo = base && layer === 'type' ? layerSig(base, 'typeGeo') : null;
   const pics = base && layer === 'type' ? layerSig(base, 'pics') : null;
+  // phase 18: a construction-engine poster steers away from what it showed: a placement re-roll from its page archetype,
+  // a type re-roll from its constructions (the re-roll's own salt still decides what comes instead)
+  const bvars = (base?.info.sem as { vars?: Record<string, { value?: unknown }> } | undefined)?.vars;
+  // a grid re-roll keeps the steer the poster already had (its construction stays the same)
+  const avoid: GenInput['avoid'] = layer === 'place' && inp.forceKind?.startsWith('build:') ? { ...inp.avoid, kind: inp.forceKind } : layer === 'type' && bvars?.construction?.value ? { constructions: String(bvars.construction.value).split('+') } : inp.avoid;
   let best: GenResult | null = null, bestKey = -Infinity;
   const tries = layer === 'type' ? 6 : 4;
   for (let k = 0; k < tries; k++) {
-    const r = generateOne({ ...inp, reroll: undefined, select: 0, layers: { ...prev, v: 2, [layer]: k ? `${salt}~${k}` : salt } });
+    const r = generateOne({ ...inp, reroll: undefined, select: 0, layers: { ...prev, v: 2, [layer]: k ? `${salt}~${k}` : salt }, ...(layer === 'place' ? { forceKind: undefined } : {}), avoid });
     const changed = was === null || layerSig(r.scene, layer) !== was;
     const strong = changed && (wasGeo === null || layerSig(r.scene, 'typeGeo') !== wasGeo);
     const kept = pics === null || layerSig(r.scene, 'pics') === pics;

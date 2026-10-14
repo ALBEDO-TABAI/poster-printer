@@ -1,6 +1,6 @@
 # Ready Poster Printer
 
-在浏览器里抽取、编辑和导出海报的本地设计工具。支持多页文档、配色探索、瑞士网格多图排版（模块网格 / 满版拼图）、按层换结构（网格 / 图位 / 排字，可只换文字排法而图片不动），以及供脚本和 AI 助手使用的命令行版与配套技能。
+在浏览器里抽取、编辑和导出海报的本地设计工具。支持多页文档、配色探索、构成编排（34 种文字组构成 × 19 种页面原型，规则来自设计课程与参考库的研究）、瑞士网格多图排版（模块网格 / 满版拼图）、按层换结构（网格 / 图位 / 排字，可只换文字排法而图片不动），以及供脚本和 AI 助手使用的命令行版与配套技能。
 
 A local generative poster tool with a browser editor, a Swiss modular grid for several pictures (modular and full-bleed layouts), layer-by-layer structure changes (grid / placement / type: re-set the type while the pictures stay put), and a companion CLI with an agent skill.
 

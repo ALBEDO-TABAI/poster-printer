@@ -36,6 +36,23 @@
 
 Run: `cd agent-harness && CLI_ANYTHING_FORCE_INSTALLED=1 ../.venv/bin/python -m pytest cli_anything/poster_printer/tests/ -v -s`
 
+## Part 2 — Results (2026-10-14 JST, app phase 18 / CLI 0.4.0)
+
+- **Full suite:** **49 passed, 1 skipped** (the glyph-fix test needs the full font directory) in 8 min 1 s, on macOS
+  with Microsoft Edge as the Chromium. The app round trip is included.
+- **Real-copy briefs** (Chinese event, English event, Chinese exhibition with a date range; 8 candidates each):
+  - construction-engine (`build`) posters pass every blocking gate: content, contrast and minimum size;
+  - the remaining gate failures come from older compositions (`index` drops a venue, `modular` sets a date at 8.9 CSS px).
+- **New:**
+  - `gate_failed[].why` gives each blocking issue's evidence and region;
+  - the content gate reads the nodes of one `unit` as one text (a construction sets each line and script run as its own node).
+- **rea-poster:**
+  - vitest 238 passed / 1 skipped; `tsc -b` OK;
+  - posters without layers match the phase-16 fingerprints;
+  - 60 posters drawn with the committed phase-17 engine replay byte-identically;
+  - `scripts/qa/e2e.mjs` against the release build: 164 checks passed. One check fails, "全部解除 clears all pins", as on
+    the phase-16 and phase-17 builds.
+
 ## Part 2 — Results (2026-10-14 JST, app phase 17 / CLI 0.3.0)
 
 - **Full suite:** **49 passed, 1 skipped** (the glyph-fix test needs the full font directory) in 8 min 2 s, on macOS with Microsoft Edge as the Chromium.

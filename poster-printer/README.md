@@ -368,6 +368,21 @@ Under the hood:
 
 Details are in `docs/PHASE17_LAYERS.md`.
 
+## Phase 18: the construction engine (构成编排)
+
+A new composition, **构成编排 `build`**, now makes most automatic draws (70%; 50% with several pictures). It is built from a study of a designer's course and reference library (阿冲: lessons, PSD boards, covers, micro typesetting).
+
+- **Text groups are constructions.** A library of 34 constructions: justified bricks, cap-locked side stacks, rule sandwiches, ticket frames, staircases, number locks, corner satellites… Sizes step in fixed ratios, gaps are line heights, notches are closed, and one level carries the accent.
+- **19 page archetypes.** Photo band, full bleed (type only on calm, high-contrast zones, never on the subject; no scrims), open side, masthead, centre frame, window, split, plate, picture strip, mosaic, giant block, type fill, Latin architecture, gate, scattered grid, quiet emblem, totem, info form, colour mass.
+- **A real grid layer.** Margins, columns, rows and gutter. Photos stop on row lines, frames and measures span whole columns.
+- **Every re-roll shows something new.**
+  - **网格** moves the page onto another grid and keeps the archetype and type.
+  - **图位** changes the archetype and keeps the type where it fits.
+  - **排字** changes the construction and keeps every picture.
+- **Pin it.** Advanced › 页面原型 / 文字组构成 (`archetype`, `construction`) pin an archetype or a construction.
+
+Details are in `docs/PHASE18_CONSTRUCTIONS.md`.
+
 ## License
 
 Original program code is licensed under [GNU AGPL v3.0 only](../LICENSE). Third-party code, fonts, images and palette data retain their respective licenses and credits in [licenses/](licenses/).

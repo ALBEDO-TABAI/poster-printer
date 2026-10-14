@@ -55,7 +55,7 @@ describe('phase 5 compositions', () => {
     let repeats = 0;
     for (let i = 0; i < 40; i++) {
       const r = run(`rec-${i}`, '3:4', BUILTIN_STYLES[i % BUILTIN_STYLES.length].id, 'auto', { recent: seen.slice(-4) });
-      const c = String(r.scene.info.comp ?? '');
+      const c = String((r.picked as { kind?: string }).kind ?? r.scene.info.comp ?? ''); // phase 18: build posters by page archetype
       if (seen.length && seen[seen.length - 1] === c) repeats++;
       seen.push(c);
     }

@@ -180,6 +180,8 @@ export function buildInput(s: State, extra: Extra = {}, paramPatch: Params = {})
       forceComp: keep?.comp ?? lay?.comp,
       forcePlan: keep?.plan ?? lay?.plan,
       forceIdea: keep?.idea ?? lay?.idea,
+      forceKind: keep?.kind ?? lay?.kind,
+      avoid: keep?.avoid ?? lay?.avoid,
       layoutSalt: keep ? keep.salt : lay ? lay.salt : undefined,
       // phase 17: the poster's layer streams (a poster made before phase 17 has none: null replays its single stream);
       // an adjustment that re-lays out keeps the layer salts it had
@@ -187,7 +189,7 @@ export function buildInput(s: State, extra: Extra = {}, paramPatch: Params = {})
       reroll: extra.reroll && lay ? { ...extra.reroll, base: s.result?.scene ?? null } : undefined,
       select: keep || lay ? 0 : SELECT_K,
       honor: s.honor,
-      recent: (lay || keep ? s.history.slice(Math.max(0, s.hIndex - 4), Math.max(0, s.hIndex)) : s.history.slice(-4)).map((e) => String(e.comp ?? '')),
+      recent: (lay || keep ? s.history.slice(Math.max(0, s.hIndex - 4), Math.max(0, s.hIndex)) : s.history.slice(-4)).map((e) => String(e.picked?.kind ?? e.comp ?? '')),
       recentIdeas: (lay || keep ? s.history.slice(Math.max(0, s.hIndex - 4), Math.max(0, s.hIndex)) : s.history.slice(-4)).map((e) => String(e.picked?.idea?.id ?? '')),
     };
 }
@@ -351,6 +353,8 @@ export const useStore = create<State>((set, get) => ({
 
   setParam(k, v) { get().setParams({ [k]: v }); },
   setParams(patch) {
+    // phase 18: pinning a page archetype or a text construction means the Construction composition
+    if (((patch.archetype !== undefined && patch.archetype !== 'auto') || (patch.construction !== undefined && patch.construction !== 'auto')) && !('composition' in patch) && get().params.composition !== 'build') patch = { ...patch, composition: 'build' };
     const ks = Object.keys(patch);
     const live = ks.filter((k) => !SETTINGS_KEYS.includes(k));
     set((s) => {

@@ -167,6 +167,15 @@ All sizes below are in canvas units `u = min(W,H)/100`.
 - Declared breaks: a deliberate overlap is licensed in the scene, not flagged.
 - Real copy is sacred: never invent numbers, years, mastheads or quotes; names, dates, venues and prices never split.
 
+## Phase 18 principles (the construction engine; `docs/PHASE18_CONSTRUCTIONS.md`)
+- **A text group is a construction, not a list of lines.** Sizes are multiples of one unit with clear steps (≥ 1.5×); gaps are member heights; a side stack is as tall as the big word's cap height; display leading 0.9–1.0, tracking negative.
+- **Close the rectangle.** A notch in a compact group gets a symbol, a rule or letterspacing until the group reads as one shape, unless the rag is the declared rhythm.
+- **One spot colour, on one level.**
+- **The grid decides the geometry.** Photos stop on row lines, frames and measures span whole columns, aux columns sit on the column starts. A grid re-roll moves the page, not the idea.
+- **Type on a picture only where the picture carries it.** Judge the box the type will really cover, part by part; no scrims; never on the subject. Otherwise use a solid band.
+- **Real copy is shown whole, found and read.** A fact is never cut, a missing fact is set in a free corner, and small text on a busy part of a picture gets a solid tag.
+- **Each layer re-roll shows something new.** A placement re-roll changes the page archetype, a type re-roll the construction; what it moved away from is stored, so the result replays exactly.
+
 ## Phase 17 principles (the structure in layers; `docs/PHASE17_LAYERS.md`)
 - **A structure has layers, and each layer can change alone.** The grid system, the picture placement and the typesetting draw from separate streams. Re-rolling one never moves the others.
 - **The pictures are placed against blocks, not against glyphs.** Where a picture hangs from the type (type-led layouts, title bands), the block it hangs from belongs to the placement. The type is set inside that block.
