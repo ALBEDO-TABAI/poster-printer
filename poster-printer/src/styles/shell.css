@@ -330,6 +330,8 @@ body.film-open .film { transform: translate(-50%, 0) scale(1); opacity: 1; point
 .style-card .th { aspect-ratio: 3/4; border-radius: 6px; overflow: hidden; background: var(--fill); box-shadow: 0 1px 2px rgba(0,0,0,.08); transition: transform 420ms var(--ease-spring), box-shadow var(--d-2); position: relative; }
 .style-card .th img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .style-card .th .spec { position: absolute; inset: 0; display: grid; place-items: center; font-size: 28px; font-weight: 700; color: var(--ink-2); }
+/* phase 21: a card shows the whole poster at its format; a preview being re-made for new content is dimmed */
+.style-card .th.stale .svgth { opacity: .45; transition: opacity var(--d-2); }
 .style-card:hover .th { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 22px -10px rgba(0,0,0,.4); }
 .style-card.on .th { box-shadow: 0 0 0 2px var(--stage), 0 0 0 3.5px var(--accent); }
 .style-card .nm { font-size: var(--fs-xs); font-weight: 500; color: var(--ink-2); line-height: 1.25; }

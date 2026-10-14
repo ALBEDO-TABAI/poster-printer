@@ -92,11 +92,14 @@ export function copyOf(ctx: Ctx): Copy {
   const date = (f?.date ? `${f.date.y}.${String(f.date.m).padStart(2, '0')}.${String(f.date.d).padStart(2, '0')}` : null) ?? all.map((p) => p.t.match(DATE_RE)?.[1]).find(Boolean) ?? null;
   const year = f?.year || date?.match(/\b(19|20)\d{2}\b/)?.[0] || (custom ? null : String(2024 + ctx.rd.int(1, 3)));
   const num = f?.numeral ? { v: f.numeral, unit: '' } : numOf([...meta, ...items.map((i) => i.main), ...(sub ? [sub] : [])]);
+  // phase 22: real copy whose info line is exactly the date — that line IS the date, set once through the date slot
+  // (as an info line too, it appeared twice: the main group took one, the side block the other)
+  const metaShown = custom && date ? meta.filter((m) => m.t.trim() !== date) : meta;
   const para = T.prose[0]?.t ? T.prose[0] : T.note.t && T.note.t.length > 12 ? T.note : null;
-  const labels = [...(custom ? [] : T.words), ...meta, ...items.map((i) => i.main)].filter((p) => p.t && short(p));
+  const labels = [...(custom ? [] : T.words), ...metaShown, ...items.map((i) => i.main)].filter((p) => p.t && short(p));
   const index = f?.issue ?? (custom ? null : `No.${String(ctx.rd.int(1, 48)).padStart(2, '0')}`);
   const times = items.map((i) => i.main.t.match(/\b\d{1,2}:\d{2}\b/)?.[0]).filter((x): x is string => !!x);
-  return { title: hl, cn, en, sub: sub2, num, date, year, items, meta, para, labels, index, dp: dateParts(date, times), custom };
+  return { title: hl, cn, en, sub: sub2, num, date, year, items, meta: metaShown, para, labels, index, dp: dateParts(date, times), custom };
 }
 
 /** the words for a slot (null = the slot is empty) */

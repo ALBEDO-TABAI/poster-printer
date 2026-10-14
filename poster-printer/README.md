@@ -405,6 +405,18 @@ Under the hood (`src/engine/color/palette.ts` → `withRoles`): the edits ride o
 - **Background work waits.** Thumbnails wait until the motion is done (`holdIdle`).
 - **Switching fixed.** 高级调校 and 图层与模式 are two views of one panel: from Layers, the 高级调校 button switches back to the last Advanced view instead of closing the panel, and opening Advanced never lands on Layers. View switches fade in.
 
+
+## Phase 21: style previews are what you get
+
+The style library (风格) used to show the current poster with only the style's settings swapped in. It kept that poster's layout and colours, cropped the poster to 3:4 and didn't load the style's fonts, so every card looked alike. Clicking a card then drew a brand-new random poster.
+
+- **A card is the click's result.** Each card is the poster a click makes: your copy and pictures with that style's fonts, settings, layout and colours. The click replays that very result (`stylePreview` / `pickStyle` in `store.ts`).
+- **Each card draws its own poster.** Each style draws its own layout and colours from the poster's seeds (`styleSeeds`). The card of the style the poster was made in is that poster.
+- **Cards stay put.** Picking a style keeps the content it was applied to (`styleBasis`, stored with the entry), so the other cards don't change. They follow a new draw or edited copy, dimmed while they re-render.
+- **Fonts first, whole poster.** Cards load their style's fonts before rendering, only when they come into view, and show the whole poster at its format.
+
+**Fix (construction engine):** with real copy, an info line that is exactly the date (e.g. `2027.05.20`) is the date. It was set twice ("2027.05.20 — 2027.05.20", or once in the text group and again in a side block). It is now set once, through the date slot (`copy.ts`, `usedTexts`). Random draws and earlier posters are unchanged (72 draws and replays checked byte-identical).
+
 ## License
 
 Original program code is licensed under [GNU AGPL v3.0 only](../LICENSE). Third-party code, fonts, images and palette data retain their respective licenses and credits in [licenses/](licenses/).

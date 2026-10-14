@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { generate, DEFAULT_MODULES, type GenResult, type GenInput, type Picked, type Seeds, type Layer } from './engine/generate';
+import type { PickedTexts } from './engine/gen/pick';
 import { FIXED_PLACE, layerHint } from './engine/layers';
 import { COMPONENTS, compSize, freeSlots, type PlacedComponent, type ColorRole } from './engine/components';
 import { DEFAULT_PARAMS, SETTINGS_KEYS, DRAW_ONLY, RELAYOUT, REPICK_PALETTE, REPICK_TEXT, REMOVED_PARAMS, type Params } from './engine/params';
@@ -26,7 +27,12 @@ export interface Entry {
   honor?: string[];
   /** phase 19: the user's own colours on this poster (palette editor); absent = none */
   palEdits?: PalEdits;
+  /** phase 21: a poster made by picking a style keeps the content the style was applied to, so the style previews stay
+   *  the same while the user compares styles */
+  styleBasis?: StyleBasis;
 }
+/** phase 21: what a style is applied to — the poster the user started from (its copy, pictures, seeds, style and picks) */
+export interface StyleBasis { texts: PickedTexts; imageIds: string[]; seeds: Seeds; custom: CustomText | null; styleId: string; picked: Picked }
 /** phase 19: a palette the user saved (源色 for future draws + the exact roles of the poster it came from) */
 export interface MyPalette { id: string; name: string; colors: string[]; roles: PalEdits }
 export interface CompPreset { id: string; name: string; type: string; text?: string; color: ColorRole; scale: number; rot?: number }
@@ -61,6 +67,8 @@ export interface State {
   palettes: LibPalette[]; palFilter: PalFilter; pinnedPalette: string[] | null; baseColor: string;
   /** phase 19: the user's own colours on this poster (roles + block fills), and the ones kept for future draws */
   palEdits: PalEdits; palPins: PalEdits; myPalettes: MyPalette[];
+  /** phase 21: the content the style library previews (set when a style is picked; a new draw clears it) */
+  styleBasis: StyleBasis | null;
   result: GenResult | null; scene: Scene | null; edits: Edits; selected: string | null; editingText: string | null;
   history: Entry[]; hIndex: number; favorites: Entry[];
   recording: boolean; recorded: Entry[]; replaying: boolean;
@@ -97,7 +105,7 @@ export interface State {
   toggleModule(k: LayerKey): void;
   toggleMode(k: ModeKey): void;
   toggleLock(k: keyof Locks): void;
-  pickStyle(id: string): void;
+  pickStyle(id: string): Promise<void>;
   shake(): Promise<void>;
   setRole(lang: Lang, role: RoleKey, patch: Partial<RoleFont>): void;
   copyBigToSmall(lang: Lang): void;
@@ -157,6 +165,7 @@ const entryOf = (s: State, r: GenResult): Entry => ({ honor: s.honor.length ? [.
   id: s.seeds.layout + '-' + Date.now().toString(36), ts: Date.now(), seeds: { ...s.seeds }, decorSalt: s.decorSalt, ratio: s.ratio, styleId: s.styleId,
   params: { ...s.params }, modules: { ...s.modules }, modes: [...s.modes], fonts: s.fonts, picked: r.picked, edits: {}, custom: s.customOn ? s.custom : null, comp: r.picked.comp, placed: s.placed.length ? s.placed : undefined,
   ...(Object.keys(s.palEdits).length ? { palEdits: { ...s.palEdits } } : {}),
+  ...(s.styleBasis ? { styleBasis: s.styleBasis } : {}),
 });
 /** phase 19: a palette carried into a new draw by the colour lock: its look, without the edit history of the old poster */
 const plainPalette = (p: Palette): Palette => { if (!p.user) return p; const { user: _u, ...rest } = p; return rest; }; // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -213,6 +222,49 @@ export function buildInput(s: State, extra: Extra = {}, paramPatch: Params = {})
     };
 }
 
+/* ---------- phase 21: style previews that are exactly what a click makes ---------- */
+/** the content the style library applies styles to: the basis of a style-picked poster, else the current poster */
+export function styleBasisOf(s: State): StyleBasis | null {
+  const cur = s.result?.picked; if (!cur) return null;
+  const e = s.history[s.hIndex];
+  // a kept basis holds only while the poster still carries its copy (editing the copy starts a new basis)
+  const kept = s.styleBasis ?? e?.styleBasis;
+  if (kept && (kept.texts === cur.texts || JSON.stringify(kept.texts) === JSON.stringify(cur.texts))) return kept;
+  return { texts: cur.texts, imageIds: [...cur.imageIds], seeds: { ...(e?.seeds ?? s.seeds) }, custom: s.customOn ? s.custom : null, styleId: s.styleId, picked: { ...cur, quality: undefined } };
+}
+/** each style draws its own layout and colours from the basis seeds (the copy and pictures stay); the style the basis
+ *  poster was made in keeps its seeds — its card is that poster */
+export const styleSeeds = (b: StyleBasis, st: Style): Seeds => (st.id === b.styleId ? b.seeds : { ...b.seeds, layout: `${b.seeds.layout}~${st.id}`, color: `${b.seeds.color}~${st.id}` });
+/** the draw a style makes from a basis: the style's params / fonts / modes over the app settings and pins, the basis copy
+ *  and pictures, the basis seeds; colours re-picked by the style unless locked; nothing from the session history */
+function styleInput(s: State, st: Style, b: StyleBasis): GenInput {
+  const cur = s.result!.picked;
+  const params = { ...DEFAULT_PARAMS, ...st.params, ...settingsOf(s.params), ...s.pins } as Params;
+  const over: State = { ...s, styleId: st.id, params, fonts: st.fonts, modes: st.modes ?? [], seeds: styleSeeds(b, st), decorSalt: '', palEdits: { ...s.palPins }, edits: {}, custom: b.custom, customOn: !!b.custom, honor: Object.keys(s.pins),
+    result: { ...s.result!, picked: { ...cur, texts: b.texts, imageIds: b.imageIds } } };
+  // the basis poster's own style: that poster again (its picks replayed, without tweaks that were not pinned)
+  if (st.id === b.styleId) return buildInput(over, { keepPicked: b.picked });
+  return { ...buildInput(over, { keepTexts: true, keepImages: true }), recent: [], recentIdeas: [] };
+}
+const hashStr = (t: string) => { let h = 2166136261; for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0).toString(36); };
+/** what a style preview depends on besides the style (the basis, ratio, locks, pins, settings, layers, pools) */
+export function styleContextKey(s: State, b: StyleBasis): string {
+  return hashStr(JSON.stringify([b, s.ratio, s.locks.color ? s.result?.picked.palette : 0, s.pins, s.palPins, settingsOf(s.params), s.modules, s.pinnedPalette, s.palFilter, s.imgPick, s.imgCat, s.placed, s.userImages.length]));
+}
+const styleKeyOf = (st: Style, ctx: string) => st.id + ':' + hashStr(JSON.stringify([st.params, st.fonts, st.modes])) + ':' + ctx;
+const stylePreviews = new Map<string, GenResult>();
+/** the poster a style card shows and a click on it makes (cached; the style's fonts must be loaded first) */
+export function stylePreview(s: State, st: Style, b: StyleBasis, ctx = styleContextKey(s, b)): GenResult {
+  const key = styleKeyOf(st, ctx);
+  let r = stylePreviews.get(key);
+  if (!r) {
+    r = generate(styleInput(s, st, b));
+    stylePreviews.set(key, r);
+    if (stylePreviews.size > 240) stylePreviews.delete(stylePreviews.keys().next().value!);
+  }
+  return r;
+}
+
 /** Re-create the scene of a history/favourite entry (exact, using its stored picks). */
 export function entryScene(e: Entry): Scene | null {
   const s = useStore.getState();
@@ -239,7 +291,7 @@ export const useStore = create<State>((set, get) => ({
   textSet: 'auto', custom: null, customOn: false, savedTexts: LS.get('rea.texts.v1', []),
   presetImages: [], userImages: [], imgCat: 'all', imgPick: [],
   palettes: [], palFilter: { src: 'all', light: 'any', chroma: 'any', contrast: 'any', tag: 'any' }, pinnedPalette: null, baseColor: '#f1ede4',
-  palEdits: {}, palPins: {}, myPalettes: LS.get('rea.myPalettes.v1', []),
+  palEdits: {}, palPins: {}, myPalettes: LS.get('rea.myPalettes.v1', []), styleBasis: null,
   result: null, scene: null, edits: {}, selected: null, editingText: null,
   history: [], hIndex: -1, favorites: LS.get('rea.favs.v1', []),
   recording: false, recorded: [], replaying: false,
@@ -291,7 +343,7 @@ export const useStore = create<State>((set, get) => ({
     let fonts = s.fonts;
     if (s.params.shakeOnDraw) fonts = shakeFonts(seeds.layout, s.fontCount).set;
     // phase 13: a draw starts from the style + settings + pins; tweaks of the last poster stay with that poster
-    set({ seeds, decorSalt: '', fonts, edits: {}, selected: null, params: drawParams(s), honor: Object.keys(s.pins), noEffect: null, dirty: Object.keys(s.pins).length > 0 || Object.keys(s.palPins).length > 0, palEdits: { ...s.palPins } });
+    set({ seeds, decorSalt: '', fonts, edits: {}, selected: null, params: drawParams(s), honor: Object.keys(s.pins), noEffect: null, dirty: Object.keys(s.pins).length > 0 || Object.keys(s.palPins).length > 0, palEdits: { ...s.palPins }, styleBasis: null });
     await get().regen(true);
   },
 
@@ -330,7 +382,7 @@ export const useStore = create<State>((set, get) => ({
 
   async variant(kind) {
     const s = get();
-    set({ edits: {}, selected: null });
+    set({ edits: {}, selected: null, styleBasis: null });
     // phase 13: 换文字 / 换色 / 换图 / 换图形 keep the layout and re-pick only their own dimension; only 换结构 re-lays out
     const L = { keepLayout: true };
     if (kind === 'text') { set({ seeds: { ...s.seeds, text: newSeed() } }); return get().regen(true, { ...L, keepPalette: true, keepImages: true }); }
@@ -370,7 +422,7 @@ export const useStore = create<State>((set, get) => ({
   },
 
   async restore(e, push = false) {
-    set({ honor: e.honor ? [...e.honor] : [], noEffect: null, seeds: { ...e.seeds }, decorSalt: e.decorSalt, ratio: e.ratio, styleId: e.styleId, params: { ...e.params }, modules: { ...e.modules }, modes: [...e.modes], fonts: e.fonts, edits: { ...e.edits }, selected: null, custom: e.custom ?? get().custom, customOn: !!e.custom, placed: e.placed ?? [], palEdits: { ...(e.palEdits ?? {}) } });
+    set({ honor: e.honor ? [...e.honor] : [], noEffect: null, seeds: { ...e.seeds }, decorSalt: e.decorSalt, ratio: e.ratio, styleId: e.styleId, params: { ...e.params }, modules: { ...e.modules }, modes: [...e.modes], fonts: e.fonts, edits: { ...e.edits }, selected: null, custom: e.custom ?? get().custom, customOn: !!e.custom, placed: e.placed ?? [], palEdits: { ...(e.palEdits ?? {}) }, styleBasis: e.styleBasis ?? null });
     await get().regen(push, { keepPicked: e.picked });
   },
 
@@ -426,17 +478,22 @@ export const useStore = create<State>((set, get) => ({
     get().regen(false, { touch: 'mode:' + k, keepLayout: false, keepPalette: false });
   },
   toggleLock(k) { set((s) => ({ locks: { ...s.locks, [k]: !s.locks[k] } })); },
-  pickStyle(id) {
+  async pickStyle(id) {
+    // phase 21: the poster a style card previews is the poster the click makes: the same content (copy, pictures,
+    // seeds) in that style, computed once and replayed exactly
     const s0 = get();
     const st = styleById(s0, id);
+    const b = styleBasisOf(s0);
     // tweaks of this poster that are not pinned are dropped by a new style: say so; pins are kept
     const base = styleBase(s0);
     const lost = Object.keys(s0.params).filter((k) => !SETTINGS_KEYS.includes(k) && !(k in s0.pins) && s0.params[k] !== base[k]).length;
     const n = Object.keys(s0.pins).length;
-    set({ styleId: st.id, fonts: st.fonts, modes: st.modes ?? [], edits: {}, selected: null, seeds: newSeeds(), decorSalt: '', palEdits: { ...s0.palPins } });
+    await ensureFontSet(st.fonts);
+    const r = b ? stylePreview(get(), st, b) : null;
+    set({ styleId: st.id, fonts: st.fonts, modes: st.modes ?? [], edits: {}, selected: null, seeds: r?.seeds ?? (b ? styleSeeds(b, st) : newSeeds()), decorSalt: '', palEdits: { ...s0.palPins }, styleBasis: b });
     set({ params: drawParams(get()), honor: Object.keys(s0.pins), dirty: n > 0, noEffect: null });
     if (lost || n) get().toast(s0.lang === 'zh' ? `已切换风格${lost ? ` · 本张 ${lost} 项调整已重置` : ''}${n ? ` · 保留 ${n} 个锁定` : ''}` : `Style changed${lost ? ` · ${lost} tweaks reset` : ''}${n ? ` · ${n} pins kept` : ''}`, lost ? 'warn' : 'ok');
-    get().regen(true);
+    await get().regen(true, r ? { keepPicked: r.picked } : {});
   },
   async shake() {
     const s = get();
@@ -615,7 +672,7 @@ export const useStore = create<State>((set, get) => ({
 const SESSION = 'rea.session.v1';
 const SESSION_KEYS: (keyof State)[] = ['params', 'pins', 'palPins', 'honor', 'history', 'hIndex', 'styleId', 'ratio', 'modules', 'modes', 'fonts', 'locks', 'seeds', 'decorSalt'];
 let saveTimer: ReturnType<typeof setTimeout> | null = null;
-const slim = (e: Entry): Entry => ({ ...e, picked: { ...e.picked, quality: undefined } });
+const slim = (e: Entry): Entry => ({ ...e, picked: { ...e.picked, quality: undefined }, ...(e.styleBasis ? { styleBasis: { ...e.styleBasis, picked: { ...e.styleBasis.picked, quality: undefined } } } : {}) });
 export function saveSession() {
   const s = useStore.getState();
   const keep = 60;

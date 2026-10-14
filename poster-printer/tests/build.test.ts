@@ -169,4 +169,15 @@ describe('text-group engine', () => {
     expect(opt('construction').sort()).toEqual(LIBRARY.map((c) => c.id).sort());
     expect(opt('archetype').sort()).toEqual(Object.keys(ARCHETYPES).sort());
   });
+  it('never sets a date twice when an info line is that same date (real copy)', () => {
+    const copy = { headline: 'Sugar Lab', sub: 'A candy pop-up', small: [], note: [], prose: '', meta: ['2027.05.20', '18 West Street', 'Free entry'] };
+    let shown = 0;
+    for (let k = 0; k < 60; k++) {
+      const r = generate(input(`DD${k}`, RATIOS[k % RATIOS.length], STYLES[k % STYLES.length], 'build', { custom: copy }) as GenInput);
+      const n = texts(r).filter((t) => t.lines.map((l) => l.text).join('').replace(/\s/g, '') === '2027.05.20').length;
+      expect(n, `DD${k} ${r.picked.kind}`).toBeLessThanOrEqual(1);
+      if (n === 1 || words(r).includes('2027.05.20')) shown++;
+    }
+    expect(shown).toBe(60); // the date is still on every poster
+  });
 });

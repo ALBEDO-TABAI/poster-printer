@@ -412,5 +412,7 @@ export function usedTexts(copy: Copy, L: Layout): Set<string> {
   const out = new Set<string>();
   for (const it of L.items) if (it.kind === 'text' && it.leaf.slot === 'lit' && it.leaf.of) { const p = slotText(copy, it.leaf.of, it.leaf.idx ?? 0); if (p) out.add(p.t); }
   for (const it of L.items) if (it.kind === 'text' && it.leaf.slot !== 'lit') { const p = slotText(copy, it.leaf.slot, it.leaf.idx ?? 0); if (p) out.add(p.t); if (it.leaf.slot === 'num' && copy.num) out.add(copy.num.v); if (it.leaf.slot === 'date' && copy.date) out.add(copy.date); }
+  // phase 22 (real copy): a date set as a plain literal (a micro stack, a side stack) is shown too — the side blocks skip it
+  if (copy.custom && copy.date) for (const it of L.items) if (it.kind === 'text' && it.leaf.slot === 'lit' && !it.leaf.of && it.leaf.lit?.trim() === copy.date) out.add(copy.date);
   return out;
 }

@@ -326,7 +326,21 @@ for (const k of await page.$$eval('.rail-l [data-lib]', (b) => b.map((x) => x.da
   await page.click(`.rail-l [data-lib="${k}"]`); await wait(350);
   check(await S(() => document.querySelector('#library.open .p-body')?.children.length > 0), `library tab ${k} renders`);
   if (k === 'images') check(await S(() => document.querySelectorAll('.img-item .uses').length) > 0, 'usage-count badges on library images');
-  if (k === 'styles') await page.screenshot({ path: `${out}/lib-styles.png` });
+  if (k === 'styles') {
+    await page.screenshot({ path: `${out}/lib-styles.png` });
+    // phase 21: a style card is exactly the poster its click makes, and picking it leaves the other cards alone
+    const normSvg = (x) => x.replace(/^<svg[^>]*>/, '<svg>').replace(/ data-[a-z-]+(="[^"]*")?/g, '').replace(/ class="[^"]*"/g, '').replace(/\bid="[^"]*"/g, 'id').replace(/url\(#[^)]*\)/g, 'url(#)').replace(/href="#[^"]*"/g, 'href="#"');
+    await page.waitForFunction(() => { const c = [...document.querySelectorAll('.style-card')].slice(0, 6); return c.length >= 6 && c.every((x) => x.querySelector('.svgth svg') && !x.querySelector('.th.stale')); }, null, { timeout: 60000 });
+    const cards = await S(() => [...document.querySelectorAll('.style-card')].slice(0, 6).map((c) => ({ id: c.dataset.style, svg: c.querySelector('.svgth').innerHTML })));
+    check(new Set(cards.map((c) => normSvg(c.svg))).size === cards.length, 'style cards differ from one another');
+    const curStyle = await st((x) => x.styleId);
+    const pick = cards.find((c) => c.id !== curStyle) ?? cards[1];
+    await page.click(`.style-card[data-style="${pick.id}"]`);
+    await page.waitForFunction((id) => window.__rea.getState().styleId === id, pick.id, { timeout: 30000 }); await wait(600);
+    check(normSvg(await S(() => document.querySelector('.frame .paper svg').outerHTML)) === normSvg(pick.svg), `picking style ${pick.id} makes exactly its card`);
+    const after = await S(() => [...document.querySelectorAll('.style-card')].slice(0, 6).map((c) => ({ id: c.dataset.style, svg: c.querySelector('.svgth')?.innerHTML ?? '', stale: !!c.querySelector('.th.stale') })));
+    check(after.every((a, i) => a.id === cards[i].id && !a.stale && normSvg(a.svg) === normSvg(cards[i].svg)), 'picking a style leaves the other style cards as they were');
+  }
 }
 await page.keyboard.press('Escape'); await wait(150);
 await S(() => { const s = window.__rea.getState(); s.clearPlaced(); s.addComponent({ type: 'stamp' }); }); await wait(300);
