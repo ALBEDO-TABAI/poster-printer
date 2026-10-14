@@ -6,6 +6,8 @@
 
 [简体中文](README.md) · English
 
+**[Download and double-click to run (macOS / Windows)](#the-easy-way-download-and-double-click)**
+
 </div>
 
 ![The Ready Poster Printer editor](.github/assets/hero-en.jpg)
@@ -125,7 +127,31 @@ Results export as PNG, SVG or PDF, or as JSON that the web app can open for hand
 
 Everything runs locally. No account needed.
 
-### Web app
+### The easy way: download and double-click
+
+No command line needed. Three steps:
+
+1. **Download** the package [ready-poster-printer-dist.zip](https://github.com/ALBEDO-TABAI/ready-poster-printer/releases/latest/download/ready-poster-printer-dist.zip) (about 96 MB; it's also on the [Releases](https://github.com/ALBEDO-TABAI/ready-poster-printer/releases/latest) page).
+2. **Unzip** it. You get a `ready-poster-printer` folder.
+3. **Double-click** the launcher inside:
+   - **macOS**: `start.command`
+   - **Windows**: `start.bat`
+
+After a few seconds the poster editor opens in your browser (at http://localhost:5180/). When you're done, close the black terminal window to quit.
+
+You need **Python 3.9 or newer**. No Node.js required.
+
+- **Mac**: most Macs already have it. If double-clicking asks you to install the "command line developer tools", click Install, then double-click again.
+- **Windows**: download it from [python.org](https://www.python.org/downloads/), and on the first screen of the installer tick **Add python.exe to PATH**.
+
+The first time, your system may stop the launcher because it was downloaded from the internet. Nothing is wrong:
+
+- **Mac** says it can't be opened: go to System Settings → Privacy & Security, scroll down to the message and click **Open Anyway**. Or right-click `start.command` → Open → Open.
+- **Windows** shows "Windows protected your PC": click **More info** → **Run anyway**.
+
+Your posters, favorites and uploaded images stay in your own browser.
+
+### Web app (for developers)
 
 You need Node.js 22.12 or newer. Fonts, preset images and palette data are already in the repository.
 
@@ -138,7 +164,7 @@ npm run dev
 
 Open the local address printed in the terminal. Full instructions: [web app README](poster-printer/README.md).
 
-To share it with someone who doesn't have Node.js, run `npm run dist`. It builds a local package at `poster-printer/release/ready-poster-printer-dist.zip`. They unzip it and double-click `start.command` (macOS) or `start.bat` (Windows); it only needs Python 3.9+.
+To build a package like the one above yourself, run `npm run dist`. It's written to `poster-printer/release/ready-poster-printer-dist.zip`.
 
 ### Command line
 

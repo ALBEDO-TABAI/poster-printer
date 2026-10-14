@@ -6,6 +6,8 @@
 
 简体中文 · [English](README.en.md)
 
+**[下载运行包，双击就能用（macOS / Windows）](#最简单下载后双击打开)**
+
 </div>
 
 ![Ready Poster Printer 的编辑界面](.github/assets/hero-zh.jpg)
@@ -125,7 +127,31 @@ ready-poster-printer generate --title "教室里的春天" --subtitle "Picture B
 
 全部在本地运行，不需要注册账号。
 
-### 网页版
+### 最简单：下载后双击打开
+
+不会用命令行也没关系，三步就能用：
+
+1. **下载**运行包 [ready-poster-printer-dist.zip](https://github.com/ALBEDO-TABAI/ready-poster-printer/releases/latest/download/ready-poster-printer-dist.zip)（约 96 MB，也可以在 [Releases](https://github.com/ALBEDO-TABAI/ready-poster-printer/releases/latest) 页面找到）。
+2. **解压**，得到一个 `ready-poster-printer` 文件夹。
+3. **双击**里面的启动文件：
+   - **macOS**：双击 `start.command`
+   - **Windows**：双击 `start.bat`
+
+稍等几秒，浏览器会自动打开海报编辑器（地址是 http://localhost:5180/ ）。用完关掉那个黑色的终端窗口就退出了。
+
+电脑上需要有 **Python 3.9 或更新版本**，不需要装 Node.js。
+
+- **Mac**：大多数 Mac 已经自带。如果双击后提示要安装「命令行开发者工具」，点「安装」，装好后再双击一次。
+- **Windows**：到 [python.org](https://www.python.org/downloads/) 下载安装，安装第一页记得勾选 **Add python.exe to PATH**。
+
+第一次打开时系统可能会拦一下，这是因为文件是从网上下载的，不是出了问题：
+
+- **Mac** 提示「无法打开」：打开「系统设置 → 隐私与安全性」，往下找到这条提示，点「仍要打开」；或者右键点 `start.command` → 打开 → 打开。
+- **Windows** 弹出「Windows 已保护你的电脑」：点「更多信息」→「仍要运行」。
+
+你做的海报、收藏和上传的图片都只保存在你自己的浏览器里。
+
+### 网页版（开发者）
 
 需要 Node.js 22.12 或更新版本。字体、预设图片和配色数据都已经在仓库里了。
 
@@ -138,7 +164,7 @@ npm run dev
 
 打开终端里显示的本地地址就能用了。完整说明见[网页版说明](poster-printer/README.md)。
 
-想给没装 Node.js 的人用，可以执行 `npm run dist` 打一个本地运行包，输出在 `poster-printer/release/ready-poster-printer-dist.zip`。对方解压后双击 `start.command`（macOS）或 `start.bat`（Windows）就能打开，只需要 Python 3.9+。
+执行 `npm run dist` 可以自己打一个上面那样的运行包，输出在 `poster-printer/release/ready-poster-printer-dist.zip`。
 
 ### 命令行版
 
