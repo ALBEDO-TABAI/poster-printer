@@ -211,8 +211,15 @@ if (typeof window !== 'undefined' && !window.__ppGlass) {
       mirrorSetup(el, filterFor(w, h, rad, bevel, scale, ca, PAD, blur, mat.sat));
     }
   }
-  const ro = new ResizeObserver((entries) => { for (const e of entries) applyRefraction(e.target); });
-  G.refract = (root = document) => root.querySelectorAll('[data-refract]').forEach((el) => { if (!el.__lg) { el.__lg = 1; ro.observe(el); } applyRefraction(el); });
+  /* phase 20: while the layout glides (body.shifting, ~420 ms) every surface shows a plain blur, so a surface that
+     changes size mid-glide (the dock folding its labels) waits: its maps are built once, at the size it settles on —
+     not for every intermediate width (a new filter + canvas maps per frame was the main cost of a panel toggle) */
+  const shifting = () => document.body.classList.contains('shifting');
+  const later = new Set(); let laterT = 0;
+  const flushLater = () => { laterT = 0; if (shifting()) { laterT = setTimeout(flushLater, 90); return; } const l = [...later]; later.clear(); l.forEach(applyRefraction); };
+  const refractSoon = (el) => { if (!shifting()) { applyRefraction(el); return; } later.add(el); if (!laterT) laterT = setTimeout(flushLater, 90); };
+  const ro = new ResizeObserver((entries) => { for (const e of entries) refractSoon(e.target); });
+  G.refract = (root = document) => root.querySelectorAll('[data-refract]').forEach((el) => { if (!el.__lg) { el.__lg = 1; ro.observe(el); } refractSoon(el); });
   G.refreshAll = () => { document.querySelectorAll('[data-refract]').forEach(applyRefraction); G.kick(50); };
 
   /* ---------------------------------------------------------------

@@ -5,7 +5,8 @@ import { useStore } from '../../store';
 import { useT } from '../i18n';
 import { Icon } from '../Icon';
 import { LSeg } from '../controls';
-import { useUI } from './ui';
+import { useUI, pushUndo } from './ui';
+import { palTargetName } from '../panels/PalettePanel';
 import * as A from './actions';
 import { PARAMS } from '../../engine/params';
 import { LAYERS, LAYER_INFO, FIXED_PLACE, layerHint } from '../../engine/layers';
@@ -201,6 +202,7 @@ export function PinsBar() {
   const t = useT();
   const lang = useStore((s) => s.lang);
   const live = useStore((s) => s.pins);
+  const palPins = useStore((s) => s.palPins);
   // phase 14: a removed chip stays for its exit animation (value frozen), then leaves
   const [gone, setGone] = useState<Record<string, unknown>>({});
   const prev = useRef(live);
@@ -215,9 +217,11 @@ export function PinsBar() {
   }, [live]);
   const pins = { ...gone, ...live } as typeof live;
   const ks = Object.keys(pins).filter((k) => k in live || k in gone);
-  const nLive = Object.keys(live).length;
+  // phase 19: pinned colours (palette editor) ride along as colour chips
+  const pk = Object.keys(palPins) as (keyof typeof palPins)[];
+  const nLive = Object.keys(live).length + pk.length;
   useEffect(() => { document.body.classList.toggle('has-pins', nLive > 0); }, [nLive]);
-  if (!ks.length) return null;
+  if (!ks.length && !pk.length) return null;
   const fmt = (k: string) => {
     const d = uiParam(k); const v = pins[k];
     if (!d) return `${k} ${String(v)}`;
@@ -230,6 +234,7 @@ export function PinsBar() {
     <div className="pins-bar" id="pins-bar" data-n={ks.length}>
       <span className="pins-h"><Icon name="pin" size={12} />{t('之后的抽卡沿用', 'Future draws keep')}</span>
       {ks.map((k) => <button key={k} className={'lg pin-chip press' + (k in live ? '' : ' out')} data-pin={k} title={t('点按打开参数 · ✕ 解除', 'Open the control · ✕ to unpin')} onClick={() => A.openParam(k)}>{fmt(k)}<span className="x" role="button" aria-label={t('解除', 'Unpin')} onClick={(e) => { e.stopPropagation(); A.togglePin(k); }}><Icon name="x" size={11} /></span></button>)}
+      {pk.map((k) => <button key={'pal-' + k} className="lg pin-chip press" data-pin={'pal.' + k} title={t('点按打开配色 · ✕ 解除', 'Open the palette · ✕ to unpin')} onClick={() => useUI.setState({ lib: 'palettes', palSel: k })}><i className="pin-sw" style={{ background: palPins[k] }} />{palTargetName(k, t)}<span className="x" role="button" aria-label={t('解除', 'Unpin')} onClick={(e) => { e.stopPropagation(); pushUndo(t('解除锁定 ', 'Unpin ') + palTargetName(k, t)); useStore.getState().togglePalPin(k); }}><Icon name="x" size={11} /></span></button>)}
       {nLive > 0 && <button className="pin-clear press" id="btn-unpin-all" onClick={A.clearPins}><Icon name="x" size={11} />{t('全部解除', 'Unpin all')}</button>}
     </div>
   );

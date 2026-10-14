@@ -14,6 +14,8 @@
    ============================================================ */
 :root {
   --t-1: 140ms; --t-2: 200ms; --t-3: 260ms; --t-4: 320ms;
+  /* phase 20: a layout change (a panel opening, closing or replacing another) is one motion on one time and curve */
+  --shift: 420ms; --e-shift: cubic-bezier(.22, .8, .24, 1); --shift-out: 280ms; --e-shift-out: cubic-bezier(.4, 0, .6, 1);
   --e-std: cubic-bezier(.2, .8, .2, 1);
   --e-exit: cubic-bezier(.4, 0, 1, 1);
   --e-spring: var(--e-std);
@@ -40,14 +42,14 @@ button:disabled:active { transform: none; }
 
 /* ---------- panels: scale + fade from their rail, faster out than in; closed panels leave the compositor ---------- */
 .panel { filter: none !important; visibility: hidden; contain: layout paint style;
-  transition: transform var(--t-3) var(--e-exit), opacity var(--t-2) var(--e-exit), visibility 0s linear var(--t-3); }
-.panel.open { visibility: visible; transition: transform var(--t-3) var(--e-spring), opacity var(--t-2) var(--e-std), visibility 0s; }
+  transition: transform var(--shift-out) var(--e-shift-out), opacity var(--t-2) var(--e-exit), visibility 0s linear var(--shift-out); }
+.panel.open { visibility: visible; transition: transform var(--shift) var(--e-shift), opacity 240ms var(--e-std), visibility 0s; }
 .inspector, .advanced { transform: translateX(24px) scale(.98); transform-origin: calc(100% + 48px) var(--rail-oy, 50%); }
 .library { transform: translateX(-24px) scale(.98) !important; transform-origin: -48px var(--rail-oy, 50%); }
 .library.open { transform: none !important; }
 .adv-main, .p-body { contain: content; }
-.film { visibility: hidden; transition: transform var(--t-3) var(--e-exit), opacity var(--t-2) var(--e-exit), visibility 0s linear var(--t-3); transform-origin: 50% 100%; }
-.film.open { visibility: visible; transition: transform var(--t-3) var(--e-spring), opacity var(--t-2) var(--e-std), visibility 0s; }
+.film { visibility: hidden; transition: transform var(--t-3) var(--e-exit), opacity var(--t-2) var(--e-exit), translate var(--shift) var(--e-shift), visibility 0s linear var(--t-3); transform-origin: 50% 100%; }
+.film.open { visibility: visible; transition: transform var(--t-3) var(--e-spring), opacity var(--t-2) var(--e-std), translate var(--shift) var(--e-shift), visibility 0s; }
 
 /* ---------- sheets: from the button that opened them (origin set by Sheets.tsx) ---------- */
 .sheet { visibility: hidden; transform-origin: var(--sx, 50%) var(--sy, 50%); transform: translate(-50%, -50%) scale(.94);
@@ -74,7 +76,9 @@ button:disabled:active { transform: none; }
 .pin-chip.out { animation: chipOut var(--t-2) var(--e-exit) both; pointer-events: none; }
 @keyframes chipIn { from { opacity: 0; transform: translateY(-6px) scale(.9); } }
 @keyframes chipOut { to { opacity: 0; transform: scale(.9); max-width: 0; padding: 0; margin: 0; } }
-.pins-bar { animation: popFade var(--t-3) var(--e-std) both; }
+/* the pins bar keeps its centring (translateX(-50%)) while it pops in */
+@keyframes pinsIn { from { opacity: 0; transform: translateX(-50%) translateY(-3px) scale(.98); } to { transform: translateX(-50%); } }
+.pins-bar { animation: pinsIn var(--t-3) var(--e-std) both; }
 
 /* ---------- segmented control: the thumb slides on the shared curve ---------- */
 .seg-thumb { transition-duration: var(--t-3) !important; transition-timing-function: var(--e-spring) !important; }
@@ -84,21 +88,20 @@ button:disabled:active { transform: none; }
 @keyframes printOut { 0% { opacity: 1; } 100% { opacity: 0; } }
 .frame .paper .layer.in { animation: printIn var(--t-4) var(--e-std) both; }
 .frame .paper .layer.out { animation: printOut var(--t-3) var(--e-exit) both; }
-.frame { transition: width var(--t-4) var(--e-std), height var(--t-4) var(--e-std); }
 
 /* ---------- rails: centred on the poster axis (top set by Shell.tsx), glide when it moves ---------- */
 .rails-placed .rail { transition: top var(--t-4) var(--e-std), opacity var(--t-2) var(--e-std); }
 
 /* ---------- reduced motion: no movement, only quick fades ---------- */
 @media (prefers-reduced-motion: reduce) {
-  :root { --t-1: 0ms; --t-3: 120ms; --t-4: 0ms; --e-spring: linear; }
+  :root { --t-1: 0ms; --t-3: 120ms; --t-4: 0ms; --e-spring: linear; --shift: 0ms; --shift-out: 0ms; }
   *, *::before, *::after { animation-duration: 120ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
   .press:active, .rail button:active, .btn:active, .icon-btn:active { transform: none; }
   .inspector, .advanced, .library { transform: none !important; }
   .film { transform: translate(-50%, 0) !important; }
   .sheet, .sheet.open { transform: translate(-50%, -50%) !important; }
 }
-html.reduce-motion { --t-1: 0ms; --t-3: 120ms; --t-4: 0ms; --e-spring: linear; }
+html.reduce-motion { --t-1: 0ms; --t-3: 120ms; --t-4: 0ms; --e-spring: linear; --shift: 0ms; --shift-out: 0ms; }
 html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after { animation-duration: 120ms !important; animation-iteration-count: 1 !important; }
 html.reduce-motion .inspector, html.reduce-motion .advanced, html.reduce-motion .library { transform: none !important; }
 html.reduce-motion .film { transform: translate(-50%, 0) !important; }
@@ -109,11 +112,18 @@ html.reduce-motion .sheet, html.reduce-motion .sheet.open { transform: translate
    re-blurs its backdrop (the poster tucks under its rim) every frame — that alone took frames from 17 ms to 100 ms on a
    software rasteriser. During a drag the panels swap the live blur for an almost-opaque tint of the same colour (the
    blurred backdrop there is nearly uniform anyway), and get it back on release. */
-.panel.lg { transition: background-color var(--t-1) var(--e-std), box-shadow var(--t-3) var(--e-std), transform var(--t-3) var(--e-exit), opacity var(--t-2) var(--e-exit), visibility 0s linear var(--t-3); }
+.panel.lg { transition: background-color var(--t-1) var(--e-std), box-shadow var(--t-3) var(--e-std), transform var(--shift-out) var(--e-shift-out), opacity var(--t-2) var(--e-exit), visibility 0s linear var(--shift-out); }
 body.scrubbing .panel.lg, body.scrubbing .panel.lg > .lg-lens::after { -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
   background: linear-gradient(rgb(var(--amb) / var(--amb-alpha)), rgb(var(--amb) / var(--amb-alpha))), rgb(var(--glass-tint) / .94) !important; }
 body.scrubbing .frame .paper .layer.in { animation: none; }
-.panel.lg.open { transition: background-color var(--t-1) var(--e-std), box-shadow var(--t-3) var(--e-std), transform var(--t-3) var(--e-spring), opacity var(--t-2) var(--e-std), visibility 0s; }
+.panel.lg.open { transition: background-color var(--t-1) var(--e-std), box-shadow var(--t-3) var(--e-std), transform var(--shift) var(--e-shift), opacity 240ms var(--e-std), visibility 0s; }
+
+/* ---------- phase 20: while the layout glides, the glass shows a plain blur ----------
+   The SVG refraction (backdrop-filter: url()) re-renders its backdrop on the main rendering path every frame the
+   backdrop moves; a plain blur stays on the compositor. For the ~420 ms of a shift each surface swaps to the blur of its
+   own material, then its refraction comes back. */
+html[data-glass='backdrop'] body.shifting .lg { -webkit-backdrop-filter: blur(var(--sb, 8px)) saturate(1.75) !important; backdrop-filter: blur(var(--sb, 8px)) saturate(1.75) !important; }
+body.shifting .panel.lg { --sb: 10px; } body.shifting .lg[data-mat='clear'] { --sb: 3px; } body.shifting .lg[data-mat='thick'] { --sb: 22px; }
 
 /* a segmented thumb is invisible until it has been measured once (first placement is deferred a frame) */
 .seg-thumb:not([data-placed]) { opacity: 0; }
@@ -122,3 +132,4 @@ body.scrubbing .frame .paper .layer.in { animation: none; }
 .remix.busy { color: var(--accent); }
 .remix.busy svg { animation: busyPulse 600ms var(--e-std) infinite alternate; }
 @keyframes busyPulse { to { opacity: .45; } }
+

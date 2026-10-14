@@ -147,7 +147,7 @@ textarea.inp { padding: 8px 12px; line-height: 24px; }
 .comp-lib, .font-roles { gap: 8px; }
 
 /* ---------- dock: 48px caps + 64px Draw on one centre line, centred on the poster ---------- */
-.dock { left: var(--pcx, 50vw); bottom: var(--m); height: var(--dock); gap: var(--u); transition: left var(--d-4) var(--ease-liquid), opacity var(--d-3) var(--ease-out), transform var(--d-4) var(--ease-liquid); }
+.dock { left: 0; translate: var(--pcx, 50vw) 0; bottom: var(--m); height: var(--dock); gap: var(--u); transition: translate var(--shift) var(--e-shift), opacity var(--d-3) var(--ease-out), transform var(--d-4) var(--ease-liquid); }
 .dock .cap { height: 48px; padding: 0 4px; border-radius: 24px; }
 .remix { height: 40px; padding: 0 16px; border-radius: 20px; gap: 8px; }
 .draw { height: 64px; padding: 0 24px; gap: 16px; }
@@ -155,7 +155,7 @@ textarea.inp { padding: 8px 12px; line-height: 24px; }
 .dock.recede:hover { opacity: 1; transform: translateX(-50%); }
 
 /* ---------- filmstrip: rides above the dock band ---------- */
-.film { left: var(--pcx, 50vw); bottom: calc(var(--m) + var(--dock) + 16px); width: min(864px, calc(100vw - var(--cl) - var(--cr) + 2 * var(--tuck) - 2 * var(--g))); padding: 16px; border-radius: 24px; }
+.film { left: 0; translate: var(--pcx, 50vw) 0; bottom: calc(var(--m) + var(--dock) + 16px); width: min(864px, calc(100vw - var(--cl) - var(--cr) + 2 * var(--tuck) - 2 * var(--g))); padding: 16px; border-radius: 24px; }
 .film-head { padding: 0 0 8px; min-height: 32px; gap: 8px; }
 .film-strip { height: 96px; padding: 8px 0 0; gap: 8px; }
 .fthumb { height: 80px; } .fthumb.cur { height: 88px; }
@@ -205,7 +205,7 @@ body.ui-grid #ui-grid { display: block; }
 :root { --dot: rgba(11, 11, 14, .16); }
 [data-theme='dark'] { --dot: rgba(255, 255, 255, .13); }
 .aura { inset: 0; }
-.aura img { left: 0; top: 0; width: 100vw; height: 100vh; transform: none; filter: none; object-fit: fill; transition: opacity 900ms var(--ease-out); }
+.aura img { left: 0; top: 0; width: 100vw; height: 100vh; transform: none; filter: none; object-fit: fill; transition: opacity 560ms var(--ease-out); }
 .aura img.on, [data-theme='dark'] .aura img.on { opacity: 1; }
 .dots { background-image: radial-gradient(circle at 1px 1px, var(--dot) .7px, transparent 1.3px); background-size: 24px 24px; background-position: 24px 24px; opacity: 1;
   /* lattice belongs to the canvas zone only: fades out under open side panels so frosted glass reads clean */

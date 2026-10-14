@@ -655,17 +655,19 @@ def generate(brief_path, title, subtitle, date, venue, lines, body, lang, mood, 
 @click.argument("src", required=False)
 @click.option("--set", "sets", multiple=True, help="param=value (see: catalog params), repeatable")
 @click.option("--text", "texts", multiple=True, help="slot=value: headline, sub, note, groups.N.main|sub|note, prose.N, meta.N, words.N")
+@click.option("--color", "colors", multiple=True, help="role=#rrggbb or role=auto: bg, ink, inkSoft, accent, alt, f0…f5 (block fills); the exact colour, like the app's palette editor")
 @click.option("--style", "style_id", default=None, help="switch style, keep copy / palette / pictures")
 @click.option("--ratio", type=click.Choice(["3:4", "9:16", "1:1", "4:3", "16:9", "21:9"]), default=None)
 @click.option("--output", "-o", "out", default=None, help="write the refined poster JSON (and PNG next to it)")
 @click.option("--png/--no-png", default=True)
 @handle_error
-def refine(src, sets, texts, style_id, ratio, out, png):
-    """Change params / copy / style / ratio of a poster, keeping the draw (like the app's sliders)."""
+def refine(src, sets, texts, colors, style_id, ratio, out, png):
+    """Change params / copy / colours / style / ratio of a poster, keeping the draw (like the app's sliders)."""
     entry = _entry_from(src)
     tx = _parse_sets(texts) if texts else None
-    r = be.run("refine", {"entry": entry, "set": _parse_sets(sets), "texts": tx, "styleId": style_id, "ratio": ratio}, backend=_backend)
-    label = "refine " + " ".join(list(sets) + list(texts) + ([f"style={style_id}"] if style_id else []) + ([f"ratio={ratio}"] if ratio else []))
+    cx = _parse_sets(colors) if colors else None
+    r = be.run("refine", {"entry": entry, "set": _parse_sets(sets), "texts": tx, "colors": cx, "styleId": style_id, "ratio": ratio}, backend=_backend)
+    label = "refine " + " ".join(list(sets) + list(texts) + [f"color {c}" for c in colors] + ([f"style={style_id}"] if style_id else []) + ([f"ratio={ratio}"] if ratio else []))
     res: dict = {"summary": r["summary"]}
     sess = get_session()
     if not src and sess.has_project():

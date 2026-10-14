@@ -61,6 +61,8 @@ In the **Text** panel, turn on **Custom text** and fill in the headline, subtitl
 
 Upload photos in the **Images** panel; they stay in your own browser. Set the palette source to **From image** and the colors come from your photos, so the poster matches your event photos or brand colors instead of somebody else's template.
 
+Every colour in the palette panel is yours to set: ground, text, accent, block fills. Click one to drag a new colour, type a hex code, or sample one straight from a photo with the eyedropper. The poster follows live and the layout basically stays put. Got a colour combination in your head? Add it as source colours and the poster is coloured from them. Save palettes you like under **My palettes** for one-click reuse, and pin a colour to keep it on every poster you draw after.
+
 > For now, the web app sometimes leaves out a minor line of your copy, and a few layouts fill in a couple of sample words. Check the poster before you post it. When every detail has to be right, as for a formal event, use the [command-line version](#for-ai-agents-and-scripts-the-command-line-version) below, which checks every item.
 
 ### One piece of content, every size

@@ -236,6 +236,24 @@ class TestCLISubprocess:
         assert r["items"][0]["layer"]["vary"] == "grid"
 
     @needs_chrome
+    def test_refine_colors(self, briefs, tmp_path):
+        # app phase 19: the palette editor from the CLI — exact role colours, 'auto' releases one, a bad value is refused
+        g = self._json(["generate", "--brief", briefs["exhibition"], "-n", "1", "-o", str(tmp_path / "g"), "--no-sheet"])
+        src = g["posters"][0]["files"]["json"]
+        drawn = json.loads(Path(src).read_text())["entry"]["picked"]["palette"]
+        out = str(tmp_path / "c.json")
+        self._json(["refine", src, "--color", "bg=#F3E9D2", "--color", "accent=#e4002b", "-o", out, "--no-png"])
+        e = json.loads(Path(out).read_text())["entry"]
+        pal = e["picked"]["palette"]
+        assert pal["bg"] == "#f3e9d2" and pal["accent"] == "#e4002b"
+        assert e["palEdits"] == {"bg": "#f3e9d2", "accent": "#e4002b"} and pal["user"]["base"]["bg"] == drawn["bg"]
+        out2 = str(tmp_path / "d.json")
+        self._json(["refine", out, "--color", "bg=auto", "-o", out2, "--no-png"])
+        e2 = json.loads(Path(out2).read_text())["entry"]
+        assert e2["palEdits"] == {"accent": "#e4002b"} and e2["picked"]["palette"]["bg"] == drawn["bg"]
+        assert self._run(["refine", out, "--color", "bg=purple", "--no-png"], check=False).returncode != 0
+
+    @needs_chrome
     def test_audit_gates_and_actionable_fix(self, briefs, tmp_path):
         g = self._json(["generate", "--brief", briefs["exhibition"], "-n", "1", "-o", str(tmp_path / "g"), "--no-sheet"])
         src = g["posters"][0]["files"]["json"]

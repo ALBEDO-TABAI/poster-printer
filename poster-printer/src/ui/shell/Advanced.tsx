@@ -1,4 +1,5 @@
 // Advanced layer: every engine parameter, organised by intent → group → tier (UX_REDESIGN.md §7), plus layers & modes.
+import { useLayoutEffect, useRef } from 'react';
 import { useStore } from '../../store';
 import { LAYERS, MODES } from '../../engine/types';
 import { SECTION_LABELS, DEFAULT_PARAMS } from '../../engine/params';
@@ -38,7 +39,7 @@ function AdvancedBody() {
       <div style={{ padding: '0 16px 8px', display: 'flex', gap: 8 }}>
         <label className="search-field"><Icon name="search" size={16} /><input id="adv-q" placeholder={t('搜索参数：留白、margin、纹理…', 'Search: whitespace, margin, grain…')} value={q} onChange={(e) => useUI.setState({ advQuery: e.target.value })} /></label>
       </div>
-      <div className="adv-wrap"><AdvNav /><div className="adv-main" id="adv-main"><AdvMain /></div></div>
+      <div className="adv-wrap"><AdvNav /><div className="adv-main" id="adv-main"><AdvView /></div></div>
     </>
   );
 }
@@ -87,6 +88,19 @@ function PreviewCard() {
         <div className="legacy mono">{t('原位置', 'Was')}: {SECTION_LABELS[d.section][lang === 'zh' ? 0 : 1]} › {lang === 'zh' ? d.zh : d.en} · {t('默认', 'default')} {fmt(d.def)}</div></div>
     </div>
   );
+}
+
+/** phase 20: a view switch (版式 → 色彩, 高级调校 ↔ 图层与模式) fades the new view in (the same element: no remount) */
+function AdvView() {
+  const intent = useUI((u) => u.advIntent);
+  const ref = useRef<HTMLDivElement>(null);
+  const last = useRef(intent);
+  useLayoutEffect(() => {
+    if (last.current === intent) return;
+    last.current = intent;
+    ref.current?.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+  }, [intent]);
+  return <div ref={ref} className="adv-view"><AdvMain /></div>;
 }
 
 function AdvMain() {

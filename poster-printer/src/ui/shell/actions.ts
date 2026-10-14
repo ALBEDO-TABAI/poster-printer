@@ -71,7 +71,7 @@ export function togglePin(k: string) {
   // phase 14: the chip appearing / leaving under 抽一张 is the feedback; one replaceable toast, never a stack
   S().toast(on ? t(`已锁定「${d?.pzh ?? k}」到之后的抽卡`, `“${d?.pen ?? k}” pinned for future draws`) : t(`已解除锁定「${d?.pzh ?? k}」`, `“${d?.pen ?? k}” unpinned`), 'ok', 'pin');
 }
-export function clearPins() { const n = Object.keys(S().pins).length; if (!n) return; pushUndo(t('全部解除', 'Unpin all')); S().clearPins(); toast(t(`已解除 ${n} 个锁定`, `${n} pins cleared`)); }
+export function clearPins() { const n = Object.keys(S().pins).length + Object.keys(S().palPins).length; if (!n) return; pushUndo(t('全部解除', 'Unpin all')); S().clearPins(); toast(t(`已解除 ${n} 个锁定`, `${n} pins cleared`)); }
 export function resetAll() { pushUndo(t('全部还原为风格', 'Reset all to style')); S().resetParams('all'); S().clearPins(); toast(t('已全部还原为风格（锁定已解除）', 'All back to the style (pins cleared)')); }
 export function resetGroup(keys: string[], label: string) { pushUndo(t('复位 ', 'Reset ') + label); S().resetParams(keys); }
 export function toggleModule(k: Parameters<ReturnType<typeof S>['toggleModule']>[0]) { pushUndo(t('图层', 'Layer')); S().toggleModule(k); }
@@ -113,12 +113,18 @@ export function closeSheets() {
 }
 /** light panels (library, history film) close on a click in the empty canvas; work panels (inspector, advanced) stay */
 export function dismissLight() { const u = useUI.getState(); if (u.lib || u.film) useUI.setState({ lib: null, film: false }); }
+// phase 20: 高级调校 and 图层与模式 are two views of one panel. The 高级调校 button opens (or switches back to) the last
+// Advanced view that is not layers; only the button of the view on screen closes the panel.
+let advView = useUI.getState().advIntent !== 'layers' ? useUI.getState().advIntent : 'layout';
+useUI.subscribe((u) => { if (u.advIntent && u.advIntent !== 'layers') advView = u.advIntent; });
 export function togglePanel(k: 'insp' | 'adv' | 'film') {
   const u = useUI.getState();
   // one right-hand panel: the inspector and 高级调校 replace each other (no hidden-but-open state behind the other)
   if (k === 'insp') useUI.setState(u.adv ? { adv: false, insp: true } : { insp: !u.insp });
-  else if (k === 'adv') useUI.setState(u.adv ? { adv: false } : { adv: true, insp: false });
-  else useUI.setState({ film: !u.film });
+  else if (k === 'adv') {
+    if (u.adv && u.advIntent === 'layers') useUI.setState({ advIntent: advView });
+    else useUI.setState(u.adv ? { adv: false } : { adv: true, insp: false, advIntent: u.advIntent === 'layers' ? advView : u.advIntent });
+  } else useUI.setState({ film: !u.film });
 }
 export function openLib(k: string) { const u = useUI.getState(); useUI.setState({ lib: u.lib === k ? null : k }); }
 export function openLayers() { const u = useUI.getState(); if (u.adv && u.advIntent === 'layers') { useUI.setState({ adv: false }); return; } useUI.setState({ adv: true, insp: false, advIntent: 'layers', advQuery: '' }); }

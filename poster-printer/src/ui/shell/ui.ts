@@ -16,6 +16,8 @@ export interface UIState {
   canUndo: number; canRedo: number; imgEdit: string | null; frame: { w: number; h: number };
   /** phase 17: the 结构 layer menu (网格 / 图位 / 排字 / 整体结构) above the dock */
   layerPop: boolean;
+  /** phase 19: the colour open in the palette editor ('bg' … 'alt', 'f0'… block fills, 's0'… source colours) */
+  palSel: string | null;
   set(p: Partial<UIState>): void;
 }
 export const useUI = create<UIState>((set) => ({
@@ -23,14 +25,14 @@ export const useUI = create<UIState>((set) => ({
   advIntent: 'layout', advQuery: '', focus: 'margin', expanded: {},
   filmTab: 'hist', exportFmt: 'png', exportScale: 2, cmdQ: '',
   reduceT: false, uiGrid: false, posterGrid: 0, posterRect: null, selBottom: 0,
-  pendingRatio: null, canUndo: 0, canRedo: 0, imgEdit: null, frame: { w: 0, h: 0 }, layerPop: false,
+  pendingRatio: null, canUndo: 0, canRedo: 0, imgEdit: null, frame: { w: 0, h: 0 }, layerPop: false, palSel: null,
   set: (p) => set(p),
 }));
 if (typeof window !== 'undefined') (window as unknown as { __ui: unknown }).__ui = useUI;
 
 /* ---------- undo / redo: snapshots of the editable generator state ---------- */
-type Snap = { picked?: NonNullable<State['result']>['picked'] } & Pick<State, 'seeds' | 'decorSalt' | 'params' | 'pins' | 'honor' | 'modules' | 'modes' | 'locks' | 'ratio' | 'styleId' | 'fonts' | 'edits' | 'placed' | 'hIndex' | 'dirty'>;
-const take = (): Snap => { const s = useStore.getState(); return { picked: s.result?.picked, seeds: s.seeds, decorSalt: s.decorSalt, params: s.params, pins: s.pins, honor: s.honor, modules: s.modules, modes: s.modes, locks: s.locks, ratio: s.ratio, styleId: s.styleId, fonts: s.fonts, edits: s.edits, placed: s.placed, hIndex: s.hIndex, dirty: s.dirty }; };
+type Snap = { picked?: NonNullable<State['result']>['picked'] } & Pick<State, 'seeds' | 'decorSalt' | 'params' | 'pins' | 'honor' | 'modules' | 'modes' | 'locks' | 'ratio' | 'styleId' | 'fonts' | 'edits' | 'placed' | 'hIndex' | 'dirty' | 'palEdits' | 'palPins' | 'pinnedPalette'>;
+const take = (): Snap => { const s = useStore.getState(); return { picked: s.result?.picked, seeds: s.seeds, decorSalt: s.decorSalt, params: s.params, pins: s.pins, honor: s.honor, modules: s.modules, modes: s.modes, locks: s.locks, ratio: s.ratio, styleId: s.styleId, fonts: s.fonts, edits: s.edits, placed: s.placed, hIndex: s.hIndex, dirty: s.dirty, palEdits: s.palEdits, palPins: s.palPins, pinnedPalette: s.pinnedPalette }; };
 const undoStack: { label: string; s: Snap }[] = [];
 const redoStack: { label: string; s: Snap }[] = [];
 const sync = () => useUI.setState({ canUndo: undoStack.length, canRedo: redoStack.length });
@@ -42,11 +44,11 @@ export function pushUndo(label: string) {
 async function apply(sn: Snap) {
   const s = useStore.getState();
   if (sn.hIndex !== s.hIndex && s.history[sn.hIndex]) {
-    useStore.setState({ hIndex: sn.hIndex, locks: sn.locks, pins: sn.pins });
+    useStore.setState({ hIndex: sn.hIndex, locks: sn.locks, pins: sn.pins, palPins: sn.palPins, pinnedPalette: sn.pinnedPalette });
     await s.restore(s.history[sn.hIndex]);
     return;
   }
-  useStore.setState({ seeds: sn.seeds, decorSalt: sn.decorSalt, params: sn.params, pins: sn.pins, honor: sn.honor, modules: sn.modules, modes: sn.modes, locks: sn.locks, ratio: sn.ratio, styleId: sn.styleId, fonts: sn.fonts, edits: sn.edits, placed: sn.placed, dirty: sn.dirty, selected: null });
+  useStore.setState({ seeds: sn.seeds, decorSalt: sn.decorSalt, params: sn.params, pins: sn.pins, honor: sn.honor, modules: sn.modules, modes: sn.modes, locks: sn.locks, ratio: sn.ratio, styleId: sn.styleId, fonts: sn.fonts, edits: sn.edits, placed: sn.placed, dirty: sn.dirty, palEdits: sn.palEdits, palPins: sn.palPins, pinnedPalette: sn.pinnedPalette, selected: null });
   // exact undo: the poster's own picks (palette / copy / layout) come back, not a re-pick
   await s.regen(false, sn.picked && sn.ratio === s.ratio ? { keepPicked: sn.picked } : {});
   const st = useStore.getState();

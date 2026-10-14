@@ -124,6 +124,7 @@ ready-poster-printer --json $P refine --set composition=build --set archetype=ma
 ready-poster-printer --json $P refine --set composition=build --set construction=ticket   # … or the main text construction
 ready-poster-printer --json $P refine --set titleScale=130 --set margin=6
 ready-poster-printer --json $P refine --text sub="新的副标题" --text groups.0.note="opening"
+ready-poster-printer --json $P refine --color bg=#f3e9d2 --color accent=#e4002b    # exact colours; ink follows a new ground; =auto releases
 ready-poster-printer --json $P refine --style zh-song-edit             # new style, same copy / palette / pictures
 ready-poster-printer --json $P refine --ratio 9:16
 ready-poster-printer --json $P variations --vary layout -n 6 -o var/ --pick 3   # layout|structure|color|image|decor|tendency
@@ -136,6 +137,7 @@ ready-poster-printer --json $P export --format png@2x -o final.png      # png pn
 ready-poster-printer --json $P deck --pages 6 -o deck/
 ```
 - `refine` writes a PNG next to the project; show it after each change. Use `--dry-run` to try without saving.
+- **Colours the user names are used exactly** (`refine --color role=#rrggbb`, the app's palette editor). Roles: `bg` ground, `ink` main text, `inkSoft` secondary text, `accent`, `alt`; block fills `f0`…`f5`; `role=auto` gives one back to the drawn palette. Roles the user did not name follow where they must (a light ground gets a dark ink). If the user's ink can't be read on their ground, text is set in a readable stand-in: say so and offer the stand-in as the ink. The colours are stored with the poster (`palEdits`) and replay exactly in the app.
 - **Change one layer of the structure when the user likes the rest.** The structure has three layers, and each can be re-rolled alone:
   - "I like where the pictures are / that they run full bleed, but the text…" → `--vary type`. Breaks, alignment, headline size, colour and where the info sits change; every picture frame is kept (`layer.picturesKept`).
   - "The text is good, move the pictures" → `--vary place`. In full-bleed / set-plate layouts (`layer.fixedPlacement: true`) the picture position is part of the design; use `--vary structure` or change `composition`.

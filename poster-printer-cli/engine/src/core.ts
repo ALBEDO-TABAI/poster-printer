@@ -8,7 +8,7 @@ import type { Measurer } from '@rea/engine/text/measure';
 import type { Scene, Ratio } from '@rea/engine/types';
 import type { FontSet } from '@rea/engine/typo';
 import type { ImageAsset } from '@rea/engine/gen/ctx';
-import type { LibPalette } from '@rea/engine/color/palette';
+import { cleanEdits, normHex, type LibPalette, type PalEdits } from '@rea/engine/color/palette';
 import { tasteScore } from '@rea/engine/aesthetic/score';
 import { compSize, type PlacedComponent } from '@rea/engine/components';
 import { drawPlan } from '@rea/engine/gen/plan';
@@ -20,6 +20,8 @@ export const APP_SLUG = 'ready-poster-printer';
 export interface Entry {
   id: string; ts: number; seeds: Seeds; decorSalt: string; ratio: Ratio; styleId: string; params: Params;
   modules: Record<string, boolean>; modes: string[]; fonts: FontSet; picked: Picked; edits: Record<string, unknown>; custom: unknown; comp?: string; placed?: PlacedComponent[];
+  /** app phase 19: the user's own colours on this poster (palette editor / refine --color); absent = none */
+  palEdits?: PalEdits;
 }
 export interface PosterJSON { app: string; kind: 'poster'; version: 1; entry: Entry; x_cli?: Record<string, unknown> }
 export interface Env {
@@ -55,7 +57,7 @@ export function replayInput(env: Env, e: Entry): GenInput {
     seeds: e.seeds, ratio: e.ratio, style, params: { ...e.params, decorSalt: e.decorSalt }, modules: e.modules as GenInput['modules'], modes: e.modes as GenInput['modes'], fonts: e.fonts,
     images: e.modules.images ? pool : [], lockedImages: lockedIds,
     palettes: env.palettes, paletteFilter: () => true, pinnedPalette: null, baseColor: e.params.paletteSource === 'base' ? '#f1ede4' : null,
-    lockedPalette: keep.palette, textSets: TEXT_SETS, custom: (e.custom ?? null) as GenInput['custom'],
+    lockedPalette: keep.palette, paletteEdits: e.palEdits, textSets: TEXT_SETS, custom: (e.custom ?? null) as GenInput['custom'],
     forceAttempt: keep.attempt ?? 0, lockedTexts: keep.texts, placed: e.placed ?? [], sidebarSizes: {}, forceSidebar: String(e.params.sidebarTpl ?? 'auto') !== 'auto',
     measure: env.measure, forceComp: keep.comp, forcePlan: keep.plan, forceIdea: keep.idea, forceKind: keep.kind, avoid: keep.avoid, layoutSalt: keep.salt, select: 0, recent: [], recentIdeas: [],
     // app phase 17: the poster's layered streams (absent = a poster made before phase 17: its single stream, replayed exactly)
@@ -227,7 +229,8 @@ export function setParams(params: Params, set: Record<string, string | number | 
   return out;
 }
 
-export interface RefineArgs { entry: Entry; set?: Record<string, string | number | boolean>; texts?: Record<string, string>; styleId?: string; ratio?: string; render?: RenderOpts }
+export interface RefineArgs { entry: Entry; set?: Record<string, string | number | boolean>; texts?: Record<string, string>; colors?: Record<string, string>; styleId?: string; ratio?: string; render?: RenderOpts }
+const COLOR_ROLES = /^(bg|ink|inkSoft|accent|alt|f[0-5])$/;
 /** like the app's slider tweak: keep the draw (salt / plan / idea / attempt / palette / copy / pictures), change params */
 export async function refine(env: Env, a: RefineArgs) {
   const e: Entry = JSON.parse(JSON.stringify(a.entry));
@@ -237,6 +240,18 @@ export async function refine(env: Env, a: RefineArgs) {
   if (a.set) { const h = Object.keys(a.set).filter((k) => GRID_HONOR.includes(k)); if (h.length) (e as Entry & { honor?: string[] }).honor = [...new Set([...((e as Entry & { honor?: string[] }).honor ?? []), ...h])]; }
   if (a.styleId) { const st = styleById(a.styleId); if (st.id !== a.styleId) throw Object.assign(new Error('unknown style ' + a.styleId), { code: 2 }); e.styleId = st.id; e.fonts = st.fonts; e.params = { ...DEFAULT_PARAMS, ...st.params, ...pickContentParams(e.params) } as Params; e.modes = [...(st.modes ?? [])]; }
   if (a.ratio) e.ratio = a.ratio as Ratio;
+  // app phase 19: the palette editor — set (or with 'auto' release) the colour of a role / block fill, exactly as given
+  if (a.colors) {
+    const cur = { ...(e.palEdits ?? e.picked.palette.user?.edits ?? {}) } as Record<string, string>;
+    for (const [k, v] of Object.entries(a.colors)) {
+      if (!COLOR_ROLES.test(k)) throw Object.assign(new Error(`unknown colour "${k}" (bg, ink, inkSoft, accent, alt, f0…f5)`), { code: 2 });
+      if (!v || v === 'auto') { delete cur[k]; continue; }
+      const h = normHex(v);
+      if (!h) throw Object.assign(new Error(`not a colour: ${k}=${v} (use #rrggbb or auto)`), { code: 2 });
+      cur[k] = h;
+    }
+    e.palEdits = cleanEdits(cur);
+  }
   if (a.texts) {
     const T = e.picked.texts as unknown as Record<string, unknown>;
     for (const [k, v] of Object.entries(a.texts)) {

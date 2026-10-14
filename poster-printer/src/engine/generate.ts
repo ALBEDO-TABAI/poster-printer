@@ -3,7 +3,7 @@ import type { Params } from './params';
 import { DEFAULT_PARAMS } from './params';
 import { canvasSize, type Ratio, type Scene, type LayerKey, type ModeKey, LAYERS } from './types';
 import { paletteFit } from './color/fit';
-import { buildPalette, type Palette, type LibPalette, type ColorMode } from './color/palette';
+import { buildPalette, withRoles, type Palette, type LibPalette, type ColorMode, type PalEdits } from './color/palette';
 import type { Measurer } from './text/measure';
 import type { FontSet } from './typo';
 import type { TextSet, CustomText } from '../data/texts';
@@ -71,6 +71,9 @@ export interface GenInput {
   /** re-create a stored draw exactly: use this composition when composition is auto */
   forceComp?: Comp;
   lockedPalette?: Palette | null;
+  /** phase 19: the user's own colours for this poster (palette editor: roles and block fills), applied on top of the
+   *  drawn or kept palette. Undefined = the edits stored with a kept palette (replays from other callers); {} = none. */
+  paletteEdits?: PalEdits | null;
   baseColor?: string | null;
   textSets: TextSet[];
   custom?: CustomText | null;
@@ -330,6 +333,13 @@ function generateOne(inp: GenInput): GenResult {
   }
 
 
+  // phase 19: the user's own colours (palette editor) go on top of the drawn or kept palette. A palette without user
+  // colours and no edits asked for is left exactly as it was (older posters replay unchanged).
+  {
+    const edits = inp.paletteEdits ?? palette.user?.edits;
+    if (palette.user || (edits && Object.keys(edits).length)) palette = withRoles(palette, edits);
+  }
+
   if (idea && inp.lockedPalette && !inp.forceIdea) idea.contrast = 'none';
   else if (idea && !inp.lockedPalette && !ittenOn) idea.contrast = 'none'; // the label names the contrast only when it built the palette
 
@@ -450,6 +460,8 @@ function generateOne(inp: GenInput): GenResult {
     if (direction) scene.info.direction = direction;
     const quality = p.collisionFix === false ? undefined : polish(ctx);
     if (quality) scene.info.score = Math.round(quality.score);
+    // phase 19: say when text in the user's own colours was repaired for legibility (or kept as chosen)
+    if (quality?.mineFixed || quality?.mineKept) scene.info.overrides = [...overrides, { keys: ['palette'], kind: quality.mineKept ? 'kept' : 'repaired', fails: ['text-contrast'] }];
     if (inp.placed?.length) addComponents(ctx, inp.placed, scene.bg);
     scene.nodes = ctx.nodes;
     // phase 7 hard gates (aesthetic/gates.ts): measured on a 64 px raster of the scene graph

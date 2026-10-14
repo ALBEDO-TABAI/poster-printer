@@ -84,6 +84,11 @@ def free_port(host, start):
                 continue
     raise SystemExit('no free port found')
 
+class Server(ThreadingHTTPServer):
+    # a browser opens many connections at once (image thumbnails, fonts); the default backlog of 5 resets some of them
+    request_queue_size = 128
+
+
 def main():
     ap = argparse.ArgumentParser(description='Ready Poster Printer local server')
     ap.add_argument('--port', type=int, default=int(os.environ.get('REA_PORT', 5180)))
@@ -96,7 +101,7 @@ def main():
         raise SystemExit('No built app found (expected ../app or ../dist). Run `npm run build` first.')
     port = free_port(a.host, a.port)
     url = f'http://{"localhost" if a.host in ("127.0.0.1", "0.0.0.0") else a.host}:{port}/'
-    srv = ThreadingHTTPServer((a.host, port), partial(Handler, directory=os.path.abspath(root)))
+    srv = Server((a.host, port), partial(Handler, directory=os.path.abspath(root)))
     print(f'Ready Poster Printer  →  {url}', flush=True)
     print(f'  palettes  →  {url}color.html   ·   deck  →  {url}?view=deck', flush=True)
     print(f'  AI cut-out: {"on (" + MODEL + ")" if ai_available() else "off (optional: run setup-ai)"}', flush=True)

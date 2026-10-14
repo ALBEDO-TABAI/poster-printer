@@ -19,6 +19,9 @@ export interface QualityReport {
   moved: number; dropped: number; recolored: number; scrims: number; outlined: number;
   /** design-principle penalty (see audit.ts) and its main measurements */
   design: number; audit?: Audit;
+  /** phase 19 (only on posters with user colours): text in the user's own colours that the contrast repair changed,
+   *  and text left as the user chose because "keep my colours" (fitOverride) is on */
+  mineFixed?: number; mineKept?: number;
 }
 
 const isText = (n: SceneNode): n is TextNode => n.kind === 'text';
@@ -314,6 +317,10 @@ export function polish(ctx: Ctx): QualityReport {
     rep.outlined++;
     return true;
   };
+  // phase 19: the user's own colours (palette editor). With "keep my colours" on, text in them is left as chosen;
+  // otherwise the repair runs as always and is counted, so the editor can say what it changed.
+  const mine = ctx.pal.user ? new Set(Object.values(ctx.pal.user.edits).map((c) => String(c).toLowerCase())) : null;
+  if (mine) { rep.mineFixed = 0; rep.mineKept = 0; }
   for (let i = 0; i < list.length; i++) {
     const t = list[i];
     if (!isText(t) || !ctx.on(t.layer) || !visibleText(t) || t.clip || (t.opacity ?? 1) < 0.5) continue;
@@ -322,6 +329,10 @@ export function polish(ctx: Ctx): QualityReport {
     const need = large ? 2.6 : 3.6;
     const cur = textContrast(ctx, list, i, t, t.fill, bg, assets);
     if (cur >= need) { if (large) outlineIfSplit(t, i); continue; }
+    if (mine?.has(t.fill.toLowerCase())) {
+      if (ctx.p.fitOverride) { rep.mineKept!++; rep.lowContrast++; continue; }
+      rep.mineFixed!++;
+    }
     let bestC = t.fill, bestV = cur;
     for (const c of cands) { const v = textContrast(ctx, list, i, t, c, bg, assets); if (v > bestV + 0.15) { bestV = v; bestC = c; } }
     if (bestC !== t.fill) { t.fill = bestC; rep.recolored++; }

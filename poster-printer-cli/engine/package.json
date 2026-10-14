@@ -1,7 +1,7 @@
 {
   "name": "ready-poster-printer-engine",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "description": "Headless engine for the ready-poster-printer CLI: content analyzer, brief resolver, generate/replay/export on top of the Ready Poster Printer (rea-poster) generator.",
   "scripts": {

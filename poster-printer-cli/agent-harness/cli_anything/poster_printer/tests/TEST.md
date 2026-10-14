@@ -36,6 +36,17 @@
 
 Run: `cd agent-harness && CLI_ANYTHING_FORCE_INSTALLED=1 ../.venv/bin/python -m pytest cli_anything/poster_printer/tests/ -v -s`
 
+## Part 2 — Results (2026-10-14 JST, app phase 19 / CLI 0.5.0)
+
+- **Full suite:** **49 passed, 1 skipped** (the glyph-fix test needs the full font directory) in 14 min. `test_help_and_version` was re-run on its own after the version bump landed mid-run (2 passed).
+- **New:** `test_refine_colors`: `refine --color bg=… --color accent=…` sets exact colours and records `palEdits` and the drawn base; `bg=auto` gives the ground back; `bg=purple` is refused.
+- **rea-poster:**
+  - vitest 248 passed / 1 skipped (new `tests/palette-edit.test.ts`); `tsc -b` OK;
+  - 72 draws and their replays (build and auto, custom copy, the taste selector) are byte-identical to the committed phase-18 engine;
+  - `scripts/qa/e2e.mjs` against the release build: **165 checks passed**. "全部解除 clears all pins" now passes: the check waited 200 ms but the chips leave with a 220 ms exit animation;
+  - a palette-editor end-to-end run (31 checks: drag, hex, fills, undo / redo, reset, swap, pins and the pins bar, library pick, source colours, My palettes, low-contrast stand-in, reload, inspector) passes 4/4 against the release;
+  - the release server's listen backlog is 128 (was Python's default 5, which reset some of a page's parallel requests).
+
 ## Part 2 — Results (2026-10-14 JST, app phase 18 / CLI 0.4.0)
 
 - **Full suite:** **49 passed, 1 skipped** (the glyph-fix test needs the full font directory) in 8 min 1 s, on macOS

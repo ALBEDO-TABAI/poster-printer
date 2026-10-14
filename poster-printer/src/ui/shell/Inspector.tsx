@@ -64,7 +64,11 @@ function PosterInspector() {
         <div className="sec"><div className="sec-h"><h3>{t('配色', 'Palette')}</h3><div className="act">
           <button className={'icon-btn press' + (locks.color ? ' on' : '')} title={t('锁定配色', 'Lock colours')} onClick={() => A.toggleLock('color')}><Icon name={locks.color ? 'lock' : 'lock-open'} size={15} /></button>
           <button className="icon-btn press" title={t('换配色', 'New colours')} onClick={() => A.remix('color')}><Icon name="shuffle" size={15} /></button></div></div>
-          <div className="swatches">{sw.map((c) => <i key={c} style={{ background: c }} title={c} onClick={() => { navigator.clipboard?.writeText(c).catch(() => {}); A.toast(t('已复制 ', 'Copied ') + c); }}><span>{c}</span></i>)}</div>
+          <div className="swatches">{sw.map((c) => {
+            // phase 19: a swatch opens the palette editor on that colour
+            const k = (['bg', 'ink', 'accent', 'alt'] as const).find((r) => pal[r] === c) ?? `f${pal.fills.indexOf(c)}`;
+            return <i key={c} style={{ background: c }} title={t('点按修改 · ', 'Click to edit · ') + c} data-pal={k} onClick={() => useUI.setState({ lib: 'palettes', palSel: k })}><span>{c}</span></i>;
+          })}</div>
           <p className="hint mono">WCAG {ratio.toFixed(1)}:1 {ratio >= 7 ? 'AAA' : ratio >= 4.5 ? 'AA' : ratio >= 3 ? 'AA-L' : '—'} · APCA Lc {Math.round(lc)} · {t('色源 ', 'source ')}{(srcL[paletteSource] ?? [paletteSource, paletteSource])[lang === 'zh' ? 0 : 1]}</p></div>
         <div className="sec"><div className="sec-h"><h3>{t('字体搭配', 'Type pairing')}</h3><div className="act">
           <button className="icon-btn press" title={t('摇一组', 'Shake')} onClick={() => { pushUndo(t('字体', 'Fonts')); s.shake(); }}><Icon name="dice-5" size={15} /></button>

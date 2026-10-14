@@ -383,6 +383,28 @@ A new composition, **构成编排 `build`**, now makes most automatic draws (70%
 
 Details are in `docs/PHASE18_CONSTRUCTIONS.md`.
 
+## Phase 19: set every colour yourself (palette editor)
+
+The 配色 library tab used to show the poster's colours read-only. Now every colour opens an editor in place.
+
+- **Every colour.** The five roles (底色 / 主文字 / 次文字 / 强调 / 辅色), each block fill (色块) and each source colour (色源) are buttons. The editor has a saturation / brightness field, a hue strip, a hex field, the screen eyedropper (pick from the poster or a photo), quick picks (source, photo, this poster, recent) and the contrast that matters for that colour.
+- **Live, layout kept.** Dragging re-colours the poster every frame. The construction layouts never move; the older modular / bleed grids make a few colour-dependent choices (an accent cell only when it contrasts), so a very different palette can re-fit their type now and then. Each gesture is one undo step. A colour resets on its own, or all at once (还原全部); 明暗互换 swaps ground and ink.
+- **Only what you set is yours.** The roles you did not touch follow from the drawn palette where they must: a new ground gets an ink that reads on it, a new ink a matching soft ink, block fills follow a new accent / alt. Text is never set in an ink that can't be read; the editor names the readable stand-in and makes it the ink in one click.
+- **This poster, or every draw.** Colours belong to the poster (like a slider tweak). The pin in the editor keeps one for future draws; pinned colours show in the pins bar under 抽一张, and 全部解除 clears them too. 锁定配色 still keeps the whole palette.
+- **Your own combination.** Edit, add (+) or remove source colours: the poster re-assigns its roles from them, and so do future draws. 保存配色 keeps the palette under 我的配色 for one-click reuse.
+- **Fixed:** picking a library palette (and the palette page's hand-off) now re-colours the poster on screen, not just the next draw.
+- **CLI:** `refine --color bg=#f3e9d2 --color accent=#e4002b` (roles `bg ink inkSoft accent alt`, block fills `f0…f5`, `=auto` releases one).
+
+Under the hood (`src/engine/color/palette.ts` → `withRoles`): the edits ride on the palette (`palette.user = { base, edits }`), so a poster replays exactly in the app and the CLI. A palette without user colours is returned untouched, and posters made before this version replay byte-identically (checked against the previous build).
+
+## Phase 20: panels and the poster move as one
+
+- **One timing.** Opening, closing or switching a side panel is one motion on one time and curve (`--shift`, 420 ms): the panel slides, the poster glides to its new place, and the dock and pins bar follow.
+- **The poster glides on the compositor.** It used to animate the canvas zone's edges and its own width and height, which needs the main thread every frame. It also jumped to the zone's far edge first, then slid back. Now it is laid out at its new place at once and animated there by transform from where it was seen (FLIP, `fitFrame(from)` in `Shell.tsx`), so a panel mounting its controls can't stall or jerk it.
+- **Plain blur while moving.** During the motion the glass shows a plain blur instead of its SVG refraction (`body.shifting`), and glass maps for surfaces that change size mid-motion are built once, at the end.
+- **Background work waits.** Thumbnails wait until the motion is done (`holdIdle`).
+- **Switching fixed.** 高级调校 and 图层与模式 are two views of one panel: from Layers, the 高级调校 button switches back to the last Advanced view instead of closing the panel, and opening Advanced never lands on Layers. View switches fade in.
+
 ## License
 
 Original program code is licensed under [GNU AGPL v3.0 only](../LICENSE). Third-party code, fonts, images and palette data retain their respective licenses and credits in [licenses/](licenses/).

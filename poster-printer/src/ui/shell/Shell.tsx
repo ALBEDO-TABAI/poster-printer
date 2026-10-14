@@ -15,11 +15,39 @@ import { Sheets, exportNow } from './Sheets';
 import { useUI } from './ui';
 import G from '../glass/glass';
 import * as A from './actions';
+import { holdIdle } from '../idle';
 
 const px = (n: string) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(n)) || 0;
 
 /* ---------- frame fitting + dock placement ---------- */
-export function fitFrame() {
+/** phase 20: one motion for a layout change. A panel opening, closing or replacing another moves the poster, the dock and
+ *  the panels on the same time and curve. The poster is laid out at its new place at once and glides there on the
+ *  compositor from where it was seen (FLIP), so a busy main thread (a panel mounting its controls, glass maps) can
+ *  neither stall it nor make it jump. */
+export const SHIFT_MS = 420;
+const SHIFT_EASE = 'cubic-bezier(.22, .8, .24, 1)';
+const reducedMotion = () => document.documentElement.classList.contains('reduce-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+let shiftT: ReturnType<typeof setTimeout> | undefined;
+/** while things move (a panel sliding, the poster gliding) the glass shows a plain blur — its SVG refraction re-renders a
+ *  moving backdrop every frame — and background thumbnails wait */
+function beginShift() {
+  if (reducedMotion()) return;
+  document.body.classList.add('shifting'); holdIdle(SHIFT_MS + 160);
+  clearTimeout(shiftT); shiftT = setTimeout(() => document.body.classList.remove('shifting'), SHIFT_MS + 40);
+}
+function glide(el: HTMLElement, from: DOMRect) {
+  // a glide still running is replaced: the new one starts where the poster is on screen right now
+  el.getAnimations().forEach((a) => a.cancel());
+  const to = el.getBoundingClientRect();
+  const dx = from.left - to.left, dy = from.top - to.top, sx = from.width / (to.width || 1), sy = from.height / (to.height || 1);
+  if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5 && Math.abs(sx - 1) < 0.002 && Math.abs(sy - 1) < 0.002) return;
+  if (reducedMotion()) return;
+  el.style.transformOrigin = '0 0';
+  el.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` }, { transform: 'none' }], { duration: SHIFT_MS, easing: SHIFT_EASE });
+  beginShift();
+}
+/** fit the poster into the free canvas zone; with `from` (where it was on screen) it glides to the new place */
+export function fitFrame(from?: DOMRect | null) {
   const z = document.getElementById('zone-probe')?.getBoundingClientRect(); if (!z) return;
   const s = useStore.getState();
   const [a, b] = s.ratio.split(':').map(Number);
@@ -31,10 +59,14 @@ export function fitFrame() {
   const x = right && !left ? z.right - w : left && !right ? z.left : z.left + (W - w) / 2;
   const y = z.top + 24 + (H - h) / 2;
   const u = useUI.getState();
+  // the size lands in the DOM now (React writes the same values when it re-renders), so a glide can measure the new box
+  const fr = document.getElementById('frame');
+  if (fr && w && h) { fr.style.width = w + 'px'; fr.style.height = h + 'px'; }
   if (u.frame.w !== w || u.frame.h !== h) useUI.setState({ frame: { w, h } });
   const pr = u.posterRect;
   if (!pr || Math.abs(pr.left - x) > .5 || Math.abs(pr.top - y) > .5 || pr.width !== w || pr.height !== h) useUI.setState({ posterRect: { left: x, top: y, width: w, height: h, right: x + w, bottom: y + h } });
   placeDock();
+  if (from) { const wrap = document.querySelector<HTMLElement>('.frame-wrap'); if (wrap) glide(wrap, from); }
 }
 let adaptT: ReturnType<typeof setTimeout> | undefined;
 function placeDock() {
@@ -71,11 +103,14 @@ function placeRails(pr: { top: number; height: number }) {
 function adaptDock() { const pr = useUI.getState().posterRect; if (!pr) return; document.querySelectorAll('.dock .cap.adaptive, .dock .draw').forEach((c) => G.adapt(c, pr)); }
 
 /* ---------- ambient field: the poster, blurred across the stage, so the glass has colour under it ---------- */
-let fieldT: ReturnType<typeof setTimeout> | undefined; let flip = 0; let lastUrl = ''; let fieldImg: HTMLImageElement | null = null;
-export function rebuildField(now = false) {
+let fieldT: ReturnType<typeof setTimeout> | undefined; let flip = 0; let lastUrl = ''; let fieldImg: HTMLImageElement | null = null; let fieldKey = '';
+export function rebuildField(now = false, onlyIfMoved = false) {
   clearTimeout(fieldT);
   fieldT = setTimeout(async () => {
     const s = useStore.getState(); const sc = s.scene; if (!sc) return;
+    const pr0 = useUI.getState().posterRect;
+    const key = pr0 ? `${Math.round(pr0.left)},${Math.round(pr0.top)},${Math.round(pr0.width)},${s.theme}` : '';
+    if (onlyIfMoved && key === fieldKey && fieldImg) return;
     let img = fieldImg;
     if (!now || !img) {
       try {
@@ -89,6 +124,7 @@ export function rebuildField(now = false) {
       } catch { return; }
     }
     const pr = useUI.getState().posterRect;
+    fieldKey = key;
     const stage = getComputedStyle(document.documentElement).getPropertyValue('--stage').trim() || '#ebebee';
     const field = G.buildField(img, pr, stage, s.theme === 'dark' ? 0.42 : 0.5);
     const au = document.querySelectorAll<HTMLImageElement>('.aura img'); if (au.length < 2) return;
@@ -218,6 +254,11 @@ export function Shell() {
   // body classes drive grid.css zones
   useLayoutEffect(() => {
     const bc = document.body.classList;
+    // where the poster is on screen before the zones change (mid-glide included)
+    const wrap = document.querySelector<HTMLElement>('.frame-wrap');
+    const from = wrap && useUI.getState().posterRect ? wrap.getBoundingClientRect() : null;
+    const zones = () => ['insp-open', 'adv-open', 'lib-open', 'film-open', 'view-deck'].map((c) => bc.contains(c)).join();
+    const z0 = zones();
     bc.toggle('insp-open', (insp || deck) && !(adv && !deck));
     bc.toggle('adv-open', adv && !deck);
     bc.toggle('lib-open', !!lib && !deck);
@@ -225,11 +266,14 @@ export function Shell() {
     bc.toggle('view-deck', deck);
     bc.toggle('ui-grid', uiGrid);
     bc.toggle('replaying', replaying);
-    // phase 14: measure after the frame that applies the new classes has painted (reading the zone synchronously forced
-    // a full style + layout inside the click handler: ~100 ms on a panel toggle). The poster follows one frame later.
-    let r1 = requestAnimationFrame(() => { r1 = 0; setTimeout(fitFrame, 0); });
-    const h = setTimeout(() => { fitFrame(); rebuildField(true); }, 520);
-    return () => { clearTimeout(h); if (r1) cancelAnimationFrame(r1); };
+    // phase 20: the poster is fitted in this same frame (its controls mount a frame later, so this layout is light) and
+    // glides from where it was seen; the ambient field follows at once (cached image), a settle check catches late
+    // layout (fonts, scrollbars) without a second jump
+    if (zones() !== z0 && useUI.getState().posterRect) beginShift(); // a panel slides even when the poster stays
+    fitFrame(from);
+    rebuildField(true, true);
+    const h = setTimeout(() => { fitFrame(); rebuildField(true, true); }, SHIFT_MS + 120);
+    return () => { clearTimeout(h); };
   }, [insp, adv, lib, film, deck, uiGrid, ratio, replaying]);
   useLayoutEffect(() => { fitFrame(); }, [ready]);
   // ambient field follows the poster

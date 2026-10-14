@@ -120,7 +120,7 @@ kbd, .kbd {
 @keyframes tipIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* ---------- canvas ---------- */
-.canvas-area { position: fixed; z-index: 5; left: 84px; right: 84px; top: 80px; bottom: 112px; display: grid; place-items: center; transition: right var(--d-4) var(--ease-liquid), left var(--d-4) var(--ease-liquid), bottom var(--d-4) var(--ease-liquid); }
+.canvas-area { position: fixed; z-index: 5; left: 84px; right: 84px; top: 80px; bottom: 112px; display: grid; place-items: center; }
 body.insp-open .canvas-area { right: 420px; }
 body.adv-open .canvas-area { right: 680px; }
 body.lib-open .canvas-area { left: 456px; }
@@ -128,7 +128,6 @@ body.film-open .canvas-area { bottom: 232px; }
 .frame-wrap { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .frame {
   position: relative; border-radius: 3px; overflow: visible;
-  transition: width 560ms var(--ease-liquid), height 560ms var(--ease-liquid);
 }
 .frame .paper { position: absolute; inset: 0; border-radius: 3px; overflow: hidden; box-shadow: var(--poster-shadow); background: #ddd; }
 .frame .paper .layer { position: absolute; inset: 0; }
@@ -455,7 +454,7 @@ body.view-deck .canvas-area { left: 232px; }
 }
 
 /* ---- compact dock when panels take space ---- */
-.remix .rl { display: inline-block; max-width: 5em; overflow: hidden; transition: max-width var(--d-4) var(--ease-liquid), opacity var(--d-2); }
+.remix .rl { display: inline-block; max-width: 5em; overflow: hidden; transition: max-width var(--shift, 420ms) var(--e-shift, ease), opacity var(--d-2); }
 body.insp-open .remix .rl, body.adv-open .remix .rl, body.lib-open .remix .rl { max-width: 0; opacity: 0; }
 body.insp-open .remix, body.adv-open .remix, body.lib-open .remix { padding: 0 12px; gap: 0; }
 body.adv-open .draw, body.insp-open.lib-open .draw { min-width: 0; padding: 0 22px 0 20px; }
@@ -518,10 +517,11 @@ body.has-pins { --pinsh: 34px; --cb: calc(var(--m) + var(--dock) / 2 + 8px + var
 body.has-pins.film-open { --cb: calc(var(--m) + var(--dock) + 16px + 168px - var(--tuck) + var(--pinsh)); }
 body.has-pins .dock { bottom: calc(var(--m) + var(--pinsh) - 10px); }
 body.has-pins .film, body.has-pins .toasts { bottom: calc(var(--m) + var(--dock) + 16px + var(--pinsh) - 10px); }
-.pins-bar { position: fixed; z-index: 26; left: var(--pcx, 50vw); bottom: 8px; transform: translateX(-50%); display: flex; align-items: center; gap: 6px; max-width: min(900px, calc(100vw - 2 * var(--fl, 84px))); overflow-x: auto; scrollbar-width: none; padding: 2px 4px; transition: left var(--d-4) var(--ease-liquid); animation: tipIn var(--d-3) var(--ease-out); }
+.pins-bar { position: fixed; z-index: 26; left: 0; translate: var(--pcx, 50vw) 0; bottom: 8px; transform: translateX(-50%); display: flex; align-items: center; gap: 6px; max-width: min(900px, calc(100vw - 2 * var(--fl, 84px))); overflow-x: auto; scrollbar-width: none; padding: 2px 4px; transition: translate var(--shift) var(--e-shift); }
 .pins-bar::-webkit-scrollbar { display: none; }
 .pins-h { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--ink-3); white-space: nowrap; margin-right: 2px; }
 .pins-h .ic { color: var(--accent); }
+.pin-chip .pin-sw { width: 12px; height: 12px; border-radius: 4px; box-shadow: inset 0 0 0 .5px var(--hair-2); margin-left: -2px; }
 .pin-chip { height: 26px; padding: 0 4px 0 10px; border-radius: 13px; display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 500; color: var(--ink); white-space: nowrap; }
 .pin-chip .x { width: 18px; height: 18px; border-radius: 9px; display: grid; place-items: center; color: var(--ink-3); }
 .pin-chip .x:hover { background: var(--fill); color: var(--ink); }

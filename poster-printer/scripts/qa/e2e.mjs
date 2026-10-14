@@ -267,6 +267,23 @@ await page.fill('#adv-q', '');
 await page.click('#adv-nav [data-intent="color"]'); await wait(120); // phase 14: the layers rail button toggles like the other rail buttons
 await page.click('#r-layers'); await wait(300);
 check((await page.$$eval('#adv-main .sw, #adv-main [role=switch], #adv-main .layer', (e) => e.length)) > 0, 'layers & modes pane');
+// phase 20: the rail switches panels in one click; 高级调校 and 图层与模式 are two views of one panel
+const ui = () => S(() => { const u = window.__ui.getState(); return `${u.insp ? 'insp' : u.adv ? (u.advIntent === 'layers' ? 'layers' : 'adv:' + u.advIntent) : 'none'}`; });
+await page.click('#r-adv'); await wait(250);
+check(await ui() === 'adv:color', `from 图层与模式, 高级调校 switches back to its last view (got ${await ui()})`);
+await page.click('#r-layers'); await wait(250); await page.click('#r-layers'); await wait(400);
+check(await ui() === 'none', '图层与模式 closes from its own button');
+await page.click('#r-adv'); await wait(250);
+check(await ui() === 'adv:color', `高级调校 never reopens on 图层与模式 (got ${await ui()})`);
+await page.click('#r-insp'); await wait(250);
+check(await ui() === 'insp', 'advanced → inspector in one click');
+await page.click('#r-layers'); await wait(250);
+check(await ui() === 'layers', 'inspector → layers in one click');
+// the poster glides on the compositor: a running transform animation, no layout-property transitions on its zone
+await page.click('#r-insp'); await wait(30);
+check(await S(() => (document.querySelector('.frame-wrap')?.getAnimations().length ?? 0) > 0), 'the poster glides (compositor animation) when the panel changes');
+check(await S(() => !/right|left/.test(getComputedStyle(document.querySelector('.canvas-area')).transitionProperty) && !/width/.test(getComputedStyle(document.getElementById('frame')).transitionProperty)), 'no layout-property transitions on the canvas zone or the frame');
+await wait(500);
 await page.keyboard.press('Escape'); await wait(200);
 console.log(`numeric params: ${pcount}, advanced scrubs: ${scrubs}`);
 
@@ -402,7 +419,7 @@ await page.hover('#adv-main [data-pk="bgPref"]'); await page.click('#adv-main [d
 check(await page.isVisible('#pins-bar [data-pin="bgPref"]'), 'pinned control shows a chip under 抽一张');
 await page.keyboard.press('Escape'); await page.mouse.click(5, 450); await page.keyboard.press('Space'); await wait(900);
 check(await st('(s) => s.params.bgPref === "dark" && s.params.saturation === 100'), 'a draw keeps the pin and drops unpinned tweaks');
-await page.click('#btn-unpin-all'); await wait(200);
+await page.click('#btn-unpin-all'); await wait(450); // the chips leave with a 220 ms exit animation
 check(await st('(s) => Object.keys(s.pins).length === 0') && !(await page.isVisible('#pins-bar')), '全部解除 clears all pins');
 await page.keyboard.press('Meta+z').catch(() => {}); await wait(300);
 if (await st('(s) => !s.pins.bgPref')) { await page.keyboard.press('Control+z'); await wait(300); }

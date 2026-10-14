@@ -323,7 +323,7 @@ async function main() {
       } else res.rendered = r.rendered;
       return res;
     }
-    if (op === 'refine') { const r = await run('refine', { entry: p.entry, set: p.set, texts: p.texts, styleId: p.styleId, ratio: p.ratio }); return { backend, entry: r.entry, summary: r.summary }; }
+    if (op === 'refine') { const r = await run('refine', { entry: p.entry, set: p.set, texts: p.texts, colors: p.colors, styleId: p.styleId, ratio: p.ratio }); return { backend, entry: r.entry, summary: r.summary }; }
     if (op === 'audit') return { backend, ...(await run('audit', { entry: p.entry, brief: p.brief ?? null })) };
     if (op === 'variations' || op === 'deck') {
       const list = await run(op, { ...p, render: out ? { formats: op === 'deck' ? ['jpeg', ...(p.formats ?? []).filter((f: string) => f === 'png')] : p.formats ?? ['png'], scale: p.scale ?? 1 } : undefined });

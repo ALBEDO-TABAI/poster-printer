@@ -17,7 +17,17 @@ export interface Palette {
   dark: string;
   source: string;
   sourceColors: string[];
+  /** phase 19: colours the user set by hand (the palette editor). `base` is the palette as drawn, `edits` the user's
+   *  colours; the role fields above hold the result (withRoles). Absent = a drawn palette, untouched. */
+  user?: { base: PaletteCore; edits: PalEdits };
 }
+
+/** phase 19: the colour roles a user can set */
+export type RoleKey = 'bg' | 'ink' | 'inkSoft' | 'accent' | 'alt';
+export const ROLE_KEYS: RoleKey[] = ['bg', 'ink', 'inkSoft', 'accent', 'alt'];
+/** the user's colours: the five roles, and block fills by their place in the fill list (f0 … f5) */
+export type PalEdits = Partial<Record<RoleKey | `f${number}`, string>>;
+export interface PaletteCore { bg: string; ink: string; inkSoft: string; accent: string; alt: string; fills: string[]; light: string; dark: string }
 
 export interface LibPalette { id: string; src: 'wada' | 'nice'; colors: string[]; names?: string[]; L: number; C: number; dL: number; light: string; chroma: string; contrast: string; tags: string[] }
 
@@ -116,6 +126,57 @@ export function buildPalette(src: string[], mode: ColorMode, rng: Rng, opts: { s
   const uniq: string[] = [];
   for (const f of fills) if (!uniq.some((u) => deltaE(u, f) < 8) && deltaE(f, bg) > 10) uniq.push(f);
   return { bg, ink, inkSoft: wcag(inkSoft, bg) >= 4.5 ? inkSoft : ink, accent, alt, fills: uniq.slice(0, 6), light: lt, dark, source: opts.source, sourceColors: cols };
+}
+
+const HEX = /^#[0-9a-f]{6}$/;
+/** '#abc' / 'ABCDEF' / '#AbCdEf' → '#abcdef'; anything else → null */
+export function normHex(v: unknown): string | null {
+  if (typeof v !== 'string') return null;
+  let h = v.trim().toLowerCase();
+  if (!h.startsWith('#')) h = '#' + h;
+  if (/^#[0-9a-f]{3}$/.test(h)) h = '#' + h.slice(1).split('').map((c) => c + c).join('');
+  return HEX.test(h) ? h : null;
+}
+
+export const coreOf = (p: Palette): PaletteCore => ({ bg: p.bg, ink: p.ink, inkSoft: p.inkSoft, accent: p.accent, alt: p.alt, fills: [...p.fills], light: p.light, dark: p.dark });
+
+/** the clean user colours of an edit set (invalid values dropped) */
+export function cleanEdits(e: PalEdits | null | undefined): PalEdits {
+  const out: PalEdits = {};
+  for (const [k, v] of Object.entries(e ?? {})) { const h = normHex(v); if (h && (ROLE_KEYS.includes(k as RoleKey) || /^f[0-5]$/.test(k))) out[k as RoleKey] = h; }
+  return out;
+}
+
+/**
+ * Phase 19: put the user's colours into a palette. Every colour the user set is used exactly as given; the roles they
+ * did not set follow from the drawn palette (`base`), and only where they must: a ground the user changed gets a text
+ * colour that still reads on it, a changed ink gets a matching soft ink, and the block fills follow a changed accent /
+ * alt. Always computed from the drawn palette, so it is deterministic and a reset is just fewer edits.
+ */
+export function withRoles(p: Palette, edits: PalEdits | null | undefined): Palette {
+  const base = p.user?.base ?? coreOf(p);
+  const e = cleanEdits(edits);
+  if (!Object.keys(e).length) {
+    if (!p.user) return p;
+    const { user: _drop, ...rest } = p; // eslint-disable-line @typescript-eslint/no-unused-vars
+    return { ...rest, ...base, fills: [...base.fills] };
+  }
+  const bg = e.bg ?? base.bg;
+  let ink = e.ink ?? base.ink;
+  if (!e.ink && bg !== base.bg && wcag(ink, bg) < 4.5) {
+    // the drawn ink no longer reads on the user's ground: the palette's own neutrals first, then a tinted deep / pale
+    const [, , hh] = hexToLch(bg);
+    const cands = [base.ink, base.dark, base.light, lchToHex(8, 4, hh), lchToHex(98, 3, hh)];
+    ink = cands.reduce((a, c) => (wcag(c, bg) > wcag(a, bg) + 0.05 ? c : a), cands[0]);
+  }
+  let inkSoft = e.inkSoft ?? base.inkSoft;
+  if (!e.inkSoft && (ink !== base.ink || bg !== base.bg)) {
+    const soft = adjust(ink, { dL: relLum(bg) > 0.3 ? 18 : -18 });
+    inkSoft = wcag(soft, bg) >= 4.5 ? soft : ink;
+  }
+  const accent = e.accent ?? base.accent, alt = e.alt ?? base.alt;
+  const fills = base.fills.map((f, i) => e[`f${i}`] ?? (f === base.accent ? accent : f === base.alt ? alt : f));
+  return { ...p, bg, ink, inkSoft, accent, alt, fills, light: base.light, dark: base.dark, user: { base, edits: e } };
 }
 
 /** palette metrics used for library filtering */

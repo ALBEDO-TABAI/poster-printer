@@ -7,10 +7,18 @@ type Job = { key: string; run: () => void; owner: object };
 const q: Job[] = [];
 let h = 0;
 const ric: (f: IdleRequestCallback, o?: IdleRequestOptions) => number = typeof requestIdleCallback === 'function' ? requestIdleCallback : (f) => window.setTimeout(() => f({ didTimeout: true, timeRemaining: () => 8 } as IdleDeadline), 32);
+// phase 20: while the layout glides (a panel opening / closing) background jobs wait, so no render lands mid-motion
+let holdUntil = 0; let holdT = 0;
+export function holdIdle(ms: number) {
+  holdUntil = Math.max(holdUntil, performance.now() + ms);
+  clearTimeout(holdT); holdT = window.setTimeout(pump, ms + 5);
+}
 function pump() {
   if (h || !q.length) return;
+  if (performance.now() < holdUntil) { clearTimeout(holdT); holdT = window.setTimeout(pump, holdUntil - performance.now() + 5); return; }
   h = ric((dl) => {
     h = 0;
+    if (performance.now() < holdUntil) { pump(); return; }
     // at least one job per slot; more only while the slot has real room left
     do { const j = q.shift(); if (!j) break; try { j.run(); } catch { /* a thumbnail failing is not fatal */ } } while (q.length && dl.timeRemaining() > 12);
     pump();

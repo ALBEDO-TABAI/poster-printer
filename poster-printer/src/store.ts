@@ -9,7 +9,7 @@ import type { FontSet, RoleKey, RoleFont, Lang } from './engine/typo';
 import { BUILTIN_STYLES, type Style } from './data/styles';
 import { TEXT_SETS, type CustomText } from './data/texts';
 import type { ImageAsset } from './engine/gen/ctx';
-import type { LibPalette } from './engine/color/palette';
+import { withRoles, cleanEdits, normHex, ROLE_KEYS, type LibPalette, type Palette, type PalEdits } from './engine/color/palette';
 import { canvasMeasurer } from './engine/text/measure';
 import { ensureFontSet, loadFontManifest, shakeFonts } from './lib/fonts';
 import { loadImages, loadPalettes } from './lib/assets';
@@ -24,7 +24,11 @@ export interface Entry {
   modules: Record<LayerKey, boolean>; modes: ModeKey[]; fonts: FontSet; picked: Picked; edits: Edits; custom: CustomText | null; comp?: string; placed?: PlacedComponent[];
   /** phase 13: the params the engine honoured for this poster (pins + tweaks); absent on older entries = none */
   honor?: string[];
+  /** phase 19: the user's own colours on this poster (palette editor); absent = none */
+  palEdits?: PalEdits;
 }
+/** phase 19: a palette the user saved (源色 for future draws + the exact roles of the poster it came from) */
+export interface MyPalette { id: string; name: string; colors: string[]; roles: PalEdits }
 export interface CompPreset { id: string; name: string; type: string; text?: string; color: ColorRole; scale: number; rot?: number }
 export interface SavedText { id: string; name: string; text: CustomText }
 type Toast = { id: number; msg: string; kind?: 'ok' | 'warn'; group?: string; out?: boolean };
@@ -55,6 +59,8 @@ export interface State {
   textSet: string; custom: CustomText | null; customOn: boolean; savedTexts: SavedText[];
   presetImages: ImageAsset[]; userImages: ImageAsset[]; imgCat: string; imgPick: string[];
   palettes: LibPalette[]; palFilter: PalFilter; pinnedPalette: string[] | null; baseColor: string;
+  /** phase 19: the user's own colours on this poster (roles + block fills), and the ones kept for future draws */
+  palEdits: PalEdits; palPins: PalEdits; myPalettes: MyPalette[];
   result: GenResult | null; scene: Scene | null; edits: Edits; selected: string | null; editingText: string | null;
   history: Entry[]; hIndex: number; favorites: Entry[];
   recording: boolean; recorded: Entry[]; replaying: boolean;
@@ -107,6 +113,15 @@ export interface State {
   updateUserImage(id: string, patch: Partial<ImageAsset>): Promise<void>;
   removeUserImage(id: string): Promise<void>;
   setCustom(c: CustomText | null, on?: boolean): void;
+  /** phase 19: set / clear the user's colours of this poster ('' removes one; null clears all). live = a drag frame */
+  setPalEdits(patch: PalEdits | null, live?: boolean): void;
+  togglePalPin(k: keyof PalEdits): void;
+  /** the source colours roles are drawn from (null = back to the palette source setting); re-colours this poster */
+  /** fresh: a whole palette was picked — the hand-set colours of this poster give way (pinned ones stay) */
+  setSourceColors(colors: string[] | null, live?: boolean, fresh?: boolean): Promise<void>;
+  savePalette(name?: string): MyPalette | null;
+  deletePalette(id: string): void;
+  applyPalette(p: MyPalette): Promise<void>;
   saveText(name: string): void;
 }
 
@@ -141,11 +156,14 @@ const styleById = (s: State, id: string) => s.styles.find((x) => x.id === id) ??
 const entryOf = (s: State, r: GenResult): Entry => ({ honor: s.honor.length ? [...s.honor] : undefined,
   id: s.seeds.layout + '-' + Date.now().toString(36), ts: Date.now(), seeds: { ...s.seeds }, decorSalt: s.decorSalt, ratio: s.ratio, styleId: s.styleId,
   params: { ...s.params }, modules: { ...s.modules }, modes: [...s.modes], fonts: s.fonts, picked: r.picked, edits: {}, custom: s.customOn ? s.custom : null, comp: r.picked.comp, placed: s.placed.length ? s.placed : undefined,
+  ...(Object.keys(s.palEdits).length ? { palEdits: { ...s.palEdits } } : {}),
 });
+/** phase 19: a palette carried into a new draw by the colour lock: its look, without the edit history of the old poster */
+const plainPalette = (p: Palette): Palette => { if (!p.user) return p; const { user: _u, ...rest } = p; return rest; }; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 
 /** keepLayout: re-render the current poster with its plan, composition, idea, salt and attempt (the "adjust this poster" path) */
-type Extra = Partial<{ keepPicked: Picked; keepTexts: boolean; keepPalette: boolean; keepImages: boolean; keepLayout: boolean; touch: string; preview: boolean; base: Scene; keepLayers: boolean; reroll: { layer: Layer; salt: string } }>;
+type Extra = Partial<{ keepPicked: Picked; keepTexts: boolean; keepPalette: boolean; /** phase 19: draw this poster's palette again from its source colours, even under the colour lock */ newPalette: boolean; keepImages: boolean; keepLayout: boolean; touch: string; preview: boolean; base: Scene; keepLayers: boolean; reroll: { layer: Layer; salt: string } }>;
 const styleBase = (s: State): Params => ({ ...DEFAULT_PARAMS, ...styleById(s, s.styleId).params } as Params);
 const settingsOf = (p: Params): Params => Object.fromEntries(SETTINGS_KEYS.filter((k) => p[k] !== undefined).map((k) => [k, p[k]]));
 /** parameters a draw starts from: the style, the app settings and the pins */
@@ -171,7 +189,8 @@ export function buildInput(s: State, extra: Extra = {}, paramPatch: Params = {})
       palettes: s.palettes,
       paletteFilter: (p) => (f.src === 'all' || p.src === f.src) && (f.light === 'any' || p.light === f.light) && (f.chroma === 'any' || p.chroma === f.chroma) && (f.contrast === 'any' || p.contrast === f.contrast) && (f.tag === 'any' || (p.tags || []).includes(f.tag)),
       pinnedPalette: s.pinnedPalette, baseColor: s.params.paletteSource === 'base' ? s.baseColor : null,
-      lockedPalette: keep ? keep.palette : (s.locks.color || extra.keepPalette) && cur ? cur.palette : null,
+      lockedPalette: keep ? keep.palette : extra.newPalette ? null : extra.keepPalette && cur ? cur.palette : s.locks.color && cur ? plainPalette(cur.palette) : null,
+      paletteEdits: s.palEdits,
       textSets: TEXT_SETS, custom: s.customOn ? s.custom : null,
       forceAttempt: keep ? keep.attempt ?? 0 : lay ? lay.attempt ?? 0 : undefined,
       lockedTexts: keep ? keep.texts : (s.locks.text || extra.keepTexts) && cur ? cur.texts : null,
@@ -197,7 +216,7 @@ export function buildInput(s: State, extra: Extra = {}, paramPatch: Params = {})
 /** Re-create the scene of a history/favourite entry (exact, using its stored picks). */
 export function entryScene(e: Entry): Scene | null {
   const s = useStore.getState();
-  const st: State = { ...s, honor: e.honor ?? [], seeds: e.seeds, decorSalt: e.decorSalt, ratio: e.ratio, styleId: e.styleId, params: e.params, modules: e.modules, modes: e.modes, fonts: e.fonts, customOn: !!e.custom, custom: e.custom, placed: e.placed ?? [] };
+  const st: State = { ...s, honor: e.honor ?? [], seeds: e.seeds, decorSalt: e.decorSalt, ratio: e.ratio, styleId: e.styleId, params: e.params, modules: e.modules, modes: e.modes, fonts: e.fonts, customOn: !!e.custom, custom: e.custom, placed: e.placed ?? [], palEdits: e.palEdits ?? {} };
   try { return applyEdits(generate(buildInput(st, { keepPicked: e.picked })).scene, e.edits || {}); } catch { return null; }
 }
 
@@ -220,6 +239,7 @@ export const useStore = create<State>((set, get) => ({
   textSet: 'auto', custom: null, customOn: false, savedTexts: LS.get('rea.texts.v1', []),
   presetImages: [], userImages: [], imgCat: 'all', imgPick: [],
   palettes: [], palFilter: { src: 'all', light: 'any', chroma: 'any', contrast: 'any', tag: 'any' }, pinnedPalette: null, baseColor: '#f1ede4',
+  palEdits: {}, palPins: {}, myPalettes: LS.get('rea.myPalettes.v1', []),
   result: null, scene: null, edits: {}, selected: null, editingText: null,
   history: [], hIndex: -1, favorites: LS.get('rea.favs.v1', []),
   recording: false, recorded: [], replaying: false,
@@ -244,9 +264,12 @@ export const useStore = create<State>((set, get) => ({
     await ensureFontSet(get().fonts);
     set({ loadMsg: '' });
     // palette handed over from the palette-draw page
-    try { const pin = localStorage.getItem('rea.pinPalette'); if (pin) { localStorage.removeItem('rea.pinPalette'); set({ pinnedPalette: JSON.parse(pin) }); setTimeout(() => get().toast(get().lang === 'zh' ? '已使用配色页的配色' : 'Palette from the palette page applied'), 400); } } catch { /* ignore */ }
+    let handed: string[] | null = null;
+    try { const pin = localStorage.getItem('rea.pinPalette'); if (pin) { localStorage.removeItem('rea.pinPalette'); handed = JSON.parse(pin); set({ pinnedPalette: handed }); setTimeout(() => get().toast(get().lang === 'zh' ? '已使用配色页的配色' : 'Palette from the palette page applied'), 400); } } catch { /* ignore */ }
     const cur = get().history[get().hIndex];
     if (cur) { try { await get().restore(cur); } catch { await get().regen(true); } } else await get().regen(true);
+    // phase 19: the palette handed over from the palette page colours the poster on screen, not only the next draw
+    if (handed?.length && cur) await get().setSourceColors(handed, false, true);
     set({ ready: true });
     useStore.subscribe((st, prev) => { if (SESSION_KEYS.some((k) => st[k] !== prev[k])) saveSessionSoon(); });
   },
@@ -268,7 +291,7 @@ export const useStore = create<State>((set, get) => ({
     let fonts = s.fonts;
     if (s.params.shakeOnDraw) fonts = shakeFonts(seeds.layout, s.fontCount).set;
     // phase 13: a draw starts from the style + settings + pins; tweaks of the last poster stay with that poster
-    set({ seeds, decorSalt: '', fonts, edits: {}, selected: null, params: drawParams(s), honor: Object.keys(s.pins), noEffect: null, dirty: Object.keys(s.pins).length > 0 });
+    set({ seeds, decorSalt: '', fonts, edits: {}, selected: null, params: drawParams(s), honor: Object.keys(s.pins), noEffect: null, dirty: Object.keys(s.pins).length > 0 || Object.keys(s.palPins).length > 0, palEdits: { ...s.palPins } });
     await get().regen(true);
   },
 
@@ -347,7 +370,7 @@ export const useStore = create<State>((set, get) => ({
   },
 
   async restore(e, push = false) {
-    set({ honor: e.honor ? [...e.honor] : [], noEffect: null, seeds: { ...e.seeds }, decorSalt: e.decorSalt, ratio: e.ratio, styleId: e.styleId, params: { ...e.params }, modules: { ...e.modules }, modes: [...e.modes], fonts: e.fonts, edits: { ...e.edits }, selected: null, custom: e.custom ?? get().custom, customOn: !!e.custom, placed: e.placed ?? [] });
+    set({ honor: e.honor ? [...e.honor] : [], noEffect: null, seeds: { ...e.seeds }, decorSalt: e.decorSalt, ratio: e.ratio, styleId: e.styleId, params: { ...e.params }, modules: { ...e.modules }, modes: [...e.modes], fonts: e.fonts, edits: { ...e.edits }, selected: null, custom: e.custom ?? get().custom, customOn: !!e.custom, placed: e.placed ?? [], palEdits: { ...(e.palEdits ?? {}) } });
     await get().regen(push, { keepPicked: e.picked });
   },
 
@@ -378,7 +401,7 @@ export const useStore = create<State>((set, get) => ({
     if (k in pins) delete pins[k]; else pins[k] = s.params[k] ?? DEFAULT_PARAMS[k];
     set({ pins });
   },
-  clearPins() { set({ pins: {} }); },
+  clearPins() { set({ pins: {}, palPins: {} }); },
   resetParams(keys) {
     const s = get();
     const base = styleBase(s);
@@ -410,7 +433,7 @@ export const useStore = create<State>((set, get) => ({
     const base = styleBase(s0);
     const lost = Object.keys(s0.params).filter((k) => !SETTINGS_KEYS.includes(k) && !(k in s0.pins) && s0.params[k] !== base[k]).length;
     const n = Object.keys(s0.pins).length;
-    set({ styleId: st.id, fonts: st.fonts, modes: st.modes ?? [], edits: {}, selected: null, seeds: newSeeds(), decorSalt: '' });
+    set({ styleId: st.id, fonts: st.fonts, modes: st.modes ?? [], edits: {}, selected: null, seeds: newSeeds(), decorSalt: '', palEdits: { ...s0.palPins } });
     set({ params: drawParams(get()), honor: Object.keys(s0.pins), dirty: n > 0, noEffect: null });
     if (lost || n) get().toast(s0.lang === 'zh' ? `已切换风格${lost ? ` · 本张 ${lost} 项调整已重置` : ''}${n ? ` · 保留 ${n} 个锁定` : ''}` : `Style changed${lost ? ` · ${lost} tweaks reset` : ''}${n ? ` · ${n} pins kept` : ''}`, lost ? 'warn' : 'ok');
     get().regen(true);
@@ -488,6 +511,62 @@ export const useStore = create<State>((set, get) => ({
   async updateUserImage(id, patch) { const userImages = get().userImages.map((a) => (a.id === id ? { ...a, ...patch } : a)); set({ userImages }); await saveUserImages(userImages); },
   async removeUserImage(id) { const userImages = get().userImages.filter((a) => a.id !== id); set({ userImages, imgPick: get().imgPick.filter((x) => x !== id) }); await saveUserImages(userImages); },
   setCustom(c, on = true) { set({ custom: c, customOn: on && !!c, edits: {} }); get().regen(false, { keepTexts: false }); },
+
+  // ---- phase 19: the palette editor. The user's colours belong to this poster (like a tweak); a pin keeps one for
+  // future draws. Element colours picked from a role follow that role to its new colour.
+  setPalEdits(patch, live = false) {
+    const s = get();
+    let next: PalEdits = {};
+    if (patch) { next = { ...s.palEdits }; for (const [k, v] of Object.entries(patch)) { if (v) next[k as keyof PalEdits] = v; else delete next[k as keyof PalEdits]; } next = cleanEdits(next); }
+    const palPins = { ...s.palPins };
+    for (const k of Object.keys(palPins) as (keyof PalEdits)[]) { if (next[k]) palPins[k] = next[k]; else if (patch === null || (patch && k in patch)) delete palPins[k]; }
+    let edits = s.edits;
+    const cur = s.result?.picked.palette;
+    if (cur) {
+      const after = withRoles(cur, next);
+      const map = new Map<string, string>();
+      for (const k of ROLE_KEYS) if (cur[k].toLowerCase() !== after[k].toLowerCase()) map.set(cur[k].toLowerCase(), after[k]);
+      if (map.size) for (const [id, ed] of Object.entries(edits)) { const f = ed.fill?.toLowerCase(); if (f && map.has(f)) { if (edits === s.edits) edits = { ...s.edits }; edits[id] = { ...ed, fill: map.get(f) }; } }
+    }
+    set({ palEdits: next, palPins, edits, dirty: true });
+    if (live) scheduleRegen({}); else void get().regen(false);
+  },
+  togglePalPin(k) {
+    const s = get();
+    const pal = s.result?.picked.palette;
+    const palPins = { ...s.palPins };
+    if (palPins[k]) delete palPins[k];
+    else {
+      const v = s.palEdits[k] ?? (/^f\d$/.test(k) ? pal?.fills[Number(k.slice(1))] : pal?.[k as (typeof ROLE_KEYS)[number]]);
+      if (!v) return;
+      palPins[k] = v;
+    }
+    set({ palPins });
+  },
+  async setSourceColors(colors, live = false, fresh = false) {
+    const cols = (colors ?? []).map(normHex).filter((c): c is string => !!c).slice(0, 6);
+    set({ pinnedPalette: cols.length ? cols : null, dirty: true, ...(fresh ? { palEdits: { ...get().palPins } } : {}) });
+    if (live) { scheduleRegen({ keepPalette: false, newPalette: true }); return; }
+    await get().regen(false, { keepPalette: false, newPalette: true });
+  },
+  savePalette(name) {
+    const s = get();
+    const pal = s.result?.picked.palette;
+    if (!pal) return null;
+    const colors = [...new Set([pal.bg, pal.ink, pal.accent, pal.alt, ...pal.fills].map((c) => c.toLowerCase()))].slice(0, 6);
+    const roles = cleanEdits({ bg: pal.bg, ink: pal.ink, inkSoft: pal.inkSoft, accent: pal.accent, alt: pal.alt });
+    const n = s.myPalettes.length + 1;
+    const mp: MyPalette = { id: 'mp-' + Date.now().toString(36), name: name || (s.lang === 'zh' ? `我的配色 ${n}` : `My palette ${n}`), colors, roles };
+    const myPalettes = [mp, ...s.myPalettes].slice(0, 120);
+    set({ myPalettes }); LS.set('rea.myPalettes.v1', myPalettes);
+    return mp;
+  },
+  deletePalette(id) { const myPalettes = get().myPalettes.filter((x) => x.id !== id); set({ myPalettes }); LS.set('rea.myPalettes.v1', myPalettes); },
+  async applyPalette(mp) {
+    // this poster takes the saved colours exactly; future draws draw their roles from the same source colours
+    set({ pinnedPalette: [...mp.colors], palEdits: cleanEdits(mp.roles), dirty: true });
+    await get().regen(false, { keepPalette: false, newPalette: true });
+  },
   addComponent(spec, at) {
     const s = get();
     if (!s.scene) return;
@@ -534,7 +613,7 @@ export const useStore = create<State>((set, get) => ({
 
 /* ---------- phase 13: session persistence (params + pins + history) ---------- */
 const SESSION = 'rea.session.v1';
-const SESSION_KEYS: (keyof State)[] = ['params', 'pins', 'honor', 'history', 'hIndex', 'styleId', 'ratio', 'modules', 'modes', 'fonts', 'locks', 'seeds', 'decorSalt'];
+const SESSION_KEYS: (keyof State)[] = ['params', 'pins', 'palPins', 'honor', 'history', 'hIndex', 'styleId', 'ratio', 'modules', 'modes', 'fonts', 'locks', 'seeds', 'decorSalt'];
 let saveTimer: ReturnType<typeof setTimeout> | null = null;
 const slim = (e: Entry): Entry => ({ ...e, picked: { ...e.picked, quality: undefined } });
 export function saveSession() {
@@ -542,17 +621,17 @@ export function saveSession() {
   const keep = 60;
   const from = Math.max(0, Math.min(s.hIndex - keep + 10, s.history.length - keep));
   const history = s.history.slice(from, from + keep).map(slim);
-  LS.set(SESSION, { v: 1, params: s.params, pins: s.pins, honor: s.honor, history, hIndex: s.hIndex - from, styleId: s.styleId, ratio: s.ratio, modules: s.modules, modes: s.modes, fonts: s.fonts, locks: s.locks, seeds: s.seeds, decorSalt: s.decorSalt });
+  LS.set(SESSION, { v: 1, params: s.params, pins: s.pins, palPins: s.palPins, honor: s.honor, history, hIndex: s.hIndex - from, styleId: s.styleId, ratio: s.ratio, modules: s.modules, modes: s.modes, fonts: s.fonts, locks: s.locks, seeds: s.seeds, decorSalt: s.decorSalt });
 }
 function saveSessionSoon() { if (saveTimer) clearTimeout(saveTimer); saveTimer = setTimeout(saveSession, 300); }
-type Sess = Pick<State, 'params' | 'pins' | 'honor' | 'history' | 'hIndex' | 'styleId' | 'ratio' | 'modules' | 'modes' | 'fonts' | 'locks' | 'seeds' | 'decorSalt'>;
+type Sess = Pick<State, 'params' | 'pins' | 'palPins' | 'honor' | 'history' | 'hIndex' | 'styleId' | 'ratio' | 'modules' | 'modes' | 'fonts' | 'locks' | 'seeds' | 'decorSalt'>;
 function loadSession(s: State): Partial<State> | null {
   if (typeof location !== 'undefined' && new URLSearchParams(location.search).has('fresh')) return null;
   const x = LS.get<(Sess & { v: number }) | null>(SESSION, null);
   if (!x || x.v !== 1 || !s.styles.some((st) => st.id === x.styleId)) return null;
   const clean = (p: Params) => Object.fromEntries(Object.entries(p || {}).filter(([k]) => !REMOVED_PARAMS.includes(k))) as Params;
   const history = Array.isArray(x.history) ? x.history.filter((e) => e && e.picked && e.seeds) : [];
-  return { params: { ...DEFAULT_PARAMS, ...clean(x.params) } as Params, pins: clean(x.pins), honor: x.honor ?? [], history, hIndex: Math.min(history.length - 1, Math.max(-1, x.hIndex)), styleId: x.styleId, ratio: x.ratio ?? s.ratio, modules: { ...s.modules, ...x.modules }, modes: x.modes ?? [], fonts: x.fonts ?? s.fonts, locks: { ...s.locks, ...x.locks }, seeds: x.seeds ?? s.seeds, decorSalt: x.decorSalt ?? '', styleTab: styleById(s, x.styleId).lib === 'en' ? 'en' : styleById(s, x.styleId).lib === 'zh' ? 'zh' : 'mine' };
+  return { params: { ...DEFAULT_PARAMS, ...clean(x.params) } as Params, pins: clean(x.pins), palPins: cleanEdits(x.palPins), honor: x.honor ?? [], history, hIndex: Math.min(history.length - 1, Math.max(-1, x.hIndex)), styleId: x.styleId, ratio: x.ratio ?? s.ratio, modules: { ...s.modules, ...x.modules }, modes: x.modes ?? [], fonts: x.fonts ?? s.fonts, locks: { ...s.locks, ...x.locks }, seeds: x.seeds ?? s.seeds, decorSalt: x.decorSalt ?? '', styleTab: styleById(s, x.styleId).lib === 'en' ? 'en' : styleById(s, x.styleId).lib === 'zh' ? 'zh' : 'mine' };
 }
 
 if (typeof window !== 'undefined') (window as unknown as { __rea: unknown }).__rea = useStore;
