@@ -57,7 +57,7 @@ Without it, a local template writer produces bilingual copy offline.
 
 ### Tests & QA
 ```bash
-npm test               # vitest — 156 unit tests: colour engine (Lab/OKLCH/k-means/WCAG/APCA/palette roles, taste bounds), layout engine (rng, kinsoku, optimal breaking, grids, every composition × ratio × mode, locks, perf), quality pass (≥95% of 240 draws free of overlaps/glyph hits), components, sidebar templates, PDF/ZIP writers
+npm test               # vitest — 250 unit tests: colour engine (Lab/OKLCH/k-means/WCAG/APCA/palette roles, taste bounds), layout engine (rng, kinsoku, optimal breaking, grids, every composition × ratio × mode, locks, perf), quality pass (≥95% of 240 draws free of overlaps/glyph hits), components, sidebar templates, PDF/ZIP writers
 npm run qa:e2e         # Playwright/Chrome against the running app (1440×900), driving the glass UI: ratio control + keys 1–6 × draws (dock button / Space, exactly one draw per press), 10 modes + all-on, history (dock arrows, ←/→, film strip), variants, locks (top-cap buttons, ⇧1–4), determinism, selection → floating toolbar → in-place edit (⌘↵ / Esc) → inspector text + size edits → undo, drag-edit, Advanced (all 100 params reachable, scrub regenerates, search, layers), ⌘K (ratio + parameter commands), PNG 1/2/4× + SVG hooks and export-sheet downloads, every library tab, components, sidebar size memory, usage badges, G grid, theme + language toggles, deck view, palette page, rating page (rate/skip/undo/export + exact reproduction), reduced transparency/motion; fails on any console error
 node scripts/qa/ui-port-shot.mjs [outDir] [states,comma,separated]   # 16 UI states + palette and rating pages × light/dark at 1440×900 (test-results/ui)
 npm run qa:deck        # deck end-to-end: add/redraw pages, export a multi-page PDF and a PNG zip (validate with pdfinfo / unzip -t)
@@ -65,6 +65,7 @@ npm run qa:showcase -- showcase/posters scripts/qa/showcase-spec.json   # re-ren
 python3 scripts/contact_sheet.py showcase/contact_sheet.jpg --labels showcase/posters/*.png
 ```
 Showcase PNGs (`showcase/posters/`, ~130 MB) are regenerated, not committed; only the contact sheet and the UI JPGs in `showcase/ui/` are tracked.
+The repository README's images (`.github/assets/`) are made in the real app with uploaded pictures; the recipe and the lessons are in `docs/README_IMAGES.md`.
 Developer lab: `/lab.html?n=12&ratio=3:4,16:9&all=1&seed=X&style=…&comp=…&modes=…` renders a grid of posters for visual review.
 
 ---
@@ -416,6 +417,10 @@ The style library (风格) used to show the current poster with only the style's
 - **Fonts first, whole poster.** Cards load their style's fonts before rendering, only when they come into view, and show the whole poster at its format.
 
 **Fix (construction engine):** with real copy, an info line that is exactly the date (e.g. `2027.05.20`) is the date. It was set twice ("2027.05.20 — 2027.05.20", or once in the text group and again in a side block). It is now set once, through the date slot (`copy.ts`, `usedTexts`). Random draws and earlier posters are unchanged (72 draws and replays checked byte-identical).
+
+## Known limits
+
+- **Real copy outside the construction engine.** With custom text, the older compositions show sample words in the slots the copy leaves empty, and some leave a given line out. 构成编排 `build` keeps the copy (no sample words in 60 draws, the subtitle dropped in 9). The automatic layout picks `build` most of the time, but 26 of 60 automatic draws still had a problem. Numbers, cause and next step: `docs/QUALITY_LOG.md`, "Real copy in the web app". The CLI is not affected.
 
 ## License
 

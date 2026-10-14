@@ -45,6 +45,8 @@ The picture is in exactly the right place and only the type is off? Open the sma
 - **Placement (P)** moves and resizes the pictures, and the type is set again around them.
 - **Grid (R)** switches to another grid (columns, margins, rows) and keeps the same layout idea.
 
+In layouts where the picture's position is the design, such as Full bleed or Ring, Placement can't move it, and the button tells you why.
+
 The **Text, Colour, Image, Graphics and Style** buttons along the bottom each swap one thing and leave the rest alone.
 
 ### Lock in what you like, and every poster after it matches
@@ -67,7 +69,7 @@ Upload photos in the **Images** panel; they stay in your own browser. Set the pa
 
 Every colour in the palette panel is yours to set: ground, text, accent, block fills. Click one to drag a new colour, type a hex code, or sample one straight from a photo with the eyedropper. The poster follows live and the layout basically stays put. Got a colour combination in your head? Add it as source colours and the poster is coloured from them. Save palettes you like under **My palettes** for one-click reuse, and pin a colour to keep it on every poster you draw after.
 
-> For now, the web app sometimes leaves out a minor line of your copy, and a few layouts fill in a couple of sample words. Check the poster before you post it. When every detail has to be right, as for a formal event, use the [command-line version](#for-ai-agents-and-scripts-the-command-line-version) below, which checks every item.
+> For now, the web app isn't fully reliable with your own copy: in our tests, nearly half the posters left out a minor line (usually the subtitle), or an older layout filled in a few sample words. **Construction** is the safe choice: click it in the Layout library to lock it, and no sample words appear, though the subtitle is still dropped now and then. Check the poster before you post it. When every detail has to be right, as for a formal event, use the [command-line version](#for-ai-agents-and-scripts-the-command-line-version) below, which checks every item.
 
 ### One piece of content, every size
 

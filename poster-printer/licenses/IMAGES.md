@@ -7,7 +7,9 @@ Every preset image is public domain / CC0, or an original artwork made for this 
 - **museum** — public-domain artworks from The Metropolitan Museum of Art Open Access (CC0), `scripts/fetch-met.py`.
 - **proc** — original procedural abstracts from `scripts/gen-procedural.py` (CC0 1.0); kept in the pool for manual use but not drawn by the v2 random plan.
 
-GenerateImage was not available in the build environment, so no AI-generated images are included. Cut-outs (`public/images/cut/`) were produced locally with rembg + IS-Net.
+GenerateImage was not available in the build environment, so no AI-generated images are included in the app.
+
+**README images.** The posters and screenshots in the repository README (`.github/assets/`) were made in the app from Midjourney pictures the author uploaded through the Images panel. Those pictures are not preset images, are not shipped in the app or the release package, and are not covered by the CC0 statement above. Cut-outs (`public/images/cut/`) were produced locally with rembg + IS-Net.
 
 Phase 5: `scripts/precompute-cutouts.py` re-ran IS-Net offline over every preset photo and kept a mask only when it covered 6–55% of the frame, touched the border on <30% of its edge and was >85% one connected shape; the survivors were then checked by eye. 28 cut-outs are shipped (museum heads, vases and statues, a rose window, food and tea, palm, lantern, bicycle, pylon, lighthouse, flowers). Three earlier masks that only held legs or fragments (figure-48893, figure-773108, still-object61337727) were deleted. Cut-outs are derived from the CC0 sources listed below and stay CC0. No identifiable people are cut out.
 

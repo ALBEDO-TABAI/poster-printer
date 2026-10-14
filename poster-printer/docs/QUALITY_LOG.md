@@ -141,3 +141,23 @@ Variety is 10.27 archetype effective kinds (≥ 10.1 over 480 simulated draws).
 ## Phase 8
 - Diagnostic: best-of-200 ≤ 8 on 4 fixed contents, top candidates = same arrangements → expression/structure ceiling, not hit rate.
 - Fixed contents: lineup now carried (B usable ~35%→~55%), no invented copy; ceiling unchanged. 110 random: 52.3% vs P7, 0 nines.
+
+## Real copy in the web app (2026-10-14)
+
+**Question.** With the user's own copy (Text panel › 自定义文字), does the poster show every line, and nothing else?
+
+**Setup.** Release build 1.4.0. Two uploaded pictures, copy = title + subtitle + three info lines (date, venue, price): the common case. Styles Instrument, 现代宋 and Neue Grid, ratio 3:4, 10 draws per style and picture, so 60 per row. A draw is clean when every given line is on the poster (whitespace ignored) and no other word is (weekday and month names allowed). Driven through `window.__rea`, as in `docs/README_IMAGES.md`.
+
+| Layout | Clean | A line left out | Sample words added |
+|---|---|---|---|
+| automatic (as shipped) | 34 / 60 | 18 | 15 |
+| 构成编排 `build`, locked | 51 / 60 | 9 (always the subtitle) | **0** |
+| `fullbleed` / `giant` / `split` / `layered`, locked | 0 / 60 each | 41–60 | 50–60 |
+
+The automatic picks went to `build` 42 times out of 60. Most of the failures were the other picks, the older composers. The Swiss `modular` / `bleedgrid` grids (phase 16) also kept the copy whenever they came up. An earlier run with a richer copy (list items and a note as well) had something wrong in 41 of 60 automatic draws.
+
+**Cause.** `pickTexts` (`engine/gen/pick.ts`) writes the custom copy over a full sample text set. Slots the copy does not fill keep their sample text: group subs, `words`, meta beyond the given ones, notes. The construction engine reads only the real slots when the copy is custom (`build/copy.ts`: groups sliced to `customItems`, meta to `customMeta`, no `words`). The older composers (`gen/comps*.ts`, `kit.ts`, `sidebar.ts`, `decor.ts`) read the sample slots, and some leave given lines out. For example, `giant` sets only one word of the title, and `fullbleed` shows two of the three info lines.
+
+**What it changed.** The READMEs and the package README now say this plainly and advise locking 构成编排 for real copy. The CLI is not affected: its correctness gates check every item.
+
+**Next.** Empty the sample slots when the copy is custom and teach the older composers to skip empty slots (as `build/copy.ts` does), or keep them out of automatic draws when the copy is real. Measure again with this protocol. Earlier posters must still replay byte-identically.

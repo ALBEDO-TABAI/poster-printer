@@ -5,7 +5,8 @@
 多张图片可以排进瑞士网格：构图选「模块网格」（主图卫星、悬挂线、尺度递进、图片横条、模块分区）或「满版拼图」（满版拼贴、满版行列），在图片面板挑选或上传图片即可。
 底部「结构」按钮右侧的 ▾ 可以只换结构的一层：网格（R）、图位（P）、排字（T）。只想换文字排法时按 T，图片的位置完全不动；按 P 换一种页面原型，按 R 换一套网格。
 配色面板里的每个颜色（底色、文字、强调、色块、色源）都可以点开自己改：拖动取色、输入色号或用吸管取色，海报实时跟着变、版式基本不动；点图钉让之后的抽卡沿用，喜欢的配色可以存进「我的配色」。
-全部在你自己的电脑上运行，不需要联网（AI 抠图为可选项）。（原名 Poster Printer。）
+用你自己的文字时，建议在「版式」面板的版式库里锁定「构成编排」：较早的版式可能补上几个示例词，或省掉一行次要信息。发出去前请看一眼。
+全部在你自己的电脑上运行，不需要联网（AI 抠图为可选项）。
 
 A generative poster tool that runs in your browser: single posters, multi-page decks (PDF / PNG-zip export)
 and a palette-drawing page. Most draws use the **Construction** composition: the copy is set as a designed text
@@ -19,8 +20,9 @@ another page archetype, R onto another grid.
 Every colour in the palette panel (ground, text, accent, block fills, source colours) can be set by hand: drag, type a hex
 code or use the eyedropper. The poster follows live and basically keeps its layout; pin a colour to keep it for future draws, and
 save palettes you like under My palettes.
+With your own copy, lock **Construction** in the Layout library: the older layouts can fill in a few sample words or leave
+out a minor line. Check the poster before you post it.
 Everything runs locally on your machine; no internet needed (AI cut-out is optional).
-(Formerly Poster Printer.)
 
 ## 1. 需要 / Requirements
 
@@ -32,8 +34,8 @@ Everything runs locally on your machine; no internet needed (AI cut-out is optio
 
 | 系统 / OS | 操作 / Do this |
 |---|---|
-| **macOS** | 双击 `start.command`。第一次如被拦截：右键 → 打开 → 打开。<br>Double-click `start.command`. If macOS blocks it the first time: right-click → Open → Open. <br>或在终端 / or in Terminal: `bash start.sh` |
-| **Windows** | 双击 `start.bat` / double-click `start.bat` |
+| **macOS** | 双击 `start.command`。第一次如被拦截：打开「系统设置 → 隐私与安全性」，往下找到这条提示，点「仍要打开」；或者右键 → 打开 → 打开。<br>Double-click `start.command`. If macOS blocks it the first time: System Settings → Privacy & Security, scroll down to the message and click **Open Anyway**; or right-click → Open → Open. <br>或在终端 / or in Terminal: `bash start.sh` |
+| **Windows** | 双击 `start.bat`。如弹出「Windows 已保护你的电脑」：点「更多信息」→「仍要运行」。<br>Double-click `start.bat`. If “Windows protected your PC” appears: **More info** → **Run anyway**. |
 | **Linux** | `./start.sh` |
 
 浏览器会自动打开 **http://localhost:5180/**（端口被占用时自动换下一个，终端会显示实际地址）。
@@ -80,8 +82,8 @@ licenses/       fonts (OFL etc.), images (CC0), palettes (MIT), models
 ## 6. 常见问题 / Troubleshooting
 
 - **“python3: command not found” / 找不到 Python** → install Python 3.9+ (see §1).
-- **macOS “cannot be opened because it is from an unidentified developer”** → right-click `start.command` → Open,
-  or run `xattr -dr com.apple.quarantine .` inside this folder once.
+- **macOS “cannot be opened” / 无法打开** → System Settings → Privacy & Security → **Open Anyway** (系统设置 → 隐私与安全性 →
+  仍要打开), or right-click `start.command` → Open, or run `xattr -dr com.apple.quarantine .` inside this folder once.
 - **页面空白 / blank page** → use the address printed in the terminal (not `file://…`), and a current browser.
 - **AI 抠图提示不可用 / cut-out unavailable** → run setup-ai, then restart with the start script.
 
