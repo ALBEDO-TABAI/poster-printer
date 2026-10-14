@@ -14,9 +14,7 @@ You have the title, the date and the venue, but you can't make them look good to
 
 Speed is a side effect. What it really cares about is getting each poster right: the layout sits on a real grid, the type has a clear hierarchy, and every poster is checked so the text stays readable on its background. The words are real text, not painted pixels, so there are no misspellings or garbled letters, and you can click any line to edit it.
 
-![Example posters made with Midjourney images](.github/assets/gallery.jpg)
-
-<sub>These use the author's own Midjourney images with made-up event details. Each one was picked from 8 candidates the command-line version generated in one run. None were edited by hand.</sub>
+![Posters laid out with it](.github/assets/gallery.jpg)
 
 ## Why it exists
 
@@ -61,6 +59,8 @@ In the **Text** panel, turn on **Custom text** and fill in the headline, subtitl
 
 Upload photos in the **Images** panel; they stay in your own browser. Set the palette source to **From image** and the colors come from your photos, so the poster matches your event photos or brand colors instead of somebody else's template.
 
+![The palette panel: every colour is editable](.github/assets/paledit-en.jpg)
+
 Every colour in the palette panel is yours to set: ground, text, accent, block fills. Click one to drag a new colour, type a hex code, or sample one straight from a photo with the eyedropper. The poster follows live and the layout basically stays put. Got a colour combination in your head? Add it as source colours and the poster is coloured from them. Save palettes you like under **My palettes** for one-click reuse, and pin a colour to keep it on every poster you draw after.
 
 > For now, the web app sometimes leaves out a minor line of your copy, and a few layouts fill in a couple of sample words. Check the poster before you post it. When every detail has to be right, as for a formal event, use the [command-line version](#for-ai-agents-and-scripts-the-command-line-version) below, which checks every item.
@@ -103,7 +103,7 @@ It doesn't make the pictures. Use your own photos, AI-generated images, or the 1
 
 ## For AI agents and scripts: the command-line version
 
-![A set of candidates from one command-line run](.github/assets/cli-sheet.jpg)
+![The 8 candidates one command made](.github/assets/cli-sheet.jpg)
 
 The same layout engine runs from the command line, for batch output or for an AI agent like Claude to call. Give it real copy and pictures, and it generates a ranked set of candidates. Each one comes with a report that checks:
 
@@ -115,8 +115,8 @@ The same layout engine runs from the command line, for batch output or for an AI
 Candidates that fail are dropped, and the output says why. If too few pass, it fills the set with candidates whose problems are clearly flagged (`--strict` returns only the ones that pass).
 
 ```bash
-ready-poster-printer generate --title "春日花市" --subtitle "Spring Flower Market" \
-  --date 2027-04-05T10:00 --venue "老街广场" --image daisies.jpg -n 8 -o out/
+ready-poster-printer generate --title "教室里的春天" --subtitle "Picture Books for Spring" \
+  --date 2027-03-14 --venue "城市少儿图书馆" --image picturebooks.jpg -n 8 -o out/
 ```
 
 Results export as PNG, SVG or PDF, or as JSON that the web app can open for hand-tuning. To use it from an AI agent, load the skill in [ready-poster-printer](poster-printer-cli/skills/ready-poster-printer/SKILL.md). It explains how to choose a layout from the pictures and copy.
@@ -173,5 +173,3 @@ You need Python 3.10+ and one of Chrome, Chromium, Edge or Brave. It finds them 
 
 Original program code is licensed under **GNU AGPL v3.0 only (AGPL-3.0-only)**; the full terms are in [LICENSE](LICENSE).
 Fonts, images, palette data and third-party code keep their own licenses and credits; see [third-party licenses](poster-printer/licenses/).
-
-Formerly called Poster Printer.

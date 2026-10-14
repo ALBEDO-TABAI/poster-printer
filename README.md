@@ -14,7 +14,7 @@
 
 快只是顺带的，它真正在意的是每一张都排得对：版面落在真正的网格上，字号有清楚的层级，每张都会检查文字在背景上看不看得清。海报上的字是真正的文字，不是画出来的，所以不会有错字和乱码，点一下就能改。
 
-![用 Midjourney 图片做的示例海报](.github/assets/gallery.jpg)
+![用它排出来的海报](.github/assets/gallery.jpg)
 
 ## 为什么做它
 
@@ -59,6 +59,8 @@
 
 在「图片」面板上传照片，照片只存在你自己的浏览器里。把配色来源设成「图片提取」，海报的颜色就从你的照片里取，和活动照片、品牌色自然搭在一起，不会像套了别人的模板。
 
+![配色面板：每个颜色都能自己改](.github/assets/paledit-zh.jpg)
+
 配色面板里的每一个颜色都能自己定：底色、文字、强调色、色块，点开就能拖动取色、输入色号，或者用吸管直接吸照片上的颜色。海报实时跟着变，版式基本不动。灵光一闪想到的配色组合，加进「色源」就能用；喜欢的配色存进「我的配色」，下次一键套用。想让以后每张都用同一个颜色，点它旁边的图钉就行。
 
 > 目前网页版偶尔会省掉次要的一行说明，个别版式还会补上几个示例词，发出去前请看一眼。正式活动这类每条信息都必须准确的场合，建议用下面的[命令行版](#给-ai-助手和脚本用命令行版)，它会逐条核对。
@@ -101,7 +103,7 @@
 
 ## 给 AI 助手和脚本用：命令行版
 
-![命令行版一次生成的一组候选](.github/assets/cli-sheet.jpg)
+![命令行版一条命令生成的 8 个候选](.github/assets/cli-sheet.jpg)
 
 同一个排版引擎也能在命令行里跑，适合批量出图，也可以交给 Claude 这类 AI 助手调用。给它真实的文案和图片，它会生成一组候选、排好名次，每张都附一份检查报告：
 
@@ -113,8 +115,8 @@
 不合格的候选会被剔除并写明原因；合格的不够数时，才会用明确标出问题的候选补上（加 `--strict` 就只返回合格的）。
 
 ```bash
-ready-poster-printer generate --title "春日花市" --subtitle "Spring Flower Market" \
-  --date 2027-04-05T10:00 --venue "老街广场" --image daisies.jpg -n 8 -o out/
+ready-poster-printer generate --title "教室里的春天" --subtitle "Picture Books for Spring" \
+  --date 2027-03-14 --venue "城市少儿图书馆" --image picturebooks.jpg -n 8 -o out/
 ```
 
 结果可以导出成 PNG、SVG、PDF，也可以存成网页版能打开的 JSON，再手动调整。让 AI 助手使用时，请加载技能说明 [ready-poster-printer](poster-printer-cli/skills/ready-poster-printer/SKILL.md)，里面写了怎么根据图片和文案选版式。
