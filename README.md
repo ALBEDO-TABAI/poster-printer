@@ -16,8 +16,6 @@
 
 ![用 Midjourney 图片做的示例海报](.github/assets/gallery.jpg)
 
-<sub>这些海报用的是作者自己的 Midjourney 图片，文案是随手编的活动信息。每张都是从命令行版一次生成的 8 个候选里挑的，没有手动修改。</sub>
-
 ## 为什么做它
 
 - **内容会写，版排不好。** 标题、日期、地点、嘉宾都齐了，放在一起总觉得哪里不对。
@@ -171,5 +169,3 @@ python3 -m venv .venv
 
 本项目原创程序代码采用 **GNU AGPL v3.0 only（AGPL-3.0-only）**，完整条款见 [LICENSE](LICENSE)。
 字体、图片、配色数据及第三方代码保留各自的许可证和署名，详见[第三方授权说明](poster-printer/licenses/)。
-
-本项目原名 Poster Printer。
