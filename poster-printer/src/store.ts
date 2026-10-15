@@ -280,7 +280,7 @@ export function previewScene(paramPatch: Params, over: Partial<State> = {}): Sce
 }
 
 export const useStore = create<State>((set, get) => ({
-  ready: false, loadMsg: '',
+  ready: false, loadMsg: 'start',
   lang: LS.get('rea.lang', 'zh'), theme: LS.get('rea.theme', 'light'),
   ratio: '3:4',
   styles: [...BUILTIN_STYLES, ...LS.get<Style[]>('rea.styles.v1', [])], styleId: BUILTIN_STYLES[0].id, styleTab: 'zh', dirty: false,

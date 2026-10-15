@@ -19,6 +19,7 @@ import { RANDOM_STYLES, BUILTIN_STYLES, type Style } from '../data/styles';
 import type { Ratio, Scene } from '../engine/types';
 import { APP_SLUG, APP_VERSION } from '../config';
 import { BrandMark, Wordmark } from '../ui/shell/Chrome';
+import { Splash } from '../ui/Splash';
 import { Icon } from '../ui/Icon';
 import { LSeg } from '../ui/controls';
 import G from '../ui/glass/glass';
@@ -281,7 +282,7 @@ export function RateApp() {
       <div className="stage"><div className="aura"><img alt="" /><img alt="" /></div><div className="dots" /><div className="vignette" /></div>
       <header className="top">
         <div className="lg cap" data-refract="28" data-mat="clear">
-          <a className="brand" href="./"><BrandMark s={26} /><Wordmark /></a>
+          <a className="brand" href="./"><BrandMark /><Wordmark /></a>
           <span className="vsep" /><span className="rate-title">{t('打分', 'Rate')}</span>
         </div>
         <div className="lg cap center prog-cap" data-refract="32" data-mat="clear" data-ca=".08">
@@ -357,7 +358,7 @@ export function RateApp() {
         </div>
       </div>
       {msg && <div className="toasts"><div className="lg toast strong"><Icon name="check" size={15} />{msg}</div></div>}
-      {!ready && <div className="splash"><BrandMark s={52} /><h1>Poster <i>Printer</i></h1><p>{t('载入素材…', 'Loading assets…')}</p><div className="load-bar"><i /></div></div>}
+      {!ready && <Splash />}
     </div>
   );
 }

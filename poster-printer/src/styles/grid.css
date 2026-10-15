@@ -32,7 +32,7 @@
 .top { top: var(--m); left: var(--m); right: var(--m); height: var(--bar); gap: var(--u); }
 .cap { height: var(--bar); padding: 0 4px; gap: 0; }
 .top > .cap:first-child { gap: 4px; }
-.brand { height: 40px; padding: 0 16px 0 8px; gap: 8px; }
+.brand { height: 40px; padding: 0 16px 0 14px; gap: 10px; }
 .vsep { height: 24px; margin: 0 4px; }
 .icon-btn { width: 40px; height: 40px; }
 .text-btn { height: 40px; padding: 0 16px; gap: 8px; }

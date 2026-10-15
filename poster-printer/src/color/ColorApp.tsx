@@ -127,7 +127,7 @@ export function ColorApp() {
       <div className="stage"><div className="aura"><img alt="" /><img alt="" /></div><div className="dots" /><div className="vignette" /></div>
       <header className="top">
         <div className="lg cap" data-refract="28" data-mat="clear">
-          <a className="brand" href="./"><BrandMark s={26} /><Wordmark /></a>
+          <a className="brand" href="./"><BrandMark /><Wordmark /></a>
           <span className="vsep" />
           <nav className="seg pagenav">
             <a href="./">{t('海报', 'Poster')}</a>

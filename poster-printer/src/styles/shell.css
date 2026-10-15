@@ -47,10 +47,8 @@ kbd, .kbd {
 .top > * { pointer-events: auto; }
 .cap { height: 48px; border-radius: var(--r-pill); display: flex; align-items: center; padding: 0 6px; gap: 4px; }
 .brand { display: flex; align-items: center; gap: 10px; padding: 0 12px 0 8px; height: 36px; border-radius: var(--r-pill); }
-.brand svg { flex: none; }
-.wordmark { font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: -.025em; white-space: nowrap; }
-.wordmark i { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 17px; letter-spacing: -.01em; margin-left: 1px; }
-.wordmark .wm-ready { font-weight: 500; color: var(--ink-2); margin-right: 1px; }
+.brand-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+.wordmark { font-family: var(--font-serif); font-weight: 400; font-size: 22px; line-height: 1; letter-spacing: -.01em; white-space: nowrap; }
 .vsep { width: 1px; height: 20px; background: var(--hair-2); margin: 0 4px; flex: none; }
 .top .center { position: absolute; left: 50%; transform: translateX(-50%); }
 .icon-btn {

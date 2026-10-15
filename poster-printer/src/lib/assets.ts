@@ -1,6 +1,9 @@
 import type { ImageAsset } from '../engine/gen/ctx';
 import type { LibPalette } from '../engine/color/palette';
 
+/** Rows in public/data/palettes.json, for the splash, which shows before they load (tests/splash.test.ts checks it). */
+export const PALETTE_COUNT = 1340;
+
 let images: ImageAsset[] | null = null;
 let palettes: LibPalette[] | null = null;
 export async function loadImages(): Promise<ImageAsset[]> {

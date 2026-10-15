@@ -11,20 +11,10 @@ import * as A from './actions';
 import { PARAMS } from '../../engine/params';
 import { LAYERS, LAYER_INFO, FIXED_PLACE, layerHint } from '../../engine/layers';
 import type { Layer } from '../../engine/generate';
+import { APP_NAME } from '../../config';
 
-export function BrandMark({ s = 26 }: { s?: number }) {
-  return (
-    <svg width={s} height={s} viewBox="0 0 28 28" aria-hidden="true">
-      <rect x="1.5" y="2" width="25" height="16" rx="5.5" fill="currentColor" />
-      <rect x="6.5" y="9.4" width="15" height="1.6" rx=".8" fill="var(--stage)" opacity=".9" />
-      <rect x="8" y="11.6" width="12" height="15" rx="1.4" fill="var(--stage)" stroke="currentColor" strokeWidth="1.3" />
-      <rect x="10" y="14" width="5" height="3.2" fill="var(--accent)" />
-      <path d="M10 19.6h8M10 22h5.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" opacity=".55" />
-      <circle cx="22" cy="5.6" r="1.35" fill="var(--accent)" />
-    </svg>
-  );
-}
-export const Wordmark = () => <span className="wordmark"><span className="wm-ready">Ready</span> Poster <i>Printer</i></span>;
+export const BrandMark = () => <i className="brand-dot" aria-hidden="true" />;
+export const Wordmark = () => <span className="wordmark">{APP_NAME}</span>;
 
 const ratioGlyph = (r: string) => { const [a, b] = r.split(':').map(Number); const k = 12 / Math.max(a, b); return <i className="ratio-glyph" style={{ width: +(a * k).toFixed(1), height: +(b * k).toFixed(1) }} />; };
 
