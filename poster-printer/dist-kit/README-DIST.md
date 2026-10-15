@@ -89,8 +89,8 @@ licenses/       fonts (OFL etc.), images (CC0), palettes (MIT), models
 
 ## 快捷键 · Shortcuts
 
-空格 抽一张 · ←/→ 历史 · 1–6 画幅 · ⇧1–4 锁定 · ⌘K / Ctrl+K 命令面板 · I 检查器 · A 高级调校 · E 导出 · ? 全部快捷键。
-Space draw · ←/→ history · 1–6 ratio · ⇧1–4 locks · ⌘K / Ctrl+K command palette · I inspector · A advanced · E export · ? all shortcuts.
+空格 抽一张 · ←/→ 历史 · 1–7 画幅 · ⇧1–4 锁定 · ⌘K / Ctrl+K 命令面板 · I 检查器 · A 高级调校 · E 导出 · ? 全部快捷键。
+Space draw · ←/→ history · 1–7 ratio · ⇧1–4 locks · ⌘K / Ctrl+K command palette · I inspector · A advanced · E export · ? all shortcuts.
 
 打分页（用于训练你自己的审美选择器）：`http://localhost:5180/rate.html`，按 1–9 打分，E 导出 JSON。
 Rating page (to train the taste selector on your own taste): `http://localhost:5180/rate.html` — press 1–9 to rate, E to export JSON.

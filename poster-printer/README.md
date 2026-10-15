@@ -58,7 +58,7 @@ Without it, a local template writer produces bilingual copy offline.
 ### Tests & QA
 ```bash
 npm test               # vitest — 250 unit tests: colour engine (Lab/OKLCH/k-means/WCAG/APCA/palette roles, taste bounds), layout engine (rng, kinsoku, optimal breaking, grids, every composition × ratio × mode, locks, perf), quality pass (≥95% of 240 draws free of overlaps/glyph hits), components, sidebar templates, PDF/ZIP writers
-npm run qa:e2e         # Playwright/Chrome against the running app (1440×900), driving the glass UI: ratio control + keys 1–6 × draws (dock button / Space, exactly one draw per press), 10 modes + all-on, history (dock arrows, ←/→, film strip), variants, locks (top-cap buttons, ⇧1–4), determinism, selection → floating toolbar → in-place edit (⌘↵ / Esc) → inspector text + size edits → undo, drag-edit, Advanced (all 100 params reachable, scrub regenerates, search, layers), ⌘K (ratio + parameter commands), PNG 1/2/4× + SVG hooks and export-sheet downloads, every library tab, components, sidebar size memory, usage badges, G grid, theme + language toggles, deck view, palette page, rating page (rate/skip/undo/export + exact reproduction), reduced transparency/motion; fails on any console error
+npm run qa:e2e         # Playwright/Chrome against the running app (1440×900), driving the glass UI: ratio control + keys 1–7 × draws (dock button / Space, exactly one draw per press), 10 modes + all-on, history (dock arrows, ←/→, film strip), variants, locks (top-cap buttons, ⇧1–4), determinism, selection → floating toolbar → in-place edit (⌘↵ / Esc) → inspector text + size edits → undo, drag-edit, Advanced (all 100 params reachable, scrub regenerates, search, layers), ⌘K (ratio + parameter commands), PNG 1/2/4× + SVG hooks and export-sheet downloads, every library tab, components, sidebar size memory, usage badges, G grid, theme + language toggles, deck view, palette page, rating page (rate/skip/undo/export + exact reproduction), reduced transparency/motion; fails on any console error
 node scripts/qa/ui-port-shot.mjs [outDir] [states,comma,separated]   # 16 UI states + palette and rating pages × light/dark at 1440×900 (test-results/ui)
 npm run qa:deck        # deck end-to-end: add/redraw pages, export a multi-page PDF and a PNG zip (validate with pdfinfo / unzip -t)
 npm run qa:showcase -- showcase/posters scripts/qa/showcase-spec.json   # re-renders the showcase through the in-app exporter
@@ -151,7 +151,7 @@ Direct edits (move, re-type, image pan/zoom, hide) are stored as per-node overri
 |---|---|---|
 | One-button draw, status bar with ms, seeds | ✅ done | big PP draw button / Space; status shows ms, composition, grid |
 | History ←/→, favourites | ✅ done | 200-entry history with thumbnails; favourites persisted |
-| Ratios 3:4 9:16 1:1 4:3 16:9 21:9 | ✅ done | |
+| Ratios 3:4 9:16 1:1 4:3 16:9 21:9 1:2.1 | ✅ done | |
 | Locks: text / colour / single image / multi image | ✅ done | |
 | Style presets (zh + en libraries), update / save-as / delete, JSON import/export | ✅ done | 62 original styles |
 | ~80 sliders, live preview | ✅ done | 83 params in 7 sections, collapsible cards, units |
@@ -190,7 +190,7 @@ Direct edits (move, re-type, image pan/zoom, hide) are stored as per-node overri
 right rail (inspector, advanced, layers, history, shortcuts), bottom dock (← n/N → · 文字/配色/图片 · **抽一张** · 结构 ▾/图形/倾向 · ♥ · history). The ▾ on 结构 opens the layer menu (网格 / 图位 / 排字 / 整体结构).
 Panels open in fixed 12-column zones; the poster re-fits into the free zone and tucks slightly under the glass by design.
 
-**Shortcuts.** Space draw · ←/→ history · 1–6 ratio · ⇧1–4 locks (text / colour / image / images) · ⌘K command palette ·
+**Shortcuts.** Space draw · ←/→ history · 1–7 ratio · ⇧1–4 locks (text / colour / image / images) · ⌘K command palette ·
 I inspector · A advanced · L layers & modes · H history strip · E export sheet · S quick PNG · F favourite · ⌘Z / ⇧⌘Z undo/redo ·
 G show the poster's grid · g UI layout grid · ⇧D theme · ⇧L language · ? shortcuts · Esc closes the topmost layer.
 On the poster: click selects (floating toolbar: edit / font / colour & size / AI copy / save as part / hide), double-click edits text in place

@@ -232,7 +232,7 @@ function onKey(e: KeyboardEvent) {
   if (deck) return; // the deck view owns space / arrows
   if (e.code === 'Space') { e.preventDefault(); if (e.repeat) return; if (tg?.closest?.('button')) tg.blur(); A.draw(); }
   else if (k === 'ArrowLeft') A.go(-1); else if (k === 'ArrowRight') A.go(1);
-  else if (/^[1-6]$/.test(k)) A.setRatio(A.RATIOS[+k - 1]);
+  else if (/^[1-7]$/.test(k)) A.setRatio(A.RATIOS[+k - 1]);
   else if (k === 'f' || k === 'F') A.favorite();
   else if (k === 's' || k === 'S') exportNow('png', useUI.getState().exportScale);
   else if (k === 'i') A.togglePanel('insp'); else if (k === 'a') A.togglePanel('adv'); else if (k === 'h') A.togglePanel('film'); else if (k === 'l') A.openLayers();

@@ -1,7 +1,7 @@
 import type { Palette } from './color/palette';
 
-export type Ratio = '3:4' | '9:16' | '1:1' | '4:3' | '16:9' | '21:9';
-export const RATIOS: Ratio[] = ['3:4', '9:16', '1:1', '4:3', '16:9', '21:9'];
+export type Ratio = '3:4' | '9:16' | '1:1' | '4:3' | '16:9' | '21:9' | '1:2.1';
+export const RATIOS: Ratio[] = ['3:4', '9:16', '1:1', '4:3', '16:9', '21:9', '1:2.1'];
 export function canvasSize(r: Ratio): [number, number] {
   const [a, b] = r.split(':').map(Number);
   const short = 1200;

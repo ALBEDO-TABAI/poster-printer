@@ -75,7 +75,7 @@ Every colour in the palette panel is yours to set: ground, text, accent, block f
 
 ![The same content in six aspect ratios](.github/assets/ratios-en.jpg)
 
-Keys 1–6 switch between six aspect ratios: 3:4 for Xiaohongshu and print, 9:16 for Stories, 16:9 for X and video covers, plus 1:1, 4:3 and 21:9. The text, colors and pictures stay the same; only the layout is redone.
+Keys 1–7 switch between seven aspect ratios: 3:4 for Xiaohongshu and print, 9:16 for Stories, 1:2.1 for an even taller page close to a full phone screen, 16:9 for X and video covers, plus 1:1, 4:3 and 21:9. The text, colors and pictures stay the same; only the layout is redone.
 
 ### Export
 
@@ -102,7 +102,7 @@ There's also a 200-entry history with favorites, a ⌘K command palette, dark mo
 | Text | Painted into the image; may be misspelled and can't be edited | Real text you can click and edit |
 | Layout | Different every time and hard to control | Follows a grid, a type hierarchy and spacing rules |
 | Legibility | Up to luck | Text contrast is checked on every poster and fixed when it's too low |
-| Other sizes | Generate again | Six aspect ratios, one key each |
+| Other sizes | Generate again | Seven aspect ratios, one key each |
 | Output | Bitmap | PNG, JPG, editable SVG, PDF |
 
 It doesn't make the pictures. Use your own photos, AI-generated images, or the 142 openly licensed images it ships with. An image generator for the picture plus this for the type is a good pairing.
@@ -192,7 +192,7 @@ You need Python 3.10+ and one of Chrome, Chromium, Edge or Brave. It finds them 
 |---|---|
 | Space | Draw a poster |
 | ← / → | Step through history |
-| 1–6 | Switch aspect ratio |
+| 1–7 | Switch aspect ratio |
 | T / P / R | Change only the type / placement / grid |
 | ⇧1–4 | Lock text / colors / main image / all images |
 | S | Quick PNG export |

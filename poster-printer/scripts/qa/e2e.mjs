@@ -8,7 +8,7 @@ import fs from 'node:fs';
 const out = process.argv[2] || 'test-results/e2e';
 fs.mkdirSync(out, { recursive: true });
 const base = (process.env.REA_URL || 'http://127.0.0.1:5180/').replace(/\/?$/, '/');
-const RATIOS = ['3:4', '9:16', '1:1', '4:3', '16:9', '21:9'];
+const RATIOS = ['3:4', '9:16', '1:1', '4:3', '16:9', '21:9', '1:2.1'];
 const MODES = ['experimental', 'card', 'clash', 'random', 'layered', 'nice', 'wada', 'brushImage', 'brushMask', 'bandMask'];
 // Chrome / Chromium / Edge / Brave on Linux, macOS or Windows (or POSTER_PRINTER_CHROME)
 const { existsSync } = await import('node:fs');
@@ -48,7 +48,8 @@ for (const r of RATIOS) {
   }
   await page.screenshot({ path: `${out}/ratio-${r.replace(':', 'x')}.png` });
 }
-// keyboard ratio shortcuts 1–6
+// keyboard ratio shortcuts 1–7
+await page.keyboard.press('7'); await wait(120); check((await st((s) => s.ratio)) === '1:2.1', 'key 7 → 1:2.1');
 await page.keyboard.press('5'); await wait(120); check((await st((s) => s.ratio)) === '16:9', 'key 5 → 16:9');
 await page.keyboard.press('1'); await wait(120); check((await st((s) => s.ratio)) === '3:4', 'key 1 → 3:4');
 console.log(`ratios: ${n} draws, gen avg ${(times.reduce((a, b) => a + b, 0) / Math.max(1, times.length)).toFixed(1)} ms, max ${Math.max(...times).toFixed(1)} ms`);

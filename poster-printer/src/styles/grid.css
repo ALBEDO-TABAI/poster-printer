@@ -36,7 +36,7 @@
 .vsep { height: 24px; margin: 0 4px; }
 .icon-btn { width: 40px; height: 40px; }
 .text-btn { height: 40px; padding: 0 16px; gap: 8px; }
-.primary-btn { height: var(--bar); padding: 0 24px 0 16px; gap: 8px; }
+.primary-btn { height: var(--bar); padding: 0 24px 0 16px; gap: 8px; flex: none; white-space: nowrap; }
 .search-btn { padding: 0 8px 0 16px; }
 .seg { padding: 4px; }
 .seg > button { height: 32px; padding: 0 12px; }
@@ -48,6 +48,7 @@
 @media (max-width: 1480px) {
   .top .center { position: static; transform: none; margin: 0 auto; }
   .top .grow { display: none; }
+  #seg-ratio > button { padding: 0 9px; }
 }
 @media (max-width: 1380px) {
   #seg-ratio > button > .ratio-glyph { display: none; }

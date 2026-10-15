@@ -17,7 +17,7 @@ import { COMPOSERS_V3, stickersFor } from './gen/comps3';
 import { COMPOSERS_V2, meanImageDetail } from './gen/comps2';
 import { applyExtras } from './gen/kit';
 import { drawPlan, type DrawPlan } from './gen/plan';
-import { v2Weights, PROBATION, archOf, MULTI_IMG } from './gen/sampler';
+import { v2Weights, PROBATION, archOf, MULTI_IMG, XTALL } from './gen/sampler';
 import { tasteScore } from './aesthetic/score';
 import { COMPOSERS_V4 } from './gen/comps4';
 import { COMPOSERS_V5 } from './gen/comps5';
@@ -232,6 +232,8 @@ function generateOne(inp: GenInput): GenResult {
   }
   // long formats (16:9, 21:9) read empty as pure type: when a picture is available they keep it
   if (plan.v2 && plan.typeOnly && W / H > 1.5 && images.length) plan.typeOnly = false;
+  // very tall formats (1:2.1) leave a long empty field under pure type: they keep the picture more often than not
+  if (plan.v2 && plan.typeOnly && H / W > XTALL && images.length && new Rng(inp.seeds.layout + '|xtall').chance(0.6)) plan.typeOnly = false;
   if (lockedNone) images = [];
   if (plan.typeOnly) images = [];
 

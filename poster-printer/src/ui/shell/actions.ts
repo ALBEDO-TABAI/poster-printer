@@ -17,7 +17,7 @@ export const REMIX: [kind: 'text' | 'color' | 'image' | 'structure' | 'decor' | 
   ['structure', 'layout-grid', '结构', 'Structure'], ['decor', 'shapes', '图形', 'Graphics'], ['tendency', 'wand-sparkles', '风格', 'Style'],
 ];
 export const LOCKS: [keyof Locks, string, string, string, string][] = [['text', 'type', '文字', 'Text', '⇧1'], ['color', 'palette', '配色', 'Colour', '⇧2'], ['image', 'image', '主图', 'Image', '⇧3'], ['images', 'images', '全部图', 'All images', '⇧4']];
-export const RATIOS: Ratio[] = ['3:4', '9:16', '1:1', '4:3', '16:9', '21:9'];
+export const RATIOS: Ratio[] = ['3:4', '9:16', '1:1', '4:3', '16:9', '21:9', '1:2.1'];
 
 /* phase 14: a press is one action. The second click of a double-click (event.detail > 1) on 抽一张 / a remix button is
    ignored by the dock (Chrome.tsx), and a held key's auto-repeat by the keyboard handler; separate presses always count. */

@@ -161,3 +161,26 @@ The automatic picks went to `build` 42 times out of 60. Most of the failures wer
 **What it changed.** The READMEs and the package README now say this plainly and advise locking 构成编排 for real copy. The CLI is not affected: its correctness gates check every item.
 
 **Next.** Empty the sample slots when the copy is custom and teach the older composers to skip empty slots (as `build/copy.ts` does), or keep them out of automatic draws when the copy is real. Measure again with this protocol. Earlier posters must still replay byte-identically.
+
+## The 1:2.1 format (2026-10-15)
+
+**Question.** A seventh ratio, 1:2.1 (1200 × 2520, close to a full phone screen), was added. Does it still give good layouts?
+
+**Method.** Automatic draws called straight through the engine with the same input at 1:2.1 and at 9:16 (60 seeds, built-in styles in turn, preset pictures), rated by eye 1–10 per pair. Every composition was also drawn twice at 1:2.1.
+
+| Round | 1:2.1 mean | ≥ 7 | ≤ 6 | 9:16 mean | ≥ 7 | ≤ 6 |
+|---|---|---|---|---|---|---|
+| as added (seeds TALL0–59) | 6.68 | 36 | 15 | 6.85 | 40 | 14 |
+| with the rules below (fresh seeds TB0–59) | **7.03** | **49** | **6** | 6.87 | 45 | 10 |
+
+**What went wrong.** The engine reads only W and H, so nothing broke, but a page that tall turns an open field into a long empty one.
+- Type-only posters averaged 6.2 (title at the top, the rest empty).
+- 构成编排 archetypes that float a small block on the page: plate 5.3, scattered 5.7, typeFill 5.8, centreFrame 5.8, colourMass 6.0, strip 6.4. The photo-led ones (photoBand, masthead, split, windowInset, mosaic, fullBleed, openSide) rated 7.1–7.5.
+- Older compositions built on emptiness: ma, swiss, substitute, exhibit, object, inset, centered, checker rated 4.5–5.5.
+
+**Rules** (only when H / W > 1.9, so the six older ratios and every earlier poster are unchanged):
+- `generate.ts`: a type-only plan keeps the picture 60% of the time (wide formats already always keep it).
+- `gen/sampler.ts`: `TALL_OFF` switches the emptiness compositions off.
+- `build/compose.ts`: `TALL_ARCH` down-weights the weak archetypes.
+
+**Still weak.** Quote with a small photo, ghost and window leave some empty field; a few type-only posters remain by design.

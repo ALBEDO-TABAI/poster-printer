@@ -15,6 +15,7 @@ import { openSide, masthead, windowInset, split, typeFill, latinArch, gate, scat
 import { makeGrid } from './grid';
 import { textContrast } from '../gen/quality';
 import type { ImageAsset } from '../gen/ctx';
+import { XTALL } from '../gen/sampler';
 
 /** the page archetypes, drawn by the placement stream; `pic` = needs a picture (false = for type-only pages) */
 export const ARCHETYPES = {
@@ -40,6 +41,8 @@ export const ARCHETYPES = {
   mosaic: { run: mosaic, pic: true, wt: 1, multi: true },
 } satisfies Record<string, { run: (e: PageEnv) => void; pic: boolean; wt: number; multi?: boolean }>;
 export type Archetype = keyof typeof ARCHETYPES;
+/** weight factors on very tall pages (1:2.1), from a by-eye round: these rated 5–6.4 there, the photo-led ones 7–7.5 */
+const TALL_ARCH: Record<string, number> = { plate: 0.2, centreFrame: 0.3, scattered: 0.25, typeFill: 0.35, colourMass: 0.5, strip: 0.4 };
 
 export function paintFor(ctx: Ctx, on: string): Paint {
   const pal = ctx.pal;
@@ -75,7 +78,9 @@ export function build(ctx: Ctx): void {
   // session variety: an archetype used in the last draws is less likely (the last one much less)
   const rec = ctx.recent.slice(-4).reverse();
   const recW = (k: string) => (ctx.avoid?.kind === 'build:' + k ? 0.02 : 1) * ((i) => (i < 0 ? 1 : i === 0 ? 0.12 : i === 1 ? 0.4 : 0.7))(rec.indexOf('build:' + k));
-  const pick = names.length ? (ctx.rng.weighted(names.map((k) => [k, ARCHETYPES[k].wt * recW(k) * (pics.length >= 2 && multi(k) ? 4 : 1)] as [string, number])) as Archetype) : 'totem';
+  // very tall pages: the archetypes that float a small block on an open field leave most of the page empty
+  const tallW = (k: string) => (H / W > XTALL ? TALL_ARCH[k] ?? 1 : 1);
+  const pick = names.length ? (ctx.rng.weighted(names.map((k) => [k, ARCHETYPES[k].wt * recW(k) * tallW(k) * (pics.length >= 2 && multi(k) ? 4 : 1)] as [string, number])) as Archetype) : 'totem';
   ARCHETYPES[pick].run(env);
   ensureFacts(env);
   sem.vars.archetype = { kind: 'free', value: pick };

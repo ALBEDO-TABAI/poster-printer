@@ -61,13 +61,16 @@ const NEEDS_IMG = new Set(['fullbleed', 'ghost', 'veil', 'partition', 'mosaic', 
 /** phase 16: compositions that lay out several pictures (every other composition shows only the first) */
 export const MULTI_IMG = new Set(['modular', 'bleedgrid']);
 /** long formats: the layouts that can fill a long canvas (phase 6: echo, mosaic and object rated 5–6 on 16:9/21:9 and were dropped there) */
+/** very tall formats (taller than 1.9:1, i.e. 1:2.1): the layouts built on an open field rated 4.5–5.5 there */
+export const XTALL = 1.9;
+const TALL_OFF = new Set(['ma', 'swiss', 'substitute', 'exhibit', 'object', 'inset', 'centered', 'checker']);
 const WIDE_OK = new Set(['knockout', 'cover', 'panorama', 'edge', 'quote', 'veil', 'bands', 'split', 'fullbleed', 'ring', 'ma', 'substitute', 'anomaly', 'calendar', 'window', 'hanzi', 'modular', 'bleedgrid']);
 
 export function v2Weights(o: { plan: DrawPlan; images: ImageAsset[]; imagesOn: boolean; modes: Set<ModeKey>; W: number; H: number; zh: boolean; styleComp?: Record<string, number>; recent?: string[]; exclude?: string[] }): Record<string, number> {
   const { W, H } = o;
   const hasImg = o.images.length > 0 && o.imagesOn && !o.plan.typeOnly;
   const hasCut = hasImg && o.images.some((a) => a.cutout && a.subject);
-  const wide = W / H > 1.5, xwide = W / H > 2, land = W > H * 1.15;
+  const wide = W / H > 1.5, xwide = W / H > 2, land = W > H * 1.15, xtall = H / W > XTALL;
   // phase 16: several pictures given (the user's own, a locked set, a picked set): the compositions that show them all lead
   const multi = hasImg && o.images.length >= 2;
   const w: Record<string, number> = {};
@@ -78,6 +81,7 @@ export function v2Weights(o: { plan: DrawPlan; images: ImageAsset[]; imagesOn: b
     if (c === 'cover') x *= hasCut ? 1.3 : hasImg ? 0.45 : 0.25;
     if (c === 'panorama' && !land) x = 0;
     if (wide && !WIDE_OK.has(c)) x = 0;
+    if (xtall && TALL_OFF.has(c)) x = 0;
     if (xwide && (c === 'edge' || c === 'quote' || c === 'ring' || c === 'veil' || c === 'split')) x = 0;
     if (wide && (c === 'knockout' || c === 'panorama')) x *= 1.4;
     if (land && !wide) { if (c === 'vertical') x *= 0.3; if (c === 'bands') x = 0; if (c === 'edge') x *= 0.6; }
