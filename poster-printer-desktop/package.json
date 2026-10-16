@@ -1,0 +1,77 @@
+{
+  "name": "ready-poster-printer-desktop",
+  "productName": "Ready Poster Printer",
+  "private": true,
+  "version": "1.5.0",
+  "description": "Ready Poster Printer as a macOS app (Electron), with the AI cut-out built in",
+  "author": "ALBEDO-TABAI",
+  "license": "AGPL-3.0-only",
+  "homepage": "https://github.com/ALBEDO-TABAI/ready-poster-printer",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "model": "bash scripts/fetch-model.sh",
+    "icons": "node scripts/make-icon.mjs && node scripts/make-dmg-background.mjs",
+    "dmg": "bash scripts/build-dmg.sh",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "onnxruntime-node": "1.30.0",
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "electron": "44.8.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "io.github.albedo-tabai.ready-poster-printer",
+    "productName": "Ready Poster Printer",
+    "copyright": "© ALBEDO-TABAI · AGPL-3.0",
+    "artifactName": "Ready-Poster-Printer-${version}-mac-${arch}.${ext}",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": [
+      "main.cjs",
+      "cutout.cjs",
+      "cutout-worker.cjs",
+      "package.json",
+      "!**/node_modules/onnxruntime-node/bin/napi-v*/{linux,win32}/**",
+      "!**/node_modules/onnxruntime-node/bin/napi-v*/darwin/x64/**",
+      "!**/node_modules/onnxruntime-node/script/**",
+      "!**/node_modules/onnxruntime-node/bin/napi-v*/darwin/arm64/libonnxruntime.*.*.*.dylib"
+    ],
+    "asarUnpack": ["**/node_modules/onnxruntime-node/**", "**/node_modules/sharp/**", "**/node_modules/@img/**"],
+    "extraResources": [
+      { "from": "../poster-printer/dist", "to": "web" },
+      { "from": "models", "to": "models", "filter": ["isnet-general-use.onnx"] },
+      { "from": "../poster-printer/licenses", "to": "licenses" },
+      { "from": "licenses", "to": "licenses" },
+      { "from": "../LICENSE", "to": "LICENSE.txt" }
+    ],
+    "electronLanguages": ["zh_CN", "zh_TW", "en"],
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["arm64"] }],
+      "category": "public.app-category.graphics-design",
+      "icon": "build/icon.icns",
+      "identity": "-",
+      "sign": "scripts/adhoc-sign.cjs",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "darkModeSupport": true,
+      "minimumSystemVersion": "12.0",
+      "extendInfo": { "NSHumanReadableCopyright": "© ALBEDO-TABAI · AGPL-3.0" }
+    },
+    "dmg": {
+      "title": "Ready Poster Printer",
+      "background": "build/background.tiff",
+      "icon": "build/icon.icns",
+      "iconSize": 112,
+      "window": { "width": 660, "height": 480 },
+      "contents": [
+        { "x": 170, "y": 206, "type": "file" },
+        { "x": 490, "y": 206, "type": "link", "path": "/Applications" },
+        { "x": 120, "y": 900, "type": "file", "path": "build/background.tiff", "name": ".background.tiff" },
+        { "x": 300, "y": 900, "type": "file", "path": "build/icon.icns", "name": ".VolumeIcon.icns" }
+      ]
+    }
+  }
+}

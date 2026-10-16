@@ -46,9 +46,9 @@ const WITHIN: Record<string, number> = {
   modular: 1.2, bleedgrid: 1.0,
 };
 /** compositions that averaged < 7 when picked blind in phases 4–5: only their best candidates are accepted */
-// phase 15: swiss, window, fullbleed and inset left probation — 白's U1 ratings put them at or above the mean (shrunk 7.37–7.6)
+// phase 15: swiss, window, fullbleed and inset left probation — the U1 ratings put them at or above the mean (shrunk 7.37–7.6)
 export const PROBATION = new Set(['split', 'checker', 'partition', 'cards', 'fan', 'typefill', 'centered', 'bands', 'giant', 'ghost', 'index', 'ma']);
-/** phase 15 (Ar't alignment, scripts/align/verify_u1.py): 白's U1 mean per composition, shrunk toward the grand mean 7.285
+/** phase 15 (Ar't alignment, scripts/align/verify_u1.py): the U1 mean per composition, shrunk toward the grand mean 7.285
  *  (empirical Bayes, k = within/between variance ≈ 6.5; compositions with n < 4 are left out). The sampler multiplies each
  *  composition's final share by exp(2.5 · (shrunk − 7.285)), clamped to [0.5, 1.8]: a tendency, never a ban. */
 export const USER_SHRUNK: Record<string, number> = {

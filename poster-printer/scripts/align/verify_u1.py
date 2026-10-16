@@ -1,4 +1,4 @@
-"""Phase 15: re-verify Ar't's claims (art-kb rea-alignment-01 §7.4) on 白's U1 ratings with bootstrap CIs and
+"""Phase 15: re-verify Ar't's claims (art-kb rea-alignment-01 §7.4) on the U1 ratings with bootstrap CIs and
 a confound check (composition fixed effects + aspect). Run: python3 scripts/align/verify_u1.py"""
 import csv, random, json, numpy as np
 R = [x for x in csv.DictReader(open('scripts/taste/train.csv')) if x['set'] == 'U1']

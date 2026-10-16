@@ -14,7 +14,6 @@ Pages: poster `/` · deck `/?view=deck` · palettes `/color.html` · taste ratin
 **UI (phase 7): floating glass.** The poster is the only object on an ambient, poster-tinted stage; all chrome floats over it
 as refractive glass (top caps, rails, dock, panels, sheets). Simple by default, deep on demand: one draw button, an
 inspector for this poster or the selected element, and an **Advanced** layer with every engine parameter organised by intent.
-Design and porting notes: `docs/UX_REDESIGN.md` (§9 is the porting plan / old→new mapping).
 
 The app name lives in one constant, `src/config.ts → APP_NAME` (with `APP_SLUG` and `APP_SHORT`).
 
@@ -65,7 +64,7 @@ npm run qa:showcase -- showcase/posters scripts/qa/showcase-spec.json   # re-ren
 python3 scripts/contact_sheet.py showcase/contact_sheet.jpg --labels showcase/posters/*.png
 ```
 Showcase PNGs (`showcase/posters/`, ~130 MB) are regenerated, not committed; only the contact sheet and the UI JPGs in `showcase/ui/` are tracked.
-The repository README's images (`.github/assets/`) are made in the real app with uploaded pictures; the recipe and the lessons are in `docs/README_IMAGES.md`.
+The repository README's images (`.github/assets/`) are made in the real app with uploaded pictures.
 Developer lab: `/lab.html?n=12&ratio=3:4,16:9&all=1&seed=X&style=…&comp=…&modes=…` renders a grid of posters for visual review.
 
 ---
@@ -138,12 +137,12 @@ Direct edits (move, re-type, image pan/zoom, hide) are stored as per-node overri
 
 ## Design rules & quality loop (phase 3)
 
-* `docs/DESIGN_PRINCIPLES.md` lists the rules drawn from the reference keyframes: one focal point, 3–4 type levels on a modular scale, a budget of 5–8 blocks, at most 3 decorations, 60/30/10 colour, at least 35–40 % quiet area, and subject-aware crops. It also says where each rule is enforced.
+* The rules: one focal point, 3–4 type levels on a modular scale, a budget of 5–8 blocks, at most 3 decorations, 60/30/10 colour, at least 35–40 % quiet area, and subject-aware crops.
 * `src/engine/gen/direction.ts` applies the rules after composition (see the "direction" card in More → `typeRatio`, `blockBudget`, `decorBudget`, `busyScrim`, `opticalTracking`, `snapGrid`). `src/engine/gen/audit.ts` scores them, and the result feeds the quality retry loop.
 * Typography: optical tracking by size, CJK punctuation compression (`cjkLine`), hanging punctuation, widow control, and curated CN+EN pairings by mood (`src/data/pairings.ts`).
 * Colour: OKLCH harmony score, de-mudded image palettes, accent boost, and an accent-share cap. Grain is a soft-light print tooth.
 * Manual drags snap to grid edges, margins and centre lines with visible guides (hold Alt to move freely).
-* Benchmark: `scripts/qa/quality-spec.json` (108 posters) → `showcase.mjs` (with `REA_DUMP=1`) → `scripts/qa/rescore.mjs`. Results are in `docs/QUALITY_LOG.md`, `showcase/best24.jpg` and `showcase/before_after.jpg`.
+* Benchmark: `scripts/qa/quality-spec.json` (108 posters) → `showcase.mjs` (with `REA_DUMP=1`) → `scripts/qa/rescore.mjs`.
 
 ## Feature checklist vs SPEC (§3 / §12)
 
@@ -217,7 +216,7 @@ Retrain: `node scripts/taste/ratings-to-csv.mjs poster-printer-ratings-*.json --
 - The **pin** on a control keeps its value for future draws. Pins show as chips under 抽一张, with 全部解除.
 - The engine honours user choices over its plan, and reports when it has to repair legibility (仍用我的 overrides that).
 - 16 essentials are shown, 27 under 更多, plus a 仅经典构图 group. Params, pins and history survive a reload.
-- Details are in `docs/PHASE13.md`. To check every control: `node scripts/qa/controls.mjs`.
+- To check every control: `node scripts/qa/controls.mjs`.
 
 ## Repository size
 
@@ -263,13 +262,6 @@ The random draw now commits to a single idea for each poster.
 - 8 original illustrations.
 - Sources are listed in `licenses/IMAGES.md`.
 
-**Evaluation**
-- Results are in `docs/PHASE4_STATS.md`.
-- Showcase images:
-  - `showcase/phase4_random.jpg`
-  - `showcase/phase4_best24.jpg`
-  - `showcase/phase4_vs_lotgo.jpg`
-
 ## Phase 5: generator quality (Poster Printer)
 
 The app is now called **Poster Printer** (slug `poster-printer`). The name lives in `src/config.ts` (`APP_NAME`, `APP_SLUG`, `APP_SHORT`). Internal storage keys (`rea.*`) and the `REA_*` dev env vars are unchanged so saved data and tooling keep working.
@@ -296,13 +288,6 @@ The app is now called **Poster Printer** (slug `poster-printer`). The name lives
 **Images**
 - 28 offline cut-outs precomputed by `scripts/precompute-cutouts.py` and checked by eye (see `licenses/IMAGES.md`).
 
-**Evaluation**
-- Results are in `docs/PHASE5_STATS.md`, with labels in `docs/phase5_labels.txt`.
-- Showcase images:
-  - `showcase/phase5_random.jpg`
-  - `showcase/phase5_best24.jpg`
-  - `showcase/phase5_vs_lotgo.jpg`
-
 ## Phase 6: taste selector (generator only)
 
 - **Taste selector.** Each fresh auto draw builds 8 candidates (`SELECT_K` in `src/store.ts`) and keeps the best by a learned aesthetic score (`src/engine/aesthetic/`: scene features, gradient-boosted tree model, scorer). One challenger composition is tried when the best is weak. Mean ~30 ms per draw in the browser (main thread). Replays are exact (winner's salt, composition, plan and seeds are stored).
@@ -310,7 +295,6 @@ The app is now called **Poster Printer** (slug `poster-printer`). The name lives
 - **Sampler v2.** `src/engine/gen/sampler.ts`: archetype-first, entropy-aware weights; phase-5 rejects are back on probation.
 - **New compositions.** 物件海报 object and 全景横幅 panorama (`src/engine/gen/comps4.ts`).
 - **Fixes.** Wide-format composition set, short CJK headlines on pale grounds, heavy faces in knockout, depth covers with the subject overlapping the masthead.
-- **Evaluation.** `docs/PHASE6_STATS.md`, labels in `docs/phase6_labels.txt`; showcase `showcase/phase6_random.jpg`, `showcase/phase6_best24.jpg`.
 
 ## Phase 7: idea layer, gates, CJK pass (generator only)
 
@@ -318,14 +302,13 @@ The app is now called **Poster Printer** (slug `poster-printer`). The name lives
 - **Gates.** `src/engine/aesthetic/gates.ts` checks each draw on a 40-cell raster: flat fills, hue families, the 64 px thumbnail, accent, tone band, headline ΔL, style-read centroid and near-misses. A hard failure redraws within a counted retry budget. Soft failures are penalties in the selector rank.
 - **CJK.** Chinese text gets measured optical tracking, Han↔Latin quarter spaces and no one-character last lines (`src/engine/text/breaker.ts`, `typo.ts`, `gen/ctx.ts`).
 - **Selector.** The model is retrained with idea, Itten, gate and Ngo features. `scripts/taste/ratings-to-csv.mjs` fills in new feature columns for older `rate.html` exports.
-- **Evaluation.** Results are in `docs/PHASE7_STATS.md`, with the rubric and anchors in `docs/RATING_RUBRIC.md` and `docs/anchors/`. Showcase: `showcase/phase7_random.jpg` and `showcase/phase7_best24.jpg`.
 
 ## Phase 8
-Design strategy (coupled grammars: typeled / interleave / programme / exhibit) is now a unit of randomness on top of the P7 selector, with scene semantics, semantic line breaking, exemplar-retrieved routes, problem-tied mutations and a MAP-Elites archive. Real copy is never padded with filler. See docs/PHASE8_STATS.md.
+Design strategy (coupled grammars: typeled / interleave / programme / exhibit) is now a unit of randomness on top of the P7 selector, with scene semantics, semantic line breaking, exemplar-retrieved routes, problem-tied mutations and a MAP-Elites archive. Real copy is never padded with filler.
 
 ## Phase 16: the Swiss modular grid, several pictures, full bleed
 
-Two new compositions lay out **several pictures of different sizes** on a real modular grid. Details are in `docs/PHASE16_SWISS_GRID.md`.
+Two new compositions lay out **several pictures of different sizes** on a real modular grid.
 
 **The grid.** Fields are separated by gutters, and one field plus one gutter is a whole number of baseline lines. Every picture and text region spans whole fields.
 
@@ -367,11 +350,9 @@ Under the hood:
 - Posters made before this version replay exactly as before (checked against the phase-16 build).
 - CLI: `variations --vary type|place|grid`.
 
-Details are in `docs/PHASE17_LAYERS.md`.
-
 ## Phase 18: the construction engine (构成编排)
 
-A new composition, **构成编排 `build`**, now makes most automatic draws (70%; 50% with several pictures). It is built from a study of a designer's course and reference library (阿冲: lessons, PSD boards, covers, micro typesetting).
+A new composition, **构成编排 `build`**, now makes most automatic draws (70%; 50% with several pictures). It is built from a study of designers' text-group construction methods.
 
 - **Text groups are constructions.** A library of 34 constructions: justified bricks, cap-locked side stacks, rule sandwiches, ticket frames, staircases, number locks, corner satellites… Sizes step in fixed ratios, gaps are line heights, notches are closed, and one level carries the accent.
 - **19 page archetypes.** Photo band, full bleed (type only on calm, high-contrast zones, never on the subject; no scrims), open side, masthead, centre frame, window, split, plate, picture strip, mosaic, giant block, type fill, Latin architecture, gate, scattered grid, quiet emblem, totem, info form, colour mass.
@@ -381,8 +362,6 @@ A new composition, **构成编排 `build`**, now makes most automatic draws (70%
   - **图位** changes the archetype and keeps the type where it fits.
   - **排字** changes the construction and keeps every picture.
 - **Pin it.** Advanced › 页面原型 / 文字组构成 (`archetype`, `construction`) pin an archetype or a construction.
-
-Details are in `docs/PHASE18_CONSTRUCTIONS.md`.
 
 ## Phase 19: set every colour yourself (palette editor)
 
@@ -420,7 +399,7 @@ The style library (风格) used to show the current poster with only the style's
 
 ## Known limits
 
-- **Real copy outside the construction engine.** With custom text, the older compositions show sample words in the slots the copy leaves empty, and some leave a given line out. 构成编排 `build` keeps the copy (no sample words in 60 draws, the subtitle dropped in 9). The automatic layout picks `build` most of the time, but 26 of 60 automatic draws still had a problem. Numbers, cause and next step: `docs/QUALITY_LOG.md`, "Real copy in the web app". The CLI is not affected.
+- **Real copy outside the construction engine.** With custom text, the older compositions show sample words in the slots the copy leaves empty, and some leave a given line out. 构成编排 `build` keeps the copy (no sample words in 60 draws, the subtitle dropped in 9). The automatic layout picks `build` most of the time, but 26 of 60 automatic draws still had a problem. The CLI is not affected.
 
 ## License
 

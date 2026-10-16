@@ -38,3 +38,12 @@ release/
 
 # phase-3 rating renders (regenerable via scripts/qa/showcase.mjs + quality-spec.json)
 quality/*/
+
+# development records (phase logs, audits, ratings, evaluation renders): kept locally, not published
+docs/
+quality/
+showcase/phase*.jpg
+showcase/before_after.jpg
+showcase/best24.jpg
+scripts/taste/train.csv
+scripts/align/verify_u1.json

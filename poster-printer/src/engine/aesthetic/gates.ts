@@ -310,11 +310,11 @@ export function gates(scene: Scene, assets?: Map<string, GateAsset>): GateReport
   if (toneBand < 0.55) soft.push('tone');
   // headline ΔL is a soft, style-read score (low-key editorial work legitimately sits below 35)
   if (hero && heroDL < 20) soft.push('heroDL');
-  // phase 15: 35 → 25. 白's U1: heroDL 25–35 averaged 7.62 (n=8) vs 7.28 at ≥35; ρ(heroDL, score) = −0.12. The id stays for logs.
+  // phase 15: 35 → 25. U1 ratings: heroDL 25–35 averaged 7.62 (n=8) vs 7.28 at ≥35; ρ(heroDL, score) = −0.12. The id stays for logs.
   if (hero && heroDL < 25 && gStyle !== 'minimal') soft.push('heroDL35');
   const [c0, c1] = CENTROID[gStyle];
   if (centroid < c0 || centroid > c1) soft.push('centroid');
-  // phase 15: near-misses showed no harm in 白's ratings (≥1: 7.46, n=41 vs 0: 7.25) — flagged from 3, penalised lightly
+  // phase 15: near-misses showed no harm in the U1 ratings (≥1: 7.46, n=41 vs 0: 7.25) — flagged from 3, penalised lightly
   if (nearMiss >= 3) soft.push('nearMiss');
   return { flatFills, loud, hueFam, gStyle, accent, toneBand, heroDL, thumbCap, thumbOK, centroid, nearMiss, fails, soft };
 }
