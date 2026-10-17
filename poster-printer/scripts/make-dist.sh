@@ -10,7 +10,7 @@ cp -r dist "$R/app"
 cp server/serve.py server/cutout_server.py "$R/server/"
 cp dist-kit/requirements-ai.txt "$R/server/requirements.txt"
 cp dist-kit/start.sh dist-kit/start.command dist-kit/setup-ai.sh "$R/"
-for f in start.bat setup-ai.bat; do sed 's/$/\r/' "dist-kit/$f" > "$R/$f"; done   # CRLF for cmd.exe
+for f in start.bat setup-ai.bat; do LC_ALL=C sed 's/$/\r/' "dist-kit/$f" > "$R/$f"; done   # CRLF for cmd.exe (files are UTF-8)
 cp dist-kit/README-DIST.md "$R/README.md"
 cp -r licenses "$R/licenses"
 cp ../LICENSE "$R/LICENSE"

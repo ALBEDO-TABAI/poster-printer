@@ -146,12 +146,13 @@ ready-poster-printer generate --title "教室里的春天" --subtitle "Picture B
 电脑上需要有 **Python 3.9 或更新版本**，不需要装 Node.js。
 
 - **Mac**：大多数 Mac 已经自带。如果双击后提示要安装「命令行开发者工具」，点「安装」，装好后再双击一次。
-- **Windows**：到 [python.org](https://www.python.org/downloads/) 下载安装，安装第一页记得勾选 **Add python.exe to PATH**。
+- **Windows**：到 [python.org](https://www.python.org/downloads/) 下载安装，安装第一页记得勾选 **Add python.exe to PATH**。Windows 自带的 `python` 只是应用商店的快捷方式，不算装好了。
 
 第一次打开时系统可能会拦一下，这是因为文件是从网上下载的，不是出了问题：
 
 - **Mac** 提示「无法打开」：打开「系统设置 → 隐私与安全性」，往下找到这条提示，点「仍要打开」；或者右键点 `start.command` → 打开 → 打开。
 - **Windows** 弹出「Windows 已保护你的电脑」：点「更多信息」→「仍要运行」。
+- **Windows** 要先把 zip 解压再双击 `start.bat`，在压缩包里直接双击会缺文件。出了问题，窗口会停下来显示原因。
 
 你做的海报、收藏和上传的图片都只保存在你自己的浏览器里。
 

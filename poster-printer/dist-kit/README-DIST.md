@@ -35,7 +35,7 @@ Everything runs locally on your machine; no internet needed (AI cut-out is optio
 | 系统 / OS | 操作 / Do this |
 |---|---|
 | **macOS** | 双击 `start.command`。第一次如被拦截：打开「系统设置 → 隐私与安全性」，往下找到这条提示，点「仍要打开」；或者右键 → 打开 → 打开。<br>Double-click `start.command`. If macOS blocks it the first time: System Settings → Privacy & Security, scroll down to the message and click **Open Anyway**; or right-click → Open → Open. <br>或在终端 / or in Terminal: `bash start.sh` |
-| **Windows** | 双击 `start.bat`。如弹出「Windows 已保护你的电脑」：点「更多信息」→「仍要运行」。<br>Double-click `start.bat`. If “Windows protected your PC” appears: **More info** → **Run anyway**. |
+| **Windows** | 先把 zip 整个解压（右键 →「全部解压缩」），再双击解压出来的 `start.bat`。如弹出「Windows 已保护你的电脑」：点「更多信息」→「仍要运行」。<br>Extract the whole zip first (right-click → **Extract All**), then double-click `start.bat` in the extracted folder. If “Windows protected your PC” appears: **More info** → **Run anyway**. |
 | **Linux** | `./start.sh` |
 
 浏览器会自动打开 **http://localhost:5180/**（端口被占用时自动换下一个，终端会显示实际地址）。
@@ -82,6 +82,10 @@ licenses/       fonts (OFL etc.), images (CC0), palettes (MIT), models
 ## 6. 常见问题 / Troubleshooting
 
 - **“python3: command not found” / 找不到 Python** → install Python 3.9+ (see §1).
+- **Windows 双击 `start.bat` 后窗口一闪就没了 / the window flashes and closes** → 这是旧版启动脚本的问题，新版出错时会停下来显示原因。
+  两个常见原因：没解压就在压缩包里双击（先「全部解压缩」）；没装 Python，Windows 自带的 `python` 只是应用商店的快捷方式（去 python.org 安装）。
+  The old launcher closed on any error; this one stops and shows the reason. Usually: run from inside the zip (extract it first), or
+  no real Python installed (Windows' own `python` is only a Microsoft Store shortcut; install from python.org).
 - **macOS “cannot be opened” / 无法打开** → System Settings → Privacy & Security → **Open Anyway** (系统设置 → 隐私与安全性 →
   仍要打开), or right-click `start.command` → Open, or run `xattr -dr com.apple.quarantine .` inside this folder once.
 - **页面空白 / blank page** → use the address printed in the terminal (not `file://…`), and a current browser.

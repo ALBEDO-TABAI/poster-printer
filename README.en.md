@@ -146,12 +146,13 @@ After a few seconds the poster editor opens in your browser (at http://localhost
 You need **Python 3.9 or newer**. No Node.js required.
 
 - **Mac**: most Macs already have it. If double-clicking asks you to install the "command line developer tools", click Install, then double-click again.
-- **Windows**: download it from [python.org](https://www.python.org/downloads/), and on the first screen of the installer tick **Add python.exe to PATH**.
+- **Windows**: download it from [python.org](https://www.python.org/downloads/), and on the first screen of the installer tick **Add python.exe to PATH**. The `python` that comes with Windows is only a Microsoft Store shortcut and doesn't count.
 
 The first time, your system may stop the launcher because it was downloaded from the internet. Nothing is wrong:
 
 - **Mac** says it can't be opened: go to System Settings → Privacy & Security, scroll down to the message and click **Open Anyway**. Or right-click `start.command` → Open → Open.
 - **Windows** shows "Windows protected your PC": click **More info** → **Run anyway**.
+- On **Windows**, extract the zip before double-clicking `start.bat`; run from inside the zip, files are missing. If something goes wrong, the window stays open and shows why.
 
 Your posters, favorites and uploaded images stay in your own browser.
 
