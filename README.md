@@ -6,7 +6,7 @@
 
 简体中文 · [English](README.en.md)
 
-**[下载运行包，双击就能用（macOS / Windows）](#最简单下载后双击打开)**
+**[Mac 应用](#mac-应用apple-芯片) · [下载运行包，双击就能用（macOS / Windows）](#最简单下载后双击打开)**
 
 </div>
 
@@ -130,6 +130,16 @@ ready-poster-printer generate --title "教室里的春天" --subtitle "Picture B
 ## 在自己电脑上运行
 
 全部在本地运行，不需要注册账号。
+
+### Mac 应用（Apple 芯片）
+
+M1 及更新的 Mac（macOS 12 以上）可以直接装应用，不用装 Python，AI 抠图也内置好了：
+
+1. 在 [Releases](https://github.com/ALBEDO-TABAI/ready-poster-printer/releases/latest) 页面下载 `Ready-Poster-Printer-<版本>-mac-arm64.dmg`。
+2. 打开 dmg，把图标拖进「应用程序」。
+3. 第一次打开会提示“无法验证开发者”（因为没有付费的 Apple 开发者签名）：点「完成」，打开「系统设置 → 隐私与安全性」，往下找到这条提示，点「仍要打开」，输入开机密码。之后就和普通应用一样双击打开。
+
+Intel 芯片的 Mac 和 Windows 用下面的运行包。应用怎么打包的见[桌面版说明](poster-printer-desktop/README.md)。
 
 ### 最简单：下载后双击打开
 

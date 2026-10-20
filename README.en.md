@@ -6,7 +6,7 @@
 
 [简体中文](README.md) · English
 
-**[Download and double-click to run (macOS / Windows)](#the-easy-way-download-and-double-click)**
+**[Mac app](#mac-app-apple-silicon) · [Download and double-click to run (macOS / Windows)](#the-easy-way-download-and-double-click)**
 
 </div>
 
@@ -130,6 +130,16 @@ Results export as PNG, SVG or PDF, or as JSON that the web app can open for hand
 ## Run it on your own computer
 
 Everything runs locally. No account needed.
+
+### Mac app (Apple silicon)
+
+On an M1 or later Mac (macOS 12+), install the app: no Python needed, and the AI cut-out is built in.
+
+1. Download `Ready-Poster-Printer-<version>-mac-arm64.dmg` from the [Releases](https://github.com/ALBEDO-TABAI/ready-poster-printer/releases/latest) page.
+2. Open the dmg and drag the icon into Applications.
+3. The first time, macOS says it can't verify the developer (the app has no paid Apple developer signature). Click Done, go to System Settings → Privacy & Security, scroll down to the message, click **Open Anyway** and enter your password. After that it opens like any other app.
+
+Intel Macs and Windows use the package below. How the app is built: [desktop README](poster-printer-desktop/README.md).
 
 ### The easy way: download and double-click
 
