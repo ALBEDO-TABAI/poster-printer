@@ -104,7 +104,7 @@ function StylesTab() {
   const tab = useStore((s) => s.styleTab);
   const dirty = useStore((s) => s.dirty);
   const s = useStore.getState();
-  const list = styles.filter((x) => (tab === 'mine' ? !x.builtIn : x.lib === tab));
+  const list = styles.filter((x) => (tab === 'mine' ? !x.builtIn : x.builtIn && x.lib === tab));
   // what every card depends on besides its style: changes with the content, not with a style pick
   const ctx = useStore((st) => { const b = styleBasisOf(st); return b ? styleContextKey(st, b) : ''; });
   const ratio = useStore((st) => st.ratio);

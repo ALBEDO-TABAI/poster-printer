@@ -161,6 +161,8 @@ function scheduleRegen(extra: Extra) {
 let genToken = 0;
 
 const styleById = (s: State, id: string) => s.styles.find((x) => x.id === id) ?? s.styles[0];
+// a saved style keeps the library (zh / en) of the style it came from; up to 1.4.0 it was saved as 'mine', which crashed the style cards
+const libOf = (x: Partial<Style>): Style['lib'] => (x.lib === 'zh' || x.lib === 'en' ? x.lib : Number(x.params?.englishBias ?? 35) > 60 ? 'en' : 'zh');
 const entryOf = (s: State, r: GenResult): Entry => ({ honor: s.honor.length ? [...s.honor] : undefined,
   id: s.seeds.layout + '-' + Date.now().toString(36), ts: Date.now(), seeds: { ...s.seeds }, decorSalt: s.decorSalt, ratio: s.ratio, styleId: s.styleId,
   params: { ...s.params }, modules: { ...s.modules }, modes: [...s.modes], fonts: s.fonts, picked: r.picked, edits: {}, custom: s.customOn ? s.custom : null, comp: r.picked.comp, placed: s.placed.length ? s.placed : undefined,
@@ -283,7 +285,7 @@ export const useStore = create<State>((set, get) => ({
   ready: false, loadMsg: 'start',
   lang: LS.get('rea.lang', 'zh'), theme: LS.get('rea.theme', 'light'),
   ratio: '3:4',
-  styles: [...BUILTIN_STYLES, ...LS.get<Style[]>('rea.styles.v1', [])], styleId: BUILTIN_STYLES[0].id, styleTab: 'zh', dirty: false,
+  styles: [...BUILTIN_STYLES, ...LS.get<Style[]>('rea.styles.v1', []).map((x) => ({ ...x, lib: libOf(x) }))], styleId: BUILTIN_STYLES[0].id, styleTab: 'zh', dirty: false,
   params: ({ ...DEFAULT_PARAMS, ...BUILTIN_STYLES[0].params } as Params), modules: { ...DEFAULT_MODULES }, modes: [],
   fonts: BUILTIN_STYLES[0].fonts, fontCount: 2, pins: {}, honor: [], noEffect: null,
   locks: { text: false, color: false, image: false, images: false },
@@ -307,7 +309,7 @@ export const useStore = create<State>((set, get) => ({
     await loadFontManifest();
     set({ loadMsg: 'images' });
     const [presetImages, palettes, userImages] = await Promise.all([loadImages(), loadPalettes(), loadUserImages().catch(() => [])]);
-    const zhStyles = get().styles.filter((s) => s.lib === 'zh');
+    const zhStyles = get().styles.filter((s) => s.builtIn && s.lib === 'zh');
     const first = zhStyles[new Rng(String(Date.now())).int(0, zhStyles.length - 1)] ?? get().styles[0];
     set({ presetImages, palettes, userImages, styleId: first.id, params: ({ ...DEFAULT_PARAMS, ...first.params } as Params), fonts: first.fonts, modes: first.modes ?? [], styleTab: first.lib === 'en' ? 'en' : 'zh' });
     // phase 13: params, pins and history survive a reload
@@ -402,9 +404,9 @@ export const useStore = create<State>((set, get) => ({
     }
     if (kind === 'tendency') {
       // 换风格: another style of the same library; pins stay
-      const lib = styleById(s, s.styleId).lib;
-      const others = s.styles.filter((x) => x.lib === lib && x.id !== s.styleId);
-      const st = others[Math.floor(Math.random() * others.length)] ?? styleById(s, s.styleId);
+      const cur = styleById(s, s.styleId);
+      const others = s.styles.filter((x) => x.id !== cur.id && (cur.builtIn ? x.builtIn && x.lib === cur.lib : !x.builtIn));
+      const st = others[Math.floor(Math.random() * others.length)] ?? cur;
       set({ styleId: st.id, fonts: st.fonts, modes: st.modes ?? [] });
       set({ params: drawParams(get()), honor: Object.keys(s.pins), dirty: Object.keys(s.pins).length > 0 });
       const n = Object.keys(s.pins).length;
@@ -518,7 +520,7 @@ export const useStore = create<State>((set, get) => ({
   saveStyleAs(name) {
     const s = get();
     const base = styleById(s, s.styleId);
-    const st: Style = { id: 'u-' + Date.now().toString(36), name: { zh: name, en: name }, lib: 'mine' as never, fonts: s.fonts, params: { ...s.params }, comp: base.comp, modes: [...s.modes] };
+    const st: Style = { id: 'u-' + Date.now().toString(36), name: { zh: name, en: name }, lib: base.lib, fonts: s.fonts, params: { ...s.params }, comp: base.comp, modes: [...s.modes] };
     const styles = [...s.styles, st];
     set({ styles, styleId: st.id, dirty: false, styleTab: 'mine' });
     LS.set('rea.styles.v1', styles.filter((x) => !x.builtIn));
@@ -539,7 +541,7 @@ export const useStore = create<State>((set, get) => ({
     LS.set('rea.styles.v1', styles.filter((x) => !x.builtIn));
   },
   importStyles(list) {
-    const ok = list.filter((x) => x && x.fonts && x.params && x.name).map((x) => ({ ...x, id: 'u-' + Math.random().toString(36).slice(2, 9), builtIn: false, lib: 'mine' as never }));
+    const ok = list.filter((x) => x && x.fonts && x.params && x.name).map((x) => ({ ...x, id: 'u-' + Math.random().toString(36).slice(2, 9), builtIn: false, lib: libOf(x) }));
     const styles = [...get().styles, ...ok];
     set({ styles, styleTab: 'mine' });
     LS.set('rea.styles.v1', styles.filter((x) => !x.builtIn));
@@ -688,7 +690,7 @@ function loadSession(s: State): Partial<State> | null {
   if (!x || x.v !== 1 || !s.styles.some((st) => st.id === x.styleId)) return null;
   const clean = (p: Params) => Object.fromEntries(Object.entries(p || {}).filter(([k]) => !REMOVED_PARAMS.includes(k))) as Params;
   const history = Array.isArray(x.history) ? x.history.filter((e) => e && e.picked && e.seeds) : [];
-  return { params: { ...DEFAULT_PARAMS, ...clean(x.params) } as Params, pins: clean(x.pins), palPins: cleanEdits(x.palPins), honor: x.honor ?? [], history, hIndex: Math.min(history.length - 1, Math.max(-1, x.hIndex)), styleId: x.styleId, ratio: x.ratio ?? s.ratio, modules: { ...s.modules, ...x.modules }, modes: x.modes ?? [], fonts: x.fonts ?? s.fonts, locks: { ...s.locks, ...x.locks }, seeds: x.seeds ?? s.seeds, decorSalt: x.decorSalt ?? '', styleTab: styleById(s, x.styleId).lib === 'en' ? 'en' : styleById(s, x.styleId).lib === 'zh' ? 'zh' : 'mine' };
+  return { params: { ...DEFAULT_PARAMS, ...clean(x.params) } as Params, pins: clean(x.pins), palPins: cleanEdits(x.palPins), honor: x.honor ?? [], history, hIndex: Math.min(history.length - 1, Math.max(-1, x.hIndex)), styleId: x.styleId, ratio: x.ratio ?? s.ratio, modules: { ...s.modules, ...x.modules }, modes: x.modes ?? [], fonts: x.fonts ?? s.fonts, locks: { ...s.locks, ...x.locks }, seeds: x.seeds ?? s.seeds, decorSalt: x.decorSalt ?? '', styleTab: styleById(s, x.styleId).builtIn ? styleById(s, x.styleId).lib : 'mine' };
 }
 
 if (typeof window !== 'undefined') (window as unknown as { __rea: unknown }).__rea = useStore;

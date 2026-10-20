@@ -32,7 +32,7 @@ export function StyleLibrary() {
   const tab = useStore((s) => s.styleTab);
   const dirty = useStore((s) => s.dirty);
   const s = useStore.getState();
-  const list = styles.filter((x) => (tab === 'mine' ? !x.builtIn : x.lib === tab));
+  const list = styles.filter((x) => (tab === 'mine' ? !x.builtIn : x.builtIn && x.lib === tab));
   return (
     <div className="style-lib">
       <div className="style-tabs">
