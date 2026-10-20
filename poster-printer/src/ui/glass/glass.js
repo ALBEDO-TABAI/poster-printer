@@ -277,22 +277,29 @@ if (typeof window !== 'undefined' && !window.__ppGlass) {
   document.addEventListener('animationstart', () => G.kick(700), true);
   window.addEventListener('resize', () => G.kick(300));
 
-  /* Ambient field: a pre-blurred render of the current poster over the stage
-     colour, sized to the viewport. Used as the stage background in every
-     engine, and replayed inside mirror lenses at identical geometry. */
+  /* Ambient field: the poster's colour leaking out from behind it, over the stage colour, sized to the
+     viewport. A tight glow at the seam and a soft falloff a little further out, like a hidden light behind
+     the poster; the rest of the stage keeps its own colour. Used as the stage background in every engine,
+     and replayed inside mirror lenses at identical geometry. */
   G.buildField = (img, posterRect, stage, strength = 0.5) => {
-    const W = 192, H = Math.max(2, Math.round(192 * innerHeight / innerWidth));
+    const W = 320, H = Math.max(2, Math.round(320 * innerHeight / innerWidth));
     const c = document.createElement('canvas'); c.width = W; c.height = H; const ctx = c.getContext('2d');
     ctx.fillStyle = stage; ctx.fillRect(0, 0, W, H);
     if (img && img.naturalWidth && posterRect) {
-      const k = W / innerWidth;
+      const k = W / innerWidth, a = strength / 0.5;
       const cx = (posterRect.left + posterRect.width / 2) * k, cy = (posterRect.top + posterRect.height / 2) * k;
-      const pw = posterRect.width * k * 1.9, ph = posterRect.height * k * 1.9;
-      ctx.globalAlpha = strength;
-      if ('filter' in ctx) { ctx.filter = 'blur(9px) saturate(1.5)'; ctx.drawImage(img, cx - pw / 2, cy - ph / 2, pw, ph); ctx.filter = 'none'; }
+      // scale of the poster, blur in CSS px, opacity
+      const glow = (scale, blur, alpha) => {
+        const pw = posterRect.width * k * scale, ph = posterRect.height * k * scale;
+        ctx.globalAlpha = Math.min(1, alpha * a);
+        ctx.filter = `blur(${(blur * k).toFixed(2)}px) saturate(1.5)`;
+        ctx.drawImage(img, cx - pw / 2, cy - ph / 2, pw, ph);
+      };
+      if ('filter' in ctx) { glow(1.05, 140, 0.45); glow(1, 52, 0.55); ctx.filter = 'none'; }
       else { // no canvas filter (older Safari): downsample hard, then upscale = soft
         const t = document.createElement('canvas'); t.width = 8; t.height = 10; t.getContext('2d').drawImage(img, 0, 0, 8, 10);
-        ctx.imageSmoothingQuality = 'high'; ctx.drawImage(t, cx - pw / 2, cy - ph / 2, pw, ph);
+        const pw = posterRect.width * k * 1.15, ph = posterRect.height * k * 1.15;
+        ctx.globalAlpha = strength; ctx.imageSmoothingQuality = 'high'; ctx.drawImage(t, cx - pw / 2, cy - ph / 2, pw, ph);
       }
       ctx.globalAlpha = 1;
     }
