@@ -2,7 +2,7 @@
   "name": "ready-poster-printer-desktop",
   "productName": "Ready Poster Printer",
   "private": true,
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Ready Poster Printer as a macOS app (Electron), with the AI cut-out built in",
   "author": "ALBEDO-TABAI",
   "license": "AGPL-3.0-only",
