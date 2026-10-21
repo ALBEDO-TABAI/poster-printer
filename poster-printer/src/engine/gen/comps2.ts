@@ -347,6 +347,11 @@ function bento(ctx: Ctx) {
   const lw = Math.max(1.2, u * 0.16);
   let photoIdx = 0;
   const T = ctx.texts;
+  // phase 22: a v3 type re-roll sets the cards' type another way (title flush right / hung from the top, the info card
+  // from the foot); the cards and the photos stay where they are. v2 posters keep start / bottom / top.
+  const tv = ctx.typeV3 ? ctx.rt.fork('bento') : null;
+  const tAl = tv ? tv.pick(['start', 'end'] as const) : 'start', tVa = tv ? tv.pick(['bottom', 'top'] as const) : 'bottom';
+  const tK = tv ? tv.pick([0.7, 0.85, 1]) : 0.85, iVa = tv && tv.chance(0.5) ? 'bottom' : 'top';
   const zooms = [1, ctx.rng.range(1.7, 2.4), ctx.rng.range(2.6, 3.4)];
   const material = ctx.plan.material;
   let materialUsed = false;
@@ -371,8 +376,8 @@ function bento(ctx: Ctx) {
     const ip = Math.max(u * 2, Math.min(r.w, r.h) * 0.08);
     const inner = { x: r.x + ip, y: r.y + ip, w: r.w - ip * 2, h: r.h - ip * 2 };
     if (c.k === 'title') {
-      label(ctx, (T.meta[0]?.t || 'No. 01').toUpperCase(), inner.x, inner.y + ctx.size('meta'), cardOn);
-      bigTitle(ctx, { ...inner, y: inner.y + u * 3, h: inner.h - u * 3 }, cardOn, { align: 'start', valign: 'bottom', size: Math.min(headlineSize(ctx, inner.w) * 0.85, inner.h * 0.42), withSub: inner.h > u * 18 });
+      label(ctx, (T.meta[0]?.t || 'No. 01').toUpperCase(), tAl === 'end' ? inner.x + inner.w : inner.x, tVa === 'top' ? inner.y + inner.h : inner.y + ctx.size('meta'), cardOn, tAl === 'end' ? { anchor: 'end' } : {});
+      bigTitle(ctx, tVa === 'top' ? { ...inner, h: inner.h - u * 3 } : { ...inner, y: inner.y + u * 3, h: inner.h - u * 3 }, cardOn, { align: tAl, valign: tVa, size: Math.min(headlineSize(ctx, inner.w) * tK, inner.h * 0.42), withSub: inner.h > u * 18 });
     } else if (c.k === 'tone') {
       const t = anchorText(ctx, 'numeral');
       const fam = ctx.fonts.glyph;
@@ -380,7 +385,7 @@ function bento(ctx: Ctx) {
       rawText(ctx, { layer: 'zones', role: 'anchor', text: t, x: inner.x, y: inner.y + inner.h, size: s, family: fam.family, weight: fam.weight, fill: ctx.textColor(cardOn, 200), clip: { type: 'path', d: clipD }, tag: 'anchor' });
       label(ctx, (T.groups[1]?.main.lang === 'en' ? T.groups[1].main.t : 'INDEX').toUpperCase().slice(0, 18), inner.x + inner.w, inner.y + ctx.size('meta'), cardOn, { anchor: 'end' });
     } else {
-      ctx.group({ main: T.groups[0].main, note: T.groups[0].note }, 'small', inner, { mainSize: ctx.size('smallMain') * 0.85, align: 'start', valign: 'top', on: cardOn, mode: 'words', lines: 3 });
+      ctx.group({ main: T.groups[0].main, note: T.groups[0].note }, 'small', inner, { mainSize: ctx.size('smallMain') * 0.85, align: 'start', valign: iVa, on: cardOn, mode: 'words', lines: 3 });
       const sl = label(ctx, '→', inner.x + inner.w, inner.y + inner.h, cardOn, { anchor: 'end', size: ctx.size('smallSub') * 1.4 });
       void sl;
     }

@@ -447,8 +447,11 @@ function giant(ctx: Ctx) {
     }
   };
   if (ctx.on('text')) {
-    stack(region.x, nL, 'start', 0);
-    stack(region.x + region.w - colW, nR, 'end', 3);
+    // phase 22: a v3 type re-roll may swap the two columns' groups (the sub and its stack go right) and narrow them
+    const tv = ctx.typeV3 ? ctx.rt.fork('giant') : null;
+    const swap = !!tv && tv.chance(0.5);
+    stack(region.x, swap ? nR : nL, 'start', swap ? 3 : 0);
+    stack(region.x + region.w - colW, swap ? nL : nR, 'end', swap ? 0 : 3);
   }
   // meta
   const mh = header(ctx, { x: C.x, y: top ? C.y : C.y, w: C.w, h: C.h }, on, top ? 'bottom' : 'top', 2);

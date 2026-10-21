@@ -80,6 +80,9 @@ export class Ctx {
   rg: Rng;
   /** layered streams are on (new posters): type variations that legacy posters never drew may draw from `rt` */
   layered = false;
+  /** phase 22: the type layer was re-rolled on a v3 poster: set-ups that v2 kept fixed (a masthead's alignment, a foot
+   *  band's group) may draw from `rt` too */
+  typeV3 = false;
   /** phase 18: the layout kinds of the last draws (session variety inside the construction engine) */
   recent: string[] = [];
   forceKind?: string;

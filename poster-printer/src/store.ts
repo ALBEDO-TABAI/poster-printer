@@ -357,9 +357,10 @@ export const useStore = create<State>((set, get) => ({
     // not pushed = adjust this poster: same plan / composition / salt / copy / pictures / palette unless the caller re-picks one
     const ex: Extra = push ? extra : { keepLayout: true, keepTexts: true, keepPalette: true, keepImages: true, keepLayers: true, ...extra };
     const res = generate({ ...buildInput(s, ex), ...(ex.preview ? { preview: true } : {}) });
-    // phase 17: a layer re-roll that found nothing else to do leaves the poster (and the history) as it was
+    // phase 17: a layer re-roll that found nothing else to do leaves the poster (and the history) as it was; phase 22:
+    // that includes a re-roll whose change nobody would see (generate.ts visibleChange), not only an identical scene
     const rr = res.scene.info.reroll as { layer: Layer; changed: boolean } | undefined;
-    if (ex.reroll && rr && !rr.changed && sceneSig(res.scene) === sceneSig(s.result?.scene)) { get().toast(layerHint(s.lang, rr.layer, res.picked.comp), 'warn', 'reroll'); return; }
+    if (ex.reroll && rr && !rr.changed) { get().toast(layerHint(s.lang, rr.layer, res.picked.comp), 'warn', 'reroll'); return; }
     // the selector's salt / route live only on the winner's picks: carry them over, so the next tweak and history restores
     // keep the very same layout stream (the phase 12 drift)
     const src = ex.keepPicked ?? (ex.keepLayout ? s.result?.picked : undefined);

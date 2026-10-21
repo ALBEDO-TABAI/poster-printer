@@ -1,6 +1,6 @@
 // Phase 17: layered layout streams — 网格 grid / 图位 placement / 排字 type re-rolled one at a time (generate.ts).
 import { describe, expect, it } from 'vitest';
-import { generate, layerSig, type GenInput, type GenResult, type Layer } from '../src/engine/generate';
+import { generate, layerSig, visibleChange, type GenInput, type GenResult, type Layer } from '../src/engine/generate';
 import { FIXED_PLACE } from '../src/engine/layers';
 import { COMPS } from '../src/data/styles';
 import { cyrb128 } from '../src/engine/rng';
@@ -91,6 +91,42 @@ describe('re-rolling one layer', () => {
     const a = generate({ ...inp, layers: null });
     const b = reroll(inp, a, 'type', 'y');
     expect(a.picked.layers).toBeUndefined();
-    expect(b.picked.layers).toEqual(expect.objectContaining({ v: 2, type: expect.any(String) }));
+    expect(b.picked.layers).toEqual(expect.objectContaining({ v: 3, type: expect.any(String) }));   // phase 22: a re-roll makes a v3 poster
   });
 });
+
+// phase 22 (白: on a 构成编排 masthead poster T found nothing and R changed nothing you could see): a re-roll is judged by
+// what a viewer notices, and a v3 re-roll draws what v2 kept fixed (the grid's margin, a masthead's set-up, cover lines)
+describe('re-rolls a viewer can see (phase 22)', () => {
+  const SHOW = ['zh-new-chinese', 'zh-mincho', 'zh-heavy-hei', 'zh-cold-hei', 'instrument', 'didone-salon', 'neue-grid', 'poster-gothic'];
+  const keep = (inp: GenInput, a: GenResult): GenInput => ({ ...keepOf(inp, a), layoutSalt: a.picked.salt, forceKind: a.picked.kind, avoid: a.picked.avoid, select: 0 } as GenInput);
+  const rate = (arch: string | null, n: number) => {
+    let t = 0, r = 0;
+    for (let i = 0; i < n; i++) {
+      const b0 = input('V' + i, i % 3 ? '3:4' : RATIOS[i % 6], SHOW[i % SHOW.length], arch ? 'build' : 'auto') as GenInput;
+      const one = { ...b0, ...(arch ? { params: { ...b0.params, archetype: arch } } : {}), images: (b0 as { images: unknown[] }).images.slice(i % 40, i % 40 + 1) } as GenInput;
+      const a = generate(one);
+      for (const layer of ['type', 'grid'] as Layer[]) {
+        const b = generate({ ...keep(one, a), reroll: { layer, salt: 'v' + i, base: a.scene } });
+        if (!visibleChange(a.scene, b.scene, layer)) { if (layer === 'type') t++; else r++; }
+      }
+    }
+    return { t: t / n, r: r / n };
+  };
+  it('排字 and 网格 change something visible on almost every poster', () => {
+    const all = rate(null, 120), mast = rate('masthead', 60);
+    expect(all.t).toBeLessThan(0.03);
+    expect(all.r).toBeLessThan(0.05);
+    expect(mast.t).toBeLessThan(0.03);
+    expect(mast.r).toBeLessThan(0.06);
+  }, 120000);
+  it('a v2 poster replays exactly; only a re-roll makes v3', () => {
+    const inp = input('W1', '3:4', 'zh-cold-hei', 'build') as GenInput;
+    const a = generate(inp);
+    expect(a.picked.layers?.v).toBe(2);
+    expect(fp(generate(keepOf(inp, a)))).toBe(fp(a));
+    const b = reroll(inp, a, 'grid', 'g');
+    expect(b.picked.layers?.v).toBe(3);
+  });
+});
+

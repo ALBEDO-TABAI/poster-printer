@@ -51,7 +51,9 @@ import { addComponents, type PlacedComponent } from './components';
 export interface Seeds { layout: string; text: string; color: string; image: string }
 /** phase 17: layered layout streams. Grid (网格), picture placement (图位) and type (排字) draw from separate streams, so
  *  one layer can be re-rolled while the others stay exactly as they were. A salt re-seeds one layer. */
-export interface Layers { v: 2; grid?: string; place?: string; type?: string }
+/** v3 (phase 22): a layer re-rolled from then on also draws what v2 left fixed: the grid's margin (网格), the masthead
+ *  and band set-ups of the construction engine (排字). A v2 poster replays exactly as before. */
+export interface Layers { v: 2 | 3; grid?: string; place?: string; type?: string }
 export type Layer = 'grid' | 'place' | 'type';
 export interface GenInput {
   seeds: Seeds;
@@ -367,7 +369,10 @@ function generateOne(inp: GenInput): GenResult {
     const rT = layers ? new Rng(`${lseedA}|type${layers.type ? ':' + layers.type : ''}`) : rL;
     const pp: Params = attempt ? { ...p, decorSalt: `${p.decorSalt ?? ''}~${attempt}` } : p;
   // ---- grid & composition
-    const grid = makeGrid(rG, W, H, p);
+    // phase 22: a v3 grid re-roll draws the margin too (the 页边距 of the grid layer); a margin set by hand stays
+    const v3 = !!layers && layers.v >= 3;
+    const pg: Params = v3 && layers!.grid && !honor.has('margin') ? { ...p, margin: gridMargin(new Rng(`${lseedA}|gridm:${layers!.grid}`), Number(p.margin ?? 3)) } : p;
+    const grid = makeGrid(rG, W, H, pg);
     let comp = String(p.composition) as Comp | 'auto';
     if (comp === 'auto') {
       let w: Record<string, number> = { split: 3, checker: 2, fullbleed: 2, giant: 1.5, partition: 1, cards: 1, fan: 0.8, typefill: 1, swiss: 1.5, centered: 1.5, layered: 0, bands: 1.5, ...(inp.style.comp || {}) };
@@ -414,6 +419,7 @@ function generateOne(inp: GenInput): GenResult {
     }
     const ctx = new Ctx(rL, grid, pp, palette, inp.fonts, texts, imgs, inp.measure, inp.modules, modes);
     if (layers) { ctx.layered = true; ctx.rt = rT; ctx.rg = rG; ctx.rd = new Rng(`${lseedA}|decor|${String(pp.decorSalt ?? '')}`); } // decor keeps its stream when a layer is re-rolled
+    ctx.typeV3 = v3 && !!layers!.type;
     ctx.honor = honor;
     ctx.recent = inp.recent ?? [];
     ctx.forceKind = inp.forceKind;
@@ -639,6 +645,12 @@ export function generate(inp: GenInput): GenResult {
   return { ...win.r, ms: now() - t0, attempts: n, archive: [...archive.values()].sort((a, b) => b.score - a.score) };
 }
 
+/** phase 22: the margin a v3 grid re-roll draws (percent of the short side): a visibly different one from the current */
+function gridMargin(r: Rng, cur: number): number {
+  const opts = [1.5, 3, 4.5, 6, 8].filter((m) => Math.abs(m - cur) >= 1.2);
+  return r.pick(opts.length ? opts : [cur]);
+}
+
 // ---------------------------------------------------------------- phase 17: re-roll one layer
 const r1 = (v: number) => Math.round(v);
 /** a signature of one layer of a scene: type = text boxes, sizes, colours and faces; place = picture frames and filled panels; pics = the
@@ -656,32 +668,83 @@ export function layerSig(sc: Scene, layer: Layer | 'pics' | 'typeGeo'): string {
   walk(sc.nodes);
   return out.sort().join('|');
 }
-/** re-roll one layer: a few salts are tried; the first that visibly changes the layer (a type re-roll: moves, re-sizes or
- *  re-breaks the type, not only its colour), keeps the pictures where they were (type) and passes the gates is kept, else
- *  the best of them */
+/** phase 22: does `b` differ from `a` in a way a viewer notices? A text block moves by 4 % of the short side, changes
+ *  size by 20 %, re-breaks, re-aligns, appears or goes; a picture frame moves or resizes by 4 %. (Layer signatures alone
+ *  also change when only the grid's numbers do, or a colour by one step: a re-roll then looked like it did nothing.) */
+export function visibleChange(a: Scene, b: Scene, layer: Layer): boolean { return changeOf(a, b, layer).vis; }
+/** how much moved (0 … ~1: the mean text-block and picture-frame shift as a share of the short side) and whether a viewer
+ *  notices it (visibleChange) */
+export function changeOf(a: Scene, b: Scene, layer: Layer): { vis: boolean; mag: number } {
+  const S = Math.min(a.w, a.h), tol = S * 0.04;
+  type T = [number, number, number, number, string];
+  const geo = (sc: Scene) => {
+    const T: Record<string, T> = {}, P: number[][] = [];
+    const walk = (ns: SceneNode[]) => { for (const n of ns) {
+      if (n.kind === 'group') { walk(n.children); continue; }
+      if (n.kind === 'text' && n.layer !== 'noise' && n.layer !== 'texture') { let k = n.role as string; while (T[k]) k += "'"; T[k] = [n.box.x + n.box.w / 2, n.box.y + n.box.h / 2, n.size, n.lines.length, String(n.anchor ?? '')]; }
+      if (n.kind === 'image' && !n.cutout) P.push([n.x, n.y, n.w, n.h]);
+    } };
+    walk(sc.nodes);
+    return { T, P };
+  };
+  const A = geo(a), B = geo(b);
+  let sum = 0, cnt = 0;
+  for (const k of Object.keys(A.T)) { const x = A.T[k], y = B.T[k]; cnt++; sum += y ? Math.min(1, Math.hypot(x[0] - y[0], x[1] - y[1]) / S + Math.abs(x[2] - y[2]) / x[2]) : 1; }
+  A.P.forEach((p, i) => { const q = B.P[i]; cnt++; sum += q ? Math.min(1, p.reduce((d, v, j) => d + Math.abs(v - q[j]), 0) / (4 * S)) * 2 : 1; });
+  const mag = cnt ? sum / cnt : 0;
+  const typeMoved = () => {
+    for (const k of new Set([...Object.keys(A.T), ...Object.keys(B.T)])) {
+      const x = A.T[k], y = B.T[k];
+      if (!x || !y) return true;
+      if (Math.hypot(x[0] - y[0], x[1] - y[1]) > tol || Math.abs(x[2] - y[2]) > x[2] * 0.2 || x[3] !== y[3] || x[4] !== y[4]) return true;
+    }
+    return false;
+  };
+  const picsMoved = () => A.P.length !== B.P.length || A.P.some((p, i) => p.some((v, j) => Math.abs(v - B.P[i][j]) > tol));
+  return { vis: layer === 'type' ? typeMoved() : layer === 'place' ? picsMoved() : typeMoved() || picsMoved(), mag };
+}
+/** phase 22: Latin lines of one or two letters inside a multi-line block (“A / group show in twelve / rooms”): a re-roll
+ *  prefers a candidate without them */
+function stubLines(sc: Scene): number {
+  let n = 0;
+  const walk = (ns: SceneNode[]) => { for (const nd of ns) {
+    if (nd.kind === 'group') { walk(nd.children); continue; }
+    if (nd.kind === 'text' && nd.lines.length > 1) for (const l of nd.lines) if (/^[A-Za-z&]{1,2}[.,:]?$/.test(l.text.trim())) n++;
+  } };
+  walk(sc.nodes);
+  return n;
+}
+/** re-roll one layer: a few salts are tried; the first that visibly changes the layer (visibleChange: a type re-roll
+ *  moves, re-sizes, re-breaks or re-aligns the type, not only its colour; a grid re-roll moves something on the page),
+ *  keeps the pictures where they were (type) and passes the gates is kept, else the best of them. Phase 22: a re-roll
+ *  makes a v3 poster (its layers may now draw what v2 kept fixed), and a re-roll that changes nothing you can see says so
+ *  (changed: false → the app's toast) instead of adding a look-alike to the history. */
 function rerollLayer(inp: GenInput): GenResult {
   const { layer, salt, base } = inp.reroll!;
   const prev: Layers = inp.layers ? { ...inp.layers } : { v: 2 }; // a legacy poster becomes layered (it re-lays out once)
   const was = base ? layerSig(base, layer) : null;
-  const wasGeo = base && layer === 'type' ? layerSig(base, 'typeGeo') : null;
   const pics = base && layer === 'type' ? layerSig(base, 'pics') : null;
   // phase 18: a construction-engine poster steers away from what it showed: a placement re-roll from its page archetype,
   // a type re-roll from its constructions (the re-roll's own salt still decides what comes instead)
   const bvars = (base?.info.sem as { vars?: Record<string, { value?: unknown }> } | undefined)?.vars;
   // a grid re-roll keeps the steer the poster already had (its construction stays the same)
   const avoid: GenInput['avoid'] = layer === 'place' && inp.forceKind?.startsWith('build:') ? { ...inp.avoid, kind: inp.forceKind } : layer === 'type' && bvars?.construction?.value ? { constructions: String(bvars.construction.value).split('+') } : inp.avoid;
-  let best: GenResult | null = null, bestKey = -Infinity;
-  const tries = layer === 'type' ? 6 : 4;
+  let best: GenResult | null = null, bestKey = -Infinity, bestVis = false;
+  const tries = layer === 'place' ? 6 : 8;
   for (let k = 0; k < tries; k++) {
-    const r = generateOne({ ...inp, reroll: undefined, select: 0, layers: { ...prev, v: 2, [layer]: k ? `${salt}~${k}` : salt }, ...(layer === 'place' ? { forceKind: undefined } : {}), avoid });
+    const r = generateOne({ ...inp, reroll: undefined, select: 0, layers: { ...prev, v: 3, [layer]: k ? `${salt}~${k}` : salt }, ...(layer === 'place' ? { forceKind: undefined } : {}), avoid });
     const changed = was === null || layerSig(r.scene, layer) !== was;
-    const strong = changed && (wasGeo === null || layerSig(r.scene, 'typeGeo') !== wasGeo);
+    const ch = base ? changeOf(base, r.scene, layer) : { vis: true, mag: 1 };
+    const vis = !base || (changed && ch.vis);
     const kept = pics === null || layerSig(r.scene, 'pics') === pics;
     const fails = ((r.scene.info.gates as { fails?: string[] } | undefined)?.fails ?? []).length + ((r.scene.info.geo as { fails?: string[] } | undefined)?.fails ?? []).length;
-    const key = (kept ? 2000 : 0) + (strong ? 1000 : changed ? 600 : 0) - 100 * fails + (r.picked.quality?.score ?? 100) / 10;
-    if (key > bestKey) { best = r; bestKey = key; }
-    if (strong && kept && !fails) break;
+    const stubs = stubLines(r.scene);
+    // a grid re-roll looks at all its candidates and prefers the one that moves the page most (a new grid should read as
+    // one); type and placement keep the first clean, visible one
+    const key = (kept ? 2000 : 0) + (vis ? 1000 : changed ? 300 : 0) - 100 * fails - 400 * stubs + (layer === 'grid' ? Math.min(1, ch.mag * 4) * 120 : 0) + (r.picked.quality?.score ?? 100) / 10;
+    if (key > bestKey) { best = r; bestKey = key; bestVis = vis; }
+    if (layer !== 'grid' && vis && kept && !fails && !stubs) break;
   }
-  best!.scene.info.reroll = { layer, changed: was === null || layerSig(best!.scene, layer) !== was, kept: pics === null || layerSig(best!.scene, 'pics') === pics };
+  best!.scene.info.reroll = { layer, changed: bestVis, kept: pics === null || layerSig(best!.scene, 'pics') === pics };
   return best!;
 }

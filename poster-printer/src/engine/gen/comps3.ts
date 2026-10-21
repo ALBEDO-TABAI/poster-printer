@@ -133,25 +133,31 @@ function cover(ctx: Ctx) {
       if (top < my + cap * 0.95 && (hidden < okH || vCover < 0.45)) ctx.image(asset, full, { cutout: true });
     }
     on = lg.lum > 0.5 ? '#f4f1ea' : '#141414';
-    // cover lines: a left column of 3 stacked lines with short rules, legible over the photo
+    // cover lines: a left column of 3 stacked lines with short rules, legible over the photo. Phase 22: a v3 type
+    // re-roll may hang the column on the right and set the cover story flush right (v2 posters keep left / left)
+    const cv = ctx.typeV3 ? ctx.rt.fork('cover') : null;
+    const colRight = !!cv && cv.chance(0.5), storyEnd = !!cv && cv.chance(0.5);
     const colW = land ? W * 0.24 : C.w * 0.36;
     const ys = my + cap + u * 6;
-    const region = { x: C.x, y: ys, w: colW, h: C.y + C.h - ys - u * 12 };
+    const region = { x: colRight ? C.x + C.w - colW : C.x, y: ys, w: colW, h: C.y + C.h - ys - u * 12 };
     const lr = ctx.legible(asset, full, region, 30);
-    if (lr.opacity > 0.15) ctx.add({ kind: 'rect', id: ctx.id('scrim'), layer: 'images', x: 0, y: ys - u * 2, w: colW + C.x + u * 8, h: H - ys + u * 2, fill: `lg(0,${lr.color},${Math.min(0.7, lr.opacity * 1.2).toFixed(2)},${lr.color},0)` });
+    const sw = colW + C.x + u * 8;
+    if (lr.opacity > 0.15) ctx.add({ kind: 'rect', id: ctx.id('scrim'), layer: 'images', x: colRight ? W - sw : 0, y: ys - u * 2, w: sw, h: H - ys + u * 2, fill: `lg(${colRight ? 180 : 0},${lr.color},${Math.min(0.7, lr.opacity * 1.2).toFixed(2)},${lr.color},0)` });
     const T = ctx.texts;
     const items = [T.groups[0], T.groups[1], T.groups[2]].filter(Boolean);
     const step = Math.min(region.h / Math.max(1, items.length), u * 16);
     items.forEach((gp, i) => {
       const y = region.y + i * step;
-      hair(ctx, C.x, y, C.x + u * 5, y, 0.9, lr.fill);
-      ctx.group({ main: gp.main, note: gp.note }, 'small', { x: C.x, y: y + u * 1.4, w: colW, h: step - u * 2 }, { mainSize: ctx.size('smallMain') * 0.82, align: 'start', on: lr.color, fill: lr.fill, mode: 'words', lines: 2 });
+      const hx = colRight ? region.x + colW - u * 5 : C.x;
+      hair(ctx, hx, y, hx + u * 5, y, 0.9, lr.fill);
+      ctx.group({ main: gp.main, note: gp.note }, 'small', { x: region.x, y: y + u * 1.4, w: colW, h: step - u * 2 }, { mainSize: ctx.size('smallMain') * 0.82, align: colRight ? 'end' : 'start', on: lr.color, fill: lr.fill, mode: 'words', lines: 2 });
     });
     // headline as the cover story, bottom
-    const by = { x: C.x, y: C.y + C.h - u * 12, w: C.w * (land ? 0.5 : 0.7), h: u * 12 };
+    const bw = C.w * (land ? 0.5 : 0.7);
+    const by = { x: storyEnd ? C.x + C.w - bw : C.x, y: C.y + C.h - u * 12, w: bw, h: u * 12 };
     const lb = ctx.legible(asset, full, by, 60);
     if (lb.opacity > 0.15) ctx.add({ kind: 'rect', id: ctx.id('scrim'), layer: 'images', x: 0, y: H * 0.72, w: W, h: H * 0.28, fill: `lg(90,${lb.color},0,${lb.color},${Math.min(0.75, lb.opacity * 1.3).toFixed(2)})` });
-    ctx.group({ main: T.headline, sub: T.sub }, 'small', by, { mainSize: ctx.size('smallMain') * 1.35, align: 'start', valign: 'bottom', on: lb.color, fill: lb.fill, mode: 'words', lines: 2 });
+    ctx.group({ main: T.headline, sub: T.sub }, 'small', by, { mainSize: ctx.size('smallMain') * 1.35, align: storyEnd ? 'end' : 'start', valign: 'bottom', on: lb.color, fill: lb.fill, mode: 'words', lines: 2 });
     // issue line under the masthead
     label(ctx, `${issue(ctx)}  ·  ${T.meta[0]?.t ?? ''}  ·  ${year(ctx)}`, W - C.x, my + cap + u * 3, on, { anchor: 'end', fill: lg.fill });
     // barcode corner

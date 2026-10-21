@@ -79,9 +79,13 @@ export function masthead(env: PageEnv) {
   const mastLeaf = lit(han(word) ? word : word.toUpperCase(), k, { w: 'black', track: -30, face: 'display', of: word === copy.title.t ? 'title' : 'title.en' });
   const L1 = lay(env, col([mastLeaf]), 100);
   if (!L1) return openSide(env);
-  const A = Math.min(((W - 2 * m * 0.6) / L1.w) * 100, (H * 0.2 / L1.h) * 100);
+  // phase 22: a v3 type re-roll sets the masthead another way: full width and centred (v2), flush left or right on a
+  // shorter measure, or a narrower centred word; a v2 poster keeps the centred one
+  const mv = ctx.typeV3 ? ctx.rt.fork('mast').pick(['centre', 'left', 'right', 'narrow'] as const) : 'centre';
+  const meas = mv === 'centre' ? W - 2 * m * 0.6 : (W - 2 * m) * (mv === 'narrow' ? 0.66 : 0.82);
+  const A = Math.min((meas / L1.w) * 100, (H * 0.2 / L1.h) * 100);
   const L = lay(env, col([mastLeaf]), A)!;
-  const mx = (W - L.w) / 2, my = m * 0.8;
+  const mx = mv === 'left' ? m : mv === 'right' ? W - m - L.w : (W - L.w) / 2, my = mv === 'narrow' ? m * 1.4 : m * 0.8;
   const band = { x: mx, y: my, w: L.w, h: L.h };
   const lg = ctx.legible(a, fr, band, 60, zone(ctx, a, fr, band).lum < 0.5);
   emit(ctx, L, mx, my, { ...env.paint, ink: lg.fill, accent: env.paint.accent }, 'big.main');
@@ -94,11 +98,12 @@ export function masthead(env: PageEnv) {
     if (sx0 > mx + L.w * 0.14 && sx1 < mx + L.w * 0.86 && cov <= 0.35 && a.subject.y * H < my + L.h) ctx.image(a, fr, { cutout: true });
   }
   // the issue number under the masthead, flush right; the main group in the calmer lower corner
-  if (copy.index) { const iL = lay(env, col([lit(copy.index, 1.6, { w: 'bold' })]), env.tiny); if (iL) emit(ctx, iL, W - m - iL.w, my + L.h + env.tiny * 0.8, { ...env.paint, ink: lg.fill }, 'small.main'); }
+  if (copy.index) { const iL = lay(env, col([lit(copy.index, 1.6, { w: 'bold' })]), env.tiny); if (iL) emit(ctx, iL, mv === 'right' ? m : W - m - iL.w, my + L.h + env.tiny * 0.8, { ...env.paint, ink: lg.fill }, 'small.main'); }
   const g = env.g, nl = Math.max(2, g.colsOf(0.6)), jl = g.rowAt(0.62);
   const lowL = g.cell(0, nl, jl, g.rows), lowR = g.cell(g.cols - nl, g.cols, jl, g.rows);
   const zl = zone(ctx, a, fr, lowL), zr = zone(ctx, a, fr, lowR);
-  const order = zl.busy <= zr.busy ? [lowL, lowR] : [lowR, lowL];
+  let order = zl.busy <= zr.busy ? [lowL, lowR] : [lowR, lowL];
+  if (ctx.typeV3 && ctx.rt.fork('corner').chance(0.5)) order = [order[1], order[0]];   // phase 22: the other calm corner
   for (const room of order) {
     const al = room === lowL ? 'start' : 'end';
     const d = placeMain(env, room, { al, va: 'bottom', tags: ['cover'], dry: true });
@@ -111,9 +116,12 @@ export function masthead(env: PageEnv) {
     return;
   }
   // no corner of the picture carries type: a solid band at the foot holds the group (the covers' alternative to a scrim)
-  const bandH = Math.round(H * (env.land ? 0.3 : 0.24));
+  // phase 22: a v3 type re-roll varies the band's depth and how the group sits in it
+  const bv = ctx.typeV3 ? ctx.rt.fork('band') : null;
+  const bandH = Math.round(H * (env.land ? 0.3 : 0.24) * (bv ? bv.pick([0.8, 1, 1.25]) : 1));
   ctx.add({ kind: 'rect', id: ctx.id('band'), layer: 'zones', x: 0, y: H - bandH, w: W, h: bandH, fill: env.paint.on });
-  placeMain(env, { x: g.x(0), y: H - bandH + g.gut, w: g.xr(g.cols) - g.x(0), h: bandH - g.gut - g.mb }, { al: 'start', va: 'top', tags: ['cover', 'plain'] });
+  const bal = bv ? bv.pick(['start', 'center', 'end'] as const) : 'start';
+  placeMain(env, { x: g.x(0), y: H - bandH + g.gut, w: g.xr(g.cols) - g.x(0), h: bandH - g.gut - g.mb }, { al: bal, va: bv && bv.chance(0.4) ? 'center' : 'top', tags: ['cover', 'plain'] });
 }
 
 /** a picture window on a solid colour field, the vertical title in the margin (SGN framed_inset) */
