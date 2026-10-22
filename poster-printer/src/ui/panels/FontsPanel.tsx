@@ -67,6 +67,7 @@ export function FontsPanel() {
   const [libGroup, setLibGroup] = useState('swiss-sans');
   const [target, setTarget] = useState<RoleKey>('big.main');
   const lib = fontList().filter((f) => f.group === libGroup);
+  const installed = fontList().filter((f) => f.files.some((x) => x.local)).map((f) => f.family).join(' / ');
   return (
     <div className="panel-scroll">
       <Card title={t('摇字体', 'Shake fonts')}>
@@ -86,14 +87,18 @@ export function FontsPanel() {
         {(['main', 'sub', 'note'] as const).map((r) => <RoleEditor key={lang + grp + r} lang={lang} role={`${grp}.${r}` as RoleKey} />)}
         <button className="mini" onClick={() => s.copyBigToSmall(lang)}><Icon name="copy" size={13} />{t('大标题组 → 小标题组', 'Copy large → small')}</button>
       </Card>
-      <Card title={t('字体库', 'Font library') + ` · ${fontList().length}`} open={false}>
+      <Card title={t('字体库', 'Font library') + ` · ${fontList().length}`} collapsible open={false}>
         <div className="chips">{GROUPS.map(([g, zh, en]) => <Chip key={g} on={g === libGroup} onClick={() => setLibGroup(g)}>{t(zh, en)}</Chip>)}</div>
         <Seg label={t('点击应用到', 'Apply to')} value={target} options={[{ v: 'big.main', l: t('大·主', 'L·main') }, { v: 'big.sub', l: t('大·副', 'L·sub') }, { v: 'big.note', l: t('大·说明', 'L·cap') }, { v: 'small.main', l: t('小·主', 'S·main') }, { v: 'small.sub', l: t('小·副', 'S·sub') }]} onChange={setTarget} />
         <div className="font-grid">
           {lib.map((f) => <FontPreview key={f.family} f={f} on={fonts[f.cjk ? 'zh' : 'en'][target].family === f.family} onPick={async () => { await ensureFont(f.family); s.setRole(f.cjk ? 'zh' : 'en', target, { family: f.family, weight: Math.min(f.wmax, Math.max(f.wmin, fonts[f.cjk ? 'zh' : 'en'][target].weight)) }); }} />)}
         </div>
       </Card>
-      <div className="panel-foot">{t('所有字体均为开源授权（SIL OFL / Apache 2.0），已子集化。商用前请自行核实各字体许可。', 'All fonts are open-source (SIL OFL / Apache 2.0), subset for the web. Verify each licence before commercial use.')}</div>
+      <div className="panel-foot">
+        {t('内置字体均为开源授权（SIL OFL / Apache 2.0），已子集化。', 'Bundled fonts are open-source (SIL OFL / Apache 2.0), subset for the web. ')}
+        {installed && t(`${installed} 读取本机安装的字体，按其自身许可使用，不随应用分发。`, `${installed} is read from the fonts installed on this computer, under its own licence, and is not bundled. `)}
+        {t('商用前请自行核实各字体许可。', 'Verify each licence before commercial use.')}
+      </div>
     </div>
   );
 }

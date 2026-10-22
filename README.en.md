@@ -214,3 +214,4 @@ You need Python 3.10+ and one of Chrome, Chromium, Edge or Brave. It finds them 
 
 Original program code is licensed under **GNU AGPL v3.0 only (AGPL-3.0-only)**; the full terms are in [LICENSE](LICENSE).
 Fonts, images, palette data and third-party code keep their own licenses and credits; see [third-party licenses](poster-printer/licenses/).
+Microsoft's Michelangelus typeface, inspired by Michelangelo's handwriting, is a free download, but its licence doesn't allow passing the font files on, so the app doesn't include it. Install it from [Microsoft](https://www.microsoft.com/en-us/download/details.aspx?id=108856) and restart the app, and it shows up under Classic serif in the font library.

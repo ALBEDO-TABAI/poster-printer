@@ -1,6 +1,18 @@
 # Font credits
 
-All fonts are open-licensed (SIL Open Font License 1.1, Apache 2.0, or the Ubuntu Font Licence) and were subset to WOFF2 by `scripts/build-fonts.py`. Subsetting is a permitted modification; Reserved Font Names are not used for the subsets as product names. Upstream licence texts are in `licenses/fonts/`.
+All bundled fonts are open-licensed (SIL Open Font License 1.1, Apache 2.0, or the Ubuntu Font Licence) and were subset to WOFF2 by `scripts/build-fonts.py`. Subsetting is a permitted modification; Reserved Font Names are not used for the subsets as product names. Upstream licence texts are in `licenses/fonts/`.
+
+## Installed fonts (not bundled)
+
+These fonts are free to download, but their licence does not allow passing the files on, so neither the repository nor the builds contain them. The app looks for a copy installed on the computer (`INSTALLED` in `src/lib/fonts.ts`, CSS `local()`); when it finds one, the family joins the font library. Exported SVGs refer to the installed font by name instead of embedding it, so they render in it only where it is installed.
+
+| family | group | licence | download |
+|---|---|---|---|
+| Michelangelus | classic-serif | Microsoft Software License Terms (no distribution) | https://www.microsoft.com/en-us/download/details.aspx?id=108856 |
+
+To use Michelangelus, download the zip from Microsoft, install the four `.ttf` files (macOS: double-click, or copy them to `~/Library/Fonts`), then restart the app or the browser.
+
+## Bundled fonts
 
 | family | group | licence | source |
 |---|---|---|---|

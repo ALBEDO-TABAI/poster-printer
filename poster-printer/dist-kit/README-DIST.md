@@ -103,7 +103,9 @@ Rating page (to train the taste selector on your own taste): `http://localhost:5
 
 本项目的原创程序代码采用 **GNU Affero General Public License v3.0（AGPL-3.0-only）**，完整条款见 [LICENSE](LICENSE)。
 第三方代码、字体、图片和配色数据保留各自的许可证与署名，详见 [licenses/](licenses/)。
+微软的 Michelangelus 字体不随应用分发：从 https://www.microsoft.com/en-us/download/details.aspx?id=108856 下载安装后重启应用，字体库「经典衬线」里就会出现它。
 
 Original program code is licensed under **GNU AGPL v3.0 only**; see [LICENSE](LICENSE).
 Third-party code, fonts, images and palette data retain their respective licenses and credits in [licenses/](licenses/).
+Microsoft's Michelangelus font is not bundled: install it from https://www.microsoft.com/en-us/download/details.aspx?id=108856 and restart the app, and it appears under Classic serif in the font library.
 Source: https://github.com/ALBEDO-TABAI/ready-poster-printer

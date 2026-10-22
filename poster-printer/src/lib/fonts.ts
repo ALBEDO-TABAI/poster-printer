@@ -3,17 +3,35 @@ import type { FontRecipe, FontSet } from '../engine/typo';
 import { expandRecipe, ROLE_KEYS } from '../engine/typo';
 import { PAIRINGS, MOOD_WEIGHTS, type Mood } from '../data/pairings';
 
-export interface FontFile { url: string; weight: string; style: string; bytes: number }
+export interface FontFile { url: string; weight: string; style: string; bytes: number; local?: string[] }
 export interface FontEntry { family: string; slug: string; group: string; tags: string[]; cjk: boolean; license: string; source: string; wmin: number; wmax: number; weights: number[]; variable: boolean; files: FontFile[] }
 
 let manifest: FontEntry[] = [];
 const loaded = new Map<string, Promise<void>>();
 export const ALWAYS = ['Sacramento', 'Great Vibes', 'Dancing Script', 'Pacifico', 'Anton', 'Bebas Neue', 'Oswald', 'Archivo Black', 'IBM Plex Mono', 'Instrument Serif', 'DM Serif Display', 'Playfair Display', 'Bodoni Moda', 'Source Han Sans CN', 'Source Han Serif CN'];
 
+/**
+ * Fonts whose licence forbids passing the files on. The app never ships them: an entry joins the library only
+ * when the browser finds the copy installed on this machine (local() sources), so posters set in one render
+ * here and fall back on machines without it.
+ */
+const michelangelus = (name: string, weight: string, style: string): FontFile =>
+  ({ url: '', weight, style, bytes: 0, local: [`Michelangelus ${name}`, `Michelangelus-${name.replace(' ', '')}`] });
+export const INSTALLED: FontEntry[] = [
+  { family: 'Michelangelus', slug: 'michelangelus', group: 'classic-serif', tags: ['old-style', 'elegant', 'classical'], cjk: false,
+    license: 'Microsoft EULA (installed locally, not bundled)', source: 'https://www.microsoft.com/en-us/download/details.aspx?id=108856',
+    wmin: 400, wmax: 700, weights: [400, 700], variable: false,
+    files: [michelangelus('Regular', '400', 'normal'), michelangelus('Italic', '400', 'italic'), michelangelus('Bold', '700', 'normal'), michelangelus('Bold Italic', '700', 'italic')] },
+];
+const fontSrc = (f: FontFile) => (f.local ? f.local.map((n) => `local("${n}")`).join(', ') : `url(${f.url}) format("woff2")`);
+const isInstalled = (e: FontEntry) => new FontFace(e.family, fontSrc(e.files[0])).load().then(() => true, () => false);
+
 export async function loadFontManifest(): Promise<FontEntry[]> {
   if (manifest.length) return manifest;
   const r = await fetch('/fonts/manifest.json');
-  manifest = await r.json();
+  const shipped: FontEntry[] = await r.json();
+  const found = await Promise.all(INSTALLED.map(isInstalled));
+  manifest = [...shipped, ...INSTALLED.filter((_, i) => found[i])];
   return manifest;
 }
 export const fontList = () => manifest;
@@ -26,7 +44,7 @@ export function ensureFont(family: string): Promise<void> {
   if (!p) {
     p = Promise.all(
       ent.files.map(async (f) => {
-        const ff = new FontFace(family, `url(${f.url}) format("woff2")`, { weight: f.weight, style: f.style, display: 'block' });
+        const ff = new FontFace(family, fontSrc(f), { weight: f.weight, style: f.style, display: 'block' });
         document.fonts.add(ff);
         try { await ff.load(); } catch (e) { console.warn('font load failed', family, e); }
       }),
@@ -55,13 +73,13 @@ async function toDataUrl(url: string) {
   return d;
 }
 
-/** @font-face CSS for given families, embedding woff2 as data URLs */
+/** @font-face CSS for given families, embedding woff2 as data URLs. Installed-only fonts stay local() references: their licence forbids embedding a copy. */
 export async function fontFaceCss(families: string[]): Promise<string> {
   const parts: string[] = [];
   for (const fam of families) {
     const ent = fontByFamily(fam);
     if (!ent) continue;
-    for (const f of ent.files) parts.push(`@font-face{font-family:"${fam}";src:url(${await toDataUrl(f.url)}) format("woff2");font-weight:${f.weight};font-style:${f.style};}`);
+    for (const f of ent.files) parts.push(`@font-face{font-family:"${fam}";src:${f.local ? fontSrc(f) : `url(${await toDataUrl(f.url)}) format("woff2")`};font-weight:${f.weight};font-style:${f.style};}`);
   }
   return parts.join('');
 }

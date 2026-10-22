@@ -214,3 +214,4 @@ python3 -m venv .venv
 
 本项目原创程序代码采用 **GNU AGPL v3.0 only（AGPL-3.0-only）**，完整条款见 [LICENSE](LICENSE)。
 字体、图片、配色数据及第三方代码保留各自的许可证和署名，详见[第三方授权说明](poster-printer/licenses/)。
+微软的 Michelangelus 字体（以米开朗基罗的手迹为灵感）可以免费下载，但许可不允许转发字体文件，所以应用里没有带它。从[微软官网](https://www.microsoft.com/en-us/download/details.aspx?id=108856)下载安装后重启应用，字体库「经典衬线」里就会出现它。
